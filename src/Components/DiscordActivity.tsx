@@ -38,7 +38,7 @@ enum EventType {
 
 type SocketEvent = {
 	op: Operation;
-	t ? : EventType;
+	t? : EventType;
 	d: Presence | unknown;
 };
 
@@ -154,7 +154,7 @@ const Container = styled(motion.div, {
 const LiveDot = styled(motion.div, {
 	animation: 'blinking 2s ease-in-out infinite',
 	borderRadius: '50%',
-	backgroundColor: '#ff5252',
+	backgroundColor: '#ff0000',
 	display: 'inline-block',
 	height: '8px',
 	marginLeft: '4px',
