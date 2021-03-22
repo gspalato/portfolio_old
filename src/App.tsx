@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { styled } from './stitches.config';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
+import { Home } from './Pages/Home';
+
+// Styles
+var AppContainer = styled('div', {
+	background: '$black',
+	height: '100%',
+	width: '100%',
+});
+
+// Component
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AppContainer className="app">
+            <Router>
+                <Switch>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/about">
+
+                    </Route>
+                    <Route path="/projects">
+
+                    </Route>
+                </Switch>
+            </Router>
+        </AppContainer>
+    );
 }
 
 export default App;
