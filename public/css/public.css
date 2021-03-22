@@ -12,13 +12,22 @@
 }
 
 @keyframes blinking {
-  from {
-    opacity: 0%;
-  }
-  50% {
-    opacity: 100%;
-  }
-  to {
-    opacity: 0%;
-  }
+  	from {
+    	opacity: 0%;
+  	}
+  	50% {
+  	  opacity: 100%;
+  	}
+  	to {
+  	  opacity: 0%;
+  	}
+}
+
+/* Typist */
+.Typist .Cursor {
+  	display: inline-block;
+}
+.Typist .Cursor--blinking {
+    opacity: 1;
+    animation: blinking 1s linear infinite;
 }
