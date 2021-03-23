@@ -16,12 +16,14 @@ var STitle = styled(motion.h1, {
 
 // Component
 interface ITitleProps {
+    animate?: any,
+    initial?: any,
     style?: MotionStyle,
 }
 
 export const Title: React.FC<ITitleProps> = props => {
     return (
-        <STitle style={{ ...props.style }}>
+        <STitle animate={{ ...props.animate }} initial={{ ...props.initial }} style={{ ...props.style }}>
             {props.children}
         </STitle>
     );

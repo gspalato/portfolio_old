@@ -5,6 +5,7 @@ export const { styled, css } = createStyled({
     tokens: {
         colors: {
             $backgroundColor: '#010101',
+            $defaultBorder: '1px solid #101010',
 
             $black: '#000000',
             $disabledgray: '#98989d',
