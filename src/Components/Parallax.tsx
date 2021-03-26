@@ -12,7 +12,7 @@ export const Parallax: React.FC<IParallaxProps> = (props) => {
 	const ref = React.createRef<HTMLDivElement>();
 	const { scrollY } = useViewportScroll();
   
-	var offset = props.offset ?? 1;
+	let offset = props.offset ?? 1;
 
 	const y = useTransform(scrollY, [elementTop, elementTop + offset], [0, -1], {
 		clamp: false

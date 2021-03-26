@@ -1,4 +1,4 @@
-@import-normalize;
+@import-normalize
 
 html, body {
   	margin: 0;
@@ -22,6 +22,7 @@ code {
 
 img {
 	border: none;
+	max-width: none;
 }
 
 /**/

@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { styled } from '../stitches.config';
-import { InView } from 'react-intersection-observer';
 import Typist from 'react-typist';
 import TypistLoop from 'react-typist-loop';
 
 import { BackgroundContainer, ContentContainer, OverlayContainer } from '../Components/Page';
-import { Card } from '../Components/Card';
 import { DiscordPresence } from '../Components/DiscordPresence';
-import { Title } from '../Components/Title';
+import { Grid } from '../Components/Grid';
+import { GridItem } from '../Components/GridItem';
 import { Paragraph } from '../Components/Paragraph';
-import { Section } from '../Components/Section';
+import { Section, InnerSpacing, SectionContent } from '../Components/Section';
+import { SectionScroller } from '../Components/SectionScroller';
+import { Title } from '../Components/Title';
+
+
 
 // Styles
-var MainTitleContainer = styled(motion.div, {
+let MainTitleContainer = styled(motion.div, {
 	alignItems: 'center',
 	display: 'flex',
 	flexDirection: 'column',
@@ -21,22 +24,29 @@ var MainTitleContainer = styled(motion.div, {
 	width: 'fit-content'
 });
 
-var TopBorder = styled(motion.div, {
-	background: '#222222',
+let GridItemFullColumn = styled(GridItem, {
+	display: 'flex',
+	height: '100%',
+	justifyContent: 'center',
+	alignItem: 'center',
+});
+
+let TopBorder = styled(motion.div, {
+	background: '#151515',
 	height: '1px',
 	margin: '0 auto',
 	position: 'absolute',
 	top: '0%',
-	width: '95%',
+	width: '100%',
 });
 
-var TypewritterParagraph = styled(Paragraph, {
+let TypewritterParagraph = styled(Paragraph, {
 	fontFamily: 'Karla',
 	fontSize: '1vw',
 	fontWeight: 100
 });
 
-var Doing = styled(DiscordPresence, {
+let Doing = styled(DiscordPresence, {
 	position: 'fixed',
 	left: '15px',
 	bottom: '15px',
@@ -50,6 +60,7 @@ const WavingHand = () => (
 		}}
 	  	animate={{ rotate: [null, 14, -8, 14, -4, 10, 0, 0, 0, 0, 0, 0] }}
 	  	transition={{
+			delay: 1,
 			from: 0,
 			duration: 2,
 			ease: "easeInOut",
@@ -65,60 +76,69 @@ export const Home: React.FC = () => {
 	const [presenceActive, setPresenceActive] = useState(false);
 
 	return (
-		<React.Fragment>
+		<>
             <BackgroundContainer>
 
             </BackgroundContainer>
             <ContentContainer>
-				<Section display="flex" direction="column" justify="center" align="center">
-					<MainTitleContainer>
-						<Paragraph style={{ fontSize: '1.5vw', fontWeight: 100 }}>
-							<WavingHand/><span> Hello there</span>,
-						</Paragraph>
-						<Title style={{ fontSize: '5vw' }}>
-							I'm Gabriel Spalato
-						</Title>
-						<TypewritterParagraph>
-							<TypistLoop interval={3000}>
-    							{[
-      								'self-taught developer.',
-      								'C# enthusiast.',
-      								'graphic design apprentice.',
-									'diehard discord user.',
-									'y u bully me?',
-    							].map(text =>
-									<Typist>
-										<span>{text}</span>
-										{/*<Typist.Delay ms={text.length * 100} />*/}
-										<Typist.Backspace count={text.length} delay={text.length * 200} />
-									</Typist>
-								)}
-							</TypistLoop>
-						</TypewritterParagraph>
-					</MainTitleContainer>
-				</Section>
-				<Section display="flex" direction="column" justify="center" align="center">
-					<InView threshold={.75} delay={200}>{({ inView, ref, entry }) => (
-						<TopBorder
-							ref={ref}
-							initial={{ width: 0 }}
-							animate={ inView ? { width: '95%' } : {} }
-							transition={{ type: "easeInOut" }}
-						/>
-					)}</InView>
-					<InView threshold={.75} delay={200}>{({ inView, ref, entry }) => (
-						<Card
-							ref={ref}
-							initial={{ opacity: 0, x: -200 }}
-							animate={ inView ? { opacity: 1, x: 0 } : {} }
-							transition={{ type: "easeInOut" }}
-						/>
-					)}</InView>
-				</Section>
+				<SectionScroller>
+					<Section display="flex" direction="column" justify="center" align="center">
+						<MainTitleContainer>
+							<Paragraph css={{ color: '#ffffff', fontSize: '1.5vw', fontWeight: 100 }}>
+								<WavingHand/><span> Hello there</span>,
+							</Paragraph>
+							<Title css={{ fontSize: '5.5vw' }}>
+								I'm Gabriel Spalato
+							</Title>
+							<TypewritterParagraph css={{ color: '#ffffff' }}>
+								<TypistLoop interval={500}>
+    								{[
+      									'self-taught developer.',
+      									'C# enthusiast.',
+      									'graphic design apprentice.',
+										'diehard discord user.',
+										'y u bully me?',
+										'based in Brazil.',
+										'XVI years old.',
+										'ambitious bonehead.',
+    								].map(text =>
+										<Typist>
+											<span>{text}</span>
+											<Typist.Backspace count={text.length} delay={text.length * 200} />
+										</Typist>
+									)}
+								</TypistLoop>
+							</TypewritterParagraph>
+						</MainTitleContainer>
+					</Section>
+					<Section display="flex" direction="column" justify="start" align="start">
+						<SectionContent>
+							<Title css={{ fontSize: '3vw' }}>About</Title>
+							<InnerSpacing>
+								<Grid columns={2}>
+									<GridItemFullColumn>
+										<Paragraph>hello1</Paragraph>
+									</GridItemFullColumn>
+									<GridItemFullColumn>
+										<Paragraph>hello2</Paragraph>
+									</GridItemFullColumn>
+								</Grid>
+							</InnerSpacing>
+							</SectionContent>
+					</Section>
+					<Section display="flex" direction="column" justify="start" align="start">
+						<SectionContent>
+							<Title css={{ fontSize: '3vw' }}>Projects</Title>
+							<InnerSpacing>
+									<Paragraph>😳</Paragraph>
+							</InnerSpacing>
+						</SectionContent>
+					</Section>
+				</SectionScroller>
             </ContentContainer>
 			<OverlayContainer>
 				<Doing setActive={setPresenceActive}/>
 			</OverlayContainer>
-        </React.Fragment>
+        </>
 	);
 }

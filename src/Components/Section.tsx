@@ -1,8 +1,10 @@
+import classnames from 'classnames';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { styled } from '../stitches.config';
 
 // Styles
-export const Section = styled(motion.div, {
+export const SSection = styled(motion.div, {
     height: '100vh',
     width: '100%',
 
@@ -46,3 +48,40 @@ export const Section = styled(motion.div, {
         }
     }
 });
+
+export const SectionContent = styled(motion.div, {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    margin: '10vh auto 0 auto',
+    width: '80%',
+});
+
+export const InnerSpacing = styled(motion.div, {
+    height: 'auto',
+    flexGrow: 1,
+    margin: '10vh 0 0 0',
+    width: '100%',
+});
+
+
+// Main component
+interface ISectionProps {
+    isFocused?: boolean;
+    onSectionFocus?: () => void;
+
+    [key: string]: any;
+};
+
+export const Section: React.FC<ISectionProps> = ({ children, isFocused, onSectionFocus, ...rest }) => {
+    useEffect(() => {
+        if (isFocused)
+            onSectionFocus?.();
+    }, [isFocused]);
+
+    return (
+        <SSection {...rest}>
+            {children}
+        </SSection>
+    );
+};

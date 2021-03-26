@@ -3,12 +3,12 @@ import { motion, MotionStyle } from 'framer-motion';
 import { styled } from '../stitches.config';
 
 // Styles
-var SButton = styled(motion.button, {
+let StyledButton = styled(motion.button, {
 	alignItems: 'center',
-	background: '$vividblue',
-	border: 'none',
+	background: 'transparent',
+	border: '1px solid $vividblue',
 	borderRadius: '4px',
-	color: '#ffffff',
+	color: '$vividblue',
 	cursor: 'pointer',
 	display: 'inline-flex',
 	fontFamily: '$inter',
@@ -24,20 +24,19 @@ var SButton = styled(motion.button, {
 	verticalAlign: 'middle',
 
 	'&:focus': {
-		border: 'none',
 		outline: 'none',
 	},
 
 	variants: {
 		mode: {
 			disabled: {
-				background: '$disabledgray',
-				color: '$black',
+				borderColor: '$disabledgray',
+				color: '$disabledgray',
 				cursor: 'default',
 			},
 			success: {
-				background: '$vividgreen',
-
+				borderColor: '$vividgreen',
+				color: '$vividgreen',
 			}
 		}
 	}
@@ -51,35 +50,30 @@ interface IBaseButtonProps {
 	isSuccessful?: boolean,
 	label?: string,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
-	style?: MotionStyle,
+	
+	style?: object,
 };
 
 export const BaseButton: React.FC<IBaseButtonProps> = props => {
 	const buttonRef: React.RefObject<HTMLButtonElement> = React.createRef();
 
 	function isDisabled(): boolean {
-		var { isDisabled, isLoading } = props;
+		let { isDisabled, isLoading } = props;
 		return !!(isDisabled || isLoading);
 	}
 
-	function getStyleMode(): "success" | "disabled" | undefined {
-		return props.isSuccessful
-			? "success"
-			: props.isDisabled
-				? "disabled"
-				: undefined;
-	}
-
 	return (
-		<SButton
-		id={props.id}
-		disabled={isDisabled()}
-		mode={getStyleMode()}
-		onClick={props.onClick}
-		whileTap={{ scale: .985, transition: { duration: .0 } }}
-		ref={buttonRef}
-		style={{ ...props.style }}>
+		<StyledButton
+			id={props.id}
+			disabled={isDisabled()}
+			mode={(props.isSuccessful && "success" ) || (isDisabled() && "disabled") || undefined}
+			onClick={props.onClick}
+			whileTap={ !isDisabled() ? { scale: .95 } : {} }
+			transition={{ easing: "spring", duration: .0 }}
+			ref={buttonRef}
+			css={{ ...props.style }}
+		>
 			{props.label || props.children}
-		</SButton>
+		</StyledButton>
 	);
 }

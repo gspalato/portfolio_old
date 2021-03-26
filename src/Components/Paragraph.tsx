@@ -3,7 +3,7 @@ import { styled } from '../stitches.config';
 
 // Styles
 export const Paragraph = styled(motion.p, {
-    color: '#ffffff',
+    color: '$paragraphColor',
     fontFamily: '$karla',
 	fontSize: 'max(1.125rem, 1.05vw)',
     //fontWeight: 500,

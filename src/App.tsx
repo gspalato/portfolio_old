@@ -9,7 +9,7 @@ import {
 import { Home } from './Pages/Home';
 
 // Styles
-var AppContainer = styled('div', {
+let AppContainer = styled('div', {
 	background: '$black',
 	height: '100%',
 	width: '100%',

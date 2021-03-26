@@ -30,18 +30,16 @@ interface IPageProps {
 
 };
 
-export const Page: React.FC<IPageProps> = props => {
-    return (
-        <React.Fragment>
-            <BackgroundContainer>
-                
-            </BackgroundContainer>
-            <ContentContainer>
-                {props.children}
-            </ContentContainer>
-            <OverlayContainer>
-
-            </OverlayContainer>
-        </React.Fragment>
-    );
-}
+export const Page: React.FC<IPageProps> = props => (
+    <React.Fragment>
+        <BackgroundContainer>
+            
+        </BackgroundContainer>
+        <ContentContainer>
+            {props.children}
+        </ContentContainer>
+        <OverlayContainer>
+            
+        </OverlayContainer>
+    </React.Fragment>
+);
