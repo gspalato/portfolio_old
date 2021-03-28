@@ -1,12 +1,17 @@
 import React from 'react';
-import { styled } from './stitches.config';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
 
+import { Store } from "./Store/Store";
+import { styled } from './stitches.config';
+
 import { Home } from './Pages/Home';
+import { AnimatePresence } from 'framer-motion';
+import CursorProvider from './Components/Providers/CursorProvider';
 
 // Styles
 let AppContainer = styled('div', {
@@ -15,24 +20,22 @@ let AppContainer = styled('div', {
 	width: '100%',
 });
 
-// Component
+// Main component
 function App() {
     return (
-        <AppContainer className="app">
-            <Router>
-                <Switch>
-                    <Route path="/">
-                        <Home />
-                    </Route>
-                    <Route path="/about">
-
-                    </Route>
-                    <Route path="/projects">
-
-                    </Route>
-                </Switch>
-            </Router>
-        </AppContainer>
+        <Provider store={Store}>
+            <AppContainer className="app">
+                <AnimatePresence exitBeforeEnter>
+                    <Router>
+                        <Switch>
+                            <Route path="/">
+                                <Home />
+                            </Route>
+                        </Switch>
+                    </Router>
+                </AnimatePresence>
+            </AppContainer>
+        </Provider>
     );
 }
 

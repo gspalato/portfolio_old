@@ -9,7 +9,6 @@ let StyledButton = styled(motion.button, {
 	border: '1px solid $vividblue',
 	borderRadius: '4px',
 	color: '$vividblue',
-	cursor: 'pointer',
 	display: 'inline-flex',
 	fontFamily: '$inter',
 	fontSize: '.675vw',
@@ -23,6 +22,9 @@ let StyledButton = styled(motion.button, {
 	userSelect: 'none',
 	verticalAlign: 'middle',
 
+	'&:active': {
+		filter: 'brightness(60%)',
+	},
 	'&:focus': {
 		outline: 'none',
 	},
@@ -33,6 +35,10 @@ let StyledButton = styled(motion.button, {
 				borderColor: '$disabledgray',
 				color: '$disabledgray',
 				cursor: 'default',
+
+				'&:active': {
+					filter: 0,
+				}
 			},
 			success: {
 				borderColor: '$vividgreen',
@@ -43,15 +49,13 @@ let StyledButton = styled(motion.button, {
 });
 
 // Component
-interface IBaseButtonProps {
-	id?: string
-	isDisabled?: boolean,
-	isLoading?: boolean,
-	isSuccessful?: boolean,
-	label?: string,
-	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
-	
-	style?: object,
+interface IBaseButtonProps extends ExtraProps {
+	id?: string;
+	isDisabled?: boolean;
+	isLoading?: boolean;
+	isSuccessful?: boolean;
+	label?: string;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const BaseButton: React.FC<IBaseButtonProps> = props => {
@@ -68,10 +72,10 @@ export const BaseButton: React.FC<IBaseButtonProps> = props => {
 			disabled={isDisabled()}
 			mode={(props.isSuccessful && "success" ) || (isDisabled() && "disabled") || undefined}
 			onClick={props.onClick}
-			whileTap={ !isDisabled() ? { scale: .95 } : {} }
+			whileTap={ !isDisabled() ? { scale: .97 } : {} }
 			transition={{ easing: "spring", duration: .0 }}
 			ref={buttonRef}
-			css={{ ...props.style }}
+			{...props}
 		>
 			{props.label || props.children}
 		</StyledButton>

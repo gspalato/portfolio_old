@@ -1,3 +1,4 @@
+// Declared Modules
 declare module 'react-page-scroller';
 
 declare module 'react-motion-animate' {
@@ -19,3 +20,8 @@ declare module 'react-motion-animate' {
 };
 
 declare module 'react-typist-loop';
+
+// Declared Interfaces
+declare interface ExtraProps {
+    [key: string]: any;
+}

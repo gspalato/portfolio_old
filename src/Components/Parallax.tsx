@@ -30,7 +30,7 @@ export const Parallax: React.FC<IParallaxProps> = (props) => {
 	}, [ ref ]);
   
 	return (
-		<motion.div ref={ref} className="gs-parallax-wrapper" style={{ y, ...props.style }}>
+		<motion.div ref={ref} style={{ y, ...props.style }}>
 			{props.children}
 		</motion.div>
 	);

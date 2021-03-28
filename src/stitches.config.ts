@@ -23,6 +23,10 @@ export const { styled, css } = createStyled({
                 rgb(253, 123, 66) 100%)
             `,
         },
+        space: {
+            $contentMargin: '18.75rem',
+            $sectionMargin: '5rem',
+        },
         fonts: {
             $paragraphFont: '$inter',
 

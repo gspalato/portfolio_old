@@ -1,12 +1,13 @@
-import classnames from 'classnames';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import { styled } from '../stitches.config';
 
 // Styles
-export const SSection = styled(motion.div, {
+export const StyledSection = styled(motion.div, {
     height: '100vh',
     width: '100%',
+
+    margin: '-2.5rem 0 0 0',
 
     position: 'relative',
 
@@ -49,39 +50,47 @@ export const SSection = styled(motion.div, {
     }
 });
 
-export const SectionContent = styled(motion.div, {
+const Content = styled(motion.div, {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    margin: '10vh auto 0 auto',
-    width: '80%',
+    margin: '$sectionMargin $contentMargin 0 $contentMargin',
+    width: 'auto',
 });
 
-export const InnerSpacing = styled(motion.div, {
+const Spacing = styled(motion.div, {
     height: 'auto',
     flexGrow: 1,
-    margin: '10vh 0 0 0',
+    margin: '$sectionMargin 0 0 0',
     width: '100%',
 });
 
 
 // Main component
-interface ISectionProps {
+interface ISectionContainerProps {
+    hero?: true,
+
     isFocused?: boolean;
     onSectionFocus?: () => void;
 
     [key: string]: any;
 };
 
-export const Section: React.FC<ISectionProps> = ({ children, isFocused, onSectionFocus, ...rest }) => {
+export const Container: React.FC<ISectionContainerProps> = ({ children, isFocused, onSectionFocus, ...rest }) => {
     useEffect(() => {
         if (isFocused)
             onSectionFocus?.();
     }, [isFocused]);
 
     return (
-        <SSection {...rest}>
+        <StyledSection css={{ margin: rest.hero ? '0' : '' }}  {...rest}>
             {children}
-        </SSection>
+        </StyledSection>
     );
+};
+
+export const Section = {
+    Container,
+    Content,
+    Spacing,
 };

@@ -1,6 +1,13 @@
-@import-normalize
+@import-normalize;
+
+* {
+	margin-block-start: 0;
+    margin-block-end: 0;
+}
 
 html, body {
+	background: #000;
+
   	margin: 0;
   	padding: 0;
 
@@ -16,6 +23,14 @@ html, body {
 	font-kerning: normal;
 }
 
+h1, h2, h3, h4, h5 {
+	margin: 0;
+}
+
+b, strong {
+	font-weight: 500;
+}
+
 code {
   	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
@@ -23,6 +38,7 @@ code {
 img {
 	border: none;
 	max-width: none;
+	user-select: none;
 }
 
 /**/

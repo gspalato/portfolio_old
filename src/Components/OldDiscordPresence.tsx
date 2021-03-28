@@ -8,7 +8,7 @@ import { Image } from "./Image";
 
 // Styles
 let SmallParagraph = styled(Paragraph, {
-	fontSize: '.9rem',
+	fontSize: '15px',
 });
 
 const Container = styled(motion.div, {
@@ -17,7 +17,17 @@ const Container = styled(motion.div, {
 	borderRadius: '5px',
 	padding: '1rem',
 	transition: '.25s ease',
-	width: '25%',
+	width: '12rem',
+});
+
+const LiveDot = styled(motion.div, {
+	animation: 'blinking 2s ease-in-out infinite',
+	borderRadius: '50%',
+	backgroundColor: '#ff0000',
+	display: 'inline-block',
+	height: '8px',
+	marginLeft: '4px',
+	width: '8px',
 });
 
 const ActivityRow = styled(motion.div, {
@@ -55,6 +65,14 @@ const ActivitySecondaryImage = styled(Image, {
 const ActivityInfo = styled(motion.div, {
 	marginLeft: '1rem',
 	transition: '.25s ease',
+	'h5': {
+		color: '#fff',
+		margin: '0',
+	},
+	'p': {
+		margin: '0',
+		fontSize: '0.8rem',
+	}
 });
 
 
@@ -150,8 +168,8 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 	if (!doing || !doing?.discord_status)
 		return null;
 	
-	let initial = { opacity: 0, y: -100 };
-	let final = { opacity: 1, y: 0 }
+	let initial = { opacity: 0, x: -100 };
+	let final = { opacity: 1, x: 0 }
 	let shouldBeDisplayed = doing?.listening_to_spotify || currentActivity;
 
 	let getAppDataFromId = (id?: number, item?: string): string =>
@@ -171,32 +189,64 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 
 	return (
 		<AnimatePresence>
-			<Container>
-				<ActivityRow>
-					<ActivityImageContainer
-						css={{ height: primaryActivityImage ? '50px' : 0 }}
-					>
-				  		<ActivityImage
-						  	src={primaryActivityImage ?? ""}
-							css={{ display: primaryActivityImage ? 'block' : 'none' }}
-						/>
-				  		<ActivitySecondaryImage
-						  	src={secondaryActivityImage ?? ""}
-							  css={{ display: secondaryActivityImage ? 'block' : 'none' }}
-						/>
-					</ActivityImageContainer>
-					<ActivityInfo css={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
-						<SmallParagraph css={{ color: '#ffffff' }}>
-						{
-							doing?.listening_to_spotify
-							? (<span>Listening to <b>{doing.spotify?.song}</b> by <b>{doing.spotify?.artist}</b></span>)
-							: currentActivity
-								? (<span>{ActivityType[currentActivity.type]} <b>{currentActivity?.name}</b></span>)
+			<Container layout
+				ref={ref}
+				initial={initial}
+				animate={ shouldBeDisplayed && final }
+				exit={initial}
+				transition={{ ease: "easeInOut", duration: .5 }}
+				{...props}
+			>
+				<SmallParagraph css={{ marginTop: '0' }}>
+			 	{
+					 doing?.listening_to_spotify
+					 ? (<><span>Listening to Spotify</span> <LiveDot/></>)
+					 : currentActivity
+					 	? (<span>Doing something</span>)
+						: "Nothing going on"
+				}
+				</SmallParagraph>
+				<>
+			  		<ActivityRow>
+						<ActivityImageContainer
+							css={{ height: primaryActivityImage ? '50px' : 0 }}
+						>
+				  			<ActivityImage
+							  	src={primaryActivityImage ?? ""}
+								css={{ display: primaryActivityImage ? 'block' : 'none' }}
+							/>
+				  			<ActivitySecondaryImage
+							  	src={secondaryActivityImage ?? ""}
+								  css={{ display: secondaryActivityImage ? 'block' : 'none' }}
+							/>
+						</ActivityImageContainer>
+						<ActivityInfo css={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
+							<SmallParagraph css={{ color: '#ffffff' }}>
+							{
+								doing?.listening_to_spotify
+								? doing.spotify?.song
+								: currentActivity
+									? (<><span>{ActivityType[currentActivity.type]} </span><b>{currentActivity?.name}</b></>)
+									: null
+							}
+							</SmallParagraph>
+							<SmallParagraph>
+							{
+								doing?.listening_to_spotify
+								? `by ${doing.spotify?.artist}`
+								: currentActivity
+									? currentActivity?.details
+									: null
+							}
+							</SmallParagraph>
+							{
+								currentActivity?.state && !doing?.listening_to_spotify
+								? (<SmallParagraph>{currentActivity?.state}</SmallParagraph>)
 								: null
-						}
-						</SmallParagraph>
-					</ActivityInfo>
-			  	</ActivityRow>
+							}
+						</ActivityInfo>
+			  		</ActivityRow>
+				</>
 			</Container>
 		</AnimatePresence>
 	);

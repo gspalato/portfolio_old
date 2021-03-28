@@ -24,20 +24,20 @@ interface IGridItemProps {
 
 export const GridItem: React.FC<IGridItemProps> = props => {
     let columnSpan: string;
-    if (props.columnSpan == "full")
+    if (props.columnSpan === "full")
         columnSpan = "1 / -1";
-    else if (props.columnSpan == "auto")
+    else if (props.columnSpan === "auto")
         columnSpan = "auto";
     else
-        columnSpan = `span ${props.columnSpan} / span ${props.columnSpan}`;
+        columnSpan = `span ${props.columnSpan ?? 1} / span ${props.columnSpan ?? 1}`;
 
     let rowSpan: string;
-    if (props.rowSpan == "full")
+    if (props.rowSpan === "full")
         rowSpan = "1 / -1";
-    else if (props.rowSpan == "auto")
+    else if (props.rowSpan === "auto")
         rowSpan = "auto";
     else
-        rowSpan = `span ${props.rowSpan} / span ${props.rowSpan}`;
+        rowSpan = `span ${props.rowSpan ?? 1} / span ${props.rowSpan ?? 1}`;
 
     const ComposedGridItem = styled(SGridItem, {
         gridColumn: columnSpan,
