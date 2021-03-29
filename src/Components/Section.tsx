@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { styled } from '../stitches.config';
 
 // Styles
-export const StyledSection = styled(motion.div, {
+export const StyledSection = styled(motion.section, {
     height: '100vh',
     width: '100%',
 

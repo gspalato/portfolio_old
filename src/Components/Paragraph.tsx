@@ -5,7 +5,7 @@ import { styled } from '../stitches.config';
 export const Paragraph = styled(motion.p, {
     color: '$paragraphColor',
     fontFamily: '$karla',
-	fontSize: 'max(1.125rem, 1.4vw)',
+	fontSize: '1.45rem',
     height: 'fit-content',
     margin: '0.6rem 0 ',
     userSelect: 'none',

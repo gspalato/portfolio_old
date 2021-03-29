@@ -18,6 +18,15 @@ const Container = styled(motion.div, {
 	padding: '1rem',
 	transition: '.25s ease',
 	width: '12rem',
+
+	variants: {
+		display: {
+			show: { },
+			none: {
+				display: 'none',
+			}
+		}
+	}
 });
 
 const LiveDot = styled(motion.div, {
@@ -190,10 +199,11 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 	return (
 		<AnimatePresence>
 			<Container layout
-				ref={ref}
-				initial={initial}
 				animate={ shouldBeDisplayed && final }
+				display={{ 'sm': 'none' }}
 				exit={initial}
+				initial={initial}
+				ref={ref}
 				transition={{ ease: "easeInOut", duration: .5 }}
 				{...props}
 			>
