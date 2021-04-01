@@ -1,52 +1,37 @@
 import React from 'react';
+import classnames from 'classnames';
 import { motion, MotionStyle } from 'framer-motion';
-import { styled } from '../stitches.config';
+import styled from 'styled-components';
 
 // Styles
-let StyledButton = styled(motion.button, {
-	alignItems: 'center',
-	background: 'transparent',
-	border: '1px solid $vividblue',
-	borderRadius: '4px',
-	color: '$vividblue',
-	display: 'inline-flex',
-	fontFamily: '$inter',
-	fontSize: '.675vw',
-	fontWeight: 500,
-	justifyContent: 'center',
-	lineHeight: '2.375rem',
-	padding: '0 1rem',
-	textAlign: 'center',
-	textDecoration: 'none',
-	transition: '.07s linear',
-	userSelect: 'none',
-	verticalAlign: 'middle',
+let StyledButton = styled(motion.button).attrs({
+	className: classnames(
+		"align-middle",
+		"bg-transparent",
+		"border",
+		"border-vividblue",
+		"font-inter",
+		"font-semibold",
+		"items-center",
+		"inline-flex",
+		"justify-center",
+		"leading-loose",
+		"no-underline",
+		"py-4",
+		"rounded-sm",
+		"select-none",
+		"text-sm",
+		"text-vividblue",
+	),
+})`
+	&:active {
+		filter: 'brightness(60%)';
+	};
 
-	'&:active': {
-		filter: 'brightness(60%)',
-	},
-	'&:focus': {
-		outline: 'none',
-	},
-
-	variants: {
-		mode: {
-			disabled: {
-				borderColor: '$disabledgray',
-				color: '$disabledgray',
-				cursor: 'default',
-
-				'&:active': {
-					filter: 0,
-				}
-			},
-			success: {
-				borderColor: '$vividgreen',
-				color: '$vividgreen',
-			}
-		}
-	}
-});
+	&:focus {
+		outline: 'none';
+	};
+`;
 
 // Component
 interface IBaseButtonProps extends ExtraProps {
@@ -70,7 +55,6 @@ export const BaseButton: React.FC<IBaseButtonProps> = props => {
 		<StyledButton
 			id={props.id}
 			disabled={isDisabled()}
-			mode={(props.isSuccessful && "success" ) || (isDisabled() && "disabled") || undefined}
 			onClick={props.onClick}
 			whileTap={ !isDisabled() ? { scale: .97 } : {} }
 			transition={{ easing: "spring", duration: .0 }}

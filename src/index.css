@@ -1,5 +1,9 @@
 @import-normalize;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	margin-block-start: 0;
     margin-block-end: 0;

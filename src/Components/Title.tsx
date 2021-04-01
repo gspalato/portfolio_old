@@ -1,14 +1,15 @@
 import { motion  } from 'framer-motion';
-import { styled } from '../stitches.config';
+import classnames from 'classnames';
+import styled from 'styled-components';
 
 // Styles
-export const Title = styled(motion.h1, {
-    color: '#ffffff',
-    fontFamily: '$inter',
-	fontSize: '4vw',
-    fontWeight: 600,
-    height: 'fit-content',
-    marginBlockEnd: '0',
-    marginBlockStart: '0',
-    userSelect: 'none',
-});
+export const Title = styled(motion.h1).attrs({
+    className: classnames(
+        "font-display",
+        "font-semibold",
+        "h-auto",
+        "text-9xl",
+        "text-white",
+        "select-none",
+    ),
+})``;

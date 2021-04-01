@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { motion, MotionStyle, useTransform, useViewportScroll } from 'framer-motion';
-import { styled } from '../stitches.config';
+
 
 interface IParallaxProps {
 	offset?: number,

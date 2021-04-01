@@ -1,88 +1,108 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { forwardRef, useEffect, useMemo, useState } from "react";
-import { styled } from "../stitches.config";
+import classnames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import styled from "styled-components";
 import { Presence } from '../Types/lanyard';
 
 import { Paragraph } from '../Components/Paragraph';
 import { Image } from "./Image";
 
 // Styles
-let SmallParagraph = styled(Paragraph, {
-	fontSize: '15px',
-});
+let SmallParagraph = styled(Paragraph).attrs({})`
+	font-size: 1rem;
+	line-height: .9rem;
+`;
 
-const Container = styled(motion.div, {
-	backgroundColor: '$backgroundColor',
-	border: '1px solid #101010',
-	borderRadius: '5px',
-	padding: '1rem',
-	transition: '.25s ease',
-	width: '12rem',
+const Container = styled(motion.div).attrs({
+	className: classnames(
+		"bg-black",
+		"duration-200",
+		"ease-in-out",
+		"h-auto",
+		"p-4",
+		"rounded-md",
+		"transition-all",
+		"w-60",
+	),
+})`
+	border: 1px solid #101010;
+`;
 
-	variants: {
-		display: {
-			show: { },
-			none: {
-				display: 'none',
-			}
-		}
+const LiveDot = styled(motion.div).attrs({
+	className: classnames(
+		"animate-pulse",
+		"bg-red",
+		"h-2",
+		"inline-block",
+		"m-1",
+		"rounded-full",
+		"w-2",
+	),
+})``;
+
+const ActivityRow = styled(motion.div).attrs({
+	className: classnames(
+		"duration-200",
+		"ease-in-out",
+		"flex",
+		"flex-row",
+		"items-center",
+		"transition-all",
+	),
+})``;
+
+const ActivityImageContainer = styled(motion.div).attrs({
+	className: classnames(
+		"duration-200",
+		"ease-in-out",
+		"h-12",
+		"relative",
+		"transition-all",
+		"w-12",
+	),
+})``;
+
+const ActivityImage = styled(Image).attrs({
+	className: classnames(
+		"duration-200",
+		"ease-in-out",
+		"h-12",
+		"rounded-sm",
+		"transition-all",
+		"w-12",
+	),
+})``;
+
+const ActivitySecondaryImage = styled(Image).attrs({
+	className: classnames(
+		"absolute",
+		"bg-black",
+		"-bottom-1",
+		"duration-200",
+		"ease-in-out",
+		"h-5",
+		"p-0.5",
+		"-right-1",
+		"rounded-full",
+		"transition-all",
+		"w-5",
+	),
+})``;
+
+const ActivityInfo = styled(motion.div)`
+	margin-left: 1rem;
+	transition: .25s ease;
+
+	& h5 {
+		color: #fff;
+		margin: 0;
 	}
-});
 
-const LiveDot = styled(motion.div, {
-	animation: 'blinking 2s ease-in-out infinite',
-	borderRadius: '50%',
-	backgroundColor: '#ff0000',
-	display: 'inline-block',
-	height: '8px',
-	marginLeft: '4px',
-	width: '8px',
-});
-
-const ActivityRow = styled(motion.div, {
-	alignItems: 'center',
-	display: 'flex',
-	flexDirection: 'row',
-	transition: '.25s ease',
-});
-
-const ActivityImageContainer = styled(motion.div, {
-	height: '50px',
-	position: 'relative',
-	transition: '.25s ease',
-});
-
-const ActivityImage = styled(Image, {
-	borderRadius: '5px',
-	height: '50px',
-	transition: '.25s ease',
-	width: '50px',
-});
-
-const ActivitySecondaryImage = styled(Image, {
-	borderRadius: '50%',
-	backgroundColor: '#000',
-	border: '2px solid #000',
-	bottom: '-5px',
-	height: '20px',
-	position: 'absolute',
-	right: '-5px',
-	transition: '.25s ease',
-	width: '20px',
-});
-
-const ActivityInfo = styled(motion.div, {
-	marginLeft: '1rem',
-	transition: '.25s ease',
-	'h5': {
-		color: '#fff',
-		margin: '0',
-	},
-	'p': {
-		margin: '0',
-		fontSize: '0.8rem',
+	& p {
+		margin: 0;
+		font-size: 0.8rem;
 	}
-});
+`;
 
 
 // Main component
@@ -207,7 +227,7 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 				transition={{ ease: "easeInOut", duration: .5 }}
 				{...props}
 			>
-				<SmallParagraph css={{ marginTop: '0' }}>
+				<SmallParagraph style={{ marginTop: '0' }}>
 			 	{
 					 doing?.listening_to_spotify
 					 ? (<><span>Listening to Spotify</span> <LiveDot/></>)
@@ -219,19 +239,19 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 				<>
 			  		<ActivityRow>
 						<ActivityImageContainer
-							css={{ height: primaryActivityImage ? '50px' : 0 }}
+							style={{ height: primaryActivityImage ? '50px' : 0 }}
 						>
 				  			<ActivityImage
 							  	src={primaryActivityImage ?? ""}
-								css={{ display: primaryActivityImage ? 'block' : 'none' }}
+								style={{ display: primaryActivityImage ? 'block' : 'none' }}
 							/>
 				  			<ActivitySecondaryImage
 							  	src={secondaryActivityImage ?? ""}
-								  css={{ display: secondaryActivityImage ? 'block' : 'none' }}
+								  style={{ display: secondaryActivityImage ? 'block' : 'none' }}
 							/>
 						</ActivityImageContainer>
-						<ActivityInfo css={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
-							<SmallParagraph css={{ color: '#ffffff' }}>
+						<ActivityInfo style={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
+							<SmallParagraph style={{ color: '#ffffff' }}>
 							{
 								doing?.listening_to_spotify
 								? doing.spotify?.song

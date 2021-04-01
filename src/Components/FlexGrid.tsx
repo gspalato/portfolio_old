@@ -1,16 +1,18 @@
 import React from 'react';
+import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import { styled } from '../stitches.config';
+import styled from 'styled-components';
 
 
 // Styles
-let StyledFlexRow = styled(motion.div, {
-    display: 'flex',
-});
+let StyledFlexRow = styled(motion.div)`
+    display: flex;
+`;
 
 
 // Main component
 interface IFlexGridProps extends ExtraProps {
+    flow?: "col" | "row",
     spaced?: true,
 };
 
@@ -22,9 +24,9 @@ interface IFlexColumnProps extends ExtraProps {
 interface IFlexRowProps extends ExtraProps { };
 
 export const FlexGrid: React.FC<IFlexGridProps> = props => {
-    let StyledFlexGrid = styled(motion.div, {
-        justifyContent: props.spaced && 'space-between',
-    });
+    let StyledFlexGrid = styled(motion.div).attrs({
+        className: `grid ${props.flow ? 'grid-flow-'+props.flow : 'grid-flow-row'}`,
+    })``;
 
     return (
         <StyledFlexGrid
@@ -36,26 +38,14 @@ export const FlexGrid: React.FC<IFlexGridProps> = props => {
 };
 
 export const FlexColumn: React.FC<IFlexColumnProps> = props => {
-    let StyledFlexColumn = styled(motion.div, {
-        flex: props.size ?? 1,
+    let StyledFlexColumn = styled(motion.div).attrs({
 
-        variants: {
-            display: {
-                show: {
-
-                },
-                collapsed: {
-                    display: 'none',
-                }
-            }
-        }
-    });
+    })`
+        flex: ${props.size ?? 1};
+    `;
 
     return (
         <StyledFlexColumn
-            display={{
-                initial: 'show',
-            }}
             {...props}
         >
             {props.children}

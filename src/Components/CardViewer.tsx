@@ -1,11 +1,7 @@
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { styled } from '../stitches.config';
 
 import { Card } from './Card';
-
-
-// Styles
 
 
 // Main component

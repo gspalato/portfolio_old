@@ -1,61 +1,61 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { forwardRef, useEffect, useMemo, useState } from "react";
-import { styled } from "../stitches.config";
+import styled from "styled-components";
 import { Presence } from '../Types/lanyard';
 
 import { Paragraph } from '../Components/Paragraph';
 import { Image } from "./Image";
 
 // Styles
-let SmallParagraph = styled(Paragraph, {
-	fontSize: '.9rem',
-});
+let SmallParagraph = styled(Paragraph)`
+	font-size: .9rem;
+`;
 
-const Container = styled(motion.div, {
-	backgroundColor: '$backgroundColor',
-	border: '1px solid #101010',
-	borderRadius: '5px',
-	padding: '1rem',
-	transition: '.25s ease',
-	width: '25%',
-});
+const Container = styled(motion.div)`
+	background-color: $backgroundColor;
+	border: 1px solid #101010;
+	border-radius: 5px;
+	padding: 1rem;
+	transition: .25s ease;
+	width: 25%;
+`;
 
-const ActivityRow = styled(motion.div, {
-	alignItems: 'center',
-	display: 'flex',
-	flexDirection: 'row',
-	transition: '.25s ease',
-});
+const ActivityRow = styled(motion.div)`
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	transition: .25s ease;
+`;
 
-const ActivityImageContainer = styled(motion.div, {
-	height: '50px',
-	position: 'relative',
-	transition: '.25s ease',
-});
+const ActivityImageContainer = styled(motion.div)`
+	height: 50px;
+	position: relative;
+	transition: .25s ease;
+`;
 
-const ActivityImage = styled(Image, {
-	borderRadius: '5px',
-	height: '50px',
-	transition: '.25s ease',
-	width: '50px',
-});
+const ActivityImage = styled(Image)`
+	border-radius: 5px;
+	height: 50px;
+	transition: .25s ease;
+	width: 50px;
+`;
 
-const ActivitySecondaryImage = styled(Image, {
-	borderRadius: '50%',
-	backgroundColor: '#000',
-	border: '2px solid #000',
-	bottom: '-5px',
-	height: '20px',
-	position: 'absolute',
-	right: '-5px',
-	transition: '.25s ease',
-	width: '20px',
-});
+const ActivitySecondaryImage = styled(Image)`
+	border-radius: 50%;
+	background-color: #000;
+	border: 2px solid #000;
+	bottom: -5px;
+	height: 20px;
+	position: absolute;
+	right: -5px;
+	transition: .25s ease;
+	width: 20px;
+`;
 
-const ActivityInfo = styled(motion.div, {
-	marginLeft: '1rem',
-	transition: '.25s ease',
-});
+const ActivityInfo = styled(motion.div)`
+	margin-left: 1rem;
+	transition: .25s ease;
+`;
 
 
 // Main component
@@ -174,19 +174,19 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 			<Container>
 				<ActivityRow>
 					<ActivityImageContainer
-						css={{ height: primaryActivityImage ? '50px' : 0 }}
+						style={{ height: primaryActivityImage ? '50px' : 0 }}
 					>
 				  		<ActivityImage
 						  	src={primaryActivityImage ?? ""}
-							css={{ display: primaryActivityImage ? 'block' : 'none' }}
+							style={{ display: primaryActivityImage ? 'block' : 'none' }}
 						/>
 				  		<ActivitySecondaryImage
 						  	src={secondaryActivityImage ?? ""}
-							  css={{ display: secondaryActivityImage ? 'block' : 'none' }}
+							  style={{ display: secondaryActivityImage ? 'block' : 'none' }}
 						/>
 					</ActivityImageContainer>
-					<ActivityInfo css={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
-						<SmallParagraph css={{ color: '#ffffff' }}>
+					<ActivityInfo style={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
+						<SmallParagraph style={{ color: '#ffffff' }}>
 						{
 							doing?.listening_to_spotify
 							? (<span>Listening to <b>{doing.spotify?.song}</b> by <b>{doing.spotify?.artist}</b></span>)

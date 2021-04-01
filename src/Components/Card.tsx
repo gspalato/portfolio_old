@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { styled } from '../stitches.config';
+import styled from 'styled-components';
 
 import { CursorContext } from './Providers/CursorProvider';
 import { FlexGrid, FlexColumn, FlexRow } from './FlexGrid';
@@ -18,32 +18,17 @@ interface ICardContainerProps extends ExtraProps {
 const Container: React.FC<ICardContainerProps> = props => {
 	const [isBeingPressed, setIsBeingPressed] = useState(false);
 
-	const StyledCardContainer = styled(motion.div, {
-		background: `linear-gradient(0deg, #000, rgba(0, 0, 0, 0) 100%) url(${props.image})`,
-		backgroundPosition: 'center',
-		backgroundRepeat: 'no-repeat',
-		backgroundSize: 'cover',
-		border: '1px solid rgb(26, 26, 26)',
-		borderRadius: '10px',
-		cursor: 'pointer',
-		height: '15rem',
-		position: 'relative',
-		width: '30rem',
-	});
-
-	const onMouseDown = () => {
-		setIsBeingPressed(true);
-		console.log('mousedown')
-	};
-
-	const onMouseUp = () => {
-		setIsBeingPressed(false);
-		console.log('mouseup')
-	};
+	const StyledCardContainer = styled(motion.div).attrs({
+		className: "bg-center bg-no-repeat bg-cover border-defaultBorder h-60 w-120 rounded-md relative text-5xl",
+	})`
+		background: rgba(255, 255, 255, .05);
+		border: 1px solid rgb(26, 26, 26);
+		cursor: pointer;
+	`;
 
 	return (
-		<StyledCardContainer whileTap={{ scale: .97 }}>
-			<motion.div
+		<StyledCardContainer layout whileTap={{ scale: .975 }}>
+			<motion.div layout
 				animate={{ backdropFilter: isBeingPressed ? 'blur(5px)' : 'none' }}
 				style={{ borderRadius: 'inherit', height: '100%', width: '100%' }}
 			>
@@ -59,21 +44,18 @@ interface ICardInfo {
 }
 
 export const Info: React.FC<ICardInfo> = ({ name, description }) => {
-	let ComposedFlexGrid = styled(FlexGrid, {
-		background: 'transparent',
-		bottom: '0px',
-		height: 'fit-content',
-		position: 'absolute',
-		width: '100%',
-		zIndex: 3,
-	});
+	let ComposedFlexGrid = styled(FlexGrid).attrs({
+		className: "bottom-0 h-auto absolute w-full"
+	})`
+		background: transparent;
+	`;
 	
 	return (
 		<ComposedFlexGrid>
 			<FlexRow>
-				<FlexColumn spaced css={{ padding: '0 1vw' }}>
-					<Title css={{ fontSize: '3vw' }}>{name}</Title>
-					<Paragraph css={{ fontSize: '.9vw', marginBottom: '1vw' }}>{description}</Paragraph>
+				<FlexColumn spaced style={{ padding: '0 1vw' }}>
+					<Title style={{ fontSize: '3vw' }}>{name}</Title>
+					<Paragraph style={{ fontSize: '.9vw', marginBottom: '1vw' }}>{description}</Paragraph>
 				</FlexColumn>
 			</FlexRow>
 		</ComposedFlexGrid>

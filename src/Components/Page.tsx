@@ -1,28 +1,28 @@
 import React from 'react';
-import { styled } from '../stitches.config';
+import styled from 'styled-components';
 
 // Styles
-export const BackgroundContainer = styled('div', {
-    background: 'transparent',
-    height: '100vh',
-    position: 'fixed',
-    width: '100%',
-    zIndex: 1,
-});
-export const ContentContainer = styled('div', {
-    background: 'transparent',
-    height: 'min(100%, fit-content)',
-    position: 'absolute',
-    width: '100%',
-    zIndex: 5,
-});
-export const OverlayContainer = styled('div', {
-    background: 'transparent',
-    height: 'min(100%, fit-to-content)',
-    position: 'fixed',
-    width: '100%',
-    zIndex: 10,
-});
+export const BackgroundContainer = styled.div`
+    background: transparent;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 0;
+`;
+export const ContentContainer = styled.div`
+    background: transparent;
+    height: min(100%, fit-content);
+    position: absolute;
+    width: 100%;
+    z-index: 5,
+`;
+export const OverlayContainer = styled.div`
+    background: transparent;
+    height: min(100%, fit-content);
+    position: fixed;
+    width: 100%;
+    z-index: 10,
+`;
 
 
 // Component

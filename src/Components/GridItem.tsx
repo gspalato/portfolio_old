@@ -1,13 +1,11 @@
 import React from 'react';
+import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import { styled } from '../stitches.config';
-import { stopAnimation } from 'framer-motion/types/render/utils/animation';
+import styled from 'styled-components';
 
 
 // Styles
-export const SGridItem = styled(motion.div, {
-
-});
+const SGridItem = styled(motion.div)``;
 
 // Main component
 interface IGridItemProps {
@@ -19,38 +17,35 @@ interface IGridItemProps {
     rowSpan?: number | "full" | "auto";
     rowStart?: number | "auto";
 
-    css?: object;
+    style?: object;
 };
 
 export const GridItem: React.FC<IGridItemProps> = props => {
-    let columnSpan: string;
-    if (props.columnSpan === "full")
-        columnSpan = "1 / -1";
-    else if (props.columnSpan === "auto")
-        columnSpan = "auto";
-    else
-        columnSpan = `span ${props.columnSpan ?? 1} / span ${props.columnSpan ?? 1}`;
+    let columnSpan: string = "";
+    if (props.columnSpan && ["full", "auto"].includes(props.columnSpan as any))
+        columnSpan = `col-${props.columnSpan}`;
+    else if (props.columnSpan)
+        columnSpan = `col-span-${props.columnSpan}`;
 
-    let rowSpan: string;
-    if (props.rowSpan === "full")
-        rowSpan = "1 / -1";
-    else if (props.rowSpan === "auto")
-        rowSpan = "auto";
-    else
-        rowSpan = `span ${props.rowSpan ?? 1} / span ${props.rowSpan ?? 1}`;
+    let rowSpan: string = "";
+    if (props.columnSpan && ["full", "auto"].includes(props.rowSpan as any))
+        rowSpan = `row-${props.columnSpan}`;
+    else if (props.columnSpan)
+        rowSpan = `row-span-${props.columnSpan}`;
 
-    const ComposedGridItem = styled(SGridItem, {
-        gridColumn: columnSpan,
-        gridColumnStart: props.columnStart,
-        gridColumnEnd: props.columnEnd,
-
-        gridRow: rowSpan,
-        gridRowStart: props.rowStart,
-        gridRowEnd: props.rowEnd,
-    });
+    const ComposedGridItem = styled(SGridItem).attrs({
+        className: classnames(
+            columnSpan,
+            `col-start-${props.columnStart}`,
+            `col-end-${props.columnEnd}`,
+            rowSpan,
+            `row-start-${props.rowStart}`,
+            `row-end-${props.rowEnd}`,
+        ),
+    })``;
 
     return (
-        <ComposedGridItem css={props.css}>
+        <ComposedGridItem style={props.style}>
             {props.children}
         </ComposedGridItem>
     );

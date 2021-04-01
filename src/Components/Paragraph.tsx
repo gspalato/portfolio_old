@@ -1,12 +1,16 @@
 import { motion } from 'framer-motion';
-import { styled } from '../stitches.config';
+import classnames from 'classnames';
+import styled from 'styled-components';
 
 // Styles
-export const Paragraph = styled(motion.p, {
-    color: '$paragraphColor',
-    fontFamily: '$karla',
-	fontSize: '1.45rem',
-    height: 'fit-content',
-    margin: '0.6rem 0 ',
-    userSelect: 'none',
-});
+export const Paragraph = styled(motion.p).attrs({
+    className: classnames(
+        "h-auto",
+        "font-body",
+        "leading-7",
+        "my-2.5",
+        "text-2xl",
+        "text-white",
+        "select-none",
+    ),
+})``;
