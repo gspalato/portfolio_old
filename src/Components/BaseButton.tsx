@@ -1,37 +1,37 @@
 import React from 'react';
-import classnames from 'classnames';
 import { motion, MotionStyle } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from '../stitches.config';
+import tw from 'twin.macro';
 
 // Styles
-let StyledButton = styled(motion.button).attrs({
-	className: classnames(
-		"align-middle",
-		"bg-transparent",
-		"border",
-		"border-vividblue",
-		"font-inter",
-		"font-semibold",
-		"items-center",
-		"inline-flex",
-		"justify-center",
-		"leading-loose",
-		"no-underline",
-		"py-4",
-		"rounded-sm",
-		"select-none",
-		"text-sm",
-		"text-vividblue",
-	),
-})`
-	&:active {
-		filter: 'brightness(60%)';
-	};
+let StyledButton = styled(motion.button, {
+	...tw`
+		align-middle
+		bg-transparent
+		border
+		border-vividblue
+		font-inter
+		font-semibold
+		items-center
+		inline-flex
+		justify-center
+		leading-loose
+		no-underline
+		py-4
+		rounded-sm
+		select-none
+		text-sm
+		text-vividblue
+	`,
 
-	&:focus {
-		outline: 'none';
-	};
-`;
+	'&:active': {
+		filter: 'brightness(60%)',
+	},
+
+	'&:focus': {
+		outline: 'none',
+	},
+});
 
 // Component
 interface IBaseButtonProps extends ExtraProps {

@@ -1,11 +1,7 @@
 import React from 'react';
-import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
-
-
-// Styles
-const SGridItem = styled(motion.div)``;
+import { styled } from '../stitches.config';
+import tw from 'twin.macro';
 
 // Main component
 interface IGridItemProps {
@@ -33,20 +29,18 @@ export const GridItem: React.FC<IGridItemProps> = props => {
     else if (props.columnSpan)
         rowSpan = `row-span-${props.columnSpan}`;
 
-    const ComposedGridItem = styled(SGridItem).attrs({
-        className: classnames(
-            columnSpan,
-            `col-start-${props.columnStart}`,
-            `col-end-${props.columnEnd}`,
-            rowSpan,
-            `row-start-${props.rowStart}`,
-            `row-end-${props.rowEnd}`,
-        ),
-    })``;
+    let classes = `
+        ${columnSpan}
+        col-start-${props.columnStart}
+        col-end-${props.columnEnd}
+        ${rowSpan}
+        row-start-${props.rowStart}
+        row-end-${props.rowEnd}
+    `;
 
     return (
-        <ComposedGridItem style={props.style}>
+        <motion.div className={classes} style={props.style}>
             {props.children}
-        </ComposedGridItem>
+        </motion.div>
     );
 };

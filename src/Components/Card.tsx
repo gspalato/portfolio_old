@@ -1,13 +1,11 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from '../stitches.config';
+import tw from 'twin.macro';
 
-import { CursorContext } from './Providers/CursorProvider';
 import { FlexGrid, FlexColumn, FlexRow } from './FlexGrid';
-import { GridItem } from './GridItem';
 import { Paragraph } from './Paragraph';
 import { Title } from './Title';
-import { BaseButton } from './BaseButton';
 
 
 // Main component
@@ -18,13 +16,24 @@ interface ICardContainerProps extends ExtraProps {
 const Container: React.FC<ICardContainerProps> = props => {
 	const [isBeingPressed, setIsBeingPressed] = useState(false);
 
-	const StyledCardContainer = styled(motion.div).attrs({
-		className: "bg-center bg-no-repeat bg-cover border-defaultBorder h-60 w-120 rounded-md relative text-5xl",
-	})`
-		background: rgba(255, 255, 255, .05);
-		border: 1px solid rgb(26, 26, 26);
-		cursor: pointer;
-	`;
+	const StyledCardContainer = styled(motion.div, {
+		...tw`
+			bg-center
+			bg-no-repeat
+			bg-cover
+			border
+			border-gray-900
+			h-60
+			w-1/3
+			rounded-md
+			relative
+			text-5xl
+		`,
+
+		background: 'rgba(255, 255, 255, .05)',
+		border: '1px solid rgb(26, 26, 26)',
+		cursor: 'pointer',
+	});
 
 	return (
 		<StyledCardContainer layout whileTap={{ scale: .975 }}>
@@ -44,17 +53,22 @@ interface ICardInfo {
 }
 
 export const Info: React.FC<ICardInfo> = ({ name, description }) => {
-	let ComposedFlexGrid = styled(FlexGrid).attrs({
-		className: "bottom-0 h-auto absolute w-full"
-	})`
-		background: transparent;
-	`;
+	let ComposedFlexGrid = styled(FlexGrid, {
+		...tw`
+			bottom-0
+			h-auto
+			absolute
+			w-full
+		`,
+
+		background: 'transparent',
+	});
 	
 	return (
 		<ComposedFlexGrid>
 			<FlexRow>
-				<FlexColumn spaced style={{ padding: '0 1vw' }}>
-					<Title style={{ fontSize: '3vw' }}>{name}</Title>
+				<FlexColumn spaced style={{ padding: '0 1rem' }}>
+					<Title style={{ fontSize: '3vw', textAlign: 'left' }}>{name}</Title>
 					<Paragraph style={{ fontSize: '.9vw', marginBottom: '1vw' }}>{description}</Paragraph>
 				</FlexColumn>
 			</FlexRow>

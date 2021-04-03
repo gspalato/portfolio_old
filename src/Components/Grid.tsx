@@ -1,7 +1,7 @@
 import React from 'react';
-import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from '../stitches.config';
+import tw from 'twin.macro';
 
 
 // Main component
@@ -14,21 +14,20 @@ interface IGridProps {
 };
 
 export const Grid: React.FC<IGridProps> = props => {
-    let columns = props.columns ?? 1;
     let flow = props.flow ?? "row";
     let gap = props.gap ?? "1rem";
+    
+    let classes = `grid-rows-${props.columns ?? 1} md:grid-cols-${props.columns ?? 1}`;
 
-    const ComposedGrid = styled(motion.div).attrs({
-        className: classnames(
-            "h-full",
-            "grid",
-            `grid-cols-${columns}`,
-            //`grid-rows-${rows}`,
-        ),
-    })``;
+    const ComposedGrid = styled(motion.div, {
+        ...tw`
+            h-full
+            grid   
+        `,
+    });
 
     return (
-        <ComposedGrid style={props.css}>
+        <ComposedGrid className={classes} style={props.css}>
             {props.children}
         </ComposedGrid>
     );

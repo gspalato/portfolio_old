@@ -1,13 +1,13 @@
 import React from 'react';
-import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from '../stitches.config';
+import tw from 'twin.macro';
 
 
 // Styles
-let StyledFlexRow = styled(motion.div)`
-    display: flex;
-`;
+let StyledFlexRow = styled(motion.div, {
+	...tw`flex`,
+});
 
 
 // Main component
@@ -24,30 +24,32 @@ interface IFlexColumnProps extends ExtraProps {
 interface IFlexRowProps extends ExtraProps { };
 
 export const FlexGrid: React.FC<IFlexGridProps> = props => {
-    let StyledFlexGrid = styled(motion.div).attrs({
-        className: `grid ${props.flow ? 'grid-flow-'+props.flow : 'grid-flow-row'}`,
-    })``;
+	let flows = {
+		col: tw`grid-flow-col`,
+		row: tw`grid-flow-row`,
+	};
+
+    let StyledFlexGrid = styled(motion.div, {
+        ...tw`
+            grid
+        `,
+		...flows[props.flow ?? "row"]
+    });
 
     return (
-        <StyledFlexGrid
-            {...props}
-        >
+        <StyledFlexGrid {...props}>
             {props.children}
         </StyledFlexGrid>
     );
 };
 
 export const FlexColumn: React.FC<IFlexColumnProps> = props => {
-    let StyledFlexColumn = styled(motion.div).attrs({
-
-    })`
-        flex: ${props.size ?? 1};
-    `;
+    let StyledFlexColumn = styled(motion.div, {
+		flex: props.size ?? 1,
+	});
 
     return (
-        <StyledFlexColumn
-            {...props}
-        >
+        <StyledFlexColumn {...props}>
             {props.children}
         </StyledFlexColumn>
     );

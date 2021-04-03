@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import classnames from 'classnames';
 import { motion } from 'framer-motion';
-import styled from "styled-components";
+import { styled } from "../../stitches.config";
+import tw from 'twin.macro';
 
 
 // Styles
-let CursorComponent = styled(motion.div).attrs({
-    className: classnames(
-        "absolute",
-        "bg-white",
-        "h-2",
-        "pointer-events-none",
-        "rounded-full",
-        "transform",
-        "-translate-x-2/4",
-        "-translate-y-2/4",
-        "w-2",
-        "z-10",
-    ),
-})``;
+let CursorComponent = styled(motion.div, {
+    ...tw`
+        absolute
+        bg-white
+        h-2
+        pointer-events-none
+        rounded-full
+        transform
+        -translate-x-2/4
+        -translate-y-2/4
+        w-2
+        z-10
+    `,
+});
 
 // Main component
 type CursorHandler = (cursorType: string | boolean) => void;

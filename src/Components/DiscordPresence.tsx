@@ -1,60 +1,107 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { forwardRef, useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
+import tw from 'twin.macro';
 import { Presence } from '../Types/lanyard';
 
-import { Paragraph } from '../Components/Paragraph';
+import { Paragraph } from './Paragraph';
 import { Image } from "./Image";
 
 // Styles
 let SmallParagraph = styled(Paragraph)`
-	font-size: .9rem;
+	font-size: '1rem !important';
+	line-height: '.9rem !important';
 `;
 
 const Container = styled(motion.div)`
-	background-color: $backgroundColor;
-	border: 1px solid #101010;
-	border-radius: 5px;
-	padding: 1rem;
-	transition: .25s ease;
-	width: 25%;
+	${tw`
+		bg-black
+		duration-200
+		ease-in-out
+		h-auto
+		p-4
+		rounded-md
+		transition-all
+		w-56
+		hidden md:block
+	`}
+
+	border: '1px solid #101010';
+`;
+
+const LiveDot = styled(motion.div)`
+	${tw`
+		animate-pulse
+		bg-red-500
+		h-2
+		inline-block
+		m-1
+		rounded-full
+		w-2
+	`}
 `;
 
 const ActivityRow = styled(motion.div)`
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	transition: .25s ease;
+	${tw`
+		duration-200
+		ease-in-out
+		flex
+		flex-row
+		items-center
+		transition-all
+	`}
 `;
 
 const ActivityImageContainer = styled(motion.div)`
-	height: 50px;
-	position: relative;
-	transition: .25s ease;
+	${tw`
+		duration-200
+		ease-in-out
+		h-12
+		relative
+		transition-all
+		w-12
+	`}
 `;
 
 const ActivityImage = styled(Image)`
-	border-radius: 5px;
-	height: 50px;
-	transition: .25s ease;
-	width: 50px;
+	${tw`
+		duration-200
+		ease-in-out
+		h-12
+		rounded-sm
+		transition-all
+		w-12
+	`}
 `;
 
 const ActivitySecondaryImage = styled(Image)`
-	border-radius: 50%;
-	background-color: #000;
-	border: 2px solid #000;
-	bottom: -5px;
-	height: 20px;
-	position: absolute;
-	right: -5px;
-	transition: .25s ease;
-	width: 20px;
+	${tw`
+		absolute
+		bg-black
+		-bottom-1
+		duration-200
+		ease-in-out
+		h-5
+		p-0.5
+		-right-1
+		rounded-full
+		transition-all
+		w-5
+	`}
 `;
 
 const ActivityInfo = styled(motion.div)`
-	margin-left: 1rem;
-	transition: .25s ease;
+	${tw`
+		duration-200
+		ease-in-out
+		ml-4
+		transition-all
+	`}
+
+	p {
+		margin: 0;
+		font-size: '0.8rem !important';
+	}
 `;
 
 
@@ -150,8 +197,8 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 	if (!doing || !doing?.discord_status)
 		return null;
 	
-	let initial = { opacity: 0, y: -100 };
-	let final = { opacity: 1, y: 0 }
+	let initial = { opacity: 0, x: -100 };
+	let final = { opacity: 1, x: 0 }
 	let shouldBeDisplayed = doing?.listening_to_spotify || currentActivity;
 
 	let getAppDataFromId = (id?: number, item?: string): string =>
@@ -171,32 +218,64 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 
 	return (
 		<AnimatePresence>
-			<Container>
-				<ActivityRow>
-					<ActivityImageContainer
-						style={{ height: primaryActivityImage ? '50px' : 0 }}
-					>
-				  		<ActivityImage
-						  	src={primaryActivityImage ?? ""}
-							style={{ display: primaryActivityImage ? 'block' : 'none' }}
-						/>
-				  		<ActivitySecondaryImage
-						  	src={secondaryActivityImage ?? ""}
-							  style={{ display: secondaryActivityImage ? 'block' : 'none' }}
-						/>
-					</ActivityImageContainer>
-					<ActivityInfo style={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
-						<SmallParagraph style={{ color: '#ffffff' }}>
-						{
-							doing?.listening_to_spotify
-							? (<span>Listening to <b>{doing.spotify?.song}</b> by <b>{doing.spotify?.artist}</b></span>)
-							: currentActivity
-								? (<span>{ActivityType[currentActivity.type]} <b>{currentActivity?.name}</b></span>)
+			<Container layout
+				animate={ shouldBeDisplayed && final }
+				exit={initial}
+				initial={initial}
+				ref={ref}
+				transition={{ ease: "easeInOut", duration: .5 }}
+				{...props}
+			>
+				<SmallParagraph style={{ marginTop: '0' }}>
+			 	{
+					 doing?.listening_to_spotify
+					 ? (<><span>Listening to Spotify</span> <LiveDot/></>)
+					 : currentActivity
+					 	? (<span>Doing something</span>)
+						: "Nothing going on"
+				}
+				</SmallParagraph>
+				<>
+			  		<ActivityRow>
+						<ActivityImageContainer
+							style={{ height: primaryActivityImage ? '50px' : 0 }}
+						>
+				  			<ActivityImage
+							  	src={primaryActivityImage ?? ""}
+								style={{ display: primaryActivityImage ? 'block' : 'none' }}
+							/>
+				  			<ActivitySecondaryImage
+							  	src={secondaryActivityImage ?? ""}
+								  style={{ display: secondaryActivityImage ? 'block' : 'none' }}
+							/>
+						</ActivityImageContainer>
+						<ActivityInfo style={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
+							<SmallParagraph style={{ color: '#ffffff' }}>
+							{
+								doing?.listening_to_spotify
+								? doing.spotify?.song
+								: currentActivity
+									? (<><span>{ActivityType[currentActivity.type]} </span><b>{currentActivity?.name}</b></>)
+									: null
+							}
+							</SmallParagraph>
+							<SmallParagraph>
+							{
+								doing?.listening_to_spotify
+								? `by ${doing.spotify?.artist}`
+								: currentActivity
+									? currentActivity?.details
+									: null
+							}
+							</SmallParagraph>
+							{
+								currentActivity?.state && !doing?.listening_to_spotify
+								? (<SmallParagraph>{currentActivity?.state}</SmallParagraph>)
 								: null
-						}
-						</SmallParagraph>
-					</ActivityInfo>
-			  	</ActivityRow>
+							}
+						</ActivityInfo>
+			  		</ActivityRow>
+				</>
 			</Container>
 		</AnimatePresence>
 	);

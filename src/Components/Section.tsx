@@ -1,27 +1,29 @@
 import React, { useEffect } from 'react';
-import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
+
 
 // Styles
-const Content = styled(motion.div).attrs({
-    className: classnames(
-        "flex",
-        "flow-col",
-        "h-full",
-        "mt-28",
-        "w-auto"
-    ),
-})``;
+const Content = styled(motion.div)`
+    ${tw`
+        flex
+        flex-col
+        h-full
+        justify-center
+        md:mt-28
+        md:w-full
+    `}
+`;
 
-const Spacing = styled(motion.div).attrs({
-    className: classnames(
-        "h-auto",
-        "flex-grow",
-        "my-28",
-        "w-full",
-    ),
-})``;
+const Spacing = styled(motion.div)`
+    ${tw`
+        h-auto
+        flex-grow
+        md:my-28
+        w-full
+    `}
+`;
 
 
 // Main component
@@ -40,28 +42,22 @@ interface ISectionContainerProps {
 };
 
 export const Container: React.FC<ISectionContainerProps> = ({ children, isFocused, onSectionFocus, ...rest }) => {
-    const StyledSection = styled(motion.section).attrs({
-        className: classnames(
-            rest.flex ? "flex" : "initial",
-            "h-auto",
-            { [`items-${rest.align}`]: !!rest.align },
-            { [`grid-flow-${rest.direction}`]: !!rest.direction },
-            { [`justify-${rest.justify}`]: !!rest.justify },
-            "mx-72",
-            "relative",
-            "w-auto",
-        )
-    })``;
-
-    useEffect(() => {
-        if (isFocused)
-            onSectionFocus?.();
-    }, [isFocused]);
+    let classes = `
+        ${rest.flex ? "flex" : "initial"}
+        ${rest.hero ? "h-screen" : "h-auto"}
+        ${!!rest.align && `items-${rest.align}`}
+        ${!!rest.direction && `grid-flow-${rest.direction}`}
+        ${!!rest.justify && `justify-${rest.justify}`}
+        mx-auto md:mx-72
+        px-10 md:p-0
+        relative
+        w-auto
+    `;
 
     return (
-        <StyledSection style={{ height: rest.hero ? '100vh' : '', margin: rest.hero ? '0' : '' }} {...rest}>
+        <motion.section className={classes} style={{ margin: rest.hero ? '0' : '' }} {...rest}>
             {children}
-        </StyledSection>
+        </motion.section>
     );
 };
 

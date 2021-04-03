@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { styled } from '../stitches.config';
 import Typist from 'react-typist';
 import TypistLoop from 'react-typist-loop';
 import { MotionAnimate } from 'react-motion-animate';
+import tw from 'twin.macro';
 
 import { BackgroundContainer, ContentContainer, OverlayContainer } from '../Components/Page';
 import { Card } from '../Components/Card';
-import { DiscordPresence as NewDiscordPresence } from '../Components/DiscordPresence'; 
-import { DiscordPresence } from '../Components/OldDiscordPresence';
+import { DiscordPresence } from '../Components/DiscordPresence';
 import { Grid } from '../Components/Grid';
 import { GridItem } from '../Components/GridItem';
 import { Paragraph } from '../Components/Paragraph';
@@ -16,34 +16,61 @@ import { Section } from '../Components/Section';
 import { Title } from '../Components/Title';
 
 
+
 // Styles
-let MainTitleContainer = styled(motion.div).attrs({
-	className: "flex h-auto items-center mx-content w-auto"
-})`
-	flex-direction: column;
-`;
+let GridItemFullColumn = styled(GridItem, {
+	...tw`
+		flex
+		h-full
+		items-center
+		justify-center
+	`,
+});
 
-let GridItemFullColumn = styled(GridItem).attrs({
-	className: "flex h-full items-center justify-center"
-})``;
+let HeroParagraph = styled(Paragraph, {
+	...tw`sm:text-2xl`,
+});
 
-let TopBorder = styled(motion.div).attrs({
-	className: "flex-grow h-px mx-content my-0 top-0"
-})`
-	width: calc(100% - ${2 * 18.75}rem);
-`;
+let MainTitleContainer = styled(motion.div, {
+	...tw`
+		flex
+		flex-col
+		h-auto
+		items-center
+		sm:mx-auto
+		w-auto
+	`,
+});
 
-let TypewritterParagraph = styled(Paragraph).attrs({
-	className: ""
-})`
-	font-family: Karla;
-	font-size: 1.2rem;
-	font-weight: 100;
-`;
+let TopBorder = styled(motion.div, {
+	...tw`
+		flex-grow
+		h-px
+		mx-36
+		my-0
+		top-0
+	`,
 
-let Doing = styled(DiscordPresence).attrs({
-	className: "bottom-0 left-0 mt-0 mr-0 mb-4 ml-4 fixed"
-})``;
+	width: `calc(100% - ${2 * 18.75}rem)`,
+});
+
+let TypewritterParagraph = styled(Paragraph, {
+	fontFamily: 'Karla',
+	fontSize: '1.2rem',
+	fontWeight: 100,
+});
+
+let Doing = styled(DiscordPresence, {
+	...tw`
+		bottom-0
+		left-0
+		mt-0
+		mr-0
+		mb-4
+		ml-4
+		fixed
+	`,
+});
 
 // Other components
 const WavingHand = () => (
@@ -84,11 +111,9 @@ export const Home: React.FC = () => {
 							<Paragraph style={{ color: '#ffffff', fontSize: '2.4rem', fontWeight: 100 }}>
 								<WavingHand/><span> Hello there</span>,
 							</Paragraph>
-							<Title style={{ fontFamily: 'Inter', fontSize: '9rem' }}>
-								I'm Gabriel Spalato
-							</Title>
+							<Title main style={{ fontFamily: 'inter' }}>I'm Gabriel Spalato</Title>
 							<TypewritterParagraph
-								style={{ color: '#ffffff', fontSize: '1.8rem', padding: '0 0 0 .3vw' }}
+								style={{ color: '#ffffff', fontSize: '1.8rem', padding: '.75rem 0 0 0' }}
 							>
 								<TypistLoop interval={500}>
     								{[
@@ -113,7 +138,7 @@ export const Home: React.FC = () => {
 					<Section.Container flex direction="col" justify="center" align="center">
 						<Section.Content>
 							<MotionAnimate reset>
-								<Title style={{ fontSize: '2.75vw', textAlign: 'center' }}>About</Title>
+								<Title style={{ fontSize: '3rem', textAlign: 'center' }}>About</Title>
 							</MotionAnimate>
 							<Section.Spacing>
 								<Grid columns={2}>
@@ -136,7 +161,7 @@ export const Home: React.FC = () => {
 					<Section.Container flex direction="col" justify="center" align="center">
 						<Section.Content>
 							<MotionAnimate reset>
-								<Title style={{ fontSize: '2.75vw', textAlign: 'center' }}>Projects</Title>
+								<Title style={{ fontSize: '3rem', textAlign: 'center' }}>Projects</Title>
 							</MotionAnimate>
 							<Section.Spacing>
 								<Card.Container

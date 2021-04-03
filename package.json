@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@stitches/react": "^0.0.2",
+    "@craco/craco": "^6.1.1",
+    "@stitches/react": "^0.1.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -26,6 +27,7 @@
     "react-typist": "^2.0.5",
     "react-typist-loop": "^0.0.5",
     "styled-components": "^5.2.2",
+    "twin.macro": "^2.3.2",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
