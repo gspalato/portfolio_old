@@ -12,7 +12,7 @@ module.exports = env => { return {
   	entry: "./src/index.tsx",
   	output: {
 		filename: "bundle.[fullhash].js",
-		path: env ?? path.resolve(__dirname, "dist"),
+		path: env.vercel ? path.resolve("/vercel/path0/") : path.resolve(__dirname, "dist"),
 		publicPath: '/',
   	},
   	plugins: [
