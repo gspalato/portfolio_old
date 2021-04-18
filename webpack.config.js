@@ -24,7 +24,7 @@ module.exports = env => { return {
 		new CopyWebpackPlugin({
 			patterns: [
 			  	{
-					from: path.resolve(__dirname, "./src", "assets"),
+					from: path.resolve("./src", "Assets"),
 					to: 'assets',
 					globOptions: {
 				  		ignore: ['*.DS_Store'],
