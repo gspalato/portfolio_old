@@ -39,7 +39,8 @@
   },
   "scripts": {
     "start": "webpack serve --hot --open --mode development",
-    "build": "webpack --config webpack.config.js --mode production"
+    "build": "webpack --config webpack.config.js --mode production",
+    "vercel-build": "webpack --config webpack.config.js --mode production --env "
   },
   "keywords": [],
   "author": "Gabriel Spalato Marques",

@@ -8,11 +8,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+module.exports = env => { return {
   	entry: "./src/index.tsx",
   	output: {
 		filename: "bundle.[fullhash].js",
-		path: path.resolve(__dirname, "dist"),
+		path: env ?? path.resolve(__dirname, "dist"),
 		publicPath: '/',
   	},
   	plugins: [
@@ -86,4 +86,4 @@ module.exports = {
 	  	open: true,
 		historyApiFallback: true,
   	}
-};
+} };
