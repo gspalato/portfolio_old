@@ -4,6 +4,7 @@ import React from "react";
 
 import { DefaultNavbar } from "../Partials/DefaultNavbar";
 import { NavbarItem } from "../Partials/NavbarItem";
+import { DiscordPresence } from "../Components/DiscordPresence";
 
 
 export const Home: React.FC = () => {

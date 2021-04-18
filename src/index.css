@@ -27,3 +27,18 @@ h1, h2, h3, h4, h5, li, ul, p {
 	height: fit-content;
 	width: fit-content;
 }
+
+/* Animations */
+@keyframes pulse {
+	from {
+	  opacity: 0%;
+	}
+	
+	50% {
+	  opacity: 100%;
+	}
+
+	to {
+	  opacity: 0%;
+	}
+}
