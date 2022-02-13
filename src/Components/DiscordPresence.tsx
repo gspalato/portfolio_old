@@ -8,9 +8,10 @@ import SpotifyLogo from "../Assets/img/spotify.svg";
 // Styles
 let SmallParagraph = "font-body leading-4 text-sm text-white";
 
-let Container = `bg-black md:block border border-neutral-gray-25
-bottom-4 duration-200 ease-in-out md:fixed hidden h-auto p-4 left-4
-rounded-md transition-all w-56`;
+let Container = `backdrop-blur-md bg-scheme-overlay-transparent
+border border-solid border-scheme-border
+bottom-4 duration-200 ease-in-out h-auto
+p-4 left-4 rounded-md transition-all w-56`;
 
 let LiveDot = "animate-pulse bg-red h-2 inline-block m-1 my-auto rounded-full w-2";
 
@@ -68,59 +69,53 @@ const discordId = "341377366079045632";
 
 const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean) => void } & any, ref: any) => {
 	const [socket, setSocket] = useState<WebSocket | null>(null);
-	const [doing, setDoing] = useState<Presence>();
-  
-	const send = (op: Operation, d?: unknown): void => {
-	  	if (socket !== null) socket.send(JSON.stringify({ op, d }));
-	};
-  
-	useEffect(() => {
-	  	if (socket === null)
-		  	return () => {};
-  
-	  	socket.onmessage = function ({ data }: MessageEvent): void {
-			const { op, t, d }: SocketEvent = JSON.parse(data);
-  
-			if (op === Operation.Hello) {
-		  		setInterval(
-					() => send(Operation.Heartbeat),
-					(d as { heartbeat_interval: number }).heartbeat_interval
-		  		);
-		  		send(Operation.Initialize, { subscribe_to_id: discordId });
-			} else if (op === Operation.Event && t) {
-		  		logLanyardEvent(t, d);
-  
-		  		if ([EventType.INIT_STATE, EventType.PRESENCE_UPDATE].includes(t)) {
-					let presence = d as Presence;
-					setDoing(presence);
-				}
-			}
-	  	};
-  
-	  	socket.onclose = () => {
-			setSocket(null);
-	  	};
-	}, [socket]);
-  
-	useEffect(() => {
-	  	if (!socket)
-		  	setSocket(new WebSocket("wss://api.lanyard.rest/socket"));
-	}, [socket]);
-  
-	const currentActivity = useMemo(
-	  	() => doing?.activities.filter((activity) => activity.type === 0)[0],
-	  	[doing]
-	);
-  
-	useEffect(() => {
-	  	setActive(doing?.listening_to_spotify || currentActivity);
-	}, [doing, currentActivity])
-  
-	if (!doing || !doing?.discord_status)
-		return null;
+  const [doing, setDoing] = useState<Presence>();
+
+  const send = (op: Operation, d?: unknown): void => {
+    if (socket !== null) socket.send(JSON.stringify({ op, d }));
+  };
+
+  useEffect(() => {
+    if (socket === null) return () => {};
+
+    socket.onmessage = function ({ data }: MessageEvent): void {
+      const { op, t, d }: SocketEvent = JSON.parse(data);
+
+      if (op === Operation.Hello) {
+        setInterval(
+          () => send(Operation.Heartbeat),
+          (d as { heartbeat_interval: number }).heartbeat_interval
+        );
+        send(Operation.Initialize, { subscribe_to_id: discordId });
+      } else if (op === Operation.Event && t) {
+        logLanyardEvent(t, d);
+
+        if ([EventType.INIT_STATE, EventType.PRESENCE_UPDATE].includes(t)) setDoing(d as Presence);
+      }
+    };
+
+    	socket.onclose = () => {
+      		setSocket(null);
+    	};
+  	}, [socket]);
+
+  useEffect(() => {
+    if (!socket) setSocket(new WebSocket('wss://api.lanyard.rest/socket'));
+  }, [socket]);
+
+  const currentActivity = useMemo(
+    () => doing?.activities.filter((activity) => activity.type === 0)[0],
+    [doing]
+  );
+
+  useEffect(() => {
+    setActive(doing?.listening_to_spotify || currentActivity);
+  }, [doing, currentActivity]);
+
+  if (!doing || !doing?.discord_status) return null;
 	
-	let initial = { opacity: 0 };
-	let final = { opacity: 1 }
+	let initial = { display: 'none', opacity: 0 };
+	let final = { display: 'block', opacity: 1 };
 	let shouldBeDisplayed = doing?.listening_to_spotify || currentActivity;
 
 	let getAppDataFromId = (id?: number, item?: string): string =>
@@ -140,13 +135,13 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 		<AnimatePresence>
 			<motion.div layout
 				animate={ shouldBeDisplayed && final }
-				className={Container + " " + props.className}
+				className={(Container + (props.className ?? ""))}
 				exit={initial}
 				initial={initial}
 				transition={{ duration: .5 }}
 				{...props}
 			>
-				<p className={SmallParagraph + " pb-4"} style={{ marginTop: '0' }}>
+				<p className={`${SmallParagraph} pb-4`} style={{ marginTop: '0' }}>
 			 	{
 					 doing?.listening_to_spotify
 					 ? (<><span className="text-base">Listening to Spotify</span> <div className={LiveDot}/></>)

@@ -10,13 +10,11 @@ import './index.css';
 
 const App: React.FC = () => {
     return (
-        <main className="bg-black-25">
+        <main className="antialiased bg-scheme-background">
             <AnimatePresence exitBeforeEnter>
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <Redirect to="/links"/>
-                            {/* Home isn't finished yet, so redirect to links. */}
                             <Home />
                         </Route>
                         <Route exact path="/home">
