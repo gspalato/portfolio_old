@@ -1,6 +1,9 @@
 import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+
 import { Presence } from '../Typings/lanyard';
 
 import SpotifyLogo from "../Assets/img/spotify.svg";
@@ -13,7 +16,7 @@ border border-solid border-scheme-border
 bottom-4 duration-200 ease-in-out h-auto
 p-4 left-4 rounded-md transition-all w-56`;
 
-let LiveDot = "animate-pulse bg-red h-2 inline-block m-1 my-auto rounded-full w-2";
+let LiveDot = "animate-pulse bg-red h-2 inline-block ml-2 m-1 my-auto rounded-full w-2";
 
 let ActivityRow = "duration-200 ease-in-out flex flex-row items-center transition-all";
 
@@ -66,6 +69,7 @@ const logLanyardEvent = (eventName: string, data: any) => {
 };
 
 const discordId = "341377366079045632";
+const discordProfile = `https://discordapp.com/users/${discordId}`;
 
 const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean) => void } & any, ref: any) => {
 	const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -142,24 +146,40 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 				{...props}
 			>
 				<p className={`${SmallParagraph} pb-4`} style={{ marginTop: '0' }}>
-			 	{
-					 doing?.listening_to_spotify
-					 ? (<><span className="text-base">Listening to Spotify</span> <div className={LiveDot}/></>)
-					 : currentActivity
-					 	? (<span>Doing something</span>)
-						: "Nothing going on"
-				}
+			 		{
+					 	doing?.listening_to_spotify
+					 		? (
+							 	<>
+							 		<span className="text-base">Listening to Spotify</span>
+									<div className={LiveDot}/>
+								</>
+								)
+					 		: currentActivity
+					 			? (<span>Doing something</span>)
+								: "Nothing going on"
+					}
 				</p>
 				<>
 			  		<div className={ActivityRow}>
-						<div className={ActivityImageContainer}
-							style={{ height: primaryActivityImage ? '50px' : 0 }}
-						>
-				  			<img className={ActivityImage}
-							  	src={primaryActivityImage ?? ""}
-								style={{ display: primaryActivityImage ? 'block' : 'none' }}
-							/>
-				  			{
+						<div className={ActivityImageContainer} style={{ height: primaryActivityImage ? '50px' : 0 }}>
+							{
+								doing?.listening_to_spotify
+									? (
+										<a target="_blank" href={`https://open.spotify.com/track/${doing.spotify.track_id}`}>
+											<img className={ActivityImage}
+							  				src={primaryActivityImage ?? ""}
+												style={{ display: primaryActivityImage ? 'block' : 'none' }}
+											/>
+										</a>
+									)
+									: (
+										<img className={ActivityImage}
+							  			src={primaryActivityImage ?? ""}
+											style={{ display: primaryActivityImage ? 'block' : 'none' }}
+										/>
+									)
+							}
+				  		{
 								doing?.listening_to_spotify
 									? <SpotifyLogo className={ActivitySecondaryImage}
 										style={{ display: secondaryActivityImage ? 'block' : 'none' }}
