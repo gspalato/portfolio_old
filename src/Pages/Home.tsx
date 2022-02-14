@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faGithub, faSpotify,  } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faGithub, faSpotify, faLinkedin  } from "@fortawesome/free-brands-svg-icons";
 import React, { useEffect, useRef, useState } from "react";
 
 import { DefaultNavbar } from "../Partials/DefaultNavbar";
@@ -18,13 +18,16 @@ export const Home: React.FC = () => {
 			<div className="bg-transparent backdrop-blur">
 				<DefaultNavbar>
 					<NavbarItem link="https://www.instagram.com/gabriel.spalato/">
-						<FontAwesomeIcon className=" text-white" icon={faInstagram} size="lg" />
+						<FontAwesomeIcon className="text-white" icon={faInstagram} size="lg" />
 					</NavbarItem>
 					<NavbarItem link="https://github.com/gspalato">
-						<FontAwesomeIcon className=" text-white" icon={faGithub} size="lg" />
+						<FontAwesomeIcon className="text-white" icon={faGithub} size="lg" />
 					</NavbarItem>
 					<NavbarItem link="https://open.spotify.com/user/oubhvljhzyudfbxyx20opzxhq">
-						<FontAwesomeIcon className=" text-white" icon={faSpotify} size="lg" />
+						<FontAwesomeIcon className="text-white" icon={faSpotify} size="lg" />
+					</NavbarItem>
+					<NavbarItem link="https://www.linkedin.com/in/gabriel-marques-3aa183a8/">
+						<FontAwesomeIcon className="text-white" icon={faLinkedin} size="lg" />
 					</NavbarItem>
 				</DefaultNavbar>
 				<section className="relative flex items-center flex-col justify-center h-screen max-w-screen-xl mx-auto pl-5 pr-5">
