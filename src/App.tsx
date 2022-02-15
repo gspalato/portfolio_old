@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { Home } from './Pages/Home';
 import { Links } from './Pages/Links';
 
+import { Cursor } from './Components/Cursor';
+
 import './index.css';
 import './tailwind.css';
 
@@ -27,6 +29,7 @@ const App: React.FC = () => {
                     </Switch>
                 </Router>
             </AnimatePresence>
+            <Cursor/>
         </main>
     );
 }
