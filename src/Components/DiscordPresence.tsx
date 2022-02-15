@@ -14,7 +14,8 @@ let SmallParagraph = "font-body leading-4 text-sm text-white";
 let Container = `backdrop-blur-md bg-scheme-overlay-transparent
 border border-solid border-scheme-border
 bottom-4 duration-200 ease-in-out h-auto
-p-4 left-4 rounded-md transition-all w-56`;
+p-4 left-4 rounded-md transition-all w-56
+md:max-w-[16rem]`;
 
 let LiveDot = "animate-pulse bg-red h-2 inline-block ml-2 m-1 my-auto rounded-full w-2";
 

@@ -1,14 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faGithub, faSpotify, faLinkedin  } from "@fortawesome/free-brands-svg-icons";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faInstagram, faGithub, faSpotify, faLinkedin  } from "@fortawesome/free-brands-svg-icons";
 import React, { useEffect, useRef, useState } from "react";
 
 import { DefaultNavbar } from "../Partials/DefaultNavbar";
 import { NavbarItem } from "../Partials/NavbarItem";
 import { DiscordPresence } from "../Components/DiscordPresence";
 
+import { Card } from "../Components/Card";
+import { CardView } from "../Components/CardView";
+import { Button } from "../Components/Button";
+
 import ProfilePicture from "../Assets/img/selfie.png";
 import MisfitsSwirl from "../Assets/img/misfits_swirl.png";
 import ArrowDown from "../Assets/img/arrow_down.svg";
+import { GithubRepositoryList } from "../Components/GithubRepositoryList";
+
 
 export const Home: React.FC = () => {
 	const [presenceActive, setPresenceActive] = useState(false);
@@ -18,16 +24,16 @@ export const Home: React.FC = () => {
 			<div className="bg-transparent backdrop-blur">
 				<DefaultNavbar>
 					<NavbarItem link="https://www.instagram.com/gabriel.spalato/">
-						<FontAwesomeIcon className="text-white" icon={faInstagram} size="lg" />
+						<i className="fa-brands fa-instagram fa-lg"></i>
 					</NavbarItem>
 					<NavbarItem link="https://github.com/gspalato">
-						<FontAwesomeIcon className="text-white" icon={faGithub} size="lg" />
+						<i className="fa-brands fa-github fa-lg"></i>
 					</NavbarItem>
 					<NavbarItem link="https://open.spotify.com/user/oubhvljhzyudfbxyx20opzxhq">
-						<FontAwesomeIcon className="text-white" icon={faSpotify} size="lg" />
+						<i className="fa-brands fa-spotify fa-lg"></i>
 					</NavbarItem>
 					<NavbarItem link="https://www.linkedin.com/in/gabriel-marques-3aa183a8/">
-						<FontAwesomeIcon className="text-white" icon={faLinkedin} size="lg" />
+						<i className="fa-brands fa-linkedin fa-lg"></i>
 					</NavbarItem>
 				</DefaultNavbar>
 				<section className="relative flex items-center flex-col justify-center h-screen max-w-screen-xl mx-auto pl-5 pr-5">
@@ -48,10 +54,13 @@ export const Home: React.FC = () => {
 					</div>
 					<ArrowDown className="h-8 w-auto animate-bounce bottom-6 absolute mb-4 invert opacity-75" />
 				</section>
-				<section className="relative flex flex-col items-center justify-center h-screen mx-auto">
-					<img src={MisfitsSwirl} className="absolute h-full w-full"></img>
-					<div className="flex bg-scheme-contrast-transparent backdrop-blur-2xl h-full w-full pl-5 pr-5">
-
+				<section className="relative flex flex-col justify-center h-screen mx-auto">
+					<img src={MisfitsSwirl} className="absolute h-full w-full" />
+					<div className="flex justify-center bg-scheme-contrast-transparent backdrop-blur-2xl h-full w-full pl-5 pr-5">
+						<div className="flex flex-col items-center justify-center max-w-screen-xl h-full w-full">
+							<h1 className="font-display font-bold text-scheme-offwhite text-5xl py-20">Projects</h1>
+							<GithubRepositoryList className="flex-1"/>
+						</div>
 					</div>
 				</section>
 			</div>

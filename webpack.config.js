@@ -47,6 +47,22 @@ module.exports = env => { return {
 				exclude: /node_modules/,
 				loader: require.resolve("babel-loader"),
 	  		},
+			{
+				test: /\.(sa|sc|c)ss$/,
+				use: [
+				  {
+					loader: 'style-loader',
+				  },
+				  {
+					loader: 'css-loader',
+				  },
+				  {
+					loader: 'postcss-loader',
+				  },
+				  'sass-loader',
+				],
+			},
+			/*
 	  		{
 				test: /\.css$/,
 				use: [
@@ -64,6 +80,7 @@ module.exports = env => { return {
 					},
 				],
 	  		},
+			*/
 	  		{
 				test: /\.svg$/,
 				use: ['@svgr/webpack'],
