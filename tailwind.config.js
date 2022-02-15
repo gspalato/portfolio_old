@@ -1,6 +1,5 @@
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-	darkMode: false,
 	theme: {
 		colors: {
 			white: '#ffffff',
@@ -56,12 +55,6 @@ module.exports = {
 			width: {
 				fit: 'fit-content',
 			}
-		},
-	},
-	variants: {
-		extend: {
-			fill: ['hover'],
-			padding: ['first', 'last'],
 		},
 	},
 	plugins: [],

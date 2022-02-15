@@ -6,6 +6,7 @@ import { Home } from './Pages/Home';
 import { Links } from './Pages/Links';
 
 import './index.css';
+import './tailwind.css';
 
 
 const App: React.FC = () => {

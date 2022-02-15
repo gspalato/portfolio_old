@@ -38,8 +38,9 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "start": "cross-env TAILWIND_MODE=build webpack serve --hot --open --mode development",
-    "build": "webpack --config webpack.config.js --mode production",
+    "start": "concurrently \"npm run start:css\" \"cross-env TAILWIND_MODE=watch webpack serve --hot --open --mode development\"",
+    "start:css": "tailwindcss -o src/tailwind.css --watch",
+    "build": "tailwindcss -o src/tailwind.css && webpack --config webpack.config.js --mode production",
     "vercel-build": "npm i && webpack --config webpack.config.js --mode production --env=vercel"
   },
   "keywords": [],
@@ -52,6 +53,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
     "autoprefixer": "^10.4.2",
+    "concurrently": "^7.0.0",
     "postcss": "^8.4.6",
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",

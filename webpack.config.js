@@ -47,24 +47,8 @@ module.exports = env => { return {
 				exclude: /node_modules/,
 				loader: require.resolve("babel-loader"),
 	  		},
-			{
-				test: /\.(sa|sc|c)ss$/,
-				use: [
-				  {
-					loader: 'style-loader',
-				  },
-				  {
-					loader: 'css-loader',
-				  },
-				  {
-					loader: 'postcss-loader',
-				  },
-				  'sass-loader',
-				],
-			},
-			/*
 	  		{
-				test: /\.css$/,
+				test: /\.(c|sc|sa)ss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
@@ -74,13 +58,12 @@ module.exports = env => { return {
 					  	options: {
 							postcssOptions: {
 						  		ident: 'postcss',
-						  		plugins: [tailwindcss, autoprefixer],
+						  		plugins: [autoprefixer, tailwindcss],
 							},
 					  	},
 					},
 				],
 	  		},
-			*/
 	  		{
 				test: /\.svg$/,
 				use: ['@svgr/webpack'],
