@@ -7,13 +7,16 @@ import { DiscordPresence } from "../Components/DiscordPresence";
 import { Card } from "../Components/Card";
 import { CardView } from "../Components/CardView";
 import { Button } from "../Components/Button";
+import { Timeline } from "../Components/Timeline";
+import { TimelineEntry } from "../Components/TimelineEntry";
+import { WindowRepresentation } from "../Components/WindowRepresentation";
+
 
 import ProfilePicture from "../Assets/img/selfie.png";
 import MisfitsSwirl from "../Assets/img/misfits_swirl.png";
 import ArrowDown from "../Assets/img/arrow_down.svg";
-import { WindowRepresentation } from "../Components/WindowRepresentation";
-import { Timeline } from "../Components/Timeline";
-import { TimelineEntry } from "../Components/TimelineEntry";
+import ColorBrush1 from "../Assets/img/color_brush_1.png";
+
 
 
 // Other Components
@@ -23,7 +26,7 @@ interface IGridLogoProps {
 
 const GridLogo: React.FC<IGridLogoProps> = ({ children }) => {
 	return (
-		<i className={`${children} colored text-center`}></i>
+		<i className={`${children} colored text-center w-fit place-self-center`}></i>
 	);
 }
 
@@ -50,7 +53,7 @@ export const Home: React.FC = () => {
 				</DefaultNavbar>
 				<section className="relative flex items-center flex-col justify-center h-screen max-w-screen-xl mx-auto pl-5 pr-5">
 					<div className="flex items-center flex-col md:flex-row justify-between">
-						<img src={ProfilePicture} draggable="false" className="h-[22rem] w-auto rounded-full saturate-150 blur" />
+						<img src={ProfilePicture} draggable="false" className="animate-grow h-[22rem] w-auto rounded-full saturate-150 blur" />
 						<img src={ProfilePicture} draggable="false" className="relative md:mx-[-22rem] my-[-22rem] h-[22rem] w-auto rounded-full opacity-edge-gradient" />
 						<div className="flex flex-col items-left text-white h-fit w-fit pt-[25rem] md:pt-0 md:pl-[25rem]">
 							<h1 className="font-light text-3xl md:text-[2.5rem] pb-1 md:text-left">Hello there,</h1>
@@ -73,15 +76,15 @@ export const Home: React.FC = () => {
 							<h1 className="font-display font-bold text-scheme-offwhite text-5xl py-20">Projects</h1>
 							<CardView className="flex-1">
 								<Card image={MisfitsSwirl} title="Portfolio" description="My portfolio's repository.">
-									<Button text="Check Out" link="https://github.com/gspalato/portfolio">
-										<i className="fa-solid fa-up-right-from-square text-scheme-offwhite pl-[0.4rem]"></i>
+									<Button text="Source Code" link="https://github.com/gspalato/portfolio">
+										<i className="devicon-github-original my-auto leading-none text-lg text-scheme-offwhite pl-[0.4rem]"></i>
 									</Button>
 								</Card>
 							</CardView>
 						</div>
 					</div>
 				</section>
-				<section className="relative flex items-center flex-col justify-center h-screen max-w-screen-xl mx-auto pl-5 pr-5">
+				<section className="relative flex items-center flex-col justify-center h-max md:h-screen max-w-screen-xl mx-auto pl-5 pr-5">
 					<div className="flex items-center flex-col md:flex-row flex-1 w-full">
 						<div className="flex flex-col items-center justify-center h-full w-full flex-1">
 							<h1 className="font-display font-bold text-scheme-offwhite text-5xl py-20">Experience</h1>
@@ -101,9 +104,9 @@ export const Home: React.FC = () => {
 										/>
 									</Timeline>
 								</div>
-								<div className="flex flex-auto h-auto w-auto justify-center items-center">
+								<div className="flex flex-auto pt-10 md:pt-0 h-auto w-auto justify-center items-center">
 									<WindowRepresentation>
-										<div className="p-6 grid grid-cols-5 gap-6 auto-rows-min text-5xl text-scheme-offwhite">
+										<div className="p-6 grid grid-cols-5 gap-6 auto-rows-fr text-5xl text-scheme-offwhite">
 											<GridLogo>devicon-nodejs-plain</GridLogo>
 											<GridLogo>devicon-typescript-plain</GridLogo>
 											<GridLogo>devicon-react-original</GridLogo>
