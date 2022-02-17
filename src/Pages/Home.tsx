@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
+import { DefaultFooter } from "../Partials/DefaultFooter";
 import { DefaultNavbar } from "../Partials/DefaultNavbar";
 import { NavbarItem } from "../Partials/NavbarItem";
-import { DiscordPresence } from "../Components/DiscordPresence";
 
+import { Button } from "../Components/Button";
 import { Card } from "../Components/Card";
 import { CardView } from "../Components/CardView";
-import { Button } from "../Components/Button";
+import { DiscordPresence } from "../Components/DiscordPresence";
 import { Timeline } from "../Components/Timeline";
 import { TimelineEntry } from "../Components/TimelineEntry";
 import { WindowRepresentation } from "../Components/WindowRepresentation";
@@ -127,6 +128,7 @@ export const Home: React.FC = () => {
 					</div>
 				</section>
 			</div>
+			<DefaultFooter/>
 			<div className="hidden md:block fixed left-4 bottom-4">
 				<DiscordPresence
 					setActive={setPresenceActive}
