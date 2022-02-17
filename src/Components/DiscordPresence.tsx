@@ -9,7 +9,7 @@ import SpotifyLogo from "../Assets/img/spotify.svg";
 let SmallParagraph = "font-body leading-4 text-sm text-white";
 
 let Container = `backdrop-blur-md bg-scheme-overlay-transparent
-border border-solid border-scheme-border
+border border-solid border-scheme-border/50
 bottom-4 duration-200 ease-in-out h-auto
 p-4 left-4 rounded-md transition-all w-56
 md:max-w-[16rem]`;
@@ -153,7 +153,7 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 				<p className={`${SmallParagraph} mx-auto mt-0 pb-4`}>
 			 		{
 					 	doing?.listening_to_spotify
-					 		? (<span className="text-base">Listening to Spotify</span>)
+					 		? (<span className="text-base"><i className="fa-brands fa-spotify text-[#0f0] pr-2"></i>Listening to Spotify</span>)
 					 		: currentActivity
 					 			? (<span>Doing something</span>)
 								: "Nothing going on"

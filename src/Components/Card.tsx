@@ -3,7 +3,7 @@ import React from "react";
 // Styles
 let Container = `flex flex-col justify-center items-center
 backdrop-blur-md bg-scheme-overlay-transparent
-border border-solid border-scheme-border
+border border-solid border-scheme-border/50
 p-4 left-4 rounded-xl min-h-[20rem] min-w-[15rem]`;
 
 // Component
