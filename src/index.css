@@ -7,6 +7,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	cursor: none;
+	
+	user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+}
+
 html, body, #root {
 	background: black;
 	height: 100%;

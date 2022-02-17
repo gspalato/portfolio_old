@@ -13,7 +13,7 @@ import './tailwind.css';
 
 const App: React.FC = () => {
     return (
-        <main className="antialiased bg-scheme-background">
+        <main className="antialiased bg-scheme-background h-max">
             <AnimatePresence exitBeforeEnter>
                 <Router>
                     <Switch>

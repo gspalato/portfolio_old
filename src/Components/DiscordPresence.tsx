@@ -1,9 +1,6 @@
 import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-
 import { Presence } from '../Typings/lanyard';
 
 import SpotifyLogo from "../Assets/img/spotify.svg";
@@ -19,7 +16,7 @@ md:max-w-[16rem]`;
 
 let LiveDot = "animate-pulse bg-red h-2 inline-block ml-2 m-1 my-auto rounded-full w-2";
 
-let ActivityRow = "duration-200 ease-in-out flex flex-row items-center transition-all";
+let ActivityRow = "duration-200 ease-in-out flex flex-row items-center w-full transition-all";
 
 let ActivityImageContainer = "duration-200 ease-in-out h-12 relative transition-all w-12";
 
@@ -30,8 +27,15 @@ h-5 max-w-none p-0.5 -right-1 rounded-full transition-all w-5`;
 
 let ActivityInfo = "duration-200 ease-in-out ml-4 transition-all";
 
+// Utilities
+const truncate = (s: string, n: number): string => {
+	if (s.length <= n)
+		return s;
+	else
+		return s.substring(0, n) + "...";
+}
 
-// Main component
+// Component
 enum Operation {
 	Event,
 	Hello,
@@ -146,15 +150,10 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 				transition={{ duration: .5 }}
 				{...props}
 			>
-				<p className={`${SmallParagraph} pb-4`} style={{ marginTop: '0' }}>
+				<p className={`${SmallParagraph} mx-auto mt-0 pb-4`}>
 			 		{
 					 	doing?.listening_to_spotify
-					 		? (
-							 	<>
-							 		<span className="text-base">Listening to Spotify</span>
-									<div className={LiveDot}/>
-								</>
-								)
+					 		? (<span className="text-base">Listening to Spotify</span>)
 					 		: currentActivity
 					 			? (<span>Doing something</span>)
 								: "Nothing going on"
@@ -192,21 +191,21 @@ const DiscordActivity = ({ setActive, ...props }: { setActive: (active: boolean)
 							}
 						</div>
 						<div className={ActivityInfo} style={{ marginLeft: primaryActivityImage ? '1rem' : 0 }}>
-							<p className={SmallParagraph} style={{ color: '#ffffff', fontSize: '0.8rem !important', margin: 0 }}>
+							<p className={`${SmallParagraph} text-center mx-auto`}>
 							{
 								doing?.listening_to_spotify
-								? doing.spotify?.song
+								? truncate(doing.spotify?.song, 17)
 								: currentActivity
-									? (<><span>{ActivityType[currentActivity.type]} </span><b>{currentActivity?.name}</b></>)
+									? (<><span>{ActivityType[currentActivity.type]} </span><b>{truncate(currentActivity?.name, 17)}</b></>)
 									: null
 							}
 							</p>
-							<p className={SmallParagraph}>
+							<p className={`${SmallParagraph} text-center mx-auto`}>
 							{
 								doing?.listening_to_spotify
-								? `by ${doing.spotify?.artist}`
+								? `by ${truncate(doing.spotify?.artist, 17)}`
 								: currentActivity
-									? currentActivity?.details
+									? truncate(currentActivity?.details, 17)
 									: null
 							}
 							</p>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 interface INavbarItem {
     link?: string;
@@ -30,10 +31,13 @@ export const NavbarItem: React.FC<INavbarItem> = ({ children, link }) => {
     `;
 
 	return (
-		<li className="font-light text-white pr-5">
+		<motion.li
+            whileTap={{ scale: 0.95, filter: "brightness(75%)" }}
+            className="font-light text-white pr-5 hover:text-scheme-blue active:text-scheme-blue transition-colors"
+        >
             <Link target="_blank" href={link}>
                 {children}
             </Link>
-        </li>
+        </motion.li>
 	);
 }

@@ -19,12 +19,12 @@ export const GithubRepositoryList: React.FC<IGithubRepositoryListProps> = (props
 	const [repositories, setRepositories] = useState<any>([]);
 
 	useEffect(() => {
-			request('GET /users/{owner}/repos', {
+		request('GET /users/{owner}/repos', {
 				headers: {
 					"user-agent": "gspalato.portfolio/1.0.0",
 				},
 				owner: 'gspalato',
-			}).then((data: any) => setRepositories(data));
+		}).then((data: any) => setRepositories(data));
 
 		console.log(repositories);
 	})

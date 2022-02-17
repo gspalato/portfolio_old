@@ -6,10 +6,6 @@ backdrop-blur-md bg-scheme-overlay-transparent
 border border-solid border-scheme-border
 p-4 left-4 rounded-xl min-h-[20rem] min-w-[15rem]`;
 
-let Title = `text-white text-display text-xl`;
-
-let Description = `text-white text-body text-base`;
-
 // Component
 interface ICardProps {
     image: any,
@@ -22,7 +18,7 @@ export const Card: React.FC<ICardProps> = ({ image, title, description, children
         <div className={Container}>
             <img src={image} className="rounded-full h-24 w-24 mb-6"/>
             <h1 className="text-scheme-offwhite font-display text-2xl font-bold mb-4 active:brightness-75 transition-all">{title}</h1>
-            <p className="text-scheme-offwhite font-body text-base mb-6">{description}</p>
+            <p className="text-scheme-offwhite font-body text-base mb-6 break-words">{description}</p>
             {children}
         </div>
     );

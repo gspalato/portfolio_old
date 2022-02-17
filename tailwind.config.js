@@ -6,10 +6,13 @@ module.exports = {
 			red: '#ff0000',
 
 			// Color Scheme
-			"scheme-gray": "#050507",
-			"scheme-lightgray": "#060609",
-			"scheme-contrastgray": "#0b0b0f",
-			"scheme-disabledgray": "#98989d",
+			"scheme-gray-100": "#050507",
+			"scheme-gray-200": "#060609",
+			"scheme-gray-300": "#0b0b0f",
+			"scheme-gray-400": "#252533",
+			"scheme-gray-500": "#50506d",
+			"scheme-gray-700": "#475569",
+			"scheme-gray-900": "#98989d",
 			"scheme-darkblue": "#0039ff",
 			"scheme-blue": "#0066ff",
 			"scheme-green": "#28cd41",
