@@ -22,7 +22,7 @@ export const Button: React.FC<IButtonProps> = ({ className, text, link, onClick,
 
         target="_blank" href={link}
       >
-        <h1 className="text-white font-display font-semibold text-base">{text}{children}</h1>
+        <h1 className="flex items-center align-middle text-white font-display font-medium text-base">{text}{children}</h1>
       </motion.a>
     );
   }
@@ -34,7 +34,7 @@ export const Button: React.FC<IButtonProps> = ({ className, text, link, onClick,
         className={`bg-scheme-darkblue px-4 py-2 rounded-lg ${className ?? ""}`}
         onClick={(() => onClick?.())}
     >
-        <h1 className="text-white font-display font-semibold text-base">{text}{children}</h1>
+        <h1 className="flex items-center align-middle text-white font-display font-medium text-base">{text}{children}</h1>
     </motion.button>
   );
 }
