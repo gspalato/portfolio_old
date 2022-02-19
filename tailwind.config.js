@@ -30,7 +30,7 @@ module.exports = {
 		},
 		extend: {
 			animation: {
-				grow: 'grow 5s ease-in-out infinite',
+				grow: 'grow 3s ease-in-out infinite',
 				marquee: 'marquee 2.5s linear infinite',
 			},
 			keyframes: {
