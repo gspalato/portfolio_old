@@ -38,14 +38,14 @@ export const Cursor: React.FC = (props) => {
 	return (
 		<>
 			<motion.div
-    	  className="fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-scheme-offwhite pointer-events-none"
+    	  className="fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-scheme-offwhite pointer-events-none z-[1000]"
     	  style={{
     	    translateX: cursorX,
     	    translateY: cursorY,
     	  }}
     	/>
 			<motion.div
-				className="fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-scheme-offwhite opacity-10 backdrop-invert pointer-events-none"
+				className="fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-scheme-offwhite opacity-10 backdrop-invert pointer-events-none z-[999]"
 				style={{
 					translateX: auraXSpring,
 					translateY: auraYSpring,
