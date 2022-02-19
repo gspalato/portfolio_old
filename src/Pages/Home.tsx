@@ -16,7 +16,8 @@ import { WindowRepresentation } from "../Components/WindowRepresentation";
 import ProfilePicture from "../Assets/img/selfie.png";
 import MisfitsSwirl from "../Assets/img/misfits_swirl.png";
 import ArrowDown from "../Assets/img/arrow_down.svg";
-import ColorBrush1 from "../Assets/img/color_brush_1.png";
+import WondersLogo from "../Assets/img/wonders.png";
+import DefaultIcon from "../Assets/img/icon.png";
 
 
 
@@ -38,20 +39,6 @@ export const Home: React.FC = () => {
 	return (
 		<>
 			<div className="bg-transparent backdrop-blur">
-				<DefaultNavbar>
-					<NavbarItem link="https://www.instagram.com/gabriel.spalato/">
-						<i className="fa-brands fa-instagram fa-lg"></i>
-					</NavbarItem>
-					<NavbarItem link="https://github.com/gspalato">
-						<i className="fa-brands fa-github fa-lg"></i>
-					</NavbarItem>
-					<NavbarItem link="https://open.spotify.com/user/oubhvljhzyudfbxyx20opzxhq">
-						<i className="fa-brands fa-spotify fa-lg"></i>
-					</NavbarItem>
-					<NavbarItem link="https://www.linkedin.com/in/gabriel-marques-3aa183a8/">
-						<i className="fa-brands fa-linkedin fa-lg"></i>
-					</NavbarItem>
-				</DefaultNavbar>
 				<section className="relative flex items-center flex-col justify-center h-screen max-w-screen-xl mx-auto pl-5 pr-5">
 					<div className="flex items-center flex-col md:flex-row justify-between">
 						<img src={ProfilePicture} draggable="false" className="animate-grow h-[22rem] w-auto rounded-full saturate-150 blur" />
@@ -75,9 +62,19 @@ export const Home: React.FC = () => {
 					<div className="flex justify-center bg-scheme-contrast-transparent backdrop-blur-2xl h-full w-full pl-5 pr-5">
 						<div className="flex flex-col items-center justify-center max-w-screen-xl h-full w-full">
 							<h1 className="font-display font-bold text-scheme-offwhite text-5xl py-20">Projects</h1>
-							<CardView className="flex-1">
-								<Card image={MisfitsSwirl} title="Portfolio" description="My portfolio's repository.">
-									<Button text="Source Code" link="https://github.com/gspalato/portfolio">
+							<CardView className="m-auto !w-min">
+								<Card image={WondersLogo} title="Wonders" description="A rainmeter-like widget platform powered by Electron!">
+									<Button text="Repository" link="https://github.com/wondersorg/wonders">
+										<i className="devicon-github-original my-auto leading-none text-lg text-scheme-offwhite pl-[0.4rem]"></i>
+									</Button>
+								</Card>
+								<Card image={DefaultIcon} title="Portfolio" description="My portfolio website, bootstrapped with Reactions.">
+									<Button text="Repository" link="https://github.com/gspalato/portfolio">
+										<i className="devicon-github-original my-auto leading-none text-lg text-scheme-offwhite pl-[0.4rem]"></i>
+									</Button>
+								</Card>
+								<Card image={DefaultIcon} title="Reactions" description="A boilerplate for React projects using Webpack 5 and Typescript; preconfigured with TailwindCSS.">
+									<Button text="Repository" link="https://github.com/gspalato/reactions">
 										<i className="devicon-github-original my-auto leading-none text-lg text-scheme-offwhite pl-[0.4rem]"></i>
 									</Button>
 								</Card>
@@ -106,10 +103,12 @@ export const Home: React.FC = () => {
 									</Timeline>
 								</div>
 								<div className="flex flex-auto pt-10 md:pt-0 h-auto w-auto justify-center items-center">
-									<WindowRepresentation>
+									<WindowRepresentation className="mb-6 md:mb-0">
 										<div className="p-6 grid grid-cols-5 gap-6 auto-rows-fr text-5xl text-scheme-offwhite">
-											<GridLogo>devicon-nodejs-plain</GridLogo>
+											<GridLogo>devicon-javascript-plain</GridLogo>
 											<GridLogo>devicon-typescript-plain</GridLogo>
+											<GridLogo>devicon-nodejs-plain</GridLogo>
+											<GridLogo>devicon-lua-plain</GridLogo>
 											<GridLogo>devicon-react-original</GridLogo>
 											<GridLogo>devicon-html5-plain</GridLogo>
 											<GridLogo>devicon-css3-plain</GridLogo>
@@ -119,7 +118,7 @@ export const Home: React.FC = () => {
 											<GridLogo>devicon-git-plain</GridLogo>
 											<GridLogo>devicon-photoshop-plain</GridLogo>
 											<GridLogo>devicon-electron-original</GridLogo>
-
+											<GridLogo>devicon-mongodb-plain</GridLogo>
 										</div>
 									</WindowRepresentation>
 								</div>
