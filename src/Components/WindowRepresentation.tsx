@@ -1,11 +1,13 @@
 import React from 'react';
 
 // Component
-interface IWindowRepresentationProps { }
+interface IWindowRepresentationProps {
+    className?: string;
+}
 
-export const WindowRepresentation: React.FC<IWindowRepresentationProps> = ({ children }) => {
+export const WindowRepresentation: React.FC<IWindowRepresentationProps> = ({ className, children }) => {
     return (
-        <div className='relative row-start-1 col-start-6 xl:col-start-7 col-span-7 xl:col-span-6 z-10'>
+        <div className={`relative row-start-1 col-start-6 xl:col-start-7 col-span-7 xl:col-span-6 z-10 ${className ?? ""}`}>
             <div className="-mx-4 sm:mx-0 md:min-h-[20rem] md:min-w-[35rem]">
                 <div className='relative overflow-hidden shadow-xl
                     flex bg-slate-800 h-[31.625rem] max-h-[60vh]
