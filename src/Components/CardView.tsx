@@ -1,5 +1,7 @@
 import React from "react";
 
+import Slider from 'react-slick';
+
 // Component
 interface ICardViewProps {
     className?: string;
@@ -7,7 +9,9 @@ interface ICardViewProps {
 
 export const CardView: React.FC<ICardViewProps> = ({ className, children }) => {
     return (
-        <div className={`flex flex-row justify-center items-center rounded-md h-auto w-full ${(className ?? "")}`}>
+        <div className={`grid gap-6 grid-flow-row md:grid-flow-col auto-cols-max
+            auto-rows-min h-auto w-full ${(className ?? "")}`}
+        >
             {children}
         </div>
     );
