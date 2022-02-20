@@ -12,14 +12,14 @@ export const WindowRepresentation: React.FC<IWindowRepresentationProps> = ({ cla
                 <div className='relative overflow-hidden shadow-xl
                     flex bg-slate-800 h-[31.625rem] max-h-[60vh]
                     sm:max-h-[none] rounded-xl lg:h-[34.6875rem]
-                    xl:h-[31.625rem] bg-scheme-overlay-transparent backdrop-blur
-                    ring-1 ring-inset ring-scheme-gray-500 !h-auto'>
+                    xl:h-[31.625rem] bg-overlay-transparent backdrop-blur
+                    ring-1 ring-inset ring-gray-500 !h-auto'>
                     <div className='relative w-full flex flex-col'>
-                        <div className="flex-none border-b border-scheme-gray-500/90">
+                        <div className="flex-none border-b border-gray-500/90">
                             <div className="flex items-center h-8 space-x-1.5 px-3">
-                                <div className="w-2.5 h-2.5 bg-scheme-gray-500 rounded-full"></div>
-                                <div className="w-2.5 h-2.5 bg-scheme-gray-500 rounded-full"></div>
-                                <div className="w-2.5 h-2.5 bg-scheme-gray-500 rounded-full"></div>
+                                <div className="w-2.5 h-2.5 bg-gray-500 rounded-full"></div>
+                                <div className="w-2.5 h-2.5 bg-gray-500 rounded-full"></div>
+                                <div className="w-2.5 h-2.5 bg-gray-500 rounded-full"></div>
                             </div>
                         </div>
                         <div className='relative min-h-max flex-auto flex flex-col'>

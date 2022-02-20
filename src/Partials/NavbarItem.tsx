@@ -32,9 +32,9 @@ export const NavbarItem: React.FC<INavbarItem> = ({ children, link }) => {
 
 	return (
 		<motion.li
-            whileTap={{ scale: 0.95, filter: "brightness(75%)" }}
-            className="font-light text-white pr-5 hover:text-scheme-blue active:text-scheme-blue transition-colors"
-        >
+        whileTap={{ scale: 0.95, filter: "brightness(75%)" }}
+        className="font-light pr-5 hover:text-blue
+        active:text-blue transition-colors">
             <Link target="_blank" href={link}>
                 {children}
             </Link>

@@ -11,7 +11,7 @@ export const Cursor: React.FC = (props) => {
 	const auraXSpring = useSpring(auraX, { damping: 50, stiffness: 500 });
 	const auraYSpring = useSpring(auraY, { damping: 50, stiffness: 500 });
 
-	const [clickable, setClickable] = useState(false);
+	const [beingClicked, setBeingClicked] = useState(false);
 
   useEffect(() => {
     const moveCursor = (e: any) => {
@@ -20,39 +20,48 @@ export const Cursor: React.FC = (props) => {
 
 			auraX.set(e.clientX - 10);
 			auraY.set(e.clientY - 10);
-
-			let over = document.elementFromPoint(e.clientX, e.clientY);
-			if ((over?.getAttribute('onclick') != null)
-				|| (over?.getAttribute('href') != null)
-				|| over?.getAttribute('role') === "button")
-				setClickable(true);
     };
 
+		const mouseDownCursor = (e: any) => {
+			setBeingClicked(true);
+		}
+
+		const mouseUpCursor = (e: any) => {
+			setBeingClicked(false);
+		}
+
     window.addEventListener("mousemove", moveCursor);
+		window.addEventListener("mousedown", mouseDownCursor);
+		window.addEventListener("mouseup", mouseUpCursor);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+	  	window.removeEventListener("mousedown", mouseDownCursor);
+	  	window.removeEventListener("mouseup", mouseUpCursor);
     };
   }, []);
 
 	return (
 		<>
 			<motion.div
-    	  className="fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-scheme-offwhite pointer-events-none z-[1000]"
+    	  className="fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-white pointer-events-none z-[1000]"
     	  style={{
     	    translateX: cursorX,
     	    translateY: cursorY,
     	  }}
     	/>
 			<motion.div
-				className="fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-scheme-offwhite opacity-10 backdrop-invert pointer-events-none z-[999]"
+				className="fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-white opacity-10 backdrop-invert pointer-events-none z-[999]"
 				style={{
 					translateX: auraXSpring,
 					translateY: auraYSpring,
-					backgroundColor: clickable ? "#066ff" : ""
+					backgroundColor: beingClicked ? "#066ff" : ""
+				}}
+				animate={{
+					scale: beingClicked ? 0.8 : 1
 				}}
 				transition={{
-					duration: 0.5
+					duration: 0.05
 				}}
 			/>
 		</>

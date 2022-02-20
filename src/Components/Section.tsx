@@ -15,11 +15,11 @@ export const Section: React.FC<ISectionProps> = (props) => {
 			<div className="absolute h-full w-full">
 				{props.background}
 			</div>
-			<div className={`flex justify-center h-full w-full pl-5 pr-5
-			${props.blur ? "backdrop-blur-2xl" : ""} ${props.overlayColor ? "bg-scheme-contrast-transparent" : ""}`}>
+			<div className={`flex justify-center h-full w-full px-0
+			${props.blur ? "backdrop-blur-2xl" : ""} ${props.overlayColor ? "bg-contrast-transparent" : ""}`}>
 				<div className={`flex flex-col items-center justify-center
 				h-full w-full ${!props.noMaxWidth ? "max-w-screen-xl" : ""}`}>
-					<h1 className="font-display font-bold text-scheme-offwhite text-5xl py-24">{props.title}</h1>
+					<h1 className="font-display font-bold text-offwhite text-5xl py-24">{props.title}</h1>
 					<div className={`flex-1 h-auto w-full ${props.className ?? ""}`}>
 						{/* This div should act just like a normal one. */}
 						{/* Styles applied to it shouldn't break. */}

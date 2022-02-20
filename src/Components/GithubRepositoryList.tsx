@@ -44,7 +44,7 @@ export const GithubRepositoryList: React.FC<IGithubRepositoryListProps> = (props
 				return (
 					<Card image={Selfie} title="Test" description="Lorem ipsum yamete">
 						<Button text="Check Out">
-							<i className="fa-solid fa-up-right-from-square text-scheme-offwhite pl-[0.5rem]"></i>
+							<i className="fa-solid fa-up-right-from-square text-offwhite pl-[0.5rem]"></i>
 						</Button>
 					</Card>
 				);

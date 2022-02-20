@@ -8,8 +8,8 @@ import SpotifyLogo from "../Assets/img/spotify.svg";
 // Styles
 let SmallParagraph = "font-body leading-4 text-sm text-white";
 
-let Container = `backdrop-blur-md bg-scheme-overlay-transparent
-border border-solid border-scheme-border/50
+let Container = `backdrop-blur-md bg-overlay-transparent
+border border-solid border-border/50
 bottom-4 duration-200 ease-in-out h-auto
 p-4 left-4 rounded-md transition-all w-56
 md:max-w-[16rem]`;

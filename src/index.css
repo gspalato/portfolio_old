@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
@@ -43,10 +44,16 @@ h1, h2, h3, h4, h5, li, ul, p {
 	width: fit-content;
 }
 
+input:focus input:active input:hover {
+	outline: none;
+	border: none;
+}
+
 ::-webkit-scrollbar {
 	background: transparent;
 	border-radius: 3px;
 	width: 5px;
+	overflow: overlay;
 }
 
 ::-webkit-scrollbar-button {
@@ -60,11 +67,31 @@ h1, h2, h3, h4, h5, li, ul, p {
 }
 
 /* Custom classes */
-.opacity-edge-gradient {
-	-webkit-mask-image: -webkit-radial-gradient(from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-	-o-mask-image: -o-radial-gradient(from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+.transparent {
+	background: transparent;
+	background-color: transparent;
 }
 
+.pc-center-children > div > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.absolute-center {
+  	position: absolute;
+  	left: 50%;
+  	top: 50%;
+  	-webkit-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
+}
+
+.flip {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+}
 
 /* Animations */
 @keyframes pulse {

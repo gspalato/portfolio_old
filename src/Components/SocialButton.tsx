@@ -14,7 +14,7 @@ export const SocialButton: React.FC<ISocialButtonProps> = props => {
     return (
         <a target="_blank" href={props.link}>
             <FontAwesomeIcon
-                className="hover:text-scheme-blue transition-colors"
+                className="hover:text-blue transition-colors"
                 color={props.color ?? "#ffffff"}
                 icon={props.icon}
                 size={props.size ?? "2x"}
