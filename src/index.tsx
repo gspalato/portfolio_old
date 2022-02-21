@@ -17,12 +17,10 @@ import './index.css';
 ReactDOM.render(
 	<main className="antialiased h-max
 selection:bg-darkblue selection:text-offwhite/90">
-  	<AnimatePresence exitBeforeEnter>
-    	<Router>
-				<Navbar/>
-				<App />
-			</Router>
-		</AnimatePresence>
+    <Router>
+			<Navbar/>
+			<App />
+		</Router>
 		<div className="hidden md:block fixed left-4 bottom-4">
 			<DiscordPresence setActive={() => {}} />
 		</div>

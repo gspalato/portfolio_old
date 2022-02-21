@@ -63,6 +63,9 @@ module.exports = {
 			fontSize: {
 
 			},
+			gridAutoColumns: {
+				'min-max-5': 'minmax(1, 5fr)'
+			},
 			height: {
 				fit: 'fit-content',
 			},
@@ -71,7 +74,7 @@ module.exports = {
 			},
 			width: {
 				fit: 'fit-content',
-			}
+			},
 		},
 	},
 	plugins: []

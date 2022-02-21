@@ -7,7 +7,7 @@ interface ITimelineProps { }
 
 export const Timeline: React.FC<ITimelineProps> = ({ children }) => {
     return (  
-        <ol className="relative border-l border-white/30 h-fit">
+        <ol className="relative border-l border-gray-400 h-fit">
             {children}
         </ol>
     );

@@ -35,6 +35,7 @@ export const DefaultNavbar: React.FC = ({ children }) => {
 				<div className="hidden md:flex h-full w-auto align-middle items-center text-white/60">
 					<NavbarLink name="Home" to="/"/>
                     <NavbarLink name="Projects" to="/projects"/>
+					<NavbarLink name="About" to="/about"/>
 				</div>
 				<ul className="absolute-center flex flex-row last:pr-0 text-display text-white w-auto">
 					<h1 className="text-white font-bold text-[1.5rem]">unreaalism.</h1>

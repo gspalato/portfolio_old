@@ -1,11 +1,5 @@
-// Extend Window
-declare global {
-    interface Window {
-        PRELOADED_IMAGES: Image[];
-    };
-};
-
 // Modules without typings
+declare module 'react-preload-image';
 declare module 'react-use-dimensions';
 
 // Image imports
@@ -15,3 +9,4 @@ declare module '*.svg' {
 }
 
 declare module '*.png';
+declare module '*.jpg';

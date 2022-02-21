@@ -1,12 +1,13 @@
 import React from 'react';
-import { Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { v4 as uuid } from 'uuid';
 
 import { Button } from '../Components/Button';
 import { Card } from '../Components/Card';
 import { Page } from '../Components/Page';
 
 import DefaultIcon from '../Assets/img/icon.png';
-import WondersLogo from '../Assets/img/wonders.png';
+import WondersLogo from '../Assets/img/wonders.jpg';
 import MisfitsSwirl from '../Assets/img/misfits_swirl.png';
 
 
@@ -49,56 +50,44 @@ const cardVariants: Variants = {
 }
 
 export const Projects: React.FC = () => {
-    return (
-        <Page className="flex justify-center items-center">
-            <img src={MisfitsSwirl} className="absolute h-full w-full brightness-50" />
-            <div className="absolute h-full w-full backdrop-blur-2xl bg-overlay-transparent" />
-            <div className="h-max w-full grid grid-cols-1 gap-y-4
-            md:grid-cols-5 auto-rows-fr pt-12 px-20 justify-center">
-                {
-                    ProjectsList.map((v, i) => {
-                        return (
-                            <Card
-                            className=""
-                            image={v.image}
-                            title={v.title}
-                            description={v.description}
+  return (
+    <Page className="flex justify-center items-center">
+      <motion.img
+			src={MisfitsSwirl}
+			className="absolute h-full w-full brightness-0"
+      key={uuid()}
+
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1, filter: "brightness(0.5)" }}
+			exit={{ opacity: 0 }}
+			transition={{ delay:.5, duration: 0.75 }}
+			/>
+      <div className="absolute backdrop-blur-2xl h-full w-full bg-overlay-transparent" />
+      <div className="h-max w-full grid grid-cols-1 gap-y-4
+      md:grid-cols-5 auto-rows-fr pt-12 px-20 justify-center">
+        {
+          ProjectsList.map((v, i) => {
+            return (
+              <Card
+              className=""
+              image={v.image}
+              title={v.title}
+              description={v.description}
                             
-                            custom={i}
-                            initial="start"
-                            animate="end"
-                            exit="start"
-                            variants={cardVariants}>
-					            <Button text="Repository" link={v.link}>
-						            <i className="devicon-github-original my-auto
-                                    leading-none text-lg text-offwhite pl-[0.4rem]" />
-					            </Button>
-				            </Card>
-                        );
-                    })
-                }
-            </div>
-            {/*
-            <div className="flex h-full w-full items-center justify-center">
-				<PietileCarousel className="pc-center-children w-full" count={1}>
-					<Card image={WondersLogo} title="Wonders" description="A rainmeter-like widget platform powered by Electron!">
-						<Button text="Repository" link="https://github.com/wondersorg/wonders">
-							<i className="devicon-github-original my-auto leading-none text-lg text-offwhite pl-[0.4rem]"></i>
-						</Button>
-					</Card>
-					<Card image={DefaultIcon} title="Portfolio" description="My portfolio website, bootstrapped with Reactions.">
-						<Button text="Repository" link="https://github.com/gspalato/portfolio">
-							<i className="devicon-github-original my-auto leading-none text-lg text-offwhite pl-[0.4rem]"></i>
-						</Button>
-					</Card>
-					<Card image={DefaultIcon} title="Reactions" description="A boilerplate for React projects using Webpack 5 and Typescript; preconfigured with TailwindCSS.">
-						<Button text="Repository" link="https://github.com/gspalato/reactions">
-							<i className="devicon-github-original my-auto leading-none text-lg text-offwhite pl-[0.4rem]"></i>
-						</Button>
-					</Card>
-				</PietileCarousel>
-			</div>
-            */}
-        </Page>
-    );
+              custom={i}
+              initial="start"
+              animate="end"
+              exit="start"
+              variants={cardVariants}>
+					      <Button text="Repository" link={v.link}>
+						      <i className="devicon-github-original my-auto
+                  leading-none text-lg text-offwhite pl-[0.4rem]" />
+					      </Button>
+				    </Card>
+          );
+        })
+      }
+  	</div>
+  	</Page>
+  );
 }

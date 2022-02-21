@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { v4 as uuid } from 'node-uuid';
+import { v4 as uuid } from 'uuid';
 
 
 // Component
@@ -13,7 +13,7 @@ export const Page: React.FC<IPageProps> = ({ className, children, compensateNavb
     return (
         <motion.div {...props}
         className={`w-full bg-[#000] overflow-x-hidden ${className ?? ""}
-        ${compensateNavbar ? "h-[calc(100vh-17rem)] max-h-max" : "h-screen"}`}
+            ${compensateNavbar ? "h-[calc(100vh-4.125rem)] max-h-max" : "h-screen"}`}
         key={uuid()}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
