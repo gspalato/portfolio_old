@@ -6,6 +6,8 @@ import { Button } from '../Components/Button';
 import { Card } from '../Components/Card';
 import { Page } from '../Components/Page';
 
+import { defaultFadeInDownVariants } from '../AnimationVariants';
+
 import DefaultIcon from '../Assets/img/icon.png';
 import WondersLogo from '../Assets/img/wonders.jpg';
 import MisfitsSwirl from '../Assets/img/misfits_swirl.png';
@@ -33,22 +35,6 @@ const ProjectsList = [
     },
 ]
 
-const cardVariants: Variants = {
-    start: {
-        opacity: 0,
-        translateY: -50
-    },
-    end: (i: number) => ({
-      opacity: 1,
-      translateY: 0,
-      transition: {
-        ease: "easeInOut",
-        duration: .75,
-        delay: i * 0.3
-      },
-    }),
-}
-
 export const Projects: React.FC = () => {
   return (
     <Page className="flex justify-center items-center">
@@ -63,8 +49,9 @@ export const Projects: React.FC = () => {
 			transition={{ delay:.5, duration: 0.75 }}
 			/>
       <div className="absolute backdrop-blur-2xl h-full w-full bg-overlay-transparent" />
-      <div className="h-max w-full grid grid-cols-1 gap-y-4
-      md:grid-cols-5 auto-rows-fr pt-12 px-20 justify-center">
+      <div className="min-h-full md:min-h-0 md:h-max w-full grid grid-cols-1 gap-y-4
+      md:grid-cols-5 auto-rows-fr pt-12 pb-12 md:pb-0 md:px-20 justify-center
+      justify-items-center overflow-y-scroll">
         {
           ProjectsList.map((v, i) => {
             return (
@@ -78,7 +65,7 @@ export const Projects: React.FC = () => {
               initial="start"
               animate="end"
               exit="start"
-              variants={cardVariants}>
+              variants={defaultFadeInDownVariants}>
 					      <Button text="Repository" link={v.link}>
 						      <i className="devicon-github-original my-auto
                   leading-none text-lg text-offwhite pl-[0.4rem]" />
