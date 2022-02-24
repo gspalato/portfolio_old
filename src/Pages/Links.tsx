@@ -4,7 +4,7 @@ import { faInstagram, faGithub, faSpotify, faTwitter, faTwitch, faDiscord } from
 
 import ProfilePicture from "../Assets/img/selfie.png";
 import { SocialButton } from "../Components/SocialButton";
-import { DiscordPresence } from "../Components/DiscordPresence";
+import { Doing } from "../Components/Doing";
 
 import DiscordSVG from "../Assets/img/discord.svg";
 
@@ -45,9 +45,6 @@ export const Links: React.FC = () => {
 						<SocialButton icon={faTwitch} link={TwitchLink}/>
 					</li>
 				</ul>
-				<DiscordPresence
-					setActive={setPresenceActive}
-				/>
 			</div>
 		</>
 	);
