@@ -11,60 +11,60 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = env => { return {
   	entry: "./src/index.tsx",
   	output: {
-		filename: "bundle.[fullhash].js",
-		path: env.vercel ? path.resolve("/vercel/path0/") : path.resolve(__dirname, "dist"),
-		publicPath: '/',
+			filename: "bundle.[fullhash].js",
+			path: path.resolve(__dirname, "dist"),
+			publicPath: '/',
   	},
   	plugins: [
-		new CleanWebpackPlugin(),
-		new MiniCssExtractPlugin({
-			filename: "[name].[contenthash].css",
-			chunkFilename: "[id].[contenthash].css"
-		}),
-		new CopyWebpackPlugin({
-			patterns: [
+			new CleanWebpackPlugin(),
+			new MiniCssExtractPlugin({
+				filename: "[name].[contenthash].css",
+				chunkFilename: "[id].[contenthash].css"
+			}),
+			new CopyWebpackPlugin({
+				patterns: [
 			  	{
-					from: path.resolve("./src", "Assets"),
-					to: 'assets',
-					globOptions: {
+						from: path.resolve("./src", "Assets"),
+						to: 'assets',
+						globOptions: {
 				  		ignore: ['*.DS_Store'],
-					},
+						},
 			  	},
-			],
-		}),
-		new HtmlWebpackPlugin({
+				],
+			}),
+			new HtmlWebpackPlugin({
 	  		template: "./public/index.html",
-		}),
+			}),
   	],
   	resolve: {
-		modules: ["src", "node_modules"],
-		extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+			modules: ["src", "node_modules"],
+			extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
   	},
   	module: {
-		rules: [
+			rules: [
 	  		{
-				test: /\.(t|j)sx?$/,
-				exclude: /node_modules/,
-				loader: require.resolve("babel-loader"),
+					test: /\.(t|j)sx?$/,
+					exclude: /node_modules/,
+					loader: require.resolve("babel-loader"),
 	  		},
 	  		{
-				test: /\.(c|sc|sa)ss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'sass-loader',
-					{
+					test: /\.(c|sc|sa)ss$/,
+					use: [
+						MiniCssExtractPlugin.loader,
+						'css-loader',
+						'sass-loader',
+						{
 					  	loader: 'postcss-loader',
 					  	options: {
 							postcssOptions: {
-						  		ident: 'postcss',
-						  		plugins: [autoprefixer, tailwindcss],
+						  	ident: 'postcss',
+						  	plugins: [autoprefixer, tailwindcss],
 							},
-					  	},
+					  },
 					},
 				],
-	  		},
-	  		{
+	  	},
+	  	{
 				test: /\.svg$/,
 				use: ['@svgr/webpack'],
 			},
@@ -79,11 +79,12 @@ module.exports = env => { return {
 				type: 'asset/inline'
 			},
 		],
-  	},
+  },
   	devServer: {
 	  	watchContentBase: true,
 	  	contentBase: path.resolve(__dirname, "dist"),
 	  	open: true,
-		historyApiFallback: true,
+			historyApiFallback: true,
   	}
-} };
+	}
+};
