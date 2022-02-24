@@ -37,7 +37,7 @@
     "start": "concurrently \"npm run start:css\" \"cross-env TAILWIND_MODE=watch webpack serve --hot --open --mode development\"",
     "start:css": "tailwindcss -o src/tailwind.css --watch",
     "build": "tailwindcss -o dist/tailwind.css && cross-env TAILWIND_MODE=build webpack --config webpack.config.js --mode production",
-    "vercel-build": "yarn add && tailwindcss -o dist/tailwind.css && webpack --config webpack.config.js --mode production --env=vercel"
+    "vercel-build": "tailwindcss -o dist/tailwind.css && webpack --config webpack.config.js --mode production --env=vercel"
   },
   "keywords": [],
   "author": "Gabriel Spalato Marques",
