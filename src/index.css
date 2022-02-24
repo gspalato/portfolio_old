@@ -93,6 +93,17 @@ input:focus input:active input:hover {
     transform: scale(-1, -1);
 }
 
+.text-overflow-fade {
+	background-color: #fff;
+  background-image: linear-gradient(90deg, #fff, #fff 50%, var(--different-background-color) 95%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
 /* Animations */
 @keyframes pulse {
 	from {
