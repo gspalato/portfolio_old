@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 interface INavbarItem {
+    last?: boolean;
     link?: string;
 }
 
-export const NavbarItem: React.FC<INavbarItem> = ({ children, link }) => {
+export const NavbarItem: React.FC<INavbarItem> = ({ children, last, link }) => {
     let Link = styled.a`
         display: inline-block;
         position: relative;
@@ -33,8 +34,8 @@ export const NavbarItem: React.FC<INavbarItem> = ({ children, link }) => {
 	return (
 		<motion.li
         whileTap={{ scale: 0.95, filter: "brightness(75%)" }}
-        className="font-light pr-5 hover:text-blue
-        active:text-blue transition-colors">
+        className={`font-light hover:text-blue
+        active:text-blue transition-colors ${last ? "" : "pr-5"}`}>
             <Link target="_blank" href={link}>
                 {children}
             </Link>
