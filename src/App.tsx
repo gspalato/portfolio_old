@@ -6,6 +6,8 @@ import { Home } from './Pages/Home';
 import { Projects } from './Pages/Projects';
 import { About } from './Pages/About';
 
+import { Navbar } from './Partials/Navbar';
+
 import ColorBrush1 from "./Assets/img/color_brush_1.png";
 import ColorBrush2 from "./Assets/img/color_brush_2.png";
 import ProfilePicture from "./Assets/img/selfie.png";
@@ -19,9 +21,12 @@ import './index.css';
 import './tailwind.css';
 
 
+// Main Component
 const App: React.FC = () => {
   const location = useLocation();
   const [ isLoaded, setIsLoaded ] = useState(false);
+
+  const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useState(false);
 
   useEffect(() => {
     PreloadImages([
@@ -34,18 +39,20 @@ const App: React.FC = () => {
   if (!isLoaded)
     return (
       <motion.div
-      className="flex justify-center items-center"
+      className="flex justify-center items-center h-screen w-screen"
       
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75 }}
       >
-        <h1 className="font-detail text-3xl text-white">Loading...</h1>
+        <h1 className="font-detail text-3xl text-white/60">Loading...</h1>
       </motion.div>
     );
   else
     return (
+      <>
+      <Navbar />
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
             <Route exact path="/">
@@ -62,7 +69,8 @@ const App: React.FC = () => {
             </Route>
     	  </Switch>
       </AnimatePresence>
-	  );
+    </>
+	);
 }
 
 export default App;
