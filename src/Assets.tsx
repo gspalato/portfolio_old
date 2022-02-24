@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 export const PreloadImages = async (srcs: string[], setState: () => void) => {
     const promises = srcs.map((src) => {
         return new Promise((res, rej) => {
