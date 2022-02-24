@@ -5616,11 +5616,6 @@ react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-preload-image@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-preload-image/-/react-preload-image-1.0.7.tgz#4fc4afccc72b11465df2898ab4aae7832f233bab"
-  integrity sha512-lIREXvawPJsykq2aFSk4XRP2/mvsnEX5FpZUExXW7eeHhXCLuUARus/DjfxfbaLfIwXDjZ/tQsmq5JDemSgaeA==
-
 react-router-dom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.2.0.tgz"
@@ -5649,11 +5644,6 @@ react-router@5.2.0:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
-
-react-use-dimensions@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/react-use-dimensions/-/react-use-dimensions-1.2.1.tgz"
-  integrity sha512-XL+Rup9Hosxx3Ap9xpyQMbVwuUa4BSqiOjfBb2zDuGs4uv2FesFV+m8Z/huRx2BNptMd9ARPqFuSNA62zhCozg==
 
 react@^16.7.0-alpha.0:
   version "16.14.0"
