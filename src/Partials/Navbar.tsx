@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useRouteMatch, withRouter } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 
 import { NavbarItem } from "./NavbarItem";
@@ -38,7 +38,7 @@ const MobileNavbarVariants: Variants = {
 		}
 	},
 	hidden: {
-		height: 'auto',
+		height: 'max-content',
 		transition: {
 			ease: 'easeInOut',
 			duration: 0.25,
@@ -84,9 +84,7 @@ export const Navbar: React.FC = () => {
 							links.map( (v) => <NavbarLink name={v.name} to={v.to} /> )
 						}
 					</div>
-					<ul className="absolute-center flex flex-row last:pr-0 text-display text-white w-auto">
-						<h1 className="text-white font-bold text-[1.5rem]">unreaalism.</h1>
-					</ul>
+					<h1 className="absolute-center-x text-white font-bold text-[1.5rem]">unreaalism.</h1>
 					<div className="hidden md:flex h-full w-auto items-center">
 						<ul className="flex flex-row last:pr-0 text-display text-white w-auto">
 							<NavbarItem link="https://www.instagram.com/gabriel.spalato/">
