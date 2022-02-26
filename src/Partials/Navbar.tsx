@@ -38,7 +38,7 @@ const MobileNavbarVariants: Variants = {
 		}
 	},
 	hidden: {
-		height: 'max-content',
+		height: '5.5rem',
 		transition: {
 			ease: 'easeInOut',
 			duration: 0.25,
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
 							<NavbarItem link="https://github.com/gspalato">
 								<i className="fa-brands fa-github fa-lg"></i>
 							</NavbarItem>
-							<NavbarItem link="https://open.spotify.com/user/oubhvljhzyudfbxyx20opzxhq">
+							<NavbarItem link="https://open.spotify.com/user/m0jz86ynx7i5jw05vu4la15hc">
 								<i className="fa-brands fa-spotify fa-lg"></i>
 							</NavbarItem>
 							<NavbarItem link="https://www.linkedin.com/in/gabriel-marques-3aa183a8/" last>
