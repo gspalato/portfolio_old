@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const isTouchDevice = (): boolean => {
+  return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0))
+}
+
 export const Cursor: React.FC = (props) => {
 	const cursorX = useMotionValue(-100);
 	const cursorY = useMotionValue(-100);
@@ -44,15 +48,17 @@ export const Cursor: React.FC = (props) => {
 	return (
 		<>
 			<motion.div
-    	  className="hidden md:fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-white pointer-events-none z-[1000]"
+    	  className="fixed top-0 left-0 h-[5px] w-[5px] rounded-full bg-white pointer-events-none z-[1000]"
     	  style={{
+					display: isTouchDevice() ? 'none': 'block',
     	    translateX: cursorX,
     	    translateY: cursorY,
     	  }}
     	/>
 			<motion.div
-				className="hidden md:fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-white opacity-10 backdrop-invert pointer-events-none z-[999]"
+				className="fixed top-0 left-0 h-[25px] w-[25px] rounded-full bg-white opacity-10 backdrop-invert pointer-events-none z-[999]"
 				style={{
+					display: isTouchDevice() ? 'none': 'block',
 					translateX: auraXSpring,
 					translateY: auraYSpring,
 					backgroundColor: beingClicked ? "#066ff" : ""
