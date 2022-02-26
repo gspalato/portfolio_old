@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import { Home } from './Pages/Home';
 import { Projects } from './Pages/Projects';
@@ -26,8 +26,6 @@ const App: React.FC = () => {
   const location = useLocation();
   const [ isLoaded, setIsLoaded ] = useState(false);
 
-  const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useState(false);
-
   useEffect(() => {
     PreloadImages([
       ColorBrush1, ColorBrush2,
@@ -36,8 +34,30 @@ const App: React.FC = () => {
     ], () => { setIsLoaded(true) })
   }, []);
 
-  if (!isLoaded)
-    return (
+  return (
+    isLoaded
+    ? (
+      <>
+        <Navbar />
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.pathname}>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/home">
+                <Home />
+              </Route>
+              <Route exact path="/projects">
+                <Projects />
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+      	  </Switch>
+        </AnimatePresence>
+      </>
+    )
+    : (
       <motion.div
       className="flex justify-center items-center h-screen w-screen"
       
@@ -46,31 +66,10 @@ const App: React.FC = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75 }}
       >
-        <h1 className="font-detail text-3xl text-white/60">Loading...</h1>
+        <h1 className="font-detail text-3xl text-white">Loading...</h1>
       </motion.div>
-    );
-  else
-    return (
-      <>
-      <Navbar />
-      <AnimatePresence exitBeforeEnter>
-        <Switch location={location} key={location.pathname}>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/projects">
-              <Projects />
-            </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-    	  </Switch>
-      </AnimatePresence>
-    </>
-	);
+    )
+  );
 }
 
 export default App;
