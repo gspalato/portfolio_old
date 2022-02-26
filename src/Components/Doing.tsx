@@ -7,11 +7,12 @@ import SpotifyLogo from "../Assets/img/spotify.svg";
 
 // Styles
 let ContainerStyle = 
-	`bg-overlay-transparent border
+	`bg-[#000]/40 border
 	border-solid border-border/50
 	bottom-4 duration-200 ease-in-out h-auto
 	p-4 left-4 rounded-md transition-all w-56
-	md:max-w-[16rem] drop-shadow-2xl`;
+	md:max-w-[16rem] drop-shadow-2xl
+  backdrop-blur-lg`;
 
 let SmallParagraphStyle =
 	'font-body leading-4 text-sm text-white';
@@ -146,7 +147,6 @@ const DoingHook = (
 
   return (
     <motion.div layout
-
 		initial='hidden'
 		animate={ currentActivity ? 'show' : 'hidden' }
 		exit='hidden'
