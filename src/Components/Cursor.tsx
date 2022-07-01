@@ -5,7 +5,7 @@ const isTouchDevice = (): boolean => {
   return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0))
 }
 
-export const Cursor: React.FC = (props) => {
+const Cursor: React.FC = (props) => {
 	const cursorX = useMotionValue(-100);
 	const cursorY = useMotionValue(-100);
 
@@ -73,3 +73,5 @@ export const Cursor: React.FC = (props) => {
 		</>
 	)
 }
+
+export default Cursor;

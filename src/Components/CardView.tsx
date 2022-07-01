@@ -7,7 +7,7 @@ interface ICardViewProps {
     className?: string;
 }
 
-export const CardView: React.FC<ICardViewProps> = ({ className, children }) => {
+const CardView: React.FC<ICardViewProps> = ({ className, children }) => {
     return (
         <div className={`grid gap-6 grid-flow-row md:grid-flow-col auto-cols-max
             auto-rows-min h-auto w-full ${(className ?? "")}`}
@@ -16,3 +16,5 @@ export const CardView: React.FC<ICardViewProps> = ({ className, children }) => {
         </div>
     );
 }
+
+export default CardView;

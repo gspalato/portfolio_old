@@ -7,7 +7,7 @@ interface INavbarItem {
     link?: string;
 }
 
-export const NavbarItem: React.FC<INavbarItem> = ({ children, last, link }) => {
+const NavbarItem: React.FC<INavbarItem> = ({ children, last, link }) => {
     let Link = styled.a`
         display: inline-block;
         position: relative;
@@ -42,3 +42,5 @@ export const NavbarItem: React.FC<INavbarItem> = ({ children, last, link }) => {
         </motion.li>
 	);
 }
+
+export default NavbarItem;

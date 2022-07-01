@@ -1,7 +1,3 @@
-// Modules without typings
-declare module 'react-preload-image';
-declare module 'react-use-dimensions';
-
 // Image imports
 declare module '*.svg' {
     const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
@@ -10,3 +6,6 @@ declare module '*.svg' {
 
 declare module '*.png';
 declare module '*.jpg';
+
+// Typeless Modules
+declare module 'react-arrow-key-navigation-hook';

@@ -10,12 +10,12 @@ interface ICardProps extends HTMLMotionProps<"div"> {
   description: string,
 }
 
-export const Card: React.FC<ICardProps> = ({ className, image, title, description, children, ...props }) => {
+const Card: React.FC<ICardProps> = ({ className, image, title, description, children, ...props }) => {
 	return (
     <motion.div className={`flex flex-col justify-center items-center
     backdrop-blur-md bg-overlay-transparent
     border border-solid border-border/50
-    p-6 left-4 rounded-xl min-h-[20rem] w-[15rem]
+    p-6 left-4 rounded-xl h-[25rem] min-h-[20rem] w-[15rem]
     ${className ?? ""}`} {...props}>
       <img src={image} height="200" width="200" className="rounded-full h-24 w-24"/>
       <h1 className="text-offwhite font-display text-2xl
@@ -33,3 +33,5 @@ export const Card: React.FC<ICardProps> = ({ className, image, title, descriptio
     </motion.div>
   );
 }
+
+export default Card;

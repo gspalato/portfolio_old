@@ -8,7 +8,7 @@ interface ITimelineEntryProps {
     last?: boolean;
 }
 
-export const TimelineEntry: React.FC<ITimelineEntryProps> = ({ date, title, description, last, children }) => {
+const TimelineEntry: React.FC<ITimelineEntryProps> = ({ date, title, description, last, children }) => {
     return (
         <li className={last ? "ml-4" : "mb-10 ml-4"}>
             <div className="absolute h-[0.85rem] w-[0.85rem] rounded-full
@@ -21,3 +21,5 @@ export const TimelineEntry: React.FC<ITimelineEntryProps> = ({ date, title, desc
         </li>
     );
 }
+
+export default TimelineEntry;

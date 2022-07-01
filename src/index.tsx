@@ -5,11 +5,8 @@ import { AnimatePresence } from 'framer-motion';
 
 import App from './App';
 
-import { Navbar } from './Partials/Navbar';
-import { NavbarItem } from "./Partials/NavbarItem";
-
-import { Cursor } from './Components/Cursor';
-import { Doing } from './Components/Doing';
+import Cursor from './Components/Cursor';
+import Doing from './Components/Doing';
 
 import './index.css';
 

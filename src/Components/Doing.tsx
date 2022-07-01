@@ -205,4 +205,4 @@ const DoingHook = (
   );
 };
 
-export const Doing = forwardRef(DoingHook);
+export default forwardRef(DoingHook);

@@ -10,7 +10,7 @@ interface ISectionProps {
 	title?: string | React.ReactNode;
 }
 
-export const Section: React.FC<ISectionProps> = (props) => {
+const Section: React.FC<ISectionProps> = (props) => {
   return (
     <section className="relative flex flex-col justify-center h-screen w-full">
 			<div className="absolute h-full w-full">
@@ -31,3 +31,5 @@ export const Section: React.FC<ISectionProps> = (props) => {
 		</section>
   );
 }
+
+export default Section;

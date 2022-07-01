@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Button } from './Button';
+import Button from './Button';
 
 interface IProjectCardProps {
 	className?: string;
@@ -11,7 +11,7 @@ interface IProjectCardProps {
 	title: string;
 }
 
-export const ProjectCard: React.FC<IProjectCardProps> = ({ className, icon, description, subtitle, title }) => {
+const ProjectCard: React.FC<IProjectCardProps> = ({ className, icon, description, subtitle, title }) => {
 
 	return (
 		<motion.div
@@ -25,3 +25,5 @@ export const ProjectCard: React.FC<IProjectCardProps> = ({ className, icon, desc
 		</motion.div>
 	);
 }
+
+export default ProjectCard;

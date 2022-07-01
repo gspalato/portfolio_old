@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 
-import { Button } from '../Components/Button';
-import { Page } from '../Components/Page';
-import { Timeline } from '../Components/Timeline';
-import { TimelineEntry } from '../Components/TimelineEntry';
-import { WindowRepresentation } from '../Components/WindowRepresentation';
+import Page from '../Components/Page';
+import Section from '../Components/Section';
+import Timeline from '../Components/Timeline';
+import TimelineEntry from '../Components/TimelineEntry';
+import WindowRepresentation from '../Components/WindowRepresentation';
 
 import ColorBrush2 from '../Assets/img/color_brush_2.png';
 
@@ -38,24 +38,15 @@ const fadeInLeftVariants: Variants = {
   }),
 }
 
-export const About: React.FC = () => {
+const About: React.FC = () => {
   return (
-    <Page className="relative flex justify-center items-center">
-			<img src={ColorBrush2} className="absolute hidden md:block mx-auto w-full h-full brightness-50" />
-      <div className="absolute h-full w-full backdrop-blur-2xl bg-overlay-transparent" />
-			<div className={`flex flex-col items-center justify-center h-full w-full pt-12`}>
-				<h1 className="font-display font-bold text-offwhite text-4xl py-24 z-10">Experience</h1>
-				<div className={`flex-1 h-auto w-full`}>
+    <Page className="flex flex-col">
+			<img src={ColorBrush2} className="absolute block mx-auto h-full brightness-50" />
+			<div className="mt-[5.5rem] md:mt-0 flex flex-col items-center justify-center h-screen w-full">
+				<h1 className="font-display font-bold text-offwhite text-4xl py-32 z-10">Experience</h1>
+				<div className="flex-1 h-full w-full">
 					<div className="flex flex-col md:flex-row flex-1 h-auto w-full">
 						<div className="flex flex-auto h-auto w-auto flex-col justify-center items-center p-6">
-							{/*
-							<div className="flex justify-center items-center h-full aspect-[12/9] break-words z-0">
-								<p className="font-body text-white indent-4 text-xl">
-									Hello! I'm Gabriel Spalato, a 17-year-old
-									high school student and self-taught programmer.
-								</p>
-							</div>
-							*/}
 							<div className="h-fit w-fit">
 								<Timeline>
 									<TimelineEntry 
@@ -103,3 +94,5 @@ export const About: React.FC = () => {
     </Page>
   );
 }
+
+export default About;

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
-import { Home } from './Pages/Home';
-import { Projects } from './Pages/Projects';
-import { About } from './Pages/About';
+import Home from './Pages/Home';
+import Projects from './Pages/Projects';
+import About from './Pages/About';
 
-import { Navbar } from './Partials/Navbar';
+import Navbar from './Partials/Navbar';
+
+import Palette from './Components/CommandPalette';
 
 import ColorBrush1 from "./Assets/img/color_brush_1.png";
 import ColorBrush2 from "./Assets/img/color_brush_2.png";
@@ -19,6 +21,7 @@ import { PreloadImages } from './Assets';
 
 import './index.css';
 import './tailwind.css';
+
 
 
 // Main Component
@@ -54,6 +57,7 @@ const App: React.FC = () => {
                 <About />
               </Route>
       	  </Switch>
+          <Palette/>
         </AnimatePresence>
       </>
     )

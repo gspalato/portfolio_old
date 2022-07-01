@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 
-import { NavbarItem } from "./NavbarItem";
+import NavbarItem from "./NavbarItem";
 
-import { Button } from "../Components/Button";
+import Button from "../Components/Button";
 
 
 // Other Components
@@ -17,15 +17,25 @@ interface INavbarLinkProps {
 const NavbarLink: React.FC<INavbarLinkProps> = ({ className, name, to }) => {
   const match = useRouteMatch({ path: to, exact: true });
 
-  return (
-    <Link className="h-fit w-fit" to={to}>
-      <h1 className={`font-display font-regular text-base tracking-wide
-      transition-all ${match ? "text-white border-b-2 border-b-white" : ""}
-			mr-12 ${className ?? ""}`}>
-        {name}
+	const LinkStyle = `font-display font-regular text-base tracking-wide
+	transition-all ${match ? "text-white border-b-2 border-b-white" : ""}
+	mr-12 ${className ?? ""}`
+
+	return (
+		match 
+		? ( // Current page, do nothing.
+      <h1 className={LinkStyle}>
+      	{name}
       </h1>
-    </Link>
-  );
+		)
+		: ( // Different page, go to.
+			<Link className="h-fit w-fit" to={to}>
+				<h1 className={LinkStyle}>
+					{name}
+				</h1>
+			</Link>
+		)
+	)
 }
 
 // Animation
@@ -53,7 +63,7 @@ const links = [
 	{ name: 'About', to: '/about', order: 2 }
 ]
 
-export const Navbar: React.FC = () => {
+const Navbar: React.FC = () => {
 	const [ isMobileNavbarOpen, setIsMobileNavbar ] = useState(false);
 
 	return (
@@ -81,7 +91,7 @@ export const Navbar: React.FC = () => {
 					</Button>
 					<div className="hidden md:flex h-full w-auto align-middle items-center text-white/60">
 						{
-							links.map( (v) => <NavbarLink name={v.name} to={v.to} /> )
+							links.map( (v, i) => <NavbarLink key={i} name={v.name} to={v.to} /> )
 						}
 					</div>
 					<h1 className="absolute-center-x text-white font-bold text-[1.5rem]">unreaalism.</h1>
@@ -119,3 +129,5 @@ export const Navbar: React.FC = () => {
 		</>
 	);
 }
+
+export default Navbar;

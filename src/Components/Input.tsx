@@ -5,7 +5,7 @@ interface IInputProps {
     placeholder?: string;
 }
 
-export const Input: React.FC<IInputProps> = ({ className, placeholder }) => {
+const Input: React.FC<IInputProps> = ({ className, placeholder }) => {
     return (
         <input className={`transparent h-16 w-full rounded-t-3xl
         active:outline-none focus:outline-none p-4 transition-all
@@ -14,3 +14,5 @@ export const Input: React.FC<IInputProps> = ({ className, placeholder }) => {
         placeholder={placeholder} />
     );
 }
+
+export default Input;

@@ -69,6 +69,9 @@ module.exports = {
 			height: {
 				fit: 'fit-content',
 			},
+			screens: {
+				'v': [{ raw: '(orientation: portrait)' }, { min: '640px' }],
+			},
 			spacing: {
 
 			},

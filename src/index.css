@@ -12,12 +12,16 @@
 	cursor: none;
 	
 	user-drag: none;
-    -webkit-user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+	-ms-user-select: none;
 
+}
+
+.debug * {
+	outline: 1px solid rgb(0, 255, 0, .25);
 }
 
 html, body, #root {

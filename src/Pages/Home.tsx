@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-import { Doing } from "../Components/Doing";
-import { Page } from "../Components/Page";
+import Doing from "../Components/Doing";
+import Page from "../Components/Page";
 
 import { defaultFadeInDownVariants } from "../AnimationVariants";
 
@@ -22,7 +22,7 @@ const GridLogo: React.FC<IGridLogoProps> = ({ children }) => {
 }
 
 // Component
-export const Home: React.FC = () => {
+const Home: React.FC = () => {
 	return (
 		<Page>
 			<div className="bg-transparent">
@@ -55,3 +55,5 @@ export const Home: React.FC = () => {
 		</Page>
 	);
 }
+
+export default Home;

@@ -9,7 +9,7 @@ interface IPageProps {
     compensateNavbar?: boolean;
 }
 
-export const Page: React.FC<IPageProps> = ({ className, children, compensateNavbar, ...props }) => {
+const Page: React.FC<IPageProps> = ({ className, children, compensateNavbar, ...props }) => {
     return (
         <motion.div {...props}
         className={`w-full bg-[#000] overflow-x-hidden ${className ?? ""}
@@ -23,3 +23,5 @@ export const Page: React.FC<IPageProps> = ({ className, children, compensateNavb
         </motion.div>
     );
 }
+
+export default Page;

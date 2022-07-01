@@ -10,7 +10,7 @@ interface ISocialButtonProps {
     size?: SizeProp;
 }
 
-export const SocialButton: React.FC<ISocialButtonProps> = props => {
+const SocialButton: React.FC<ISocialButtonProps> = props => {
     return (
         <a target="_blank" href={props.link}>
             <FontAwesomeIcon
@@ -22,3 +22,5 @@ export const SocialButton: React.FC<ISocialButtonProps> = props => {
         </a>
     );
 }
+
+export default SocialButton;

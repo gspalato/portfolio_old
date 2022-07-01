@@ -12,7 +12,7 @@ interface IButtonProps {
     transparent?: boolean;
 }
 
-export const Button: React.FC<IButtonProps> = ({ className, text, link, onClick, transparent, children }) => {
+const Button: React.FC<IButtonProps> = ({ className, text, link, onClick, transparent, children }) => {
   if (link) {
     return (
       <motion.a
@@ -39,3 +39,5 @@ export const Button: React.FC<IButtonProps> = ({ className, text, link, onClick,
     </motion.button>
   );
 }
+
+export default Button;
