@@ -65,20 +65,32 @@ module.exports = env => { return {
 				],
 	  	},
 	  	{
-				test: /\.svg$/,
-				use: ['@svgr/webpack'],
-			},
-			// Images: Copy image files to build folder
-			{
-				test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-				type: 'asset/resource'
-			},
-			// Fonts and SVGs: Inline files
-			{
-				test: /\.(woff(2)?|eot|ttf|otf|)$/,
-				type: 'asset/inline'
-			},
-		],
+			test: /\.svg$/,
+			use: ['@svgr/webpack'],
+		},
+		// Images: Copy image files to build folder
+		{
+			test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+			type: 'asset/resource',
+			use: [
+				{
+					loader: 'image-process-loader',
+					options: {
+						presets: {
+							   xlblur: {
+								  blur: 50,
+							},
+						}
+					}
+				}
+			]
+		},
+		// Fonts and SVGs: Inline files
+		{
+			test: /\.(woff(2)?|eot|ttf|otf|)$/,
+			type: 'asset/inline'
+		},
+	],
   },
   	devServer: {
 	  	watchContentBase: true,

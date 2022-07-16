@@ -41,12 +41,12 @@ const fadeInLeftVariants: Variants = {
 const About: React.FC = () => {
   return (
     <Page className="flex flex-col">
-			<img src={ColorBrush2} className="absolute block mx-auto h-full brightness-50" />
+			<img src={ColorBrush2} className="absolute block h-full mx-auto brightness-50" />
 			<div className="mt-[5.5rem] md:mt-0 flex flex-col items-center justify-center h-screen w-full">
-				<h1 className="font-display font-bold text-offwhite text-4xl py-32 z-10">Experience</h1>
-				<div className="flex-1 h-full w-full">
-					<div className="flex flex-col md:flex-row flex-1 h-auto w-full">
-						<div className="flex flex-auto h-auto w-auto flex-col justify-center items-center p-6">
+				<div className="flex items-center justify-center flex-1 w-full h-full">
+					<div className="grid flex-1 w-full h-auto grid-cols-1 grid-rows-2 md:grid-rows-1 md:grid-cols-2">
+						<div className="flex flex-col items-center justify-center flex-auto w-auto h-auto p-6">
+							<h1 className="z-10 pb-20 text-4xl font-bold font-display text-offwhite">Experience</h1>
 							<div className="h-fit w-fit">
 								<Timeline>
 									<TimelineEntry 
@@ -62,15 +62,14 @@ const About: React.FC = () => {
 							</div>
 						</div>
 						<motion.div
-						className="flex flex-auto pt-10 md:pt-0 h-auto
-						w-auto justify-center items-center"
+						className="flex items-center justify-center flex-auto w-auto h-auto pt-10 md:pt-0"
 
 						initial="start"
 						animate="end"
 						exit="start"
 						variants={fadeInLeftVariants}>
 							<WindowRepresentation className="mb-6 md:mb-0">
-								<div className="p-6 grid grid-cols-5 gap-6 auto-rows-fr text-5xl text-offwhite">
+								<div className="grid grid-cols-5 gap-6 p-6 text-5xl auto-rows-fr text-offwhite">
 									<GridLogo>devicon-javascript-plain</GridLogo>
 									<GridLogo>devicon-typescript-plain</GridLogo>
 									<GridLogo>devicon-nodejs-plain</GridLogo>

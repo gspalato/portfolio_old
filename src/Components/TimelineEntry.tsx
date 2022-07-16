@@ -16,7 +16,7 @@ const TimelineEntry: React.FC<ITimelineEntryProps> = ({ date, title, description
             />
             <time className="mb-1 text-sm font-light leading-none text-offwhite/50">{date}</time>
             <h1 className="text-[1.35rem] font-semibold text-white/90">{title}</h1>
-            <p className="mb-4 text-base font-normal text-offwhite/75 text-wrap max-w-sm">{description}</p>
+            <p className="max-w-sm mb-4 text-base font-body text-offwhite/75 text-wrap">{description}</p>
             {children}
         </li>
     );

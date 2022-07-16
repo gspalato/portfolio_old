@@ -57,20 +57,20 @@ const App: React.FC = () => {
                 <About />
               </Route>
       	  </Switch>
-          <Palette/>
+          {/* <Palette/> */}
         </AnimatePresence>
       </>
     )
     : (
       <motion.div
-      className="flex justify-center items-center h-screen w-screen"
+      className="flex items-center justify-center w-screen h-screen"
       
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75 }}
       >
-        <h1 className="font-detail text-3xl text-white">Loading...</h1>
+        <h1 className="text-3xl text-white font-detail">Loading...</h1>
       </motion.div>
     )
   );

@@ -10,9 +10,10 @@ import { defaultFadeInDownVariants } from '../AnimationVariants';
 
 import DefaultIcon from '../Assets/img/icon.png';
 import WondersLogo from '../Assets/img/wonders.jpg';
-import MisfitsSwirl from '../Assets/img/misfits_swirl.png';
 import RealityLogo from '../Assets/img/reality.png';
 
+// Import with a preset style
+const MisfitsSwirl = require('../Assets/img/misfits_swirl.png?preset=xlblur');
 
 // Main Components
 const ProjectsList = [
@@ -44,10 +45,10 @@ const ProjectsList = [
 
 const Projects: React.FC = () => {
   return (
-    <Page className="flex justify-center items-center">
+    <Page className="flex items-center justify-center">
       <motion.img
 			src={MisfitsSwirl}
-			className="absolute h-full w-full brightness-0"
+			className="absolute w-full h-full brightness-0"
       key={uuid()}
 
 			initial={{ opacity: 0 }}
@@ -55,7 +56,7 @@ const Projects: React.FC = () => {
 			exit={{ opacity: 0 }}
 			transition={{ delay:.5, duration: 0.75 }}
 			/>
-      <div className="absolute backdrop-blur-2xl h-full w-full bg-overlay-transparent" />
+      <div className="absolute w-full h-full bg-overlay-transparent" />
       {/*<div className="min-h-0 md:min-h-0 md:h-max w-full grid grid-cols-1 gap-y-4
       md:grid-cols-5 auto-rows-fr mt-[4.125rem] pb-12 md:pb-0 md:px-20 justify-center
       justify-items-center overflow-y-scroll h-[calc(100vh-4.125rem)] max-h-max">*/}
@@ -66,12 +67,12 @@ const Projects: React.FC = () => {
           ProjectsList.map((v, i) => {
             return (
               <Card
-              className="md:mr-8 mt-8"
+              className="mt-8 md:mr-8"
               image={v.image}
               title={v.title}
               description={v.description}
                             
-              custom={i}
+              key={i}
               initial="start"
               animate="end"
               exit="start"
