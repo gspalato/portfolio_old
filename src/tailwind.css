@@ -353,13 +353,6 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   /* 2 */
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -1573,10 +1566,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .placeholder\:text-gray-900\/10::-moz-placeholder {
-  color: rgb(152 152 157 / 0.1);
-}
-
-.placeholder\:text-gray-900\/10:-ms-input-placeholder {
   color: rgb(152 152 157 / 0.1);
 }
 

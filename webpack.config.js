@@ -91,12 +91,12 @@ module.exports = env => { return {
 			type: 'asset/inline'
 		},
 	],
-  },
-  	devServer: {
-	  	watchContentBase: true,
-	  	contentBase: path.resolve(__dirname, "dist"),
-	  	open: true,
+  		},
+  		devServer: {
+	  		liveReload: true,
+	  		static: path.resolve(__dirname, "dist"),
+	  		open: true,
 			historyApiFallback: true,
-  	}
+  		}
 	}
 };
