@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Home from './Pages/Home';
 import Projects from './Pages/Projects';
@@ -42,21 +42,13 @@ const App: React.FC = () => {
     ? (
       <>
         <Navbar />
-        <AnimatePresence exitBeforeEnter>
-          <Switch location={location} key={location.pathname}>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/home">
-                <Home />
-              </Route>
-              <Route exact path="/projects">
-                <Projects />
-              </Route>
-              <Route exact path="/about">
-                <About />
-              </Route>
-      	  </Switch>
+        <AnimatePresence mode='wait'>
+          <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Navigate to="/" />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/about" element={<About />} />
+      	  </Routes>
           {/* <Palette/> */}
         </AnimatePresence>
       </>

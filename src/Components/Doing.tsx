@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanyard } from "react-use-lanyard";
 
 import { Presence } from '../Typings/lanyard';
 
@@ -45,34 +46,6 @@ const truncate = (s: string, n: number): string => {
 		return s.substring(0, n) + "...";
 }
 
-// Component
-enum Operation {
-	Event,
-	Hello,
-	Initialize,
-	Heartbeat,
-}
-
-enum EventType {
-	INIT_STATE = 'INIT_STATE',
-	PRESENCE_UPDATE = 'PRESENCE_UPDATE',
-}
-
-enum ActivityType {
-	Playing,
-	Streaming,
-	Listening,
-	None,
-	Custom,
-	Competing,
-}
-
-type SocketEvent = {
-	op: Operation;
-	t? : EventType;
-	d: Presence | unknown;
-};
-
 const logLanyardEvent = (eventName: string, data: any) => {
 	console.log(
 		`%cLanyard%c ${eventName} %o`,
@@ -88,51 +61,21 @@ const DoingHook = (
   { setActive, ...props }: { setActive: (active: boolean) => void } & any,
   ref: any
 ) => {
-  const [socket, setSocket] = useState<WebSocket | null>(null);
-  const [doing, setDoing] = useState<Presence | null>(null);
-
-  const send = (op: Operation, d?: unknown): void => {
-    if (socket !== null) socket.send(JSON.stringify({ op, d }));
-  };
-
-  useEffect(() => {
-    if (socket === null) return () => {};
-
-    socket.onmessage = function ({ data }: MessageEvent): void {
-      const { op, t, d }: SocketEvent = JSON.parse(data);
-
-      if (op === Operation.Hello) {
-        setInterval(
-          () => send(Operation.Heartbeat),
-          (d as { heartbeat_interval: number }).heartbeat_interval
-        );
-        send(Operation.Initialize, { subscribe_to_id: discordId });
-      } else if (op === Operation.Event && t) {
-        logLanyardEvent(t, d);
-
-        if ([EventType.INIT_STATE, EventType.PRESENCE_UPDATE].includes(t)) setDoing(d as Presence);
-      }
-    };
-
-    socket.onclose = () => {
-      setSocket(null);
-    };
-  }, [socket]);
-
-  useEffect(() => {
-    if (!socket) setSocket(new WebSocket('wss://api.lanyard.rest/socket'));
-  }, [socket]);
+  const { loading, status } = useLanyard({
+    userId: discordId,
+    socket: true
+  });
 
   const currentActivity = useMemo(
-    () => doing?.activities.filter((activity) => activity.type === 0)[0],
-    [doing]
+    () => status?.activities.filter((activity) => activity.type === 0)[0],
+    [status]
   );
 
-  useEffect(() => {
-    setActive(doing?.listening_to_spotify || currentActivity);
-  }, [doing, currentActivity]);
+  logLanyardEvent("Status Update", status);
 
-  if (!doing || !doing?.discord_status) return null;
+  useEffect(() => {
+    setActive(status?.listening_to_spotify || currentActivity);
+  }, [status, currentActivity]);
 
 	let variants = {
 		show: {
@@ -148,11 +91,11 @@ const DoingHook = (
   return (
     <motion.div layout
 		initial='hidden'
-		animate={ currentActivity ? 'show' : 'hidden' }
+		animate={ (currentActivity || status?.listening_to_spotify) ? 'show' : 'hidden' }
 		exit='hidden'
 		variants={variants}
 		>
-      {doing?.listening_to_spotify ? (
+      {status?.listening_to_spotify ? (
         <motion.div
 				className={`${ContainerStyle} ${props.className ?? ''}`}
 
@@ -164,15 +107,15 @@ const DoingHook = (
           <>
             <div className={ActivityRowStyle}>
               <div className={ActivityImageContainerStyle}>
-								<a target="_blank" href={`https://open.spotify.com/track/${doing.spotify.track_id}`}>
-                	<img className={ActivityImageStyle} src={doing.spotify.album_art_url} />
+								<a target="_blank" href={`https://open.spotify.com/track/${status.spotify?.track_id}`}>
+                	<img className={ActivityImageStyle} src={status.spotify?.album_art_url} />
 								</a>
                 {/* <img className={ActivitySecondaryImageStyle} src={SpotifyLogo} /> */}
               </div>
 
               <div className={ActivityInfoStyle}>
-                <h5 className={SmallParagraphStyle}>{truncate(doing.spotify.song, 17)}</h5>
-                <p className={SmallParagraphStyle}>by {truncate(doing.spotify.artist, 17)}</p>
+                <h5 className={SmallParagraphStyle}>{truncate(status.spotify?.song ?? '', 17)}</h5>
+                <p className={SmallParagraphStyle}>by {truncate(status.spotify?.artist ?? '', 17)}</p>
               </div>
             </div>
           </>

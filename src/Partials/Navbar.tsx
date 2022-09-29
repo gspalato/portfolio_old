@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 
 import NavbarItem from "./NavbarItem";
@@ -15,7 +15,7 @@ interface INavbarLinkProps {
 }
 
 const NavbarLink: React.FC<INavbarLinkProps> = ({ className, name, to }) => {
-  const match = useRouteMatch({ path: to, exact: true });
+	const match = useMatch({ path: to, exact: true });
 
 	const LinkStyle = `font-display font-regular text-base tracking-wide
 	transition-all ${match ? "text-white border-b-2 border-b-white" : ""}
@@ -24,9 +24,9 @@ const NavbarLink: React.FC<INavbarLinkProps> = ({ className, name, to }) => {
 	return (
 		match 
 		? ( // Current page, do nothing.
-      <h1 className={LinkStyle}>
-      	{name}
-      </h1>
+      		<h1 className={LinkStyle}>
+      			{name}
+      		</h1>
 		)
 		: ( // Different page, go to.
 			<Link className="h-fit w-fit" to={to}>
@@ -69,14 +69,14 @@ const Navbar: React.FC = () => {
 	return (
 		<>
 		<motion.header
-		className="w-[calc(100vw-5px)]
-		fixed p-5 top-0 backdrop-blur-lg z-[101] bg-transparent"
+		className="w-[calc(100vw-5px)] flex justify-center items-center
+		h-[88px] px-5 top-0 fixed backdrop-blur-lg z-[101] bg-transparent"
 		initial="hidden"
 		animate={isMobileNavbarOpen ? "open" : "hidden"}
 		exit="hidden"
 		variants={MobileNavbarVariants}
 		>
-			<motion.nav className="flex items-center justify-center px-5 w-full h-[3rem]">
+			<motion.nav className="flex items-center justify-center p-5 w-full h-[3rem]">
 				<div className="flex flex-wrap items-center justify-between h-[3rem] w-full">
 					<Button
 					text=""
@@ -85,18 +85,18 @@ const Navbar: React.FC = () => {
 					transparent>
 						{
 							isMobileNavbarOpen
-							? <i className="fa-solid fa-xmark text-white text-xl"></i>
-							: <i className="fa-solid fa-bars text-white text-xl"></i>
+							? <i className="text-xl text-white fa-solid fa-xmark"></i>
+							: <i className="text-xl text-white fa-solid fa-bars"></i>
 						}
 					</Button>
-					<div className="hidden md:flex h-full w-auto align-middle items-center text-white/60">
+					<div className="items-center hidden w-auto h-full align-middle md:flex text-white/60">
 						{
 							links.map( (v, i) => <NavbarLink key={i} name={v.name} to={v.to} /> )
 						}
 					</div>
 					<h1 className="absolute-center-x text-white font-bold text-[1.5rem]">unreaalism.</h1>
-					<div className="hidden md:flex h-full w-auto items-center">
-						<ul className="flex flex-row last:pr-0 text-display text-white w-auto">
+					<div className="items-center hidden w-auto h-full md:flex">
+						<ul className="flex flex-row w-auto text-white last:pr-0 text-display">
 							<NavbarItem link="https://www.instagram.com/gabriel.spalato/">
 								<i className="fa-brands fa-instagram fa-lg"></i>
 							</NavbarItem>
@@ -114,12 +114,11 @@ const Navbar: React.FC = () => {
 				</div>
 			</motion.nav>
 			<motion.div
-			className="flex flex-col flex-1 md:hidden h-full w-auto
-			justify-center items-center text-white/60"
+			className="flex flex-col items-center justify-center flex-1 w-auto h-full md:hidden text-white/60"
 			initial={{ display: 'none' }}
 			animate={isMobileNavbarOpen ? { display: 'flex' } : { display: 'none' }}
 			>
-				<div className="flex flex-col md:hidden h-fit w-fit align-middle items-center">
+				<div className="flex flex-col items-center align-middle md:hidden h-fit w-fit">
 				{
 					links.map( (v) => <NavbarLink className="!mr-0 mb-5 !text-2xl" name={v.name} to={v.to} /> )
 				}
