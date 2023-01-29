@@ -13,7 +13,7 @@ import Palette from './Components/CommandPalette';
 import ColorBrush1 from "./Assets/img/color_brush_1.png";
 import ColorBrush2 from "./Assets/img/color_brush_2.png";
 import ProfilePicture from "./Assets/img/selfie.png";
-import MisfitsSwirl from "./Assets/img/misfits_swirl.png";
+import MisfitsSwirl from "./Assets/img/m_liquid.png";
 import WondersLogo from "./Assets/img/wonders.png";
 import DefaultIcon from "./Assets/img/icon.png";
 
@@ -41,6 +41,7 @@ const App: React.FC = () => {
     isLoaded
     ? (
       <>
+        <div id="background" className="absolute h-full w-full overflow-hidden" />
         <Navbar />
         <AnimatePresence mode='wait'>
           <Routes location={location} key={location.pathname}>

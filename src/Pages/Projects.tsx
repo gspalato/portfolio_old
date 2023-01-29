@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
+import Background from '../Components/Background';
 import Button from '../Components/Button';
 import Card from '../Components/Card';
+import NavbarSpacer from '../Components/NavbarSpacer';
 import Page from '../Components/Page';
 
 import { defaultFadeInDownVariants } from '../AnimationVariants';
@@ -12,8 +14,9 @@ import DefaultIcon from '../Assets/img/icon.png';
 import WondersLogo from '../Assets/img/wonders.jpg';
 import RealityLogo from '../Assets/img/reality.png';
 
+
 // Import with a preset style
-const MisfitsSwirl = require('../Assets/img/misfits_swirl.png?preset=xlblur');
+const MisfitsSwirl = require('../Assets/img/m_liquid.png?preset=xlblur');
 
 // Main Components
 const ProjectsList = [
@@ -45,24 +48,11 @@ const ProjectsList = [
 
 const Projects: React.FC = () => {
   return (
-    <Page className="flex items-center justify-center">
-      <motion.img
-			src={MisfitsSwirl}
-			className="absolute w-full h-full brightness-0"
-      key={uuid()}
-
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1, filter: "brightness(0.5)" }}
-			exit={{ opacity: 0 }}
-			transition={{ delay:.5, duration: 0.75 }}
-			/>
-      <div className="absolute w-full h-full bg-overlay-transparent" />
-      {/*<div className="min-h-0 md:min-h-0 md:h-max w-full grid grid-cols-1 gap-y-4
-      md:grid-cols-5 auto-rows-fr mt-[4.125rem] pb-12 md:pb-0 md:px-20 justify-center
-      justify-items-center overflow-y-scroll h-[calc(100vh-4.125rem)] max-h-max">*/}
+    <Page compensateNavbar className="flex flex-col items-center justify-center overflow-hidden">
+      <Background src={MisfitsSwirl} darkOverlay />
+      <NavbarSpacer />
       <div className="grid md:flex md:flex-row md:flex-wrap md:justify-center md:items-center md:content-center
-      mt-[4.125rem] pb-12 md:pb-0 md:px-20 md:-mt-4 overflow-y-scroll h-[calc(100vh-4.125rem)] max-h-max
-      last:mr-0 md:first:mt-4">
+      h-[calc(100vh-5.5rem)] pb-12 md:pb-0 md:px-20 overflow-y-scroll last:mr-0 md:first:mt-4">
         {
           ProjectsList.map((v, i) => {
             return (

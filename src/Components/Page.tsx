@@ -12,8 +12,7 @@ interface IPageProps {
 const Page: React.FC<IPageProps> = ({ className, children, compensateNavbar, ...props }) => {
     return (
         <motion.div {...props}
-        className={`w-full bg-[#000] overflow-x-hidden ${className ?? ""}
-            ${compensateNavbar ? "h-[calc(100vh-4.125rem)] max-h-max" : "h-screen"}`}
+        className={`w-full bg-[#000] overflow-x-hidden ${className ?? ""} h-full`}
         key={uuid()}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

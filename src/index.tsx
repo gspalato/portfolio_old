@@ -12,9 +12,8 @@ import './index.css';
 
 
 ReactDOM.render(
-	<main className="antialiased h-max
-selection:bg-darkblue selection:text-offwhite/90">
-    <Router>
+	<main className="antialiased selection:bg-darkblue selection:text-offwhite/90 h-screen">
+    	<Router>
 			<App />
 		</Router>
 		<div className="hidden md:block fixed left-4 bottom-4">

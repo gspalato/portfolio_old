@@ -9,7 +9,7 @@ import Button from "../Components/Button";
 
 // Other Components
 interface INavbarLinkProps {
-	className?: string;
+  className?: string;
   name: string;
   to: any;
 }
@@ -69,15 +69,15 @@ const Navbar: React.FC = () => {
 	return (
 		<>
 		<motion.header
-		className="w-[calc(100vw-5px)] flex justify-center items-center
-		h-[88px] px-5 top-0 fixed backdrop-blur-lg z-[101] bg-transparent"
+		className="w-[calc(100vw-5px)] flex flex-col md:flex-row justify-center items-center
+		h-[88px] px-5 top-0 fixed backdrop-blur-lg z-[1000] bg-transparent"
 		initial="hidden"
 		animate={isMobileNavbarOpen ? "open" : "hidden"}
 		exit="hidden"
 		variants={MobileNavbarVariants}
 		>
 			<motion.nav className="flex items-center justify-center p-5 w-full h-[3rem]">
-				<div className="flex flex-wrap items-center justify-between h-[3rem] w-full">
+				<div className={`flex flex-wrap items-center justify-between h-[3rem] w-full ${isMobileNavbarOpen ? "mt-[2.5rem]" : ""}`}>
 					<Button
 					text=""
 					className="block md:hidden !p-0 z-[1100]"
