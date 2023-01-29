@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 import Doing from "../Components/Doing";
+import NavbarSpacer from "../Components/NavbarSpacer";
 import Page from "../Components/Page";
 
 import { defaultFadeInDownVariants } from "../AnimationVariants";
 
 import ColorBrush1 from "../Assets/img/color_brush_1.png";
 import ProfilePicture from "../Assets/img/selfie.png";
-import NavbarSpacer from "../Components/NavbarSpacer";
-
 
 // Other Components
 interface IGridLogoProps {

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
 
 // Component
-interface IPageProps {
+interface IPageProps extends PropsWithChildren {
     className?: string;
     compensateNavbar?: boolean;
 }

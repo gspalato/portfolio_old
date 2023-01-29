@@ -1,15 +1,11 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 
+import NavbarSpacer from '../Components/NavbarSpacer';
 import Page from '../Components/Page';
-import Section from '../Components/Section';
 import Timeline from '../Components/Timeline';
 import TimelineEntry from '../Components/TimelineEntry';
 import WindowRepresentation from '../Components/WindowRepresentation';
-
-import ColorBrush2 from '../Assets/img/color_brush_2.png';
-import NavbarSpacer from '../Components/NavbarSpacer';
-
 
 // Other Components
 interface IGridLogoProps {

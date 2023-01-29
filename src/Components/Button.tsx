@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 
 import { motion } from "framer-motion";
 
 
 // Component
-interface IButtonProps {
+interface IButtonProps extends PropsWithChildren {
     className?: string;
     text: string;
     link?: string;

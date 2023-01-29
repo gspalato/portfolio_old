@@ -79,7 +79,7 @@ module.exports = env => {
 							options: {
 								presets: {
 									xlblur: {
-										blur: 60,
+										blur: 75,
 									},
 									optimized: {
 										jpeg: {
