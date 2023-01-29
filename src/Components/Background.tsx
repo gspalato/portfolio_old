@@ -3,13 +3,23 @@ import {createPortal} from 'react-dom';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
-interface IBackgroundProps {
-    children?: any;
-    src: any;
-    darkOverlay: boolean;
+export enum ImageFit {
+    cover = "object-cover",
+    contain = "object-contain",
+    fill = "object-fill",
+    none = "object-none",
+    scaleDown = "object-scale-down"
 }
 
-const Background: React.FC<IBackgroundProps> = ({ src, darkOverlay, children }) => {
+interface IBackgroundProps {
+    children?: any;
+    className?: string;
+    fit?: ImageFit;
+    darkOverlay?: boolean;
+    src: any;
+}
+
+const Background: React.FC<IBackgroundProps> = ({ children, className, fit, darkOverlay, src }) => {
     const [domReady, setDomReady] = React.useState(false);
 
     React.useEffect(() => {
@@ -19,7 +29,7 @@ const Background: React.FC<IBackgroundProps> = ({ src, darkOverlay, children }) 
     const nodes = (
         <>
             <motion.img
-                className="absolute md:w-full h-full w-auto object-cover"
+                className={`absolute md:w-full h-full w-auto ${fit ?? "object-cover"} ${className}`}
 		    	src={src}
                 key={uuid()}
 
