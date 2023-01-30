@@ -6,6 +6,9 @@ import Page from '../Components/Page';
 import Timeline from '../Components/Timeline';
 import TimelineEntry from '../Components/TimelineEntry';
 import WindowRepresentation from '../Components/WindowRepresentation';
+import Background, { ImageFit } from '../Components/Background';
+
+import ColorBrush from '../Assets/img/color_brush_2.png';
 
 // Other Components
 interface IGridLogoProps {
@@ -38,6 +41,7 @@ const fadeInLeftVariants: Variants = {
 const About: React.FC = () => {
   return (
     <Page className="flex flex-col md:flex-row md:items-center md:justify-center">
+		<Background src={ColorBrush} fit={ImageFit.cover} />
 		<NavbarSpacer className="md:hidden"/>
 		<div className="m-6 md:w-[40%] md:px-10">
 			<h1 className="w-full text-center md:text-left text-white font-bold text-4xl pt-6 pb-12">Experience</h1>
@@ -55,7 +59,7 @@ const About: React.FC = () => {
 				<TimelineEntry 
 					date="February 2023 - December 2027"
 					title="FACENS"
-					description="Coursing Computer Engineering."
+					description="Coursing Computer Engineering for 10 semesters."
 					last
 				/>
 			</Timeline>

@@ -1,6 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { v4 as uuid } from 'uuid';
 
 import Background from '../Components/Background';
 import Button from '../Components/Button';
@@ -52,12 +50,11 @@ const Projects: React.FC = () => {
       <Background src={MisfitsSwirl} darkOverlay />
       <NavbarSpacer />
       <div className="grid md:flex md:flex-row md:flex-wrap md:justify-center md:items-center md:content-center
-      h-[calc(100vh-5.5rem)] pb-12 md:pb-0 md:px-20 overflow-y-scroll last:mr-0 md:first:mt-4">
+      h-[calc(100vh-5.5rem)] pb-12 md:pb-0 md:px-20 overflow-y-scroll last:mr-0 md:first:mt-4 gap-8">
         {
           ProjectsList.map((v, i) => {
             return (
               <Card
-              className="mt-8 md:mr-8"
               image={v.image}
               title={v.title}
               description={v.description}

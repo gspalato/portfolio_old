@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 // Component
-interface IWindowRepresentationProps {
+interface IWindowRepresentationProps extends PropsWithChildren {
     className?: string;
 }
 

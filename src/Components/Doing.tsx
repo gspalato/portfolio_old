@@ -88,6 +88,8 @@ const DoingHook = (
 		}
 	}
 
+
+
   return (
     <motion.div layout
 		initial='hidden'
@@ -96,31 +98,34 @@ const DoingHook = (
 		variants={variants}
 		>
       {status?.listening_to_spotify ? (
+
         <motion.div
-				className={`${ContainerStyle} ${props.className ?? ''}`}
+				  className={`${ContainerStyle} ${props.className ?? ''}`}
+				  ref={ref}
+				  {...props}
+          >
+            <h1 className={`${SmallParagraphStyle} text-[1rem] mx-auto mt-0 pb-4`}>
+						  <i className="text-[1.125rem] fa-brands fa-spotify text-[#0f0] pr-2"/> Listening to Spotify
+            </h1>
+            <>
+              <div className={ActivityRowStyle}>
+                <div className={ActivityImageContainerStyle}>
+					  			<a target="_blank" href={`https://open.spotify.com/track/${status.spotify?.track_id}`}>
+                  	<img className={ActivityImageStyle} src={status.spotify?.album_art_url} />
+					  			</a>
+                  {/* <img className={ActivitySecondaryImageStyle} src={SpotifyLogo} /> */}
+                </div>
 
-				ref={ref}
-				{...props}>
-          <h1 className={`${SmallParagraphStyle} text-[1rem] mx-auto mt-0 pb-4`}>
-						<i className="fa-brands fa-spotify text-[#0f0] pr-2"/> Listening to Spotify
-          </h1>
-          <>
-            <div className={ActivityRowStyle}>
-              <div className={ActivityImageContainerStyle}>
-								<a target="_blank" href={`https://open.spotify.com/track/${status.spotify?.track_id}`}>
-                	<img className={ActivityImageStyle} src={status.spotify?.album_art_url} />
-								</a>
-                {/* <img className={ActivitySecondaryImageStyle} src={SpotifyLogo} /> */}
+                <div className={ActivityInfoStyle}>
+                  <h5 className={SmallParagraphStyle}>{truncate(status.spotify?.song ?? '', 17)}</h5>
+                  <p className={SmallParagraphStyle}>by {truncate(status.spotify?.artist ?? '', 30)}</p>
+                </div>
               </div>
-
-              <div className={ActivityInfoStyle}>
-                <h5 className={SmallParagraphStyle}>{truncate(status.spotify?.song ?? '', 17)}</h5>
-                <p className={SmallParagraphStyle}>by {truncate(status.spotify?.artist ?? '', 17)}</p>
-              </div>
-            </div>
-          </>
+            </>
         </motion.div>
+
       ) : currentActivity ? (
+
         <motion.div
 				className={`${ContainerStyle} ${props.className ?? ''}`}
 				{...props}>
@@ -143,6 +148,7 @@ const DoingHook = (
             </div>
           </div>
         </motion.div>
+
       ) : null}
     </motion.div>
   );

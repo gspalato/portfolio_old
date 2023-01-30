@@ -1,6 +1,6 @@
 import React from 'react';
-import {createPortal} from 'react-dom';
-import { HTMLMotionProps, motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
 export enum ImageFit {
@@ -24,6 +24,8 @@ const Background: React.FC<IBackgroundProps> = ({ children, className, fit, dark
 
     React.useEffect(() => {
         setDomReady(true);
+
+        return () => setDomReady(false);
     });
 
     const nodes = (

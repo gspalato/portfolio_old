@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface ISectionProps {
+interface ISectionProps extends PropsWithChildren {
 	background?: React.ReactNode;
 	blur?: boolean;
 	className?: string;

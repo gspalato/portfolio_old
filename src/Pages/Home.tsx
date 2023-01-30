@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+import Background, { ImageFit } from "../Components/Background";
 import Doing from "../Components/Doing";
 import NavbarSpacer from "../Components/NavbarSpacer";
 import Page from "../Components/Page";
@@ -8,25 +9,14 @@ import Page from "../Components/Page";
 import { defaultFadeInDownVariants } from "../AnimationVariants";
 
 import ColorBrush1 from "../Assets/img/color_brush_1.png";
-import ProfilePicture from "../Assets/img/selfie.png";
-import Background, { ImageFit } from "../Components/Background";
+const ProfilePicture = require("../Assets/img/selfie.png?preset=optimized");
 
-// Other Components
-interface IGridLogoProps {
-	children: string;
-}
-
-const GridLogo: React.FC<IGridLogoProps> = ({ children }) => {
-	return (
-		<i className={`${children} colored text-center w-fit place-self-center`}></i>
-	);
-}
 
 // Component
 const Home: React.FC = () => {
 	return (
 		<Page className="flex flex-col items-center justify-center">
-			<Background src={ColorBrush1} fit={ImageFit.fill} />
+			<Background src={ColorBrush1} fit={ImageFit.cover} />
 			<NavbarSpacer className="md:hidden"/>
 			<motion.div
 			className="flex flex-col items-center justify-between md:flex-row"
@@ -41,9 +31,6 @@ const Home: React.FC = () => {
 					<h1 className="font-light text-4xl md:text-[5.75rem] md:leading-[5.75rem] md:text-left w-fit">
 						I'm <b className="font-semibold">Gabriel Spalato</b>
 					</h1>
-				</div>
-				<div className="fixed pt-10 bottom-8 md:hidden">
-					<Doing setActive={() => { }} />
 				</div>
 			</motion.div>
 		</Page>
