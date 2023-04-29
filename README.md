@@ -1,3 +1,2 @@
-# my developer portfolio
-- made with React, Typescript and TailwindCSS JIT.
-- bootstrapped with [gspalato/reactions](https://github.com/gspalato/reactions).
+# my developer portfolio 💻
+- made with React, NextJS 13 and SASS.
