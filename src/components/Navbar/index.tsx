@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { AnimatePresence, motion, useAnimate, useAnimation, usePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -26,11 +26,38 @@ const Navbar: React.FC<INavbarProps> = (props) => {
     const classNames = [Styles.navbarWrapper, className].join(' ');
     const [isExpanded, setIsExpanded] = React.useState(false);
 
+    const [isPresent, safeToRemove] = usePresence()
+    
+    const navigationAnimation = useAnimation();
+    const linkAnimation = useAnimation();
+  
+    useEffect(() => {
+        if (isExpanded) {
+            const enterAnimation = async () => {
+                linkAnimation.start((i) => ({
+                    opacity: 1,
+                    x: 0,
+                    transition: { delay: i * 0.1 }
+                }));
+            }
+            enterAnimation()
+        } else {
+            const exitAnimation = async () => {
+                linkAnimation.start((i) => ({
+                    opacity: 0,
+                    x: 200,
+                    transition: { delay: i * 0.1 }
+                }));
+            }
+            exitAnimation()
+        }
+    }, [isExpanded])
+
     return (
         <>
         <motion.nav className={classNames}>
             <div className={Styles.navbarInner}>
-                <Image src='/vercel.svg' alt="" height={100} width={100} style={{ filter: 'invert(1)' }} />
+                <Image src='/favicon.ico' alt="" height={30} width={30} style={{ filter: 'invert(0)' }} />
                 <MenuButton isNavbarExpanded={isExpanded} onClick={(() => setIsExpanded(!isExpanded))}/>
             </div>
         </motion.nav>
@@ -44,44 +71,48 @@ const Navbar: React.FC<INavbarProps> = (props) => {
                             display: 'none',
                             opacity: 0,
                             pointerEvents: 'none',
+                            
                         }}
                         animate={{
                             display: 'flex',
                             opacity: 1,
                             pointerEvents: 'all',
+                            transition: {
+                                type: 'tween',
+                                ease: 'easeInOut',
+                                damping: 10,
+                                duration: .5,
+                            }
                         }}
                         exit={{
                             opacity: 0,
                             pointerEvents: 'none',
+                            transition: {
+                                type: 'tween',
+                                ease: 'easeInOut',
+                                damping: 10,
+                                duration: .5,
+                            }
                         }}
 
                         style={{
-                            backdropFilter: isExpanded ? 'blur(5px)' : 'blur(0px)',
+                            backdropFilter: isExpanded ? 'blur(7px)' : 'blur(0px)',
                         }}
                     >
                         <motion.div className={Styles.navbarItemContainer}>
                         {
-                            Routes.routes.map((route, _) => {
-                                return (
+                            Routes.routes.map((route, i) => (
                                     <NavbarLink
                                         link={route.link}
                                         name={route.name}
 
-                                        initial={{
-                                            opacity: 0,
-                                            x: 100,
-                                        }}
-                                        animate={{
-                                            opacity: 1,
-                                            x: 0,
-                                        }}
-                                        exit={{
-                                            opacity: 0,
-                                            x: 100,
-                                        }}
+                                        key={crypto.randomUUID()}
+                                        custom={i}
+                                        initial={{ x: 200, opacity: 0 }}
+                                        animate={linkAnimation}
                                     />
-                                );
-                            })
+                                )
+                            )
                         }
                         </motion.div>
                     </motion.div>
