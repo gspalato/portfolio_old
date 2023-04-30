@@ -1,0 +1,14 @@
+@use '@/styles/mixins' as *
+@use '@/styles/variables' as *
+    
+.link
+    color: #fff
+    font-family: 'Space Grotesk'
+    font-size: 3rem
+    letter-spacing: -0.05rem
+    width: auto
+
+    text-align: center
+    @include responsive($query: $md)
+        text-align: right
+    

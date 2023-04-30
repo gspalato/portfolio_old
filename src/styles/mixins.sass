@@ -1,0 +1,16 @@
+// Functional mixins
+@mixin responsive($query)
+    @media ( min-width: + $query )
+        @content
+
+@mixin optimizePerformance
+    transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)
+    transform-style: preserve-3d
+    opacity: 1
+
+// Style mixins
+@mixin glassify($blur: 10px)
+    backdrop-filter: blur($blur) brightness(120%)
+
+@mixin mouseGlow()
+    background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)
