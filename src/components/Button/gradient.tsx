@@ -1,8 +1,5 @@
-'use client';
-
-import React from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 import Styles from './gradient.module.sass';
 
@@ -85,7 +82,7 @@ const ButtonComponent: React.FC<IGradientButtonProps> = (props) => {
 
 const ButtonWithLinkComponent: React.FC<IGradientButtonProps> = ({ className, text, link, onClick, children, ...props }) => {
     return link ? (
-        <Link href={link!}>
+        <Link to={link}>
             <ButtonComponent className={className} text={text} onClick={onClick} {...props}>
                 {children}
             </ButtonComponent>

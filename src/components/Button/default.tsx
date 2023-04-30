@@ -1,11 +1,7 @@
-'use client';
-
-import React from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 import Styles from './default.module.sass';
-
 
 interface IDefaultButtonProps extends React.PropsWithChildren {
     className?: string;
@@ -61,7 +57,7 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
 
 const DefaultButtonWithLinkComponent: React.FC<IDefaultButtonProps> = ({ children, link, ...props }) => {
     return link ? (
-        <Link href={link!}>
+        <Link to={link}>
             <DefaultButtonComponent {...props}>
                 {children}
             </DefaultButtonComponent>

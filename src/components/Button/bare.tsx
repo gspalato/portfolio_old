@@ -1,11 +1,7 @@
-'use client';
-
-import React from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 import Styles from './bare.module.sass';
-
 
 interface IButtonProps extends React.PropsWithChildren {
     className?: string;
@@ -52,7 +48,7 @@ const ButtonComponent: React.FC<IButtonProps> = (props) => {
 
 const ButtonWithLinkComponent: React.FC<IButtonProps> = ({ children, link, ...props }) => {
     return link ? (
-        <Link href={link!}>
+        <Link to={link}>
             <ButtonComponent {...props}>
                 {children}
             </ButtonComponent>
