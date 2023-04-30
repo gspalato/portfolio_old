@@ -44,7 +44,7 @@ const Background: React.FC<IBackgroundProps> = (props) => {
 
     const nodes = (
         <motion.div
-            key={(window?.crypto ?? crypto).randomUUID()}
+            key={crypto.randomUUID()}
             
             style={{ position: 'absolute', height: '100%', width: '100%' }}
 
