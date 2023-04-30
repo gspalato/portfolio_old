@@ -18,7 +18,7 @@ const Input: React.FC<IInputProps> = (props) => {
     const classNames = [Styles.input, className].join(' ');
 
     return (
-        <input className={classNames} placeholder={placeholder} {...props} />
+        <input className={classNames} placeholder={placeholder} {...moreProps} />
     );
 }
 
