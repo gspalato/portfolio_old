@@ -106,7 +106,7 @@ const Navbar: React.FC<INavbarProps> = (props) => {
                                         link={route.link}
                                         name={route.name}
 
-                                        key={crypto.randomUUID()}
+                                        key={window.crypto.randomUUID()}
                                         custom={i}
                                         initial={{ x: 200, opacity: 0 }}
                                         animate={linkAnimation}
