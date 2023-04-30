@@ -8,7 +8,7 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Styles from './menuButton.module.sass';
 
 
-interface IMenuButtonProps extends React.PropsWithChildren {
+interface IMenuButtonProps {
     className?: string;
     isNavbarExpanded?: boolean;
     onClick?: () => void;
@@ -17,7 +17,6 @@ interface IMenuButtonProps extends React.PropsWithChildren {
 
 const MenuButtonComponent: React.FC<IMenuButtonProps> = (props) => {
     const {
-        children,
         className,
         isNavbarExpanded,
         onClick,
