@@ -1,11 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import React from 'react';
+import { HTMLMotionProps, motion } from 'framer-motion';
 import Link from 'next/link';
 
 import Styles from './navbarLink.module.sass';
 
-interface INavbarLinkProps {
+interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
     className?: string;
     link: string;
     name: string;
@@ -24,10 +25,7 @@ const NavbarLink: React.FC<INavbarLinkProps> = (props) => {
 
     return (
         <Link href={link}>
-            <motion.h1
-                className={classNames}
-                {...moreProps}
-            >
+            <motion.h1 className={classNames} {...moreProps}>
                 {name}
             </motion.h1>
         </Link>
