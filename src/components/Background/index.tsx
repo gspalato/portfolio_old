@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import crypto from 'crypto';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { v4 as uuid } from 'uuid';
 
 import Styles from './background.module.sass';
 
@@ -44,7 +44,7 @@ const Background: React.FC<IBackgroundProps> = (props) => {
 
     const nodes = (
         <motion.div
-            key={crypto.randomUUID()}
+            key={uuid()}
             
             style={{ position: 'absolute', height: '100%', width: '100%' }}
 

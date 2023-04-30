@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import crypto from 'crypto';
-import { AnimatePresence, motion, useAnimate, useAnimation, usePresence } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation, usePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { v4 as uuid } from 'uuid';
 
 import { Bare as Button } from '@/components/Button';
 import MenuButton from './MenuButton';
@@ -107,7 +107,7 @@ const Navbar: React.FC<INavbarProps> = (props) => {
                                         link={route.link}
                                         name={route.name}
 
-                                        key={crypto.randomUUID()}
+                                        key={uuid()}
                                         custom={i}
                                         initial={{ x: 200, opacity: 0 }}
                                         animate={linkAnimation}
