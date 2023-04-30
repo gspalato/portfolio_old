@@ -1,7 +1,9 @@
+import Page from "@/components/Page";
+
 export default function Projects() {
     return (
-        <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem' }}>
+        <Page>
             <h1 style={{ color: '#fff', fontSize: '5rem', letterSpacing: '-0.05rem' }}>Projects</h1>
-        </div>
+        </Page>
     );
 }
