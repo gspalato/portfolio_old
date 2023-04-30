@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import crypto from 'crypto';
 import { AnimatePresence, motion, useAnimate, useAnimation, usePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -106,7 +107,7 @@ const Navbar: React.FC<INavbarProps> = (props) => {
                                         link={route.link}
                                         name={route.name}
 
-                                        key={window.crypto.randomUUID()}
+                                        key={(window?.crypto ?? crypto).randomUUID()}
                                         custom={i}
                                         initial={{ x: 200, opacity: 0 }}
                                         animate={linkAnimation}
