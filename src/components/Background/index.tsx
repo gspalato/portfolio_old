@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { styled } from '@/styles';
 import { motion, useMotionValue } from 'framer-motion';
 import Image from 'next/image';
 
