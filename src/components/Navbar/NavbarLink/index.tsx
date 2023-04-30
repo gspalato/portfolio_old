@@ -1,6 +1,3 @@
-'use client';
-
-import React from 'react';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 

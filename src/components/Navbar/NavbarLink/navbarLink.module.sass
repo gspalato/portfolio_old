@@ -2,11 +2,15 @@
 @use '@/styles/variables' as *
     
 .link
-    color: #fff
+    color: $foreground
     font-family: 'Space Grotesk'
     font-size: 3rem
     letter-spacing: -0.05rem
     width: auto
+    transition: color 0.1s ease-in-out
+
+    &:hover
+        color: darken($foreground, 33%)
 
     text-align: center
     @include responsive($query: $md)
