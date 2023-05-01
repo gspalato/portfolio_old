@@ -1,16 +1,68 @@
-.contentWrapper
-    height: 100%
+@use '@/styles/mixins' as *
+@use '@/styles/variables' as *
+    
+$gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
+
+.content
     display: flex
-    justify-content: center
-    align-items: center
-    gap: 1rem
+    height: 100vh
+    width: 100vw
+    padding: 5rem 2rem 2rem 2rem
+    letter-spacing: -0.05rem
+    place-items: center
+
+    @include responsive($lg)
+        padding: 5rem
+
+.textContainer
+    display: flex
+    flex-direction: column
+    height: fit-content
+    width: 100%
+    text-align: center
+
+    & h1:not(:first-child)
+        margin-top: -2 * 1.1111111vw
+
+    @include responsive($lg)
+        & h1:nth-child(odd)
+            text-align: left
+        & h1:nth-child(even)
+            text-align: right
+
+.heroText
+    grid-column: span 4
+    grid-row: span 2
+
+    vertical-align: middle
+
+    background: $gradient
+    font-family: 'Space Grotesk'
+    font-weight: bolder
+    letter-spacing: -0.05rem
+    @include gradient-text
+    filter: saturate(200%)
+
+    @include adaptive-text(15)
+    word-wrap: break-word
+    line-height: 18*1.1111111vw
+
+    @include responsive($md)
+        @include adaptive-text(15)
+        line-height: 16*1.1111111vw
     
 .bubble
     filter: blur(25px) brightness(60%)
-    background-image: linear-gradient(299deg, #240761 10%, #5c11ff 55%, #12a)
+    background-image: linear-gradient(299deg, #23076133 10%, #5c11ff 55%, #12a)
     border-radius: 100%,
-    height: height
-    width: 550px
+    height: min(50vw, 550px)
+    width: min(50vw, 550px)
+    aspect-ratio: 1 / 1
+
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
 
 @keyframes rotate
     to
