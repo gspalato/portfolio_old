@@ -54,7 +54,7 @@ const Background: React.FC<IBackgroundProps> = (props) => {
 		>
 			{children}
 			{darken && <div className={Styles.overlay} key="dark-overlay" /> }
-			<motion.img className={className} src={src} alt="" style={{ position: 'absolute' }} />
+			<motion.img className={className} src={src} alt="" style={{ opacity: src ? 1 : 0, position: 'absolute' }} />
 		</motion.div>
 	);
 
