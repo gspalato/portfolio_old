@@ -1,7 +1,5 @@
-'use client';
-
-import React, { useEffect } from 'react';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
 import MenuButton from './MenuButton';
@@ -9,12 +7,10 @@ import NavbarLink from './NavbarLink';
 
 import Styles from './navbar.module.sass';
 
-import Routes from '@/constants/routes.json';
-
 const WrapperVariants = {
     initial: {
         opacity: 0,
-        y: -100,
+        y: 0,
         transition: {
             duration: .3
         }
@@ -28,7 +24,7 @@ const WrapperVariants = {
     },
     exit: {
         opacity: 0,
-        y: -100,
+        y: 0,
         transition: {
             delay: .3,
             duration: .3
@@ -49,6 +45,21 @@ const LinkVariants = {
         }
     })
 }
+
+const Routes = [
+    {
+        name: 'Home',
+        path: '/',
+    },
+    {
+        name: 'About',
+        path: '/about',
+    },
+    {
+        name: 'Projects',
+        path: '/projects',
+    },
+]
 
 interface INavbarProps extends React.PropsWithChildren {
     className?: string;
@@ -113,9 +124,9 @@ const Navbar: React.FC<INavbarProps> = (props) => {
                     >
                         <motion.div className={Styles.navbarItemContainer}>
                         {
-                            Routes.routes.map((route, i) => (
+                            Routes.map((route, i) => (
                                 <NavbarLink
-                                    link={route.link}
+                                    link={route.path}
                                     name={route.name}
                                     setState={setIsExpanded}
 
