@@ -1,16 +1,25 @@
 // Functional mixins
 @mixin responsive($query)
-    @media ( min-width: + $query )
+    @media screen and ( min-width: + $query )
         @content
 
-@mixin optimizePerformance
+@mixin adaptive-text($size)
+    font-size: calc($size * 1.1111111111111112vw)
+
+@mixin optimize-performance
     transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)
     transform-style: preserve-3d
     opacity: 1
 
 // Style mixins
+@mixin gradient-text
+    -webkit-background-clip: text !important
+    background-clip: text !important
+    -webkit-text-fill-color: transparent !important
+
 @mixin glassify($blur: 10px)
+    -webkit-backdrop-filter: blur($blur) brightness(120%)
     backdrop-filter: blur($blur) brightness(120%)
 
-@mixin mouseGlow()
+@mixin mouse-glow
     background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)
