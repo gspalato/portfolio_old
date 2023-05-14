@@ -10,7 +10,15 @@ export default defineConfig({
     },
   },
   esbuild: {
-    jsxInject: `import React from 'react'`,
+    //jsxInject: `import React from 'react'`,
   },
   plugins: [react()],
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    host: true,
+    strictPort: true,
+    port: 8080,
+  }
 });
