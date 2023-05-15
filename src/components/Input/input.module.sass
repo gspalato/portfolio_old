@@ -1,20 +1,31 @@
+@use '@/styles/mixins' as *
+@use '@/styles/variables' as *
+    
 .input
-    backgroundColor: transparent
-    height: 4rem
-    width: 100%
-    borderRadius: 1.5rem
+    background-color: transparent
+
+    height: 3rem
+    width: 75%
+
+    border: 1px solid #ffffff11
+    border-radius: 7px
     padding: 1rem
+    margin: 0 0 2rem 0
+
     transition: all
     color: #ffffff
-    fontFamily: 'Inter'
-    letterSpacing: -0.025rem
+    font-family: 'Inter'
+    letter-spacing: -0.025rem
     outline: transparent
 
-    &:active
-        outline: "none"
+    transition: all 0.2s ease-in-out
+
+    &:hover, &:active
+        border: 1px solid #ffffff33
+        outline: none
 
     &:focus
-        outline: "none"
+        border: 1px solid $blue
 
     &::placeholder
-        color: "#ccccccee"
+        color: #ffffff33

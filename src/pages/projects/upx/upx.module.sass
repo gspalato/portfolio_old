@@ -1,0 +1,25 @@
+@use '@/styles/mixins' as *
+@use '@/styles/variables' as *
+    
+$gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
+
+.content
+    display: flex
+    height: 100vh
+    width: 100vw
+    padding: 5rem 2rem 2rem 2rem
+    place-items: center
+
+    @include responsive($lg)
+        padding: 5rem
+
+
+.chartWrapper
+    height: 100%
+    width: 100%
+    padding: 7.5rem 5rem 5rem 5rem
+    background: rgba(127, 127, 130, 0)
+    border: 1.5px solid #ffffff11
+    border-radius: 7px
+
+    font-family: 'Inter', 'Fira Code', 'Consolas', sans-serif

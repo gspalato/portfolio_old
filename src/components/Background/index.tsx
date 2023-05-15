@@ -18,6 +18,7 @@ export enum ImageFit {
 interface IBackgroundProps extends React.PropsWithChildren {
 	children?: any;
 	className?: string;
+	blur?: string;
 	fit?: ImageFit;
 	darken?: boolean;
 	src: any;
@@ -27,6 +28,7 @@ const Background: React.FC<IBackgroundProps> = (props) => {
 	const {
 		children,
 		className,
+		blur,
 		fit,
 		darken,
 		src
@@ -53,7 +55,8 @@ const Background: React.FC<IBackgroundProps> = (props) => {
 			transition={{ delay:.5, duration: 0.75 }}
 		>
 			{children}
-			{darken && <div className={Styles.overlay} key="dark-overlay" /> }
+			{blur && <div className={Styles.overlay} style={{ backdropFilter: `blur(${blur})` }} key="blur-overlay" />}
+			{darken && <div className={Styles.overlay} style={{ background: '#00000005' }} key="dark-overlay" /> }
 			<motion.img className={className} src={src} alt="" style={{ opacity: src ? 1 : 0, position: 'absolute' }} />
 		</motion.div>
 	);

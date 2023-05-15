@@ -4,6 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import Home from '@/pages/home';
 import About from '@/pages/about';
 import Projects from "@/pages/projects";
+import UPx from "@/pages/projects/upx";
+import Login from "@/pages/login";
 
 import Cursor from '@/components/Cursor';
 import Navbar from '@/components/Navbar';
@@ -24,6 +26,8 @@ const App: React.FC = () => {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/projects" element={<Projects />} />
+                            <Route path="/projects/upx" element={<UPx />} />
+                            <Route path="/login" element={<Login />} />
                         </Routes>
                     </AnimatePresence>
                 </main>
