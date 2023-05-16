@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 import { useQuery } from '@apollo/client';
-import { ParentSize } from '@visx/responsive';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import Background from '@/components/Background';
 import Page from '@/components/Page';
@@ -10,6 +10,7 @@ import { ResponsiveLineChart as Chart } from '@/components/Chart';
 import { GET_RESUMES } from '@/graphql/queries';
 
 import Styles from './upx.module.sass';
+
 
 type RawResumeData = {
 	date: string;
@@ -33,6 +34,8 @@ const UPx: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
+
+	console.log("Rendered UPx page.");
 
 	const { loading, data, error } = useQuery<{ resume: RawResumeData[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
@@ -98,10 +101,13 @@ const UPx: React.FC = () => {
 		}
 	});
 
+	if (error)
+		console.error(error);
+
   	return loading
 		? (
 			<Page>
-				
+				<h1 style={{ fontFamily: "Space Grotesk" }}>Loading...</h1>
 			</Page>
 		)
 		: (
@@ -111,85 +117,87 @@ const UPx: React.FC = () => {
 				</Background>
 				<section className={Styles.boxes}>
 					<div className={Styles.chartGrid}>
-						<div className={Styles.box}>
-							<h1 className={Styles.title}>Total Duration</h1>
-							<Chart
-								className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
-								data={durationChartData}
-								axisLeft={{
-									tickPadding: 5,
-									legend: "Total Duration (h)",
-									legendPosition: "middle",
-									legendOffset: -40
-								}}
-								axisBottom={{
-									legend: "Date",
-									legendPosition: "middle",
-									legendOffset: +40
-								}}
-							/>
-						</div>
-						<div className={Styles.box}>
-							<h1 className={Styles.title}>Plastic</h1>
-							<Chart
-								className={Styles.chartWrapper}
-								data={plasticChartData}
-								margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
-								axisLeft={{
-									tickPadding: 5,
-									legend: "Economized Plastic (kg)",
-									legendPosition: "middle",
-									legendOffset: -60
-								}}
-								axisBottom={{
-									legend: "Date",
-									legendPosition: "middle",
-									legendOffset: +40
-								}}
-							/>
-						</div>
-						
-						<div className={Styles.box}>
-							<h1 className={Styles.title}>Water</h1>
-							<Chart
-								data={waterChartData}
-								margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-								axisLeft={{
-									tickPadding: 5,
-									legend: "Economized Water (L)",
-									legendPosition: "middle",
-									legendOffset: -50
-								}}
-								axisBottom={{
-									legend: "Date",
-									legendPosition: "middle",
-									legendOffset: +40
-								}}
-							/>
-						</div>
-						{/*
-						<Chart
-							style={{ gridArea: "a" } as React.CSSProperties}
-							data={resumeData}
-							accessors={{ x: (p) => p.date, y: (p) => p.economizedWater }}
-							xKeyName="Date"
-							yKeyName="Economized Water"
-						/>
-						<Chart
-							style={{ gridArea: "b" } as React.CSSProperties}
-							data={resumeData}
-							accessors={{ x: (p) => p.date, y: (p) => p.totalDuration }}
-							xKeyName="Date"
-							yKeyName="Total Duration"
-						/>
-						<Chart
-							tyle={{ gridArea: "c" } as React.CSSProperties}
-							data={resumeData}
-							accessors={{ x: (p) => p.date, y: (p) => p.economizedPlastic }}
-							xKeyName="Date"
-							yKeyName="Economized Plastic"
-						/>
-						*/}
+						<AnimatePresence>
+							{
+								(durationChartData.length > 0) && (
+									<motion.div className={Styles.box}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<h1 className={Styles.title}>Total Duration</h1>
+										<Chart
+											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
+											data={durationChartData}
+											axisLeft={{
+												tickPadding: 5,
+												legend: "Total Duration (h)",
+												legendPosition: "middle",
+												legendOffset: -40
+											}}
+											axisBottom={{
+												legend: "Date",
+												legendPosition: "middle",
+												legendOffset: +40
+											}}
+										/>
+									</motion.div>
+								)
+							}
+							{
+								(plasticChartData.length > 0) && (
+									<motion.div className={Styles.box}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<h1 className={Styles.title}>Plastic</h1>
+										<Chart
+											className={Styles.chartWrapper}
+											data={plasticChartData}
+											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
+											axisLeft={{
+												tickPadding: 5,
+												legend: "Economized Plastic (kg)",
+												legendPosition: "middle",
+												legendOffset: -60
+											}}
+											axisBottom={{
+												legend: "Date",
+												legendPosition: "middle",
+												legendOffset: +40
+											}}
+										/>
+									</motion.div>
+								)
+							}
+							{
+								(waterChartData.length > 0) && (
+									<motion.div className={Styles.box}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<h1 className={Styles.title}>Water</h1>
+										<Chart
+											data={waterChartData}
+											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+											axisLeft={{
+												tickPadding: 5,
+												legend: "Economized Water (L)",
+												legendPosition: "middle",
+												legendOffset: -50
+											}}
+											axisBottom={{
+												legend: "Date",
+												legendPosition: "middle",
+												legendOffset: +40
+											}}
+										/>
+									</motion.div>
+								)
+							}
+						</AnimatePresence>
 					</div>
 				</section>
 			</Page>
