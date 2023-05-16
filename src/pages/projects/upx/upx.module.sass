@@ -3,24 +3,78 @@
     
 $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
 
-.content
+$boxBackground: #ffffff05
+$boxHeight: 17.5rem
+
+#navbar
+    position: static
+
+.page
+    flex-direction: column
+    overflow-y: auto
+
+.boxes
     display: flex
     height: 100vh
     width: 100vw
-    padding: 5rem 2rem 2rem 2rem
+    padding: 5rem 2.5rem 2rem 2.5rem !important
     place-items: center
 
-    @include responsive($lg)
-        padding: 5rem
-
-
-.chartWrapper
+.chartGrid
     height: 100%
     width: 100%
-    padding: 7.5rem 5rem 5rem 5rem
-    background: rgba(127, 127, 130, 0)
-    border: 1.5px solid #ffffff11
+
+    display: grid
+    grid-template-columns: repeat(1, 1fr)
+    grid-template-rows: repeat(3, 1fr)
+    gap: 2rem
+
+    @include responsive($lg)
+        grid-template-columns: repeat(2, 1fr)
+        grid-template-rows: repeat(2, 1fr)
+        grid-template-areas: "a a" "b c"
+        gap: 3rem
+
+.box
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 100%
+    width: 100%
+    padding: 1rem 1rem 1rem 1rem
+    background: $boxBackground
+    border: 1px solid #ffffff11
     border-radius: 7px
     position: relative
 
+    min-height: $boxHeight
+    min-width: 0
+
     font-family: 'Inter', 'Fira Code', 'Consolas', sans-serif
+
+.gridDouble
+    grid-area: a
+
+.title
+    font-family: 'Space Grotesk'
+    font-size: 1.5rem
+    font-weight: bold
+    color: #ddd
+    margin-bottom: 1rem
+    letter-spacing: -0.05rem
+
+    @include responsive($lg)
+        font-size: 2rem
+
+.chartTooltip
+    background: #222
+    color: #fff
+    font-family: 'Inter', sans-serif
+    border: 1px solid #ffffff11
+    border-radius: 3px
+    padding: 1rem
+
+.axisTick
+    font-family: 'Inter', 'Fira Code', sans-serif
+    color: #ffffff00

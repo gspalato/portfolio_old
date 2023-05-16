@@ -100,7 +100,7 @@ const Navbar: React.FC<INavbarProps> = (props) => {
 
     return (
         <>
-            <motion.nav className={classNames}>
+            <motion.nav id="navbar" className={classNames}>
                 <div className={Styles.navbarInner}>
                     <img src='/favicon.ico' alt="" height={30} width={30} style={{ filter: 'invert(0)' }} />
                     <MenuButton isNavbarExpanded={isExpanded} onClick={(() => setIsExpanded(!isExpanded))}/>
