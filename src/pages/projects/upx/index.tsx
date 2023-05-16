@@ -101,9 +101,6 @@ const UPx: React.FC = () => {
 		}
 	});
 
-	if (error)
-		console.error(error);
-
   	return loading
 		? (
 			<Page>

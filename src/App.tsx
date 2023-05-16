@@ -26,8 +26,9 @@ const App: React.FC = () => {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/projects" element={<Projects />} />
-                            <Route path="/projects/upx" element={<UPx />} />
+                            <Route path="/upx" element={<UPx />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="*" element={<h1>404</h1>} />
                         </Routes>
                     </AnimatePresence>
                 </main>
