@@ -17,6 +17,7 @@ type RawResumeData = {
 	totalDuration: number; // in seconds
 	economizedPlastic: number; // in grams
 	economizedWater: number; // in mililiters
+	usedWater: number; // in liters
 };
 
 type ParsedResumeData = {
@@ -25,6 +26,7 @@ type ParsedResumeData = {
 	totalDuration: number; // in hours
 	economizedPlastic: number; // in kilograms
 	economizedWater: number; // in liters
+	usedWater: number; // in liters
 }
 
 const UPx: React.FC = () => {
@@ -69,12 +71,12 @@ const UPx: React.FC = () => {
 
 			const waterChartData = [
 				{
-					id: "Economized Water",
+					id: "Used Water",
 					color: "#0066ff",
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.economizedWater / 1000)
+							y: Math.round(resume.usedWater / 1000)
 						})
 					)
 				}
@@ -85,7 +87,7 @@ const UPx: React.FC = () => {
 					date: resume.date,
 					totalDuration: Math.round(resume.totalDuration / 60 / 60),
 					economizedPlastic: Math.round(resume.economizedPlastic / 1000),
-					economizedWater: Math.round(resume.economizedWater / 1000)
+					usedWater: Math.round(resume.usedWater / 1000)
 				})
 			);
 
@@ -104,7 +106,9 @@ const UPx: React.FC = () => {
   	return loading
 		? (
 			<Page>
-				<h1 style={{ fontFamily: "Space Grotesk" }}>Loading...</h1>
+				<section className={Styles.loading}>
+					<h1 style={{ fontFamily: "Space Grotesk" }}>Loading...</h1>
+				</section>
 			</Page>
 		)
 		: (

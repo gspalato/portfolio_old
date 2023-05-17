@@ -37,11 +37,17 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
                 curve='monotoneX'
                 colors={({ color }) => color}
                 margin={{ top: 50, bottom: 50, left: 50, right: 50 }}
-                layers={["axes", "lines", "markers", "legends"]}
+                layers={['markers', 'axes', 'areas', 'lines', 'points', 'slices', 'mesh', 'legends']}
                 enablePoints
-                pointSize={7}
-                pointColor="inherit"
-                tooltip={CustomTooltip}
+                pointSize={4}
+                pointColor={{ theme: 'background' }}
+                pointBorderWidth={2}
+                pointBorderColor={{ from: 'serieColor' }}
+                
+                /* Tooltip */
+                useMesh={true}
+                enableSlices="x"
+                sliceTooltip={({ axis, slice }) => (<CustomTooltip axis={axis} slice={slice} />)}
 
                 {...moreProps}
             />

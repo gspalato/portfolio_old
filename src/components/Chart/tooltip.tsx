@@ -1,17 +1,28 @@
-import { PointTooltipProps } from '@nivo/line';
-import { BasicTooltip } from '@nivo/tooltip';
+import { SliceTooltipProps } from '@nivo/line';
+import { motion } from 'framer-motion';
 
 import Styles from './chart.module.sass';
 
-const CustomTooltip: React.FC<PointTooltipProps> = (props) => {
-    console.log(props)
+const CustomTooltip: React.FC<SliceTooltipProps> = (props) => {
+    const { slice } = props;
+
     return (
-        <BasicTooltip
-            id={props.point.data.xFormatted}
-            value={props.point.data.yFormatted}
-            color={props.point.serieColor}
-            enableChip
-        />
+        <motion.div
+            className={Styles.tooltipWrapper}
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.1, delay: 0.01 }}
+        >
+            <div><strong>{slice.points[0].data.x.toString()}</strong></div>
+            {
+            slice.points.map(point => (
+                <div key={point.id} style={{ color: point.serieColor }}>
+                    <strong>{point.serieId}:</strong> {point.data.yFormatted}
+                </div>
+            ))
+            }
+        </motion.div>
     );
 }
 

@@ -6,7 +6,7 @@ const GET_RESUMES = gql`
             date,
             totalDuration,
             economizedPlastic,
-            economizedWater
+            usedWater
         }
     }
 `;
@@ -18,7 +18,7 @@ const GET_USES = gql`
             endTimestamp,
             duration,
             economizedPlastic,
-            economizedWater
+            usedWater
         }
     }
 `;
