@@ -101,6 +101,9 @@ const UPx: React.FC = () => {
 		}
 	});
 
+	// Add blur to navbar so it looks better on mobile.
+	document.getElementById("navbar")?.classList.add("blur");
+
   	return loading
 		? (
 			<Page>
@@ -127,12 +130,13 @@ const UPx: React.FC = () => {
 											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
 											data={durationChartData}
 											axisLeft={{
-												tickPadding: 5,
+												tickValues: 4,
 												legend: "Total Duration (h)",
 												legendPosition: "middle",
-												legendOffset: -40
+												legendOffset: -40,
 											}}
 											axisBottom={{
+												tickValues: "every 7 days",
 												legend: "Date",
 												legendPosition: "middle",
 												legendOffset: +40
@@ -154,12 +158,13 @@ const UPx: React.FC = () => {
 											data={plasticChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
 											axisLeft={{
-												tickPadding: 5,
+												tickValues: 4,
 												legend: "Economized Plastic (kg)",
 												legendPosition: "middle",
 												legendOffset: -60
 											}}
 											axisBottom={{
+												tickValues: "every 7 days",
 												legend: "Date",
 												legendPosition: "middle",
 												legendOffset: +40
@@ -180,12 +185,13 @@ const UPx: React.FC = () => {
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
 											axisLeft={{
-												tickPadding: 5,
+												tickValues: 5,
 												legend: "Economized Water (L)",
 												legendPosition: "middle",
 												legendOffset: -50
 											}}
 											axisBottom={{
+												tickValues: "every 7 days",
 												legend: "Date",
 												legendPosition: "middle",
 												legendOffset: +40

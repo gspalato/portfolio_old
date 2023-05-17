@@ -12,14 +12,18 @@ $boxHeight: 17.5rem
 .page
     flex-direction: column
     overflow-y: auto
-    padding: 5rem 0 0 0
+
+    padding: 0
 
 .boxes
     display: flex
     height: 100vh
-    width: 100vw
+    width: min(100vw, min-content)
     padding: 5rem 2.5rem 2rem 2.5rem !important
     place-items: center
+
+    @include responsive-below($md)
+        padding: 5rem 1.25rem 1rem 1.25rem !important
 
 .chartGrid
     height: 100%

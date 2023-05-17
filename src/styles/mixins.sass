@@ -3,6 +3,10 @@
     @media screen and ( min-width: + $query )
         @content
 
+@mixin responsive-below($query)
+    @media screen and ( max-width: + $query )
+        @content
+
 @mixin adaptive-text($size)
     font-size: calc($size * 1.1111111111111112vw)
 
