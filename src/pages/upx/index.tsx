@@ -101,9 +101,6 @@ const UPx: React.FC = () => {
 		}
 	});
 
-	// Add blur to navbar so it looks better on mobile.
-	document.getElementById("navbar")?.classList.add("blur");
-
   	return loading
 		? (
 			<Page>
