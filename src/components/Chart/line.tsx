@@ -22,6 +22,7 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
     const {
         className,
         data,
+        margin,
         ...moreProps
     } = props;
 
@@ -36,11 +37,11 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
                 animate={true}
                 curve='monotoneX'
                 colors={({ color }) => color}
-                margin={{ top: 50, bottom: 50, left: 50, right: 50 }}
+                margin={margin ?? { top: 50, bottom: 50, left: 50, right: 50 }}
                 layers={['markers', 'axes', 'areas', 'lines', 'points', 'slices', 'mesh', 'legends']}
                 enablePoints
-                pointSize={4}
-                pointColor={{ theme: 'background' }}
+                pointSize={6}
+                pointColor="#000"
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
                 

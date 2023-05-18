@@ -20,9 +20,21 @@ type RawResumeData = {
 	bottleQuantityEquivalent: number; // in units
 };
 
-const UPx: React.FC = () => {
-	const [resumeData, setResumeData] = useState<object[]>([]);
+const DateAxisSettings = {
+	tickValues: 3,
+	legend: "Date",
+	legendPosition: "middle",
+	legendOffset: +40
+};
 
+const DataAxisSettings = (legend: string, offset?: number) => ({
+	tickValues: 4,
+	legend: legend,
+	legendPosition: "middle",
+	legendOffset: offset ?? -50,
+});
+
+const UPx: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
@@ -41,7 +53,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.totalDuration / 60 / 60)
+							y: Math.round(resume.totalDuration / 60)
 						})
 					)
 				}
@@ -54,7 +66,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: resume.economizedPlastic / 1000
+							y: resume.economizedPlastic
 						})
 					)
 				}
@@ -80,23 +92,11 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.bottleQuantityEquivalent / 1000)
+							y: Math.round(resume.bottleQuantityEquivalent)
 						})
 					)
 				}
 			];
-
-			const parsed = resumes.map(
-				(resume: RawResumeData) => ({
-					date: resume.date,
-					totalDuration: Math.round(resume.totalDuration / 60 / 60),
-					distributedWater: Math.round(resume.distributedWater / 1000),
-					economizedPlastic: Math.round(resume.economizedPlastic / 1000),
-					bottleQuantityEquivalent: Math.round(resume.bottleQuantityEquivalent / 1000)
-				})
-			);
-
-			setResumeData(parsed);
 
 			setDurationChartData(durationChartData);
 			setPlasticChartData(plasticChartData);
@@ -141,18 +141,9 @@ const UPx: React.FC = () => {
 										<Chart
 											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
 											data={durationChartData}
-											axisLeft={{
-												tickValues: 4,
-												legend: "Total Duration (h)",
-												legendPosition: "middle",
-												legendOffset: -40,
-											}}
-											axisBottom={{
-												tickValues: "every 7 days",
-												legend: "Date",
-												legendPosition: "middle",
-												legendOffset: +40
-											}}
+											axisLeft={DataAxisSettings("Total Duration (min)", -50) as any}
+											axisBottom={DateAxisSettings as any}
+											margin={{ top: 50, bottom: 50, left: 60, right: 50 }}
 										/>
 									</motion.div>
 								)
@@ -169,18 +160,8 @@ const UPx: React.FC = () => {
 											className={Styles.chartWrapper}
 											data={plasticChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
-											axisLeft={{
-												tickValues: 4,
-												legend: "Economized Plastic (kg)",
-												legendPosition: "middle",
-												legendOffset: -60
-											}}
-											axisBottom={{
-												tickValues: "every 7 days",
-												legend: "Date",
-												legendPosition: "middle",
-												legendOffset: +40
-											}}
+											axisLeft={DataAxisSettings("Economized Plastic (g)", -60) as any}
+											axisBottom={DateAxisSettings as any}
 										/>
 									</motion.div>
 								)
@@ -196,18 +177,8 @@ const UPx: React.FC = () => {
 										<Chart
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-											axisLeft={{
-												tickValues: 5,
-												legend: "Distributed Water (L)",
-												legendPosition: "middle",
-												legendOffset: -50
-											}}
-											axisBottom={{
-												tickValues: "every 7 days",
-												legend: "Date",
-												legendPosition: "middle",
-												legendOffset: +40
-											}}
+											axisLeft={DataAxisSettings("Distributed Water (mL)") as any}
+											axisBottom={DateAxisSettings as any}
 										/>
 									</motion.div>
 								)
@@ -221,20 +192,10 @@ const UPx: React.FC = () => {
 									>
 										<h1 className={Styles.title}>Bottle Quantity Equivalent</h1>
 										<Chart
-											data={waterChartData}
+											data={bottleChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-											axisLeft={{
-												tickValues: 5,
-												legend: "Bottles",
-												legendPosition: "middle",
-												legendOffset: -50
-											}}
-											axisBottom={{
-												tickValues: "every 7 days",
-												legend: "Date",
-												legendPosition: "middle",
-												legendOffset: +40
-											}}
+											axisLeft={DataAxisSettings("Bottles") as any}
+											axisBottom={DateAxisSettings as any}
 										/>
 									</motion.div>
 								)
