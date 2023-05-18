@@ -15,27 +15,18 @@ import Styles from './upx.module.sass';
 type RawResumeData = {
 	date: string;
 	totalDuration: number; // in seconds
+	distributedWater: number; // in mililiters
 	economizedPlastic: number; // in grams
-	economizedWater: number; // in mililiters
-	usedWater: number; // in liters
+	bottleQuantityEquivalent: number; // in units
 };
-
-type ParsedResumeData = {
-	ticks: number; 
-	dateString: string;
-	totalDuration: number; // in hours
-	economizedPlastic: number; // in kilograms
-	economizedWater: number; // in liters
-	usedWater: number; // in liters
-}
 
 const UPx: React.FC = () => {
 	const [resumeData, setResumeData] = useState<object[]>([]);
 
-	const [allChartData, setAllChartData] = useState<any>([]);
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
+	const [bottleChartData, setBottleChartData] = useState<any>([]);
 
 	console.log("Rendered UPx page.");
 
@@ -59,7 +50,7 @@ const UPx: React.FC = () => {
 			const plasticChartData = [
 				{
 					id: "Economized Plastic Waste",
-					color: "#ff0000",
+					color: "#590995",
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
@@ -67,27 +58,41 @@ const UPx: React.FC = () => {
 						})
 					)
 				}
-			]
+			];
 
 			const waterChartData = [
 				{
-					id: "Used Water",
+					id: "Distributed Water",
 					color: "#0066ff",
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.usedWater / 1000)
+							y: Math.round(resume.distributedWater / 1000)
 						})
 					)
 				}
-			]
+			];
+
+			const bottleChartData = [
+				{
+					id: "Bottle Quantity Equivalent",
+					color: "#03c4a1",
+					data: resumes.map(
+						(resume: RawResumeData) => ({
+							x: resume.date,
+							y: Math.round(resume.bottleQuantityEquivalent / 1000)
+						})
+					)
+				}
+			];
 
 			const parsed = resumes.map(
 				(resume: RawResumeData) => ({
 					date: resume.date,
 					totalDuration: Math.round(resume.totalDuration / 60 / 60),
+					distributedWater: Math.round(resume.distributedWater / 1000),
 					economizedPlastic: Math.round(resume.economizedPlastic / 1000),
-					usedWater: Math.round(resume.usedWater / 1000)
+					bottleQuantityEquivalent: Math.round(resume.bottleQuantityEquivalent / 1000)
 				})
 			);
 
@@ -96,10 +101,7 @@ const UPx: React.FC = () => {
 			setDurationChartData(durationChartData);
 			setPlasticChartData(plasticChartData);
 			setWaterChartData(waterChartData);
-
-			setAllChartData(([] as any[]).concat(durationChartData, plasticChartData, waterChartData));
-
-			console.log(resumes);
+			setBottleChartData(bottleChartData);
 		}
 	});
 
@@ -153,7 +155,7 @@ const UPx: React.FC = () => {
 										animate={{ opacity: 1 }}
 										exit={{ opacity: 0 }}
 									>
-										<h1 className={Styles.title}>Plastic</h1>
+										<h1 className={Styles.title}>Economized Plastic</h1>
 										<Chart
 											className={Styles.chartWrapper}
 											data={plasticChartData}
@@ -181,13 +183,40 @@ const UPx: React.FC = () => {
 										animate={{ opacity: 1 }}
 										exit={{ opacity: 0 }}
 									>
-										<h1 className={Styles.title}>Water</h1>
+										<h1 className={Styles.title}>Distributed Water</h1>
 										<Chart
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
 											axisLeft={{
 												tickValues: 5,
-												legend: "Economized Water (L)",
+												legend: "Distributed Water (L)",
+												legendPosition: "middle",
+												legendOffset: -50
+											}}
+											axisBottom={{
+												tickValues: "every 7 days",
+												legend: "Date",
+												legendPosition: "middle",
+												legendOffset: +40
+											}}
+										/>
+									</motion.div>
+								)
+							}
+							{
+								(bottleChartData.length > 0) && (
+									<motion.div className={Styles.box}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<h1 className={Styles.title}>Bottle Quantity Equivalent</h1>
+										<Chart
+											data={waterChartData}
+											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+											axisLeft={{
+												tickValues: 5,
+												legend: "Bottles",
 												legendPosition: "middle",
 												legendOffset: -50
 											}}

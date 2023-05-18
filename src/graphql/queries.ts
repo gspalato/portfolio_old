@@ -5,8 +5,9 @@ const GET_RESUMES = gql`
         resume {
             date,
             totalDuration,
+            distributedWater,
             economizedPlastic,
-            usedWater
+            bottleQuantityEquivalent
         }
     }
 `;
@@ -17,8 +18,9 @@ const GET_USES = gql`
             startTimestamp,
             endTimestamp,
             duration,
+            distributedWater,
             economizedPlastic,
-            usedWater
+            bottleQuantityEquivalent
         }
     }
 `;
