@@ -105,15 +105,24 @@ const UPx: React.FC = () => {
 		}
 	});
 
-  	return loading
-		? (
+	if (loading)
+		return (
 			<Page>
 				<section className={Styles.loading}>
 					<h1 style={{ fontFamily: "Space Grotesk" }}>Loading...</h1>
 				</section>
 			</Page>
-		)
-		: (
+		);
+	else if (error)
+		return (
+			<Page>
+				<section className={Styles.loading}>
+					<h1 style={{ fontFamily: "Space Grotesk" }}>Error while fetching API.</h1>
+				</section>
+			</Page>
+		);
+	else
+		return (
 			<Page className={Styles.page}>
 				<Background src="">
 					{/* <motion.div className={Styles.bubble} /> */}
@@ -234,7 +243,7 @@ const UPx: React.FC = () => {
 					</div>
 				</section>
 			</Page>
-  		)
+  		);
 }
 
 export default UPx;
