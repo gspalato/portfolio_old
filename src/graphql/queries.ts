@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 const GET_RESUMES = gql`
     query {
-        resume {
+        resumes {
             date,
             totalDuration,
             distributedWater,

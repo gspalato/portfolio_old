@@ -1,11 +1,12 @@
 import { Route, Routes, useLocation, } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import Home from '@/pages/home';
-import About from '@/pages/about';
+import Home from "@/pages/home";
+import About from "@/pages/about";
 import Login from "@/pages/login";
 import Projects from "@/pages/projects";
 import UPx from "@/pages/upx";
+import NotFound from "@/pages/notfound";
 
 import Cursor from '@/components/Cursor';
 import Navbar from '@/components/Navbar';
@@ -28,7 +29,7 @@ const App: React.FC = () => {
                             <Route path="/projects" element={<Projects />} />
                             <Route path="/upx" element={<UPx />} />
                             <Route path="/login" element={<Login />} />
-                            <Route path="*" element={<h1>404</h1>} />
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </AnimatePresence>
                 </main>
