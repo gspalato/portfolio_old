@@ -42,9 +42,9 @@ const UPx: React.FC = () => {
 
 	console.log("Rendered UPx page.");
 
-	const { loading, data, error } = useQuery<{ resume: RawResumeData[] }>(GET_RESUMES, {
+	const { loading, data, error } = useQuery<{ resumes: RawResumeData[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
-			const resumes: RawResumeData[] = data.resume;
+			const resumes: RawResumeData[] = data.resumes;
 
 			const durationChartData = [
 				{
@@ -53,7 +53,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.totalDuration / 60)
+							y: Math.round(resume.totalDuration / 60).toFixed(2)
 						})
 					)
 				}
@@ -66,7 +66,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: resume.economizedPlastic
+							y: resume.economizedPlastic.toFixed(2)
 						})
 					)
 				}
@@ -79,7 +79,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.distributedWater / 1000)
+							y: (resume.distributedWater / 1000).toFixed(2)
 						})
 					)
 				}
@@ -177,7 +177,7 @@ const UPx: React.FC = () => {
 										<Chart
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-											axisLeft={DataAxisSettings("Distributed Water (mL)") as any}
+											axisLeft={DataAxisSettings("Distributed Water (L)") as any}
 											axisBottom={DateAxisSettings as any}
 										/>
 									</motion.div>
