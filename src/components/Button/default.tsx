@@ -46,6 +46,8 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
                 ease: [.53, -0.01, .44, 1.02]
             }}
 
+            transformTemplate={({ scale }) => `scale(${scale})`}
+
             className={classNames}
             onClick={(() => onClick?.())}
             {...moreProps}

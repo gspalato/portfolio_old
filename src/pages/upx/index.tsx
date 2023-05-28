@@ -10,6 +10,7 @@ import { ResponsiveLineChart as Chart } from '@/components/Chart';
 import { GET_RESUMES } from '@/graphql/queries';
 
 import Styles from './upx.module.sass';
+import { linearGradientDef } from '@nivo/core';
 
 
 type RawResumeData = {
@@ -20,12 +21,12 @@ type RawResumeData = {
 	bottleQuantityEquivalent: number; // in units
 };
 
-const DateAxisSettings = {
-	tickValues: 3,
+const DateAxisSettings = (ticks: string[]) => ({
+	tickValues: ticks,
 	legend: "Date",
 	legendPosition: "middle",
 	legendOffset: +40
-};
+});
 
 const DataAxisSettings = (legend: string, offset?: number) => ({
 	tickValues: 4,
@@ -34,17 +35,31 @@ const DataAxisSettings = (legend: string, offset?: number) => ({
 	legendOffset: offset ?? -50,
 });
 
+const ChartAreaDefs = [
+	linearGradientDef('gradient', [
+		{ offset: 0, color: 'inherit' },
+		{ offset: 100, color: 'inherit', opacity: 0.1 },
+	])
+];
+
 const UPx: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
 	const [bottleChartData, setBottleChartData] = useState<any>([]);
 
+	const [ticks, setTicks] = useState<any>([]);
+
 	console.log("Rendered UPx page.");
 
-	const { loading, data, error } = useQuery<{ resumes: RawResumeData[] }>(GET_RESUMES, {
+	const { loading, error } = useQuery<{ resumes: RawResumeData[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
 			const resumes: RawResumeData[] = data.resumes;
+
+			let firstDate = resumes[0].date;
+			let lastDate = resumes[resumes.length - 1].date;
+
+			setTicks([firstDate, lastDate]);
 
 			const durationChartData = [
 				{
@@ -53,7 +68,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: Math.round(resume.totalDuration / 60).toFixed(2)
+							y: (resume.totalDuration / 1000 / 60).toFixed(2) // in minutes
 						})
 					)
 				}
@@ -141,9 +156,12 @@ const UPx: React.FC = () => {
 										<Chart
 											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
 											data={durationChartData}
-											axisLeft={DataAxisSettings("Total Duration (min)", -50) as any}
-											axisBottom={DateAxisSettings as any}
+											axisLeft={DataAxisSettings("Total Duration (h)", -50) as any}
+											axisBottom={DateAxisSettings(ticks) as any}
 											margin={{ top: 50, bottom: 50, left: 60, right: 50 }}
+											enableArea
+											defs={ChartAreaDefs}
+											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
 								)
@@ -161,7 +179,10 @@ const UPx: React.FC = () => {
 											data={plasticChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
 											axisLeft={DataAxisSettings("Economized Plastic (g)", -60) as any}
-											axisBottom={DateAxisSettings as any}
+											axisBottom={DateAxisSettings(ticks) as any}
+											enableArea
+											defs={ChartAreaDefs}
+											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
 								)
@@ -178,7 +199,10 @@ const UPx: React.FC = () => {
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
 											axisLeft={DataAxisSettings("Distributed Water (L)") as any}
-											axisBottom={DateAxisSettings as any}
+											axisBottom={DateAxisSettings(ticks) as any}
+											enableArea
+											defs={ChartAreaDefs}
+											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
 								)
@@ -195,7 +219,10 @@ const UPx: React.FC = () => {
 											data={bottleChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
 											axisLeft={DataAxisSettings("Bottles") as any}
-											axisBottom={DateAxisSettings as any}
+											axisBottom={DateAxisSettings(ticks) as any}
+											enableArea
+											defs={ChartAreaDefs}
+											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
 								)
