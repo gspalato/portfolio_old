@@ -81,7 +81,7 @@ const UPx: React.FC = () => {
 					data: resumes.map(
 						(resume: RawResumeData) => ({
 							x: resume.date,
-							y: resume.economizedPlastic.toFixed(2)
+							y: (resume.economizedPlastic / 1000).toFixed(2)
 						})
 					)
 				}
@@ -156,7 +156,7 @@ const UPx: React.FC = () => {
 										<Chart
 											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
 											data={durationChartData}
-											axisLeft={DataAxisSettings("Total Duration (h)", -50) as any}
+											axisLeft={DataAxisSettings("Total Duration (min)", -50) as any}
 											axisBottom={DateAxisSettings(ticks) as any}
 											margin={{ top: 50, bottom: 50, left: 60, right: 50 }}
 											enableArea
@@ -178,7 +178,7 @@ const UPx: React.FC = () => {
 											className={Styles.chartWrapper}
 											data={plasticChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
-											axisLeft={DataAxisSettings("Economized Plastic (g)", -60) as any}
+											axisLeft={DataAxisSettings("Economized Plastic (kg)", -60) as any}
 											axisBottom={DateAxisSettings(ticks) as any}
 											enableArea
 											defs={ChartAreaDefs}

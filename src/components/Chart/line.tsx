@@ -42,7 +42,7 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
                 enablePoints
                 pointSize={6}
                 pointColor="#000"
-                pointBorderWidth={2}
+                pointBorderWidth={1}
                 pointBorderColor={{ from: 'serieColor' }}
                 
                 /* Tooltip */
