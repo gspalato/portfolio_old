@@ -3,7 +3,11 @@ import { gql } from "@apollo/client";
 const SUBSCRIBE_STATION_UPDATE = gql`
     subscription {
         onStationUpdate {
-            date
+            date,
+            totalDuration,
+            distributedWater,
+            economizedPlastic,
+            bottleQuantityEquivalent
         }
     }
 `;

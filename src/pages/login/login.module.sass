@@ -27,7 +27,6 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     height: 80%
     width: min(75%, 30rem)
     background: rgba(127, 127, 130, 0)
-    border: 1.5px solid #ffffff11
     border-radius: 7px
     display: flex
     justify-content: center
@@ -35,6 +34,7 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     flex-direction: column
 
     @mixin glassify()
+    @include border(1px, #ffffff11)
 
 
 .username

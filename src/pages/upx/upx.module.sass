@@ -61,7 +61,6 @@ $boxHeight: 17.5rem
     width: 100%
     padding: 1rem 1rem 1rem 1rem
     background: $boxBackground
-    border: 1px solid #ffffff11
     border-radius: 7px
 
     min-height: $boxHeight
@@ -69,8 +68,10 @@ $boxHeight: 17.5rem
 
     font-family: 'Inter', 'Fira Code', 'Consolas', sans-serif
 
+    @include border(1px, #ffffff11)
+
 .title
-    font-family: 'Space Grotesk'
+    font-family: 'Threat', 'Space Grotesk'
     font-size: 1.5rem
     font-weight: bold
     color: #ddd

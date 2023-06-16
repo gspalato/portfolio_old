@@ -2,7 +2,6 @@ import { useEffect, useState} from 'react';
 import { useQuery } from '@apollo/client';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import Background from '@/components/Background';
 import Page from '@/components/Page';
 
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
@@ -12,7 +11,7 @@ import { GET_RESUMES } from '@/graphql/queries';
 import Styles from './upx.module.sass';
 import { linearGradientDef } from '@nivo/core';
 
-
+/* Types */
 type RawResumeData = {
 	date: string;
 	totalDuration: number; // in seconds
@@ -21,27 +20,29 @@ type RawResumeData = {
 	bottleQuantityEquivalent: number; // in units
 };
 
-const DateAxisSettings = (ticks: string[]) => ({
+/* Constants */
+const getDateAxisSettings = (ticks: string[]) => ({
 	tickValues: ticks,
 	legend: "Date",
 	legendPosition: "middle",
 	legendOffset: +40
 });
 
-const DataAxisSettings = (legend: string, offset?: number) => ({
+const getDataAxisSettings = (legend: string, offset?: number) => ({
 	tickValues: 4,
 	legend: legend,
 	legendPosition: "middle",
 	legendOffset: offset ?? -50,
 });
 
-const ChartAreaDefs = [
+const chartAreaDefs = [
 	linearGradientDef('gradient', [
 		{ offset: 0, color: 'inherit' },
 		{ offset: 100, color: 'inherit', opacity: 0.1 },
 	])
 ];
 
+/* Component */ 
 const UPx: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
@@ -55,6 +56,9 @@ const UPx: React.FC = () => {
 	const { loading, error } = useQuery<{ resumes: RawResumeData[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
 			const resumes: RawResumeData[] = data.resumes;
+
+			console.log("Fetched data from Reality:");
+			console.log(resumes);
 
 			let firstDate = resumes[0].date;
 			let lastDate = resumes[resumes.length - 1].date;
@@ -139,9 +143,6 @@ const UPx: React.FC = () => {
 	else
 		return (
 			<Page className={Styles.page}>
-				<Background src="">
-					{/* <motion.div className={Styles.bubble} /> */}
-				</Background>
 				<section className={Styles.boxes}>
 					<div className={Styles.chartGrid}>
 						<AnimatePresence>
@@ -156,11 +157,11 @@ const UPx: React.FC = () => {
 										<Chart
 											className={[Styles.chartWrapper, Styles.gridDouble].join(' ')}
 											data={durationChartData}
-											axisLeft={DataAxisSettings("Total Duration (min)", -50) as any}
-											axisBottom={DateAxisSettings(ticks) as any}
+											axisLeft={getDataAxisSettings("Total Duration (min)", -50) as any}
+											axisBottom={getDateAxisSettings(ticks) as any}
 											margin={{ top: 50, bottom: 50, left: 60, right: 50 }}
 											enableArea
-											defs={ChartAreaDefs}
+											defs={chartAreaDefs}
 											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
@@ -178,10 +179,10 @@ const UPx: React.FC = () => {
 											className={Styles.chartWrapper}
 											data={plasticChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
-											axisLeft={DataAxisSettings("Economized Plastic (kg)", -60) as any}
-											axisBottom={DateAxisSettings(ticks) as any}
+											axisLeft={getDataAxisSettings("Economized Plastic (kg)", -60) as any}
+											axisBottom={getDateAxisSettings(ticks) as any}
 											enableArea
-											defs={ChartAreaDefs}
+											defs={chartAreaDefs}
 											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
@@ -198,10 +199,10 @@ const UPx: React.FC = () => {
 										<Chart
 											data={waterChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-											axisLeft={DataAxisSettings("Distributed Water (L)") as any}
-											axisBottom={DateAxisSettings(ticks) as any}
+											axisLeft={getDataAxisSettings("Distributed Water (L)") as any}
+											axisBottom={getDateAxisSettings(ticks) as any}
 											enableArea
-											defs={ChartAreaDefs}
+											defs={chartAreaDefs}
 											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>
@@ -218,10 +219,10 @@ const UPx: React.FC = () => {
 										<Chart
 											data={bottleChartData}
 											margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-											axisLeft={DataAxisSettings("Bottles") as any}
-											axisBottom={DateAxisSettings(ticks) as any}
+											axisLeft={getDataAxisSettings("Bottles") as any}
+											axisBottom={getDateAxisSettings(ticks) as any}
 											enableArea
-											defs={ChartAreaDefs}
+											defs={chartAreaDefs}
 											fill={[{ match: '*', id: 'gradient' }]}
 										/>
 									</motion.div>

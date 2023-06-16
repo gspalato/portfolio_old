@@ -5,6 +5,7 @@ import CustomTooltip from './tooltip';
 import { BaseChartTheme } from './theme';
 
 import Styles from './chart.module.sass';
+import { motion } from 'framer-motion';
 
 
 type LineData = {
@@ -42,7 +43,7 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
                 enablePoints
                 pointSize={6}
                 pointColor="#000"
-                pointBorderWidth={1}
+                pointBorderWidth={1.5}
                 pointBorderColor={{ from: 'serieColor' }}
                 
                 /* Tooltip */

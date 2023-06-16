@@ -27,3 +27,10 @@
 
 @mixin mouse-glow
     background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)
+
+@mixin border($width, $color)
+    $box-shadow: inset 0px 0px 0px $width $color
+
+    box-shadow: $box-shadow
+    -moz-box-shadow: $box-shadow
+    -webkit-box-shadow: $box-shadow
