@@ -15,7 +15,7 @@ interface IMenuButtonProps {
     [key: string]: any;
 }
 
-const MenuButtonComponent: React.FC<IMenuButtonProps> = (props) => {
+const Component: React.FC<IMenuButtonProps> = (props) => {
     const {
         className,
         isNavbarExpanded,
@@ -52,4 +52,4 @@ const MenuButtonComponent: React.FC<IMenuButtonProps> = (props) => {
     );
 }
 
-export default MenuButtonComponent;
+export default Component;

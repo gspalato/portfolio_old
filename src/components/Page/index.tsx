@@ -6,7 +6,7 @@ interface IPageProps extends HTMLMotionProps<'div'> {
     className?: string;
 }
 
-const Page: React.FC<IPageProps> = (props) => {
+const Component: React.FC<IPageProps> = (props) => {
     const {
         children,
         className,
@@ -26,4 +26,4 @@ const Page: React.FC<IPageProps> = (props) => {
     );
 }
 
-export default Page;
+export default Component;

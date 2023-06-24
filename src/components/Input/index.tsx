@@ -8,7 +8,7 @@ interface IInputProps {
     [key: string]: any;
 }
 
-const Input: React.FC<IInputProps> = (props) => {
+const Component: React.FC<IInputProps> = (props) => {
     const {
         className,
         placeholder,
@@ -22,4 +22,4 @@ const Input: React.FC<IInputProps> = (props) => {
     );
 }
 
-export default Input;
+export default Component;

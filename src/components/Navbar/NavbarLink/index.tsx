@@ -1,6 +1,8 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 
+import classes from '@/lib/classes';
+
 import Styles from './navbarLink.module.sass';
 
 interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
@@ -11,7 +13,7 @@ interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
     [key: string]: any;
 }
 
-const NavbarLink: React.FC<INavbarLinkProps> = (props) => {
+const Component: React.FC<INavbarLinkProps> = (props) => {
     const {
         className,
         link,
@@ -20,7 +22,7 @@ const NavbarLink: React.FC<INavbarLinkProps> = (props) => {
         ...moreProps
     } = props;
 
-    const classNames = [Styles.link, className].join(' ');
+    const classNames = classes(Styles.link, className);
 
     return (
         <Link onClick={(() => setState(false))} to={link}>
@@ -31,4 +33,4 @@ const NavbarLink: React.FC<INavbarLinkProps> = (props) => {
     );
 }
 
-export default NavbarLink;
+export default Component;

@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+import classes from '@/lib/classes';
+
 import Styles from './default.module.sass';
+
 
 interface IDefaultButtonProps extends React.PropsWithChildren {
     className?: string;
@@ -25,7 +28,7 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
         ...moreProps
     } = props;
 
-    const classNames = [Styles.button, className].join(' ');
+    const classNames = classes(Styles.button, className);
 
     return (
         <motion.button

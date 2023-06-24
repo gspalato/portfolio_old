@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   esbuild: {
-    //jsxInject: `import React from 'react'`,
+    jsxInject: `import React from 'react'`,
   },
   plugins: [react()],
   server: {

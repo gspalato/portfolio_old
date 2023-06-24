@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+import classes from '@/lib/classes';
+
 import Styles from './gradient.module.sass';
 
 interface IGradientButtonProps extends React.PropsWithChildren {
@@ -35,7 +37,7 @@ const ButtonComponent: React.FC<IGradientButtonProps> = (props) => {
         ...moreProps
     } = props;
 
-    const classNames = [Styles.buttonInner, className].join(' ');
+    const classNames = classes(Styles.buttonInner, className);
 
     return (
         <motion.div

@@ -7,7 +7,7 @@ const AUTHENTICATE_USER = gql`
     		password: $pwd
     	}) {
     		authenticationPayload {
-      		successful, token
+      			successful, token
     		}
     	}
     }

@@ -21,9 +21,23 @@
     background-clip: text !important
     -webkit-text-fill-color: transparent !important
 
-@mixin glassify($blur: 10px)
+@mixin glass($blur: 10px)
     -webkit-backdrop-filter: blur($blur) brightness(120%)
     backdrop-filter: blur($blur) brightness(120%)
+
+@mixin blur-gradient($blur: 10px, $background: #00000000, $position: 60%)
+    &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        opacity: 0
+        backdrop-filter: blur($blur)
+        background: $background
+        mask: linear-gradient(transparent, black $position)
+        transition: 1s
 
 @mixin mouse-glow
     background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)

@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 import Styles from './cursor.module.sass';
 
-const Cursor: React.FC = () => {
+const Component: React.FC = () => {
 	const cursorX = useMotionValue(-100);
 	const cursorY = useMotionValue(-100);
 
@@ -77,4 +77,4 @@ const Cursor: React.FC = () => {
 	)
 }
 
-export default Cursor;
+export default Component;

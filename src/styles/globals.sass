@@ -1,7 +1,11 @@
 @use 'fonts' as *
 @use 'variables' as *
 @use 'mixins' as *
-  
+
+@tailwind base
+@tailwind components
+@tailwind utilities
+
 *
   box-sizing: border-box
   padding: 0
@@ -36,10 +40,10 @@ html, body
   width: 100%
 
 h1, h2, h3, h4, h5, h6
-  font-family: $title
+  font-family: $display
 
 p
-  font-family: $body
+  font-family: $title
 
 a
   color: inherit
@@ -49,7 +53,7 @@ a
   outline: 1px solid rgb(0, 255, 0, .25)
 
 .blur
-    @include glassify()
+    @include glass()
   
 
 input:focus, input:active, input:hover

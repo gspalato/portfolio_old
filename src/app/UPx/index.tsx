@@ -6,7 +6,7 @@ import Page from '@/components/Page';
 
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
 
-import { GET_RESUMES } from '@/graphql/queries';
+import { GET_RESUMES } from '@/lib/graphql/queries';
 
 import Styles from './upx.module.sass';
 import { linearGradientDef } from '@nivo/core';
@@ -42,8 +42,7 @@ const chartAreaDefs = [
 	])
 ];
 
-/* Component */ 
-const UPx: React.FC = () => {
+const Component: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
 	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
@@ -235,4 +234,4 @@ const UPx: React.FC = () => {
   		);
 }
 
-export default UPx;
+export default Component;

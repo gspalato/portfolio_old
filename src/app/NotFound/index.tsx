@@ -2,7 +2,7 @@ import Page from "@/components/Page";
 
 import Styles from "./notfound.module.sass";
 
-const NotFound = () => {
+const Component = () => {
     return (
         <Page>
             <section className={Styles.page}>
@@ -12,4 +12,4 @@ const NotFound = () => {
     );
 }
 
-export default NotFound;
+export default Component;

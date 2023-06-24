@@ -1,17 +1,10 @@
-import { motion } from 'framer-motion';
-import useFitText from 'use-fit-text';
-
-import Background from '@/components/Background';
 import Page from '@/components/Page';
 
 import Styles from './home.module.sass';
 
-export default function Home() {
+const Component: React.FC = () => {
   	return (
     	<Page>
-			<Background src="">
-				{/* <motion.div className={Styles.bubble} /> */}
-			</Background>
 			<section className={Styles.content}>
 				<div className={Styles.textContainer}>
 					<h1 className={Styles.heroText}>full-stack</h1>
@@ -22,3 +15,5 @@ export default function Home() {
     	</Page>
   	)
 }
+
+export default Component;

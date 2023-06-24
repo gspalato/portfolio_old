@@ -15,16 +15,16 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     @include responsive($lg)
         padding: 5rem
 
-    @mixin glassify()
+    @mixin glass()
 
 .title
-    font-family: 'Inter'
+    font-family: 'Space Grotesk'
     font-weight: bolder
     font-size: 4rem
     margin: 0 0 2rem 0
 
 .form
-    height: 80%
+    height: min(80%, 50rem)
     width: min(75%, 30rem)
     background: rgba(127, 127, 130, 0)
     border-radius: 7px
@@ -33,7 +33,7 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     align-items: center
     flex-direction: column
 
-    @mixin glassify()
+    @mixin glass()
     @include border(1px, #ffffff11)
 
 

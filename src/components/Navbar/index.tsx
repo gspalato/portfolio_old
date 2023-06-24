@@ -65,7 +65,7 @@ interface INavbarProps extends React.PropsWithChildren {
     className?: string;
 }
 
-const Navbar: React.FC<INavbarProps> = (props) => {
+const Component: React.FC<INavbarProps> = (props) => {
     const {
         className,
     } = props;
@@ -148,4 +148,4 @@ const Navbar: React.FC<INavbarProps> = (props) => {
     );
 }
 
-export default Navbar;
+export default Component;
