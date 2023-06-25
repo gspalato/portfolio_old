@@ -1,32 +1,56 @@
 import { useQuery } from '@apollo/client';
+import { linearGradientDef } from '@nivo/core';
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-
-import { Card, Col, Grid, LineChart, Text, Title } from '@tremor/react';
+import { AreaChart } from '@tremor/react';
 
 import Page from '@/components/Page';
+import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
 
+import { Card, CardContent, CardHeader } from '@/components/Card';
+import { ResponsiveLineChart as Chart } from '@/components/Chart';
+
+import { useAuth } from '@/lib/auth/useAuth';
+import classes from '@/lib/classes';
 import { GET_RESUMES } from '@/lib/graphql/queries';
 
-import Styles from './dashboard.module.sass';
+/* Constants */
+const getDateAxisSettings = (ticks: string[]) => ({
+	tickValues: ticks,
+	legend: 'Date',
+	legendPosition: 'middle',
+	legendOffset: +40,
+});
 
+const getDataAxisSettings = (legend: string, offset?: number) => ({
+	tickValues: 4,
+	legend: legend,
+	legendPosition: 'middle',
+	legendOffset: offset ?? -50,
+});
 
+const chartAreaDefs = [
+	linearGradientDef('gradient', [
+		{ offset: 0, color: 'inherit' },
+		{ offset: 100, color: 'inherit', opacity: 0.1 },
+	]),
+];
 
 const Component: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
-	const [plasticChartData, setPlasticChartData] = useState<any>([]);
+	const [plLineChartasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
 	const [bottleChartData, setBottleChartData] = useState<any>([]);
 
-	const [chartData, setChartData] = useState<any>([]);
-
 	const [ticks, setTicks] = useState<any>([]);
+
+	const { user } = useAuth();
+	console.log(user);
 
 	const { loading, error } = useQuery<{ resumes: any[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
 			const resumes: any[] = data.resumes;
 
-			console.log("Fetched data from Reality:");
+			console.log('Fetched data from Reality:');
 			console.log(resumes);
 
 			let firstDate = resumes[0].date;
@@ -34,118 +58,265 @@ const Component: React.FC = () => {
 
 			setTicks([firstDate, lastDate]);
 
-			const chartData = resumes.map((resume: any) => ({
+			// @tremor/react
+			/*
+			const durationChartData = resumes.map((resume: any) => ({
 				date: resume.date,
-				"Total Duration": (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
-				"Economized Plastic Waste": (resume.economizedPlastic / 1000).toFixed(2), // in kilograms
-				"Distributed Water": (resume.distributedWater / 1000).toFixed(2), // in liters
-				"Bottle Quantity Equivalent": Math.round(resume.bottleQuantityEquivalent)
+				'Total Duration': (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
 			}));
-			setChartData(chartData);
 
-			const durationChartData = resumes.map(
-				(resume: any) => ({
-					date: resume.date,
-					"Total Duration": (resume.totalDuration / 1000 / 60).toFixed(2) // in minutes
-				})
-			);
+			const plasticChartData = resumes.map((resume: any) => ({
+				date: resume.date,
+				'Economized Plastic Waste': (
+					resume.economizedPlastic / 1000
+				).toFixed(2),
+			}));
 
-			const plasticChartData = resumes.map(
-				(resume: any) => ({
-					date: resume.date,
-					"Economized Plastic Waste": (resume.economizedPlastic / 1000).toFixed(2)
-				})
-			);
+			const waterChartData = resumes.map((resume: any) => ({
+				date: resume.date,
+				'Distributed Water': (resume.distributedWater / 1000).toFixed(
+					2
+				),
+			}));
 
-			const waterChartData = resumes.map(
-				(resume: any) => ({
-					date: resume.date,
-					"Distributed Water": (resume.distributedWater / 1000).toFixed(2)
-				})
-			);
-
-			const bottleChartData = resumes.map(
-				(resume: any) => ({
-					date: resume.date,
-					"Bottle Quantity Equivalent": Math.round(resume.bottleQuantityEquivalent)
-				})
-			);
+			const bottleChartData = resumes.map((resume: any) => ({
+				date: resume.date,
+				'Bottle Quantity Equivalent': Math.round(
+					resume.bottleQuantityEquivalent
+				),
+			}));
 
 			setDurationChartData(durationChartData);
 			setPlasticChartData(plasticChartData);
 			setWaterChartData(waterChartData);
 			setBottleChartData(bottleChartData);
-		}
+			*/
+
+			const durationChartData = [
+				{
+					id: 'Total Duration',
+					color: '#ddddff',
+					data: resumes.map((resume: any) => ({
+						x: resume.date,
+						y: (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
+					})),
+				},
+			];
+
+			const plasticChartData = [
+				{
+					id: 'Economized Plastic Waste',
+					color: '#590995',
+					data: resumes.map((resume: any) => ({
+						x: resume.date,
+						y: (resume.economizedPlastic / 1000).toFixed(2),
+					})),
+				},
+			];
+
+			const waterChartData = [
+				{
+					id: 'Distributed Water',
+					color: '#0066ff',
+					data: resumes.map((resume: any) => ({
+						x: resume.date,
+						y: (resume.distributedWater / 1000).toFixed(2),
+					})),
+				},
+			];
+
+			const bottleChartData = [
+				{
+					id: 'Bottle Quantity Equivalent',
+					color: '#03c4a1',
+					data: resumes.map((resume: any) => ({
+						x: resume.date,
+						y: Math.round(resume.bottleQuantityEquivalent),
+					})),
+				},
+			];
+
+			setDurationChartData(durationChartData);
+			setPlasticChartData(plasticChartData);
+			setWaterChartData(waterChartData);
+			setBottleChartData(bottleChartData);
+		},
 	});
 
-	const durationFormatter = (number: number) => `${Intl.NumberFormat("us").format(number).toString()}min`;
-	const plasticFormatter = (number: number) => `${Intl.NumberFormat("us").format(number).toString()}kg`;
-	const waterFormatter = (number: number) => `${Intl.NumberFormat("us").format(number).toString()}L`;
-	const bottleFormatter = (number: number) => `${Intl.NumberFormat("us").format(number).toString()}`;
+	const getFormatter = (suffix: string) => (number: number) =>
+		`${Intl.NumberFormat('us').format(number).toString()}${suffix}`;
 
 	if (loading)
 		return (
 			<Page>
-				<section className={Styles.loading}>
-					<h1 style={{ fontFamily: "Space Grotesk" }}>Loading...</h1>
+				<section className='bg-black text-foreground'>
+					<h1 style={{ fontFamily: 'Space Grotesk' }}>Loading...</h1>
 				</section>
 			</Page>
 		);
 	else
 		return (
-			<Page className="!font-title flex items-center justify-center">
-				<Grid numItems={1} numItemsSm={1} numItemsMd={4} numItemsLg={4} className='w-full m-4 gap-4 flex-shrink-0 w-fit'>
-					<Card>
-						<LineChart
-							className="mt-6"
-							data={durationChartData}
-							index="date"
-							categories={["Total Duration"]}
-							colors={["zinc"]}
-							valueFormatter={durationFormatter}
-							yAxisWidth={20}
-						/>
-					</Card>
-					<Col numColSpan={1} numColSpanMd={2}>
-						<Card>
-							<LineChart
-								className="mt-6"
-								data={plasticChartData}
-								index="date"
-								categories={["Economized Plastic Waste"]}
-								colors={["purple"]}
-								valueFormatter={plasticFormatter}
-								yAxisWidth={20}
-							/>
-						</Card>
-					</Col>
-					<Col numColSpan={1} numColSpanMd={2}>
-					<Card>
-						<LineChart
-							className="mt-6"
-							data={waterChartData}
-							index="date"
-							categories={["Distributed Water"]}
-							colors={["blue"]}
-							valueFormatter={plasticFormatter}
-							yAxisWidth={20}
-						/>
-					</Card>
-					</Col>
-					<Card>
-						<LineChart
-							className="mt-6"
-							data={bottleChartData}
-							index="date"
-							categories={["Bottle Quantity Equivalent"]}
-							colors={["teal"]}
-							valueFormatter={plasticFormatter}
-							yAxisWidth={20}
-						/>
-					</Card>
-				</Grid>
+			<Page className='block p-[2rem] pt-[6rem] !font-title md:pt-[7.5rem]'>
+				<h1 className='text-gradient mb-6 text-center font-exotic !text-2xl font-bold md:!text-5xl'>
+					Welcome back, {user.username}
+				</h1>
+				<Card className='mx-auto min-h-[30rem] min-w-full max-w-lg !font-display'>
+					<Tabs defaultTab='chart'>
+						<CardHeader separate>
+							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
+								UPx Refill Station
+							</h1>
+							<TabList>
+								<TabButton text='Chart' value='chart' />
+								<TabButton text='Test' value='test' />
+							</TabList>
+						</CardHeader>
+						<CardContent className='mt-0 pt-0'>
+							<TabContent>
+								<Tab className='h-full' value='chart'>
+									<Chart
+										data={durationChartData}
+										axisLeft={
+											getDataAxisSettings(
+												'Total Duration (min)',
+												-50
+											) as any
+										}
+										axisBottom={
+											getDateAxisSettings(ticks) as any
+										}
+										margin={{
+											top: 50,
+											bottom: 50,
+											left: 60,
+											right: 50,
+										}}
+										enableArea
+										defs={chartAreaDefs}
+										fill={[{ match: '*', id: 'gradient' }]}
+									/>
+								</Tab>
+								<Tab value='test'>
+									<h1>Test</h1>
+								</Tab>
+							</TabContent>
+						</CardContent>
+					</Tabs>
+				</Card>
 			</Page>
+			/*
+			<Page className='!font-title block p-[2rem] pt-[6rem] md:pt-[7.5rem]'>
+				<Title className='text-gradient font-exotic mb-6 text-center !text-2xl font-bold md:!text-5xl'>
+					Welcome back, {'unreaalism!'}
+				</Title>
+				<Flex>
+					<Card className='!font-display mx-auto min-w-[100%] max-w-lg'>
+						<Title className='text-gradient font-exotic'>
+							UPx Refill Station
+						</Title>
+						<TabGroup>
+							<TabList defaultValue={1} className='mt-6'>
+								<Tab value={1}>Duration</Tab>
+								<Tab value={2}>Plastic</Tab>
+								<Tab value={3}>Water</Tab>
+								<Tab value={4}>Bottles</Tab>
+							</TabList>
+							<TabPanels>
+								<TabPanel>
+									<AreaChart
+										className='mt-6'
+										data={durationChartData}
+										index='date'
+										categories={['Total Duration']}
+										colors={['zinc']}
+										valueFormatter={getFormatter('min')}
+										curveType='natural'
+										yAxisWidth={50}
+										maxValue={durationChartData.reduce(
+											(max: number, item: any) =>
+												Math.max(
+													max,
+													item['Total Duration']
+												),
+											0
+										)}
+									/>
+								</TabPanel>
+								<TabPanel>
+									<AreaChart
+										className='mt-6'
+										data={plasticChartData}
+										index='date'
+										categories={[
+											'Economized Plastic Waste',
+										]}
+										colors={['purple']}
+										valueFormatter={getFormatter('kg')}
+										curveType='natural'
+										yAxisWidth={50}
+										maxValue={plasticChartData.reduce(
+											(max: number, item: any) =>
+												Math.max(
+													max,
+													item[
+														'Economized Plastic Waste'
+													]
+												),
+											0
+										)}
+									/>
+								</TabPanel>
+								<TabPanel>
+									<AreaChart
+										className='mt-6'
+										data={waterChartData}
+										index='date'
+										categories={['Distributed Water']}
+										colors={['blue']}
+										valueFormatter={getFormatter('L')}
+										curveType='natural'
+										yAxisWidth={50}
+										maxValue={waterChartData.reduce(
+											(max: number, item: any) =>
+												Math.max(
+													max,
+													item['Distributed Water']
+												),
+											0
+										)}
+									/>
+								</TabPanel>
+								<TabPanel>
+									<AreaChart
+										className='mt-6'
+										data={bottleChartData}
+										index='date'
+										categories={[
+											'Bottle Quantity Equivalent',
+										]}
+										colors={['teal']}
+										valueFormatter={getFormatter('')}
+										curveType='natural'
+										yAxisWidth={50}
+										maxValue={bottleChartData.reduce(
+											(max: number, item: any) =>
+												Math.max(
+													max,
+													item[
+														'Bottle Quantity Equivalent'
+													]
+												),
+											0
+										)}
+									/>
+								</TabPanel>
+							</TabPanels>
+						</TabGroup>
+					</Card>
+				</Flex>
+			</Page>
+			*/
 		);
-}
+};
 
 export default Component;

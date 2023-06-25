@@ -1,0 +1,20 @@
+import classes from '@/lib/classes';
+
+interface ICardHeaderProps extends React.PropsWithChildren {
+	className?: string;
+	separate?: boolean;
+}
+
+const Component: React.FC<ICardHeaderProps> = (props) => {
+	const { children, className, separate = true, ...rest } = props;
+
+	const classNames = classes(
+		'py-5 flex items-center justify-between px-6',
+		separate ? 'border-b border-border' : '',
+		className
+	);
+
+	return <div className={classNames}>{props.children}</div>;
+};
+
+export default Component;

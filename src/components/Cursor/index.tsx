@@ -15,8 +15,9 @@ const Component: React.FC = () => {
 
 	let isTouchDevice = false;
 	useEffect(() => {
-		isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-	})
+		isTouchDevice =
+			'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	});
 
 	const [beingClicked, setBeingClicked] = useState(false);
 
@@ -31,20 +32,20 @@ const Component: React.FC = () => {
 
 		const mouseDownCursor = () => {
 			setBeingClicked(true);
-		}
+		};
 
 		const mouseUpCursor = () => {
 			setBeingClicked(false);
-		}
+		};
 
-		window.addEventListener("mousemove", moveCursor);
-		window.addEventListener("mousedown", mouseDownCursor);
-		window.addEventListener("mouseup", mouseUpCursor);
+		window.addEventListener('mousemove', moveCursor);
+		window.addEventListener('mousedown', mouseDownCursor);
+		window.addEventListener('mouseup', mouseUpCursor);
 
 		return () => {
-			window.removeEventListener("mousemove", moveCursor);
-			window.removeEventListener("mousedown", mouseDownCursor);
-			window.removeEventListener("mouseup", mouseUpCursor);
+			window.removeEventListener('mousemove', moveCursor);
+			window.removeEventListener('mousedown', mouseDownCursor);
+			window.removeEventListener('mouseup', mouseUpCursor);
 		};
 	});
 
@@ -53,7 +54,7 @@ const Component: React.FC = () => {
 			<motion.div
 				className={Styles.cursorInner}
 				style={{
-					display: isTouchDevice ? 'none': 'block',
+					display: isTouchDevice ? 'none' : 'block',
 					translateX: cursorX,
 					translateY: cursorY,
 				}}
@@ -61,20 +62,20 @@ const Component: React.FC = () => {
 			<motion.div
 				className={Styles.cursorOuter}
 				style={{
-					display: isTouchDevice ? 'none': 'block',
+					display: isTouchDevice ? 'none' : 'block',
 					translateX: auraXSpring,
 					translateY: auraYSpring,
-					backgroundColor: beingClicked ? "#066ff" : ""
+					backgroundColor: beingClicked ? '#066ff' : '',
 				}}
 				animate={{
-					scale: beingClicked ? 0.8 : 1
+					scale: beingClicked ? 0.8 : 1,
 				}}
 				transition={{
-					duration: 0.05
+					duration: 0.025,
 				}}
 			/>
 		</>
-	)
-}
+	);
+};
 
 export default Component;

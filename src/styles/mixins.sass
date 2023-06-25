@@ -25,7 +25,7 @@
     -webkit-backdrop-filter: blur($blur) brightness(120%)
     backdrop-filter: blur($blur) brightness(120%)
 
-@mixin blur-gradient($blur: 10px, $background: #00000000, $position: 60%)
+@mixin blur-gradient()
     &:after
         content: ''
         position: absolute
@@ -34,9 +34,9 @@
         right: 0
         bottom: 0
         opacity: 0
-        backdrop-filter: blur($blur)
-        background: $background
-        mask: linear-gradient(transparent, black $position)
+        backdrop-filter: blur(10px)
+        background: #00000011
+        mask: linear-gradient(transparent, black 60%)
         transition: 1s
 
 @mixin mouse-glow
