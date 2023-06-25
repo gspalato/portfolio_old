@@ -39,8 +39,7 @@ export const useRealityClient = () => {
 };
 
 const Client = new ApolloClient({
-	// uri: 'http://3.223.11.90:4000/gql',
-	uri: 'http://localhost:4000/gql',
+	uri: 'http://3.223.11.90:4000/gql',
 	cache: new InMemoryCache(),
 });
 
