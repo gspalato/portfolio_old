@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 import Page from '@/components/Page';
 import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
@@ -46,7 +45,7 @@ const Component: React.FC = () => {
 
 	const [ticks, setTicks] = useState<any>([]);
 
-	const { token, user } = useAuth();
+	const { user } = useAuth();
 	const {
 		enableDefaultNavbar,
 		disableDefaultNavbar,
@@ -129,8 +128,6 @@ const Component: React.FC = () => {
 
 	const getFormatter = (suffix: string) => (number: number) =>
 		`${Intl.NumberFormat('us').format(number).toString()}${suffix}`;
-
-	if (!token || !user) return <Navigate to='/login' />;
 
 	if (loading)
 		return (

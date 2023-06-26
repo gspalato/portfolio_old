@@ -1,5 +1,4 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
 
 import About from '@/app/About';
 import Dashboard from '@/app/Dashboard';
@@ -29,7 +28,7 @@ const App: React.FC = () => {
 				<Routes location={location} key={location.pathname}>
 					<Route path='/' element={<Home />} />
 					<Route path='/about' element={<About />} />
-					<Route path='/dashboard' element={<Dashboard />} />
+					<Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 					<Route path='/projects' element={<Projects />} />
 					<Route path='/upx' element={<UPx />} />
 					<Route path='/login' element={<Login />} />
