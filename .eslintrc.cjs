@@ -11,6 +11,7 @@ module.exports = {
 		'next/core-web-vitals',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',
+		'react/jsx-sort-props',
 	],
 	rules: {
 		'no-unused-vars': 'off',
@@ -23,6 +24,7 @@ module.exports = {
 			'warn',
 			{ props: 'never', children: 'never' },
 		],
+		'react/jsx-sort-props': 'warn',
 
 		//#region  //*=========== Unused Import ===========
 		'@typescript-eslint/no-unused-vars': 'off',

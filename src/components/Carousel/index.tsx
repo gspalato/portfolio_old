@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 
 import classes from '@/lib/classes';
+import { v4 as uuid } from 'uuid';
 
 interface ICarouselProps extends HTMLMotionProps<'div'> {
 	children?: React.ReactNode;
@@ -20,48 +21,28 @@ const Component = (props: ICarouselProps) => {
 	const { children, ...rest } = props;
 
 	const carousel = useRef<HTMLDivElement | null>(null);
-	const innerCarousel = useRef<HTMLDivElement>(null);
-
-	const [width, setWidth] = useState(0);
 
 	const controls = useDragControls();
-
 	const startDrag = (e: any) => {
 		controls.start(e);
 	};
 
-	useEffect(() => {
-		const handleWidth = () => {
-			console.log(carousel.current);
-
-			if (!carousel.current) return;
-
-			setWidth(carousel.current.scrollWidth);
-			rest.scrollWidthSetter?.(carousel.current.scrollWidth);
-			console.log(width);
-		};
-
-		window.addEventListener('resize', handleWidth);
-		handleWidth();
-
-		return () => window.removeEventListener('resize', handleWidth);
-	}, []);
-
 	return (
 		<motion.div ref={carousel} className={props.className}>
 			<motion.div
-				ref={innerCarousel}
-				dragConstraints={{ right: 0, left: -width }}
+				drag='x'
+				dragConstraints={carousel}
+				dragControls={controls}
 				className={classes(
-					'inner-carousel flex h-full w-min items-center justify-center gap-8 overflow-hidden'
+					'inner-carousel optimize flex h-full w-min items-center justify-center gap-8 overflow-hidden'
 				)}
 				onPointerDown={startDrag}
 			>
 				{React.Children.map(children, (child, index) => (
 					<motion.div
-						className='carousel-item'
+						className='carousel-item z-[1000]'
 						key={index}
-						whileHover={{ size: 1.125 }}
+						whileHover={{ size: 2 }}
 					>
 						{child}
 					</motion.div>

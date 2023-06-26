@@ -14,13 +14,15 @@ import Cursor from '@/components/Cursor';
 import Navbar from '@/components/Navbar';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
+import Layout from './lib/layout';
+
 import '@/styles/globals.sass';
 
 const App: React.FC = () => {
 	const location = useLocation();
 
 	return (
-		<>
+		<Layout>
 			<Cursor />
 			<Navbar />
 			<Content>
@@ -34,7 +36,7 @@ const App: React.FC = () => {
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Content>
-		</>
+		</Layout>
 	);
 };
 

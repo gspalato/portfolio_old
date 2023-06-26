@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { useTabs } from './Tabs';
 
@@ -12,10 +13,12 @@ const Component: React.FC<ITabContentProps> = (props) => {
 	const { currentTab } = useTabs();
 
 	return animate ? (
-		<AnimatePresence mode='wait'>{children}</AnimatePresence>
+		<AnimatePresence mode='popLayout'>{children}</AnimatePresence>
 	) : (
 		<>{children}</>
 	);
 };
+
+Component.displayName = 'TabContent';
 
 export default Component;

@@ -24,5 +24,7 @@ const Component: React.FC<ITabsProps> = (props) => {
 	);
 };
 
+Component.displayName = 'Tabs';
+
 export default Component;
 export { TabContext, useTabs };

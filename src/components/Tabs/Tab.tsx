@@ -39,4 +39,6 @@ const Component: React.FC<ITabProps> = (props) => {
 	) : null;
 };
 
+Component.displayName = 'Tab';
+
 export default Component;

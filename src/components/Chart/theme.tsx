@@ -1,4 +1,4 @@
-const font = "'IBM Plex Mono', monospace";
+const font = "'Karla', monospace";
 const detailColor = '#444';
 
 const BaseChartTheme = {

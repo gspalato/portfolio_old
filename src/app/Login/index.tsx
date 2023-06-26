@@ -9,17 +9,17 @@ import { useMutation } from '@apollo/client';
 import { useAuth } from '@/lib/auth/useAuth';
 import { AUTHENTICATE_USER } from '@/lib/graphql/mutations';
 
-import Styles from './login.module.sass';
-
 const Component = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [submitting, setSubmitting] = useState(false);
+
 	const [success, setSuccess] = useState<boolean | null>(null);
-	const [token, setToken] = useState<string | null>(null);
+	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
 	const [userJson, setUserJson] = useState<string | null>(null);
 
-	const { setUser } = useAuth();
+	const { setUser, token, setToken } = useAuth();
 
 	const [authenticate] = useMutation(AUTHENTICATE_USER, {
 		variables: {
@@ -37,9 +37,9 @@ const Component = () => {
 				return;
 			}
 
-			setToken(payload.token);
+			setFetchedToken(payload.token);
 			setUserJson(JSON.stringify(payload.user));
-			console.log(data);
+			setSubmitting(false);
 		},
 		onError(error) {
 			console.log(error);
@@ -48,21 +48,31 @@ const Component = () => {
 
 	useEffect(() => {
 		if (window) {
-			if (!!token && token.length > 0)
-				window.sessionStorage.setItem('reality-token', token!);
-			if (!!userJson && userJson.length > 0) setUser(userJson);
+			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
+			if (userJson && userJson.length > 0) setUser(userJson);
 		}
-	}, [token]);
+	}, [fetchedToken, userJson]);
 
-	return success || sessionStorage.getItem('reality-token') ? (
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		authenticate();
+		setSubmitting(true);
+	};
+
+	return success || token ? (
 		<Navigate to='/dashboard' />
 	) : (
 		<Page>
-			<section className={Styles.content}>
-				<form className={Styles.form}>
-					<h1 className={Styles.title}>Welcome!</h1>
+			<section className='flex h-screen w-screen place-items-center justify-center px-8 pb-8 pt-20 tracking-tighter lg:p-20'>
+				<form
+					onSubmit={onSubmit}
+					className='flex h-[min(50rem,80%)] w-[clamp(30rem,75%,50rem)] flex-col items-center justify-center rounded-lg border border-border bg-background md:w-[min(30rem,75%)]'
+				>
+					<h1 className='m-0 mb-8 font-display text-6xl font-extrabold'>
+						Welcome!
+					</h1>
 					<Input
-						className={Styles.username}
+						className='mb-6 border border-border font-title placeholder:text-[#ffffff22]'
 						type='text'
 						placeholder='Username'
 						value={username}
@@ -77,7 +87,7 @@ const Component = () => {
 						onChange={(e: any) => setUsername(e.target.value)}
 					/>
 					<Input
-						className={Styles.password}
+						className='mb-6 border border-border font-title placeholder:text-[#ffffff22]'
 						type='password'
 						placeholder='Password'
 						value={password}
@@ -94,10 +104,10 @@ const Component = () => {
 					<Button
 						text='Login'
 						type='submit'
-						background={
-							'linear-gradient(to right, #56ccf2, #2f80ed)'
-						}
+						background='linear-gradient(to right, #56ccf2, #2f80ed)'
+						overlay='#09090b'
 						onClick={authenticate}
+						disabled={submitting}
 					/>
 				</form>
 			</section>

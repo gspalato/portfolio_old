@@ -1,6 +1,7 @@
 import { useScroll, useTransform } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
+import { Default as Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import Carousel from '@/components/Carousel';
 import Page from '@/components/Page';
@@ -30,13 +31,34 @@ const Component = () => {
 						animate={{ x: -x }}
 						className='h-[30rem] w-full will-change-transform'
 					>
-						<Card />
-						<Card />
-						<Card />
-						<Card />
-						<Card />
-						<Card />
-						<Card />
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
+						<Card className='h-[20rem] w-[20rem]'>
+							<h1>Card</h1>
+							<Button className='z-[1000]' text='Test' />
+						</Card>
 					</Carousel>
 				</div>
 			</section>

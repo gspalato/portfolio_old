@@ -15,8 +15,8 @@ const Component: React.FC<ITabButtonProps> = (props) => {
 	const { currentTab, setCurrentTab } = useTabs();
 
 	const classNames = classes(
-		'rounded-md px-5 py-1 text-sm font-medium text-white transition-colors border border-border cursor-none',
-		currentTab == value ? 'bg-background' : '#fff',
+		'rounded-md px-5 py-1 text-xs font-medium text-white transition-colors cursor-none @2xl:min-w-[90px] shadow-md',
+		currentTab == value ? 'bg-background' : 'bg-overlay',
 		className
 	);
 
@@ -26,5 +26,7 @@ const Component: React.FC<ITabButtonProps> = (props) => {
 		</button>
 	);
 };
+
+Component.displayName = 'TabButton';
 
 export default Component;

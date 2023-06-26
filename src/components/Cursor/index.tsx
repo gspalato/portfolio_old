@@ -4,6 +4,8 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import Styles from './cursor.module.sass';
 
 const Component: React.FC = () => {
+	const [isTouchDevice, setIsTouchDevice] = useState(false);
+
 	const cursorX = useMotionValue(-100);
 	const cursorY = useMotionValue(-100);
 
@@ -13,10 +15,12 @@ const Component: React.FC = () => {
 	const auraXSpring = useSpring(auraX, { damping: 50, stiffness: 500 });
 	const auraYSpring = useSpring(auraY, { damping: 50, stiffness: 500 });
 
-	let isTouchDevice = false;
 	useEffect(() => {
-		isTouchDevice =
-			'ontouchstart' in window || navigator.maxTouchPoints > 0;
+		setIsTouchDevice(
+			'ontouchstart' in window ||
+				navigator.maxTouchPoints > 0 ||
+				window.matchMedia('(any-pointer: coarse)').matches
+		);
 	});
 
 	const [beingClicked, setBeingClicked] = useState(false);
@@ -49,7 +53,7 @@ const Component: React.FC = () => {
 		};
 	});
 
-	return (
+	return isTouchDevice ? null : (
 		<>
 			<motion.div
 				className={Styles.cursorInner}

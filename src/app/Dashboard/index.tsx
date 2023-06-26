@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
-import { useState } from 'react';
-import { AreaChart } from '@tremor/react';
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import Page from '@/components/Page';
 import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
@@ -10,22 +10,25 @@ import { Card, CardContent, CardHeader } from '@/components/Card';
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
 
 import { useAuth } from '@/lib/auth/useAuth';
-import classes from '@/lib/classes';
 import { GET_RESUMES } from '@/lib/graphql/queries';
+import { useLayout } from '@/lib/layout';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
 	tickValues: ticks,
 	legend: 'Date',
 	legendPosition: 'middle',
-	legendOffset: +40,
+	legendOffset: +20,
 });
 
 const getDataAxisSettings = (legend: string, offset?: number) => ({
 	tickValues: 4,
 	legend: legend,
 	legendPosition: 'middle',
-	legendOffset: offset ?? -50,
+	legendOffset: offset ?? -30,
+	tickPadding: 10,
+	tickRotation: -90,
+	tickSize: 0,
 });
 
 const chartAreaDefs = [
@@ -37,16 +40,21 @@ const chartAreaDefs = [
 
 const Component: React.FC = () => {
 	const [durationChartData, setDurationChartData] = useState<any>([]);
-	const [plLineChartasticChartData, setPlasticChartData] = useState<any>([]);
+	const [plasticChartData, setPlasticChartData] = useState<any>([]);
 	const [waterChartData, setWaterChartData] = useState<any>([]);
 	const [bottleChartData, setBottleChartData] = useState<any>([]);
 
 	const [ticks, setTicks] = useState<any>([]);
 
-	const { user } = useAuth();
-	console.log(user);
+	const { token, user } = useAuth();
+	const {
+		enableDefaultNavbar,
+		disableDefaultNavbar,
+		enableContentScrolling,
+		disableContentScrolling,
+	} = useLayout();
 
-	const { loading, error } = useQuery<{ resumes: any[] }>(GET_RESUMES, {
+	const { loading } = useQuery<{ resumes: any[] }>(GET_RESUMES, {
 		onCompleted: (data) => {
 			const resumes: any[] = data.resumes;
 
@@ -57,40 +65,6 @@ const Component: React.FC = () => {
 			let lastDate = resumes[resumes.length - 1].date;
 
 			setTicks([firstDate, lastDate]);
-
-			// @tremor/react
-			/*
-			const durationChartData = resumes.map((resume: any) => ({
-				date: resume.date,
-				'Total Duration': (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
-			}));
-
-			const plasticChartData = resumes.map((resume: any) => ({
-				date: resume.date,
-				'Economized Plastic Waste': (
-					resume.economizedPlastic / 1000
-				).toFixed(2),
-			}));
-
-			const waterChartData = resumes.map((resume: any) => ({
-				date: resume.date,
-				'Distributed Water': (resume.distributedWater / 1000).toFixed(
-					2
-				),
-			}));
-
-			const bottleChartData = resumes.map((resume: any) => ({
-				date: resume.date,
-				'Bottle Quantity Equivalent': Math.round(
-					resume.bottleQuantityEquivalent
-				),
-			}));
-
-			setDurationChartData(durationChartData);
-			setPlasticChartData(plasticChartData);
-			setWaterChartData(waterChartData);
-			setBottleChartData(bottleChartData);
-			*/
 
 			const durationChartData = [
 				{
@@ -143,8 +117,20 @@ const Component: React.FC = () => {
 		},
 	});
 
+	useEffect(() => {
+		enableContentScrolling();
+		disableDefaultNavbar();
+
+		return () => {
+			disableContentScrolling();
+			enableDefaultNavbar();
+		};
+	});
+
 	const getFormatter = (suffix: string) => (number: number) =>
 		`${Intl.NumberFormat('us').format(number).toString()}${suffix}`;
+
+	if (!token || !user) return <Navigate to='/login' />;
 
 	if (loading)
 		return (
@@ -154,169 +140,147 @@ const Component: React.FC = () => {
 				</section>
 			</Page>
 		);
-	else
-		return (
-			<Page className='block p-[2rem] pt-[6rem] !font-title md:pt-[7.5rem]'>
-				<h1 className='text-gradient mb-6 text-center font-exotic !text-2xl font-bold md:!text-5xl'>
-					Welcome back, {user.username}
-				</h1>
-				<Card className='mx-auto min-h-[30rem] min-w-full max-w-lg !font-display'>
-					<Tabs defaultTab='chart'>
-						<CardHeader separate>
+
+	return (
+		<Page className='mx-[2rem] flex flex-col items-center !justify-start pt-8 !font-title'>
+			<h1 className='text-gradient mb-8 w-full text-center font-exotic !text-xl font-bold md:!text-4xl'>
+				Welcome back, {user.username}.
+			</h1>
+			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
+				<Card className='mb-4 min-h-full min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
+					<Tabs defaultTab='Duration'>
+						<CardHeader separate className='flex-col @2xl:flex-row'>
 							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
 								UPx Refill Station
 							</h1>
-							<TabList>
-								<TabButton text='Chart' value='chart' />
-								<TabButton text='Test' value='test' />
+							<TabList className='mt-4 shadow-md @2xl:mt-0'>
+								<TabButton
+									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									text='Duration'
+									value='Duration'
+								/>
+								<TabButton
+									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									text='Water'
+									value='Water'
+								/>
+								<TabButton
+									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									text='Plastic'
+									value='Plastic'
+								/>
+								<TabButton
+									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									text='Bottles'
+									value='Bottles'
+								/>
 							</TabList>
 						</CardHeader>
 						<CardContent className='mt-0 pt-0'>
-							<TabContent>
-								<Tab className='h-full' value='chart'>
+							<TabContent animate={false}>
+								<Tab className='h-full' value='Duration'>
 									<Chart
 										data={durationChartData}
 										axisLeft={
 											getDataAxisSettings(
-												'Total Duration (min)',
-												-50
+												'Total Duration (min)'
 											) as any
 										}
 										axisBottom={
 											getDateAxisSettings(ticks) as any
 										}
 										margin={{
-											top: 50,
-											bottom: 50,
-											left: 60,
-											right: 50,
+											top: 30,
+											right: 35,
+											bottom: 25,
+											left: 35,
 										}}
 										enableArea
 										defs={chartAreaDefs}
 										fill={[{ match: '*', id: 'gradient' }]}
 									/>
 								</Tab>
-								<Tab value='test'>
-									<h1>Test</h1>
+								<Tab className='h-full' value='Water'>
+									<Chart
+										data={waterChartData}
+										margin={{
+											top: 30,
+											right: 35,
+											bottom: 25,
+											left: 35,
+										}}
+										axisLeft={
+											getDataAxisSettings(
+												'Distributed Water (L)'
+											) as any
+										}
+										axisBottom={
+											getDateAxisSettings(ticks) as any
+										}
+										enableArea
+										defs={chartAreaDefs}
+										fill={[{ match: '*', id: 'gradient' }]}
+									/>
+								</Tab>
+								<Tab className='h-full' value='Plastic'>
+									<Chart
+										data={plasticChartData}
+										margin={{
+											top: 30,
+											right: 35,
+											bottom: 25,
+											left: 35,
+										}}
+										axisLeft={
+											getDataAxisSettings(
+												'Economized Plastic (kg)'
+											) as any
+										}
+										axisBottom={
+											getDateAxisSettings(ticks) as any
+										}
+										enableArea
+										defs={chartAreaDefs}
+										fill={[{ match: '*', id: 'gradient' }]}
+									/>
+								</Tab>
+								<Tab className='h-full' value='Bottles'>
+									<Chart
+										data={bottleChartData}
+										margin={{
+											top: 30,
+											right: 35,
+											bottom: 25,
+											left: 35,
+										}}
+										axisLeft={
+											getDataAxisSettings(
+												'Bottles'
+											) as any
+										}
+										axisBottom={
+											getDateAxisSettings(ticks) as any
+										}
+										enableArea
+										defs={chartAreaDefs}
+										fill={[{ match: '*', id: 'gradient' }]}
+									/>
 								</Tab>
 							</TabContent>
 						</CardContent>
 					</Tabs>
 				</Card>
-			</Page>
-			/*
-			<Page className='!font-title block p-[2rem] pt-[6rem] md:pt-[7.5rem]'>
-				<Title className='text-gradient font-exotic mb-6 text-center !text-2xl font-bold md:!text-5xl'>
-					Welcome back, {'unreaalism!'}
-				</Title>
-				<Flex>
-					<Card className='!font-display mx-auto min-w-[100%] max-w-lg'>
-						<Title className='text-gradient font-exotic'>
-							UPx Refill Station
-						</Title>
-						<TabGroup>
-							<TabList defaultValue={1} className='mt-6'>
-								<Tab value={1}>Duration</Tab>
-								<Tab value={2}>Plastic</Tab>
-								<Tab value={3}>Water</Tab>
-								<Tab value={4}>Bottles</Tab>
-							</TabList>
-							<TabPanels>
-								<TabPanel>
-									<AreaChart
-										className='mt-6'
-										data={durationChartData}
-										index='date'
-										categories={['Total Duration']}
-										colors={['zinc']}
-										valueFormatter={getFormatter('min')}
-										curveType='natural'
-										yAxisWidth={50}
-										maxValue={durationChartData.reduce(
-											(max: number, item: any) =>
-												Math.max(
-													max,
-													item['Total Duration']
-												),
-											0
-										)}
-									/>
-								</TabPanel>
-								<TabPanel>
-									<AreaChart
-										className='mt-6'
-										data={plasticChartData}
-										index='date'
-										categories={[
-											'Economized Plastic Waste',
-										]}
-										colors={['purple']}
-										valueFormatter={getFormatter('kg')}
-										curveType='natural'
-										yAxisWidth={50}
-										maxValue={plasticChartData.reduce(
-											(max: number, item: any) =>
-												Math.max(
-													max,
-													item[
-														'Economized Plastic Waste'
-													]
-												),
-											0
-										)}
-									/>
-								</TabPanel>
-								<TabPanel>
-									<AreaChart
-										className='mt-6'
-										data={waterChartData}
-										index='date'
-										categories={['Distributed Water']}
-										colors={['blue']}
-										valueFormatter={getFormatter('L')}
-										curveType='natural'
-										yAxisWidth={50}
-										maxValue={waterChartData.reduce(
-											(max: number, item: any) =>
-												Math.max(
-													max,
-													item['Distributed Water']
-												),
-											0
-										)}
-									/>
-								</TabPanel>
-								<TabPanel>
-									<AreaChart
-										className='mt-6'
-										data={bottleChartData}
-										index='date'
-										categories={[
-											'Bottle Quantity Equivalent',
-										]}
-										colors={['teal']}
-										valueFormatter={getFormatter('')}
-										curveType='natural'
-										yAxisWidth={50}
-										maxValue={bottleChartData.reduce(
-											(max: number, item: any) =>
-												Math.max(
-													max,
-													item[
-														'Bottle Quantity Equivalent'
-													]
-												),
-											0
-										)}
-									/>
-								</TabPanel>
-							</TabPanels>
-						</TabGroup>
-					</Card>
-				</Flex>
-			</Page>
-			*/
-		);
+				<Card className='mb-8 min-h-full min-w-full md:col-span-1'>
+					<CardHeader separate className='flex-col md:flex-row'>
+						<h1 className='font-exotic text-2xl font-semibold text-foreground'>
+							Example card
+						</h1>
+					</CardHeader>
+					<CardContent></CardContent>
+				</Card>
+			</div>
+		</Page>
+	);
 };
 
 export default Component;

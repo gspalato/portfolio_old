@@ -14,7 +14,7 @@ const Component: React.FC<ICardProps> = (props) => {
 	const classNames = classes(
 		Styles.card,
 		rest.className,
-		'h-[23rem] w-[23rem] rounded-lg border border-border bg-background ring-1 ring-black flex flex-col pb-5'
+		'min-h-[10rem] rounded-lg border border-border bg-background ring-1 ring-black flex flex-col pb-5'
 	);
 
 	return (
