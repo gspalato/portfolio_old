@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/lib/auth/useAuth';
 
-const ApiLink = new HttpLink({ uri: 'http://3.223.11.90:4000/gql' });
+const ApiLink = new HttpLink({ uri: 'http://3.223.11.90/api' });
 
 const AuthMiddleware = (token: string) =>
 	new ApolloLink((operation, forward) => {
@@ -39,7 +39,7 @@ export const useRealityClient = () => {
 };
 
 const Client = new ApolloClient({
-	uri: 'http://3.223.11.90:4000/gql',
+	link: ApiLink,
 	cache: new InMemoryCache(),
 });
 
