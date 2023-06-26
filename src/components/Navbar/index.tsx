@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
@@ -11,21 +11,18 @@ import { useLayout } from '@/lib/layout';
 const WrapperVariants = {
 	initial: {
 		opacity: 0,
-		y: 0,
 		transition: {
 			duration: 0.3,
 		},
 	},
 	animate: {
 		opacity: 1,
-		y: 0,
 		transition: {
 			duration: 0.3,
 		},
 	},
 	exit: {
 		opacity: 0,
-		y: 0,
 		transition: {
 			delay: 0.3,
 			duration: 0.3,
@@ -74,7 +71,6 @@ const Component: React.FC<INavbarProps> = (props) => {
 
 	const classNames = classes(
 		'flex h-20 w-[calc(100%-5px)] absolute overflow-hidden z-[101]',
-		!defaultNavbarEnabled && 'hidden',
 		className
 	);
 
@@ -103,7 +99,7 @@ const Component: React.FC<INavbarProps> = (props) => {
     }, [isExpanded, linkAnimation, wrapperAnimation])
     */
 
-	return (
+	return defaultNavbarEnabled ? (
 		<>
 			<motion.nav id='navbar' className={classNames}>
 				<div className='mx-auto flex w-full items-center justify-between px-[2.23rem]'>
@@ -123,16 +119,13 @@ const Component: React.FC<INavbarProps> = (props) => {
 			<AnimatePresence mode='wait'>
 				{isExpanded && (
 					<motion.div
-						className='absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#0001] backdrop-blur-lg transition-all duration-200 ease-in-out md:justify-end'
+						className='absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#0001] backdrop-blur-lg ease-in-out md:justify-end'
 						initial='initial'
 						animate='animate'
 						exit='exit'
 						variants={WrapperVariants}
 						style={{
 							pointerEvents: isExpanded ? 'all' : 'none',
-							backdropFilter: isExpanded
-								? 'blur(7px)'
-								: 'blur(0px)',
 						}}
 					>
 						<motion.div className='flex h-fit w-fit flex-col px-20'>
@@ -154,7 +147,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 				)}
 			</AnimatePresence>
 		</>
-	);
+	) : null;
 };
 
 export default Component;
