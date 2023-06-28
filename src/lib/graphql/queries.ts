@@ -12,6 +12,7 @@ const GET_RESUMES = gql`
     query {
         resumes {
             date,
+            totalUses,
             totalDuration,
             distributedWater,
             economizedPlastic,

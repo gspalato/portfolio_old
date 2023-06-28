@@ -39,10 +39,7 @@ const chartAreaDefs = [
 ];
 
 const Component: React.FC = () => {
-	const [durationChartData, setDurationChartData] = useState<any>([]);
-	const [plasticChartData, setPlasticChartData] = useState<any>([]);
-	const [waterChartData, setWaterChartData] = useState<any>([]);
-	const [bottleChartData, setBottleChartData] = useState<any>([]);
+	const [chartData, setChartData] = useState<any>([]);
 
 	const [ticks, setTicks] = useState<any>([]);
 
@@ -66,10 +63,21 @@ const Component: React.FC = () => {
 
 			setTicks([firstDate, lastDate]);
 
+			const useChartData = [
+				{
+					id: 'Total Uses',
+					color: '#ddddff',
+					data: resumes.map((resume: any) => ({
+						x: resume.date,
+						y: resume.totalUses
+					}))
+				}
+			]
+
 			const durationChartData = [
 				{
 					id: 'Total Duration',
-					color: '#ddddff',
+					color: '#ff0000',
 					data: resumes.map((resume: any) => ({
 						x: resume.date,
 						y: (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
@@ -110,10 +118,13 @@ const Component: React.FC = () => {
 				},
 			];
 
-			setDurationChartData(durationChartData);
-			setPlasticChartData(plasticChartData);
-			setWaterChartData(waterChartData);
-			setBottleChartData(bottleChartData);
+			setChartData({
+				uses: useChartData,
+				duration: durationChartData,
+				plastic: plasticChartData,
+				water: waterChartData,
+				bottles: bottleChartData,
+			})
 		},
 	});
 
@@ -145,6 +156,11 @@ const Component: React.FC = () => {
 							<TabList className='mt-4 shadow-md @2xl:mt-0'>
 								<TabButton
 									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									text='Uses'
+									value='Uses'
+								/>
+								<TabButton
+									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
 									text='Duration'
 									value='Duration'
 								/>
@@ -167,9 +183,31 @@ const Component: React.FC = () => {
 						</CardHeader>
 						<CardContent className='mt-0 pt-0'>
 							<TabContent animate={false}>
+							<Tab className='h-full' value='Uses'>
+									<Chart
+										data={chartData.uses}
+										axisLeft={
+											getDataAxisSettings(
+												'Uses'
+											) as any
+										}
+										axisBottom={
+											getDateAxisSettings(ticks) as any
+										}
+										margin={{
+											top: 30,
+											right: 35,
+											bottom: 25,
+											left: 35,
+										}}
+										enableArea
+										defs={chartAreaDefs}
+										fill={[{ match: '*', id: 'gradient' }]}
+									/>
+								</Tab>
 								<Tab className='h-full' value='Duration'>
 									<Chart
-										data={durationChartData}
+										data={chartData.duration}
 										axisLeft={
 											getDataAxisSettings(
 												'Total Duration (min)'
@@ -191,7 +229,7 @@ const Component: React.FC = () => {
 								</Tab>
 								<Tab className='h-full' value='Water'>
 									<Chart
-										data={waterChartData}
+										data={chartData.water}
 										margin={{
 											top: 30,
 											right: 35,
@@ -213,7 +251,7 @@ const Component: React.FC = () => {
 								</Tab>
 								<Tab className='h-full' value='Plastic'>
 									<Chart
-										data={plasticChartData}
+										data={chartData.plastic}
 										margin={{
 											top: 30,
 											right: 35,
@@ -235,7 +273,7 @@ const Component: React.FC = () => {
 								</Tab>
 								<Tab className='h-full' value='Bottles'>
 									<Chart
-										data={bottleChartData}
+										data={chartData.bottles}
 										margin={{
 											top: 30,
 											right: 35,
