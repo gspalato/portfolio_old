@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { LineSvgProps, ResponsiveLine } from '@nivo/line';
 
-import { BaseChartTheme } from './theme';
+import { BaseChartTheme } from './Theme';
 import CustomTooltip from './Tooltip';
 
 import classes from '@/lib/classes';
@@ -42,9 +42,9 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
 					'legends',
 				]}
 				enablePoints
-				pointSize={6}
+				pointSize={5}
 				pointColor='#000'
-				pointBorderWidth={1.5}
+				pointBorderWidth={1.25}
 				pointBorderColor={{ from: 'serieColor' }}
 				/* Tooltip */
 				useMesh={true}

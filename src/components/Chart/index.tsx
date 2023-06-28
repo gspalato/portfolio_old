@@ -1,1 +1,1 @@
-export { default as ResponsiveLineChart } from './line';
+export { default as ResponsiveLineChart } from './Line';

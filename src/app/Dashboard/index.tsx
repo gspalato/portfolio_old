@@ -127,8 +127,6 @@ const Component: React.FC = () => {
 		};
 	});
 
-	console.log(`Is token valid? ${isTokenValid}`);
-
 	if (loading)
 		return <Loading />;
 
