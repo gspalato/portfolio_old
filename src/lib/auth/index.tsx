@@ -1,4 +1,7 @@
+import * as jose from 'jose'
 import { createContext, useContext } from 'react';
+
+import { User } from '@/types/User';
 
 interface IAuthContextData {
 	user?: any;
@@ -13,13 +16,13 @@ const useAuth = () => useContext(AuthContext);
 const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const { children } = props;
 
-	const getUser = (): any => {
+	const getUser = (): User | null => {
 		let token = getToken();
 		if (!token)
 			return null;
 
-		let content = require('jwt-decode')(token) as any;
-		let user = content.user;
+		let content = jose.decodeJwt(token);
+		let user = JSON.parse(content.user as string);
 		return user;
 	};
 

@@ -2,11 +2,12 @@ import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
 import { useEffect, useState } from 'react';
 
-import Page from '@/components/Page';
-import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
+import Loading from "@/app/Loading";
 
 import { Card, CardContent, CardHeader } from '@/components/Card';
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
+import Page from '@/components/Page';
+import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
 
 import { useAuth } from '@/lib/auth';
 import { GET_RESUMES } from '@/lib/graphql/queries';
@@ -126,22 +127,13 @@ const Component: React.FC = () => {
 		};
 	});
 
-	const getFormatter = (suffix: string) => (number: number) =>
-		`${Intl.NumberFormat('us').format(number).toString()}${suffix}`;
-
 	if (loading)
-		return (
-			<Page>
-				<section className='bg-black text-foreground'>
-					<h1 style={{ fontFamily: 'Space Grotesk' }}>Loading...</h1>
-				</section>
-			</Page>
-		);
+		return <Loading />;
 
 	return (
 		<Page className='mx-[2rem] flex flex-col items-center !justify-start pt-8 !font-title'>
 			<h1 className='text-gradient mb-8 w-full text-center font-exotic !text-xl font-bold md:!text-4xl'>
-				Welcome back, {user.username}.
+				Welcome back, {user.Username}.
 			</h1>
 			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
 				<Card className='mb-4 min-h-full min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
