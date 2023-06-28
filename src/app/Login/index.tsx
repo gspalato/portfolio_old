@@ -19,7 +19,7 @@ const Component = () => {
 	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
 	const [userJson, setUserJson] = useState<string | null>(null);
 
-	const { token, setToken } = useAuth();
+	const { token, isTokenValid, setToken, setTokenValidity } = useAuth();
 
 	const [authenticate] = useMutation(AUTHENTICATE_USER, {
 		variables: {
@@ -48,7 +48,10 @@ const Component = () => {
 
 	useEffect(() => {
 		if (window) {
-			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
+			if (fetchedToken && fetchedToken.length > 0) {
+				setToken(fetchedToken)
+				setTokenValidity(true);
+			};
 		}
 	}, [fetchedToken, userJson]);
 
@@ -58,7 +61,7 @@ const Component = () => {
 		setSubmitting(true);
 	};
 
-	return success || token ? (
+	return success || (token && isTokenValid) ? (
 		<Navigate to='/dashboard' />
 	) : (
 		<Page>

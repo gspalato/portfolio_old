@@ -46,7 +46,7 @@ const Component: React.FC = () => {
 
 	const [ticks, setTicks] = useState<any>([]);
 
-	const { user } = useAuth();
+	const { user, isTokenValid } = useAuth();
 	const {
 		enableDefaultNavbar,
 		disableDefaultNavbar,
@@ -126,6 +126,8 @@ const Component: React.FC = () => {
 			enableDefaultNavbar();
 		};
 	});
+
+	console.log(`Is token valid? ${isTokenValid}`);
 
 	if (loading)
 		return <Loading />;

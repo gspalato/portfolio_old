@@ -13,7 +13,7 @@ import { CHECK_AUTH } from "@/lib/graphql/queries";
 const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
     const { token } = useAuth();
 
-    const [valid, setValid] = React.useState<boolean>(false);
+    const { isTokenValid, setTokenValidity, expire } = useAuth();
 
     const [check, { loading, error }] = useLazyQuery(CHECK_AUTH, {
         variables: {
@@ -21,10 +21,14 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
         },
         onCompleted: (data) => {
             let payload = data.isAuthenticated;
-            setValid(payload.successful);
+            setTokenValidity(payload.successful);
+
+            if (!payload.successful)
+                expire();
         },
-        onError: (error) => {
-            setValid(false);
+        onError: () => {
+            setTokenValidity(false);
+            expire();
         }
     });
 
@@ -40,7 +44,7 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
         return ( <Navigate to="/login" />);
     }
 
-    return valid ? (
+    return isTokenValid ? (
         <>{props.children}</>
     ) : ( <Navigate to="/login" />)
 }
