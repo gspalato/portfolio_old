@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-import { useAuth } from "@/lib/auth/useAuth";
+import { useAuth } from "@/lib/auth";
 
 const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
     const { token, user } = useAuth();
