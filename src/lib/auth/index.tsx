@@ -1,4 +1,3 @@
-import decode from 'jwt-decode';
 import { createContext, useContext } from 'react';
 
 interface IAuthContextData {
@@ -19,7 +18,7 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 		if (!token)
 			return null;
 
-		let content = decode(token) as any;
+		let content = require('jwt-decode')(token) as any;
 		let user = content.user;
 		return user;
 	};

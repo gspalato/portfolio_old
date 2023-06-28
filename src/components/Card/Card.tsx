@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 
 import classes from '@/lib/classes';
 
-import Styles from './card.module.sass';
-
 interface ICardProps extends React.PropsWithChildren {
 	className?: string;
 }
@@ -12,7 +10,6 @@ const Component: React.FC<ICardProps> = (props) => {
 	const { children, ...rest } = props;
 
 	const classNames = classes(
-		Styles.card,
 		rest.className,
 		'min-h-[10rem] rounded-lg border border-border bg-background ring-1 ring-black flex flex-col pb-5'
 	);
