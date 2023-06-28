@@ -8,7 +8,7 @@ import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
 import { Card, CardContent, CardHeader } from '@/components/Card';
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
 
-import { useAuth } from '@/lib/auth/useAuth';
+import { useAuth } from '@/lib/auth';
 import { GET_RESUMES } from '@/lib/graphql/queries';
 import { useLayout } from '@/lib/layout';
 

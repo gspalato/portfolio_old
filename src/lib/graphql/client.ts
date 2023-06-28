@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { useMemo } from 'react';
 
-import { useAuth } from '@/lib/auth/useAuth';
+import { useAuth } from '@/lib/auth';
 
 const ApiLink = new HttpLink({ uri: 'http://3.223.11.90/api' });
 

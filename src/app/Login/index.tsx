@@ -6,7 +6,7 @@ import Input from '@/components/Input';
 import Page from '@/components/Page';
 import { useMutation } from '@apollo/client';
 
-import { useAuth } from '@/lib/auth/useAuth';
+import { useAuth } from '@/lib/auth';
 import { AUTHENTICATE_USER } from '@/lib/graphql/mutations';
 
 const Component = () => {
@@ -19,7 +19,7 @@ const Component = () => {
 	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
 	const [userJson, setUserJson] = useState<string | null>(null);
 
-	const { setUser, token, setToken } = useAuth();
+	const { token, setToken } = useAuth();
 
 	const [authenticate] = useMutation(AUTHENTICATE_USER, {
 		variables: {
@@ -49,7 +49,6 @@ const Component = () => {
 	useEffect(() => {
 		if (window) {
 			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
-			if (userJson && userJson.length > 0) setUser(userJson);
 		}
 	}, [fetchedToken, userJson]);
 
