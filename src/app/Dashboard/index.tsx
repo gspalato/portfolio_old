@@ -164,27 +164,27 @@ const Component: React.FC = () => {
 							</h1>
 							<TabList className='mt-4 shadow-md @2xl:mt-0'>
 								<TabButton
-									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
 									text='Uses'
 									value='Uses'
 								/>
 								<TabButton
-									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
 									text='Duration'
 									value='Duration'
 								/>
 								<TabButton
-									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
 									text='Water'
 									value='Water'
 								/>
 								<TabButton
-									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
 									text='Plastic'
 									value='Plastic'
 								/>
 								<TabButton
-									className='min-w-[70px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
 									text='Bottles'
 									value='Bottles'
 								/>
