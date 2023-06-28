@@ -58,15 +58,17 @@ const Component: React.FC = () => {
 			console.log('Fetched data from Reality:');
 			console.log(resumes);
 
-			let firstDate = resumes[0].date;
-			let lastDate = resumes[resumes.length - 1].date;
+			const timestampToDateString = (timestamp: number): string => {
+				let date = new Date(timestamp * 1000);
+				let formatted = date.toLocaleDateString('pt-BR');
+
+				return formatted;
+			}
+
+			let firstDate = timestampToDateString(resumes[0].timestamp);
+			let lastDate = timestampToDateString(resumes[resumes.length - 1].timestamp);
 
 			setTicks([firstDate, lastDate]);
-
-			const timestampToDateString = (timestamp: number) => {
-				let date = new Date(timestamp * 1000);
-				return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
-			}
 
 			const useChartData = [
 				{
@@ -142,6 +144,8 @@ const Component: React.FC = () => {
 			enableDefaultNavbar();
 		};
 	});
+
+	console.log(chartData)
 
 	if (loading)
 		return <Loading />;

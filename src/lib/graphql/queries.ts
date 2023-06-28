@@ -11,7 +11,7 @@ const CHECK_AUTH = gql`
 const GET_RESUMES = gql`
     query {
         resumes {
-            date,
+            timestamp,
             totalUses,
             totalDuration,
             distributedWater,
