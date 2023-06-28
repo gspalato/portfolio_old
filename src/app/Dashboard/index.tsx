@@ -63,12 +63,17 @@ const Component: React.FC = () => {
 
 			setTicks([firstDate, lastDate]);
 
+			const timestampToDateString = (timestamp: number) => {
+				let date = new Date(timestamp * 1000);
+				return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+			}
+
 			const useChartData = [
 				{
 					id: 'Total Uses',
 					color: '#ddddff',
 					data: resumes.map((resume: any) => ({
-						x: resume.date,
+						x: timestampToDateString(resume.timestamp),
 						y: resume.totalUses
 					}))
 				}
@@ -77,9 +82,9 @@ const Component: React.FC = () => {
 			const durationChartData = [
 				{
 					id: 'Total Duration',
-					color: '#ff0000',
+					color: '#ffe000',
 					data: resumes.map((resume: any) => ({
-						x: resume.date,
+						x: timestampToDateString(resume.timestamp),
 						y: (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
 					})),
 				},
@@ -90,7 +95,7 @@ const Component: React.FC = () => {
 					id: 'Economized Plastic Waste',
 					color: '#590995',
 					data: resumes.map((resume: any) => ({
-						x: resume.date,
+						x: timestampToDateString(resume.timestamp),
 						y: (resume.economizedPlastic / 1000).toFixed(2),
 					})),
 				},
@@ -101,7 +106,7 @@ const Component: React.FC = () => {
 					id: 'Distributed Water',
 					color: '#0066ff',
 					data: resumes.map((resume: any) => ({
-						x: resume.date,
+						x: timestampToDateString(resume.timestamp),
 						y: (resume.distributedWater / 1000).toFixed(2),
 					})),
 				},
@@ -112,7 +117,7 @@ const Component: React.FC = () => {
 					id: 'Bottle Quantity Equivalent',
 					color: '#03c4a1',
 					data: resumes.map((resume: any) => ({
-						x: resume.date,
+						x: timestampToDateString(resume.timestamp),
 						y: Math.round(resume.bottleQuantityEquivalent),
 					})),
 				},
@@ -148,7 +153,7 @@ const Component: React.FC = () => {
 			</h1>
 			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
 				<Card className='mb-4 min-h-full min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
-					<Tabs defaultTab='Duration'>
+					<Tabs defaultTab='Water'>
 						<CardHeader separate className='flex-col @2xl:flex-row'>
 							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
 								UPx Refill Station
