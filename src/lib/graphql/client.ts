@@ -10,7 +10,9 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/lib/auth';
 
-const ApiLink = new HttpLink({ uri: import.meta.env.GatewayUrl });
+import { GATEWAY_URL } from '@/constants';
+
+const ApiLink = new HttpLink({ uri: GATEWAY_URL });
 
 const AuthMiddleware = (token: string) =>
 	new ApolloLink((operation, forward) => {
@@ -26,11 +28,14 @@ const AuthMiddleware = (token: string) =>
 	});
 
 export const useRealityClient = () => {
-	const { token } = useAuth();
+	const { token, isTokenValid } = useAuth();
 
 	const client = useMemo<ApolloClient<NormalizedCacheObject>>(() => {
 		return new ApolloClient({
-			link: token ? from([AuthMiddleware(token), ApiLink]) : ApiLink,
+			link:
+				token && isTokenValid
+					? from([AuthMiddleware(token), ApiLink])
+					: ApiLink,
 			cache: new InMemoryCache(),
 		});
 	}, [token]);
