@@ -11,7 +11,7 @@ const Component: React.FC<SliceTooltipProps> = (props) => {
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.1, delay: 0.01 }}
 		>
-			<h1 className='w-full border-b border-border py-2 text-center'>
+			<h1 className='w-full border-b border-[#ffffff11] py-2 text-center'>
 				<strong>{slice.points[0].data.x.toString()}</strong>
 			</h1>
 			{slice.points.map((point) => (
