@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/github/contributors/gspalato/portfolio?style=for-the-badge">
 </div>
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -31,8 +30,6 @@
     <a href="https://github.com/gspalato/reality/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -64,52 +61,53 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 Reality is a microservice GraphQL back-end and platform for my projects, allowing easy deployments with an authentication server and database.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-* [React](https://react.dev/)
-* [Vite](https://vitejs.dev)
-* [TailwindCSS](https://tailwindcss.com)
-* [Apollo GraphQL](https://www.apollographql.com/)
-* [Docker](https://www.docker.com/)
-* [Node.js](https://nodejs.org/)
+-   [React](https://react.dev/)
+-   [Vite](https://vitejs.dev)
+-   [TailwindCSS](https://tailwindcss.com)
+-   [Apollo GraphQL](https://www.apollographql.com/)
+-   [Docker](https://www.docker.com/)
+-   [Node.js](https://nodejs.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
+
 ### Prerequisites
 
-* Docker or Node.js
+-   Docker or Node.js
 
 ### Installation
 
 To get a local copy up and running with:
 
 #### Docker
+
 1. Clone the repo
+
     ```sh
     git clone https://github.com/gspalato/portfolio.git
     ```
 
 2. Build docker image
+
     ```sh
     docker compose build
     ```
 
-3. Configure environment variables inside Dockerfile:
+3. Configure environment variables in a `.env` file:
+
     ```env
     VITE_GatewayUrl=reality_api_url
     ```
@@ -120,43 +118,46 @@ To get a local copy up and running with:
     ```
 
 #### Node.js
+
 1. Clone the repo
+
     ```sh
     git clone https://github.com/gspalato/portfolio.git
     ```
 
 2. Install dependencies
+
     ```sh
     yarn
     ```
 
 3. Configure environment variables in a `.env` file:
+
     ```env
     VITE_GatewayUrl=reality_api_url
     ```
 
-3. Start it
+4. Start it
     ```sh
     yarn dev
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
-- [ ] Finish the Projects page.
-- [ ] Finish the About page.
-- [ ] Add more information to the Dashboard.
+-   [ ] Finish the Projects page.
+-   [ ] Finish the About page.
+-   [ ] Add more information to the Dashboard.
 
 See the [open issues](https://github.com/gspalato/portfolio/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -172,18 +173,16 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Gabriel Spalato Marques - [@gspalato](https://twitter.com/gspalato) - unreaalism@gmail.com
