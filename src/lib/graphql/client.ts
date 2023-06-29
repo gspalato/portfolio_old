@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/lib/auth';
 
-const ApiLink = new HttpLink({ uri: process.env.GatewayUrl });
+const ApiLink = new HttpLink({ uri: import.meta.env.GatewayUrl });
 
 const AuthMiddleware = (token: string) =>
 	new ApolloLink((operation, forward) => {

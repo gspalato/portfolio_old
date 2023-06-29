@@ -11,9 +11,7 @@ RUN npm i serve -g
 
 # Copy source code.
 COPY ./Portfolio .
-
-# Copy .env file containing the API URL.
-COPY ./.portfolio.env ./.env
+COPY ./Portfolio/.env ./.env
 
 RUN npm run build
 
