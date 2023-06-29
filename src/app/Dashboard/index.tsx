@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
 import { useEffect, useState } from 'react';
-import { FadeLoader } from 'react-spinners'; 
 
-import Loading from "@/app/Loading";
+import Loading from '@/app/Loading';
 
 import { Gradient as Button } from '@/components/Button';
 import { Card, CardContent, CardHeader } from '@/components/Card';
@@ -69,10 +68,12 @@ const Component: React.FC = () => {
 				let formatted = date.toLocaleDateString('pt-BR');
 
 				return formatted;
-			}
+			};
 
 			let firstDate = timestampToDateString(resumes[0].timestamp);
-			let lastDate = timestampToDateString(resumes[resumes.length - 1].timestamp);
+			let lastDate = timestampToDateString(
+				resumes[resumes.length - 1].timestamp
+			);
 
 			setTicks([firstDate, lastDate]);
 
@@ -82,10 +83,10 @@ const Component: React.FC = () => {
 					color: '#ddddff',
 					data: resumes.map((resume: any) => ({
 						x: timestampToDateString(resume.timestamp),
-						y: resume.totalUses
-					}))
-				}
-			]
+						y: resume.totalUses,
+					})),
+				},
+			];
 
 			const durationChartData = [
 				{
@@ -137,7 +138,7 @@ const Component: React.FC = () => {
 				plastic: plasticChartData,
 				water: waterChartData,
 				bottles: bottleChartData,
-			})
+			});
 		},
 	});
 
@@ -151,10 +152,9 @@ const Component: React.FC = () => {
 		};
 	});
 
-	console.log(chartData)
+	console.log(chartData);
 
-	if (loading)
-		return <Loading />;
+	if (loading) return <Loading />;
 
 	return (
 		<Page className='mx-[2rem] flex flex-col items-center !justify-start pt-8 !font-title'>
@@ -198,13 +198,11 @@ const Component: React.FC = () => {
 						</CardHeader>
 						<CardContent className='mt-0 pt-0'>
 							<TabContent animate={false}>
-							<Tab className='h-full' value='Uses'>
+								<Tab className='h-full' value='Uses'>
 									<Chart
 										data={chartData.uses}
 										axisLeft={
-											getDataAxisSettings(
-												'Uses'
-											) as any
+											getDataAxisSettings('Uses') as any
 										}
 										axisBottom={
 											getDateAxisSettings(ticks) as any
@@ -318,8 +316,7 @@ const Component: React.FC = () => {
 							Example card
 						</h1>
 					</CardHeader>
-					<CardContent>
-					</CardContent>
+					<CardContent></CardContent>
 				</Card>
 			</div>
 		</Page>

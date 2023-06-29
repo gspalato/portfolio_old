@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { FadeLoader } from 'react-spinners';
 
 import { Default as Button } from '@/components/Button';
 import Input from '@/components/Input';
@@ -49,6 +48,10 @@ const Component = () => {
 			},
 			onError(error) {
 				console.log(error);
+				console.log(error.cause);
+				console.log(error.clientErrors);
+				console.log(error.graphQLErrors);
+				console.log(error.stack);
 				setSubmitting(false);
 			},
 		}
@@ -118,9 +121,7 @@ const Component = () => {
 						onClick={authenticate}
 						disabled={submitting}
 					>
-						<h1 className='w-full text-center'>
-							Sign In
-						</h1>
+						<h1 className='w-full text-center'>Sign In</h1>
 					</Button>
 				</form>
 			</section>
