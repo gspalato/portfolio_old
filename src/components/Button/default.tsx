@@ -35,7 +35,7 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
 		bg-transparent
 		border
 		border-border
-		rounded-md
+		rounded-lg
 		text-border
 		font-display
 		font-bold
@@ -44,7 +44,8 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
 		py-[.65rem]
 		px-[1.75rem]
 		text-center
-		max-w-[200px w-fit]
+		max-w-[200px]
+		w-fit
 		cursor-none
 		`,
 		className
