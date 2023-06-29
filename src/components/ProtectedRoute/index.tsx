@@ -4,10 +4,10 @@ import { Navigate } from "react-router-dom";
 
 import Loading from "@/app/Loading";
 
-import Page from "@/components/Page";
-
 import { useAuth } from "@/lib/auth";
-import { CHECK_AUTH } from "@/lib/graphql/queries";
+import { CheckAuth } from "@/lib/graphql/queries";
+
+import { IsAuthenticatedPayload } from "@/types/IsAuthenticatedPayload";
 
 
 const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
@@ -15,12 +15,12 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 
     const { isTokenValid, setTokenValidity, expire } = useAuth();
 
-    const [check, { loading, error }] = useLazyQuery(CHECK_AUTH, {
+    const [check, { loading, error }] = useLazyQuery<CheckAuth.ReturnType>(CheckAuth.Query, {
         variables: {
             token: token,
         },
         onCompleted: (data) => {
-            let payload = data.isAuthenticated;
+            let payload: IsAuthenticatedPayload = data.isAuthenticated;
             setTokenValidity(payload.successful);
 
             if (!payload.successful)

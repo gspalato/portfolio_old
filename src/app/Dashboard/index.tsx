@@ -10,8 +10,10 @@ import Page from '@/components/Page';
 import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
 
 import { useAuth } from '@/lib/auth';
-import { GET_RESUMES } from '@/lib/graphql/queries';
+import { GetResumes } from '@/lib/graphql/queries';
 import { useLayout } from '@/lib/layout';
+
+import { Resume } from '@/types/Resume';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -43,7 +45,8 @@ const Component: React.FC = () => {
 
 	const [ticks, setTicks] = useState<any>([]);
 
-	const { user, isTokenValid } = useAuth();
+	const { user } = useAuth();
+
 	const {
 		enableDefaultNavbar,
 		disableDefaultNavbar,
@@ -51,9 +54,9 @@ const Component: React.FC = () => {
 		disableContentScrolling,
 	} = useLayout();
 
-	const { loading } = useQuery<{ resumes: any[] }>(GET_RESUMES, {
+	const { loading } = useQuery<GetResumes.ReturnType>(GetResumes.Query, {
 		onCompleted: (data) => {
-			const resumes: any[] = data.resumes;
+			const resumes = data.resumes;
 
 			console.log('Fetched data from Reality:');
 			console.log(resumes);
@@ -84,7 +87,7 @@ const Component: React.FC = () => {
 			const durationChartData = [
 				{
 					id: 'Total Duration',
-					color: '#ffe000',
+					color: '#ff0000',
 					data: resumes.map((resume: any) => ({
 						x: timestampToDateString(resume.timestamp),
 						y: (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes

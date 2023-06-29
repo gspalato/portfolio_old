@@ -7,7 +7,9 @@ import Page from '@/components/Page';
 import { useMutation } from '@apollo/client';
 
 import { useAuth } from '@/lib/auth';
-import { AUTHENTICATE_USER } from '@/lib/graphql/mutations';
+import { Authenticate } from '@/lib/graphql/mutations';
+
+import { AuthenticationPayload } from '@/types/AuthenticationPayload';
 
 const Component = () => {
 	const [username, setUsername] = useState('');
@@ -21,13 +23,13 @@ const Component = () => {
 
 	const { token, isTokenValid, setToken, setTokenValidity } = useAuth();
 
-	const [authenticate] = useMutation(AUTHENTICATE_USER, {
+	const [authenticate] = useMutation<Authenticate.ReturnType>(Authenticate.Mutation, {
 		variables: {
 			user: username,
 			pwd: password,
 		},
 		onCompleted(data) {
-			let payload = data.authenticate.authenticationPayload;
+			let payload: AuthenticationPayload = data.authenticate.authenticationPayload;
 			let success = payload.successful;
 
 			setSuccess(success);

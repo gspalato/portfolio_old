@@ -7,18 +7,11 @@ import { ResponsiveLineChart as Chart } from '@/components/Chart';
 import Page from '@/components/Page';
 
 import classes from '@/lib/classes';
-import { GET_RESUMES } from '@/lib/graphql/queries';
+import { GetResumes } from '@/lib/graphql/queries';
 
 import Styles from './upx.module.sass';
 
-/* Types */
-type RawResumeData = {
-	date: string;
-	totalDuration: number; // in seconds
-	distributedWater: number; // in mililiters
-	economizedPlastic: number; // in grams
-	bottleQuantityEquivalent: number; // in units
-};
+import { Resume } from '@/types/Resume';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -52,17 +45,24 @@ const Component: React.FC = () => {
 
 	console.log('Rendered UPx page.');
 
-	const { loading, error } = useQuery<{ resumes: RawResumeData[] }>(
-		GET_RESUMES,
+	const { loading, error } = useQuery<GetResumes.ReturnType>(
+		GetResumes.Query,
 		{
 			onCompleted: (data) => {
-				const resumes: RawResumeData[] = data.resumes;
+				const resumes = data.resumes;
 
 				console.log('Fetched data from Reality:');
 				console.log(resumes);
 
-				let firstDate = resumes[0].date;
-				let lastDate = resumes[resumes.length - 1].date;
+				const timestampToDateString = (timestamp: number): string => {
+					let date = new Date(timestamp * 1000);
+					let formatted = date.toLocaleDateString('pt-BR');
+	
+					return formatted;
+				}
+
+				let firstDate = timestampToDateString(resumes[0].timestamp);
+				let lastDate = timestampToDateString(resumes[resumes.length - 1].timestamp);
 
 				setTicks([firstDate, lastDate]);
 
@@ -70,8 +70,8 @@ const Component: React.FC = () => {
 					{
 						id: 'Total Duration',
 						color: '#ddddff',
-						data: resumes.map((resume: RawResumeData) => ({
-							x: resume.date,
+						data: resumes.map((resume) => ({
+							x: timestampToDateString(resume.timestamp),
 							y: (resume.totalDuration / 1000 / 60).toFixed(2), // in minutes
 						})),
 					},
@@ -81,8 +81,8 @@ const Component: React.FC = () => {
 					{
 						id: 'Economized Plastic Waste',
 						color: '#590995',
-						data: resumes.map((resume: RawResumeData) => ({
-							x: resume.date,
+						data: resumes.map((resume) => ({
+							x: timestampToDateString(resume.timestamp),
 							y: (resume.economizedPlastic / 1000).toFixed(2),
 						})),
 					},
@@ -92,8 +92,8 @@ const Component: React.FC = () => {
 					{
 						id: 'Distributed Water',
 						color: '#0066ff',
-						data: resumes.map((resume: RawResumeData) => ({
-							x: resume.date,
+						data: resumes.map((resume) => ({
+							x: timestampToDateString(resume.timestamp),
 							y: (resume.distributedWater / 1000).toFixed(2),
 						})),
 					},
@@ -103,8 +103,8 @@ const Component: React.FC = () => {
 					{
 						id: 'Bottle Quantity Equivalent',
 						color: '#03c4a1',
-						data: resumes.map((resume: RawResumeData) => ({
-							x: resume.date,
+						data: resumes.map((resume) => ({
+							x: timestampToDateString(resume.timestamp),
 							y: Math.round(resume.bottleQuantityEquivalent),
 						})),
 					},
