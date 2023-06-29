@@ -9,6 +9,9 @@ export default defineConfig({
 			'@': path.join(__dirname, 'src/'),
 		},
 	},
+	define: {
+		'process.env': process.env,
+	},
 	plugins: [react()],
 	server: {
 		watch: {
