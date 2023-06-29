@@ -10,7 +10,6 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/lib/auth';
 
-console.log(`Gateway URL: ${import.meta.env.VITE_GatewayUrl}`);
 const ApiLink = new HttpLink({ uri: import.meta.env.VITE_GatewayUrl });
 
 const AuthMiddleware = (token: string) =>
