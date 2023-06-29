@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
 import { useEffect, useState } from 'react';
+import { FadeLoader } from 'react-spinners'; 
 
 import Loading from "@/app/Loading";
 
+import { Gradient as Button } from '@/components/Button';
 import { Card, CardContent, CardHeader } from '@/components/Card';
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
 import Page from '@/components/Page';
@@ -14,6 +16,7 @@ import { GetResumes } from '@/lib/graphql/queries';
 import { useLayout } from '@/lib/layout';
 
 import { Resume } from '@/types/Resume';
+import { AnimatePresence } from 'framer-motion';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -315,7 +318,8 @@ const Component: React.FC = () => {
 							Example card
 						</h1>
 					</CardHeader>
-					<CardContent></CardContent>
+					<CardContent>
+					</CardContent>
 				</Card>
 			</div>
 		</Page>

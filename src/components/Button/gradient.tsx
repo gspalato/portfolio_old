@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import classes from '@/lib/classes';
 
-import Styles from './gradient.module.sass';
-
 interface IGradientButtonProps extends React.PropsWithChildren {
 	className?: string;
 	text: string;
@@ -39,7 +37,10 @@ const ButtonComponent: React.FC<IGradientButtonProps> = (props) => {
 		...rest
 	} = props;
 
-	const classNames = classes(Styles.buttonInner, className);
+	const classNames = classes(
+		'flex items-center align-center rounded-lg bg-black font-display font-bold py-[.65rem] px-[1.75rem] text-center bg-center bg-cover',
+		className
+	);
 
 	return (
 		<motion.button
@@ -54,7 +55,7 @@ const ButtonComponent: React.FC<IGradientButtonProps> = (props) => {
 			transition={{
 				duration: 0.075,
 			}}
-			className={Styles.buttonOuter}
+			className='h-fit w-fit max-w-[200px] rounded-lg p-[1px]'
 			style={{ background }}
 			onClick={() => onClick?.()}
 			type={type}

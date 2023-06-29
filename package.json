@@ -37,6 +37,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.0",
     "react-scroll-percentage": "^4.3.0",
+    "react-spinners": "^0.13.8",
     "react-virtualized-auto-sizer": "^1.0.17",
     "sass": "^1.62.1",
     "sort-by": "^1.2.0",

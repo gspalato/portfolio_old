@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import classes from '@/lib/classes';
 
-import Styles from './default.module.sass';
-
 interface IDefaultButtonProps extends React.PropsWithChildren {
 	className?: string;
 	fill?: boolean;
@@ -29,7 +27,28 @@ const DefaultButtonComponent: React.FC<IDefaultButtonProps> = (props) => {
 		...rest
 	} = props;
 
-	const classNames = classes(Styles.button, className);
+	const classNames = classes(
+		`
+		flex
+		items-center
+		align-center
+		bg-transparent
+		border
+		border-border
+		rounded-md
+		text-border
+		font-display
+		font-bold
+		text-sm
+		h-fit
+		py-[.65rem]
+		px-[1.75rem]
+		text-center
+		max-w-[200px w-fit]
+		cursor-none
+		`,
+		className
+	);
 
 	return (
 		<motion.button

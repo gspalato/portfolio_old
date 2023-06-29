@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import classes from '@/lib/classes';
 
-import Styles from './bare.module.sass';
-import { type } from 'os';
-
 interface IButtonProps extends React.PropsWithChildren {
 	className?: string;
 	text: string;
@@ -28,7 +25,27 @@ const ButtonComponent: React.FC<IButtonProps> = (props) => {
 		...rest
 	} = props;
 
-	const classNames = classes(Styles.button, className);
+	const classNames = classes(
+		`
+		flex
+		align-center
+		items-center
+		bg-transparent
+		border
+		border-border
+		text-border
+		font-display
+		font-bold
+		p-2
+		text-center
+		min-h-[1.5rem]
+		min-w-[1.5rem]
+		letter-spacing-[-0.025rem]
+		text-sm
+		rounded-lg
+		`,
+		className
+	);
 
 	return (
 		<motion.button

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { FadeLoader } from 'react-spinners';
 
-import { Gradient as Button } from '@/components/Button';
+import { Default as Button } from '@/components/Button';
 import Input from '@/components/Input';
 import Page from '@/components/Page';
 import { useMutation } from '@apollo/client';
@@ -23,37 +24,42 @@ const Component = () => {
 
 	const { token, setToken, setTokenValidity } = useAuth();
 
-	const [authenticate] = useMutation<Authenticate.ReturnType>(Authenticate.Mutation, {
-		variables: {
-			user: username,
-			pwd: password,
-		},
-		onCompleted(data) {
-			let payload: AuthenticationPayload = data.authenticate.authenticationPayload;
-			let success = payload.successful;
+	const [authenticate, { loading }] = useMutation<Authenticate.ReturnType>(
+		Authenticate.Mutation,
+		{
+			variables: {
+				user: username,
+				pwd: password,
+			},
+			onCompleted(data) {
+				let payload: AuthenticationPayload =
+					data.authenticate.authenticationPayload;
+				let success = payload.successful;
 
-			setSuccess(success);
+				setSuccess(success);
 
-			if (!success) {
-				// Handle login error.
-				return;
-			}
+				if (!success) {
+					// Handle login error.
+					return;
+				}
 
-			setFetchedToken(payload.token);
-			setUserJson(JSON.stringify(payload.user));
-			setSubmitting(false);
-		},
-		onError(error) {
-			console.log(error);
-		},
-	});
+				setFetchedToken(payload.token);
+				setUserJson(JSON.stringify(payload.user));
+				setSubmitting(false);
+			},
+			onError(error) {
+				console.log(error);
+				setSubmitting(false);
+			},
+		}
+	);
 
 	useEffect(() => {
 		if (window) {
 			if (fetchedToken && fetchedToken.length > 0) {
-				setToken(fetchedToken)
+				setToken(fetchedToken);
 				setTokenValidity(true);
-			};
+			}
 		}
 	}, [fetchedToken, userJson]);
 
@@ -106,13 +112,16 @@ const Component = () => {
 						onChange={(e: any) => setPassword(e.target.value)}
 					/>
 					<Button
-						text='Login'
+						text=''
 						type='submit'
-						background='linear-gradient(to right, #56ccf2, #2f80ed)'
-						overlay='#09090b'
+						className='h-10 w-[75%] !max-w-none !border-none !bg-[#fff] !text-center !text-[#000]'
 						onClick={authenticate}
 						disabled={submitting}
-					/>
+					>
+						<h1 className='w-full text-center'>
+							Sign In
+						</h1>
+					</Button>
 				</form>
 			</section>
 		</Page>
