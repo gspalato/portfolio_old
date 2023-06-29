@@ -11,7 +11,6 @@ RUN npm i serve -g
 
 # Copy source code.
 COPY ./Portfolio .
-COPY ./Portfolio/.env ./.env
 
 RUN npm run build
 
