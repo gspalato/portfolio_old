@@ -21,7 +21,7 @@ const Component = () => {
 	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
 	const [userJson, setUserJson] = useState<string | null>(null);
 
-	const { token, isTokenValid, setToken, setTokenValidity } = useAuth();
+	const { token, setToken, setTokenValidity } = useAuth();
 
 	const [authenticate] = useMutation<Authenticate.ReturnType>(Authenticate.Mutation, {
 		variables: {
@@ -63,7 +63,7 @@ const Component = () => {
 		setSubmitting(true);
 	};
 
-	return success || (token && isTokenValid) ? (
+	return success || token ? (
 		<Navigate to='/dashboard' />
 	) : (
 		<Page>
