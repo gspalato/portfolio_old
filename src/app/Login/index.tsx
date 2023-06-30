@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { Default as Button } from '@/components/Button';
+import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Page from '@/components/Page';
 import { useMutation } from '@apollo/client';
@@ -79,13 +79,13 @@ const Component = () => {
 			<section className='flex h-screen w-screen place-items-center justify-center px-8 pb-8 pt-20 tracking-tighter lg:p-20'>
 				<form
 					onSubmit={onSubmit}
-					className='flex h-[min(50rem,80%)] w-[clamp(30rem,75%,50rem)] flex-col items-center justify-center rounded-lg border border-border bg-background md:w-[min(30rem,75%)]'
+					className='md:bg-accents-0 flex h-[min(50rem,80%)] w-[clamp(30rem,75%,50rem)] flex-col items-center justify-center rounded-lg md:w-[min(30rem,75%)] md:border md:border-ring'
 				>
-					<h1 className='m-0 mb-8 font-display text-6xl font-extrabold'>
+					<h1 className='text-gradient m-0 mb-8 font-display text-6xl font-extrabold'>
 						Welcome!
 					</h1>
 					<Input
-						className='mb-6 border border-border font-title placeholder:text-[#ffffff22]'
+						className='mb-6 w-[75%] border border-border font-title shadow-sm placeholder:text-[#ffffff22]'
 						type='text'
 						placeholder='Username'
 						value={username}
@@ -100,7 +100,7 @@ const Component = () => {
 						onChange={(e: any) => setUsername(e.target.value)}
 					/>
 					<Input
-						className='mb-6 border border-border font-title placeholder:text-[#ffffff22]'
+						className='mb-6 w-[75%] border border-border font-title shadow-sm placeholder:text-[#ffffff22]'
 						type='password'
 						placeholder='Password'
 						value={password}
@@ -115,13 +115,12 @@ const Component = () => {
 						onChange={(e: any) => setPassword(e.target.value)}
 					/>
 					<Button
-						text=''
 						type='submit'
-						className='h-10 w-[75%] !max-w-none !border-none !bg-[#fff] !text-center !text-[#000]'
+						className='flex justify-center items-center h-10 w-[75%] !max-w-none !border-none !bg-shadowy !text-center !text-[#000] shadow-sm'
 						onClick={authenticate}
 						disabled={submitting}
 					>
-						<h1 className='w-full text-center'>Sign In</h1>
+						<h1 className='w-full text-center text-sm font-semibold'>Sign In</h1>
 					</Button>
 				</form>
 			</section>
