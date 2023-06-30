@@ -158,7 +158,7 @@ const Component: React.FC = () => {
 				Welcome back, {user.Username}.
 			</h1>
 			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
-				<Card className='mb-4 !min-h-0 min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
+				<Card className='mb-4 !min-h-[30rem] min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
 					<Tabs defaultTab='Water'>
 						<CardHeader separate className='flex-col @2xl:flex-row'>
 							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
