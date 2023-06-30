@@ -9,9 +9,6 @@ export default defineConfig(({ mode }) => ({
 			'@': path.join(__dirname, 'src/'),
 		},
 	},
-	define: {
-		'process.env': { ...process.env, ...loadEnv(mode, process.cwd()) },
-	},
 	plugins: [react()],
 	server: {
 		watch: {
