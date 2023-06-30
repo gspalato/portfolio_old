@@ -8,7 +8,6 @@ import ProjectCard from './components/ProjectCard';
 import { useLayout } from '@/lib/layout';
 import { AnimatePresence } from 'framer-motion';
 
-
 const Projects = [
 	{
 		title: 'Reality',
@@ -74,44 +73,21 @@ const Component = () => {
 				</h1>
 				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
 					<AnimatePresence mode='wait'>
-						{
-							Projects.map((project, i) => (
-								<ProjectCard
-									title={project.title}
-									description={project.description}
-									img={project.img}
-									link={project.link}
-
-									variants={ProjectCardAnimationVariants}
-									initial='initial'
-									animate='animate'
-									exit='initial'
-									custom={i}
-									key={uuid()}
-								/>
-							))
-						}
+						{Projects.map((project, i) => (
+							<ProjectCard
+								title={project.title}
+								description={project.description}
+								img={project.img}
+								link={project.link}
+								variants={ProjectCardAnimationVariants}
+								initial='initial'
+								animate='animate'
+								exit='initial'
+								custom={i}
+								key={i}
+							/>
+						))}
 					</AnimatePresence>
-					{/*
-					<ProjectCard
-						title='Reality'
-						description='A microservice platform and back-end.'
-						img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'
-						link='https://github.com/gspalato/reality'
-					/>
-					<ProjectCard
-						title='Title'
-						description='Lorem ipsum dolorem...'
-						img='https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg'
-						link=''
-					/>
-					<ProjectCard
-						title='Title'
-						description='Lorem ipsum dolorem...'
-						img='https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg'
-						link=''
-					/>
-					*/}
 				</div>
 				{/*
 				<div className='sticky h-[30rem] w-full px-8'>
