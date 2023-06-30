@@ -10,7 +10,7 @@ const Component: React.FC<ICardHeaderProps> = (props) => {
 
 	const classNames = classes(
 		'py-5 flex items-center justify-between px-6 md:min-h-[80px]',
-		separate ? 'border-b border-border' : '',
+		separate ? 'border-b border-ring' : '',
 		className
 	);
 

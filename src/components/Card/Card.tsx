@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
+import { HTMLMotionProps, motion } from 'framer-motion';
 
 import classes from '@/lib/classes';
 
-interface ICardProps extends React.PropsWithChildren {
+interface ICardProps extends HTMLMotionProps<'div'> {
 	className?: string;
 }
 
@@ -11,7 +11,7 @@ const Component: React.FC<ICardProps> = (props) => {
 
 	const classNames = classes(
 		rest.className,
-		'min-h-[10rem] rounded-lg border border-border bg-background ring-1 ring-black flex flex-col pb-5'
+		'min-h-[10rem] rounded-lg border border-ring bg-accents-1 ring-1 ring-black flex flex-col pb-5'
 	);
 
 	return (
@@ -19,6 +19,7 @@ const Component: React.FC<ICardProps> = (props) => {
 			whileHover={{ size: 1.125 }}
 			whileTap={{ size: 0.875 }}
 			className={classNames}
+			{...rest}
 		>
 			{children}
 		</motion.div>
