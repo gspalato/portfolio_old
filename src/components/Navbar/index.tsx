@@ -75,31 +75,6 @@ const Component: React.FC<INavbarProps> = (props) => {
 		className
 	);
 
-	// Sequential animation. Doesn't work as intended.
-	/*
-    const wrapperAnimation = useAnimation();
-    const linkAnimation = useAnimation();
-  
-    useEffect(() => {
-        const openAnimation = async () => {
-            await wrapperAnimation.start(WrapperVariants.animate);
-
-            await linkAnimation.start(LinkVariants.animate);
-        }
-
-        const closeAnimation = async () => {
-            await linkAnimation.start(LinkVariants.initial);
-
-            await wrapperAnimation.start(WrapperVariants.initial);
-        }
-
-        if (isExpanded)
-            openAnimation()
-        else
-            closeAnimation()
-    }, [isExpanded, linkAnimation, wrapperAnimation])
-    */
-
 	return defaultNavbarEnabled ? (
 		<>
 			<motion.nav id='navbar' className={classNames}>
@@ -125,9 +100,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 						animate='animate'
 						exit='exit'
 						variants={WrapperVariants}
-						style={{
-							pointerEvents: isExpanded ? 'all' : 'none',
-						}}
+						style={{ pointerEvents: isExpanded ? 'all' : 'none' }}
 					>
 						<motion.div className='flex h-fit w-fit flex-col px-20'>
 							{Routes.map((route, i) => (
