@@ -13,7 +13,7 @@ interface IProjectCardProps {
 }
 
 const Component: React.FC<IProjectCardProps> = (props) => {
-	const { img, title, description, link, ...rest } = props;
+	const { img, title, description, link } = props;
 
 	return (
 		<div
@@ -21,20 +21,22 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 			style={{ backgroundImage: `url(${img})` }}
 		>
 			<div className={Styles.layer} />
-			<div className='z-[9] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'>
+			<div className='z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'>
 				<div className='flex max-h-full w-fit flex-col items-start justify-between pr-4 before:rounded-lg'>
-					<h1 className='z-[10] font-display text-lg'>{title}</h1>
-					<p className='z-[10] overflow-hidden text-ellipsis break-words text-sm text-overlays-8'>
+					<h1 className='font-display text-lg'>{title}</h1>
+					<p className='overflow-hidden text-ellipsis break-words text-sm text-overlays-8'>
 						{description}
 					</p>
 				</div>
 				<Button
 					style={{ color: 'fff' }}
-					className='z-[1000] h-8 self-end !rounded-md !border-none !bg-overlays-6 px-4 py-2 text-center font-title text-xs !font-thin tracking-wider backdrop-blur-sm'
+					className='flex h-8 items-center justify-center self-end !rounded-md !border-none !bg-overlays-6 px-4 py-2 backdrop-blur-sm'
 					link={link}
 					whileHover={{ scale: 1.05 }}
 				>
-					View
+					<h1 className='h-fit w-fit text-center font-title text-xs !font-thin tracking-wider'>
+						View
+					</h1>
 				</Button>
 			</div>
 		</div>
