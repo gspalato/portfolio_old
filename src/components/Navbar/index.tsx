@@ -67,10 +67,11 @@ const Component: React.FC<INavbarProps> = (props) => {
 	const { className } = props;
 
 	const [isExpanded, setIsExpanded] = React.useState(false);
-	const { defaultNavbarEnabled } = useLayout();
+	const { defaultNavbarEnabled, navbarBlurEnabled } = useLayout();
 
 	const classNames = classes(
-		'flex h-20 w-[calc(100%-5px)] absolute overflow-hidden z-[101]',
+		'flex h-20 w-[calc(100%-5px)] absolute overflow-hidden z-[101] transition-all duration-200',
+		navbarBlurEnabled && 'backdrop-blur-md',
 		className
 	);
 
