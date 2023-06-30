@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import Loading from '@/app/Loading';
 
-import { Gradient as Button } from '@/components/Button';
 import { Card, CardContent, CardHeader } from '@/components/Card';
 import { ResponsiveLineChart as Chart } from '@/components/Chart';
 import Page from '@/components/Page';
@@ -13,9 +12,6 @@ import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
 import { useAuth } from '@/lib/auth';
 import { GetResumes } from '@/lib/graphql/queries';
 import { useLayout } from '@/lib/layout';
-
-import { Resume } from '@/types/Resume';
-import { AnimatePresence } from 'framer-motion';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -162,7 +158,7 @@ const Component: React.FC = () => {
 				Welcome back, {user.Username}.
 			</h1>
 			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
-				<Card className='mb-4 min-h-full min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
+				<Card className='mb-4 !min-h-0 min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
 					<Tabs defaultTab='Water'>
 						<CardHeader separate className='flex-col @2xl:flex-row'>
 							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
@@ -198,7 +194,10 @@ const Component: React.FC = () => {
 						</CardHeader>
 						<CardContent className='mt-0 pt-0'>
 							<TabContent animate={false}>
-								<Tab className='h-full' value='Uses'>
+								<Tab
+									className='h-full min-h-full min-w-full'
+									value='Uses'
+								>
 									<Chart
 										data={chartData.uses}
 										axisLeft={
@@ -218,7 +217,10 @@ const Component: React.FC = () => {
 										fill={[{ match: '*', id: 'gradient' }]}
 									/>
 								</Tab>
-								<Tab className='h-full' value='Duration'>
+								<Tab
+									className='h-full min-h-full min-w-full'
+									value='Duration'
+								>
 									<Chart
 										data={chartData.duration}
 										axisLeft={
@@ -240,7 +242,10 @@ const Component: React.FC = () => {
 										fill={[{ match: '*', id: 'gradient' }]}
 									/>
 								</Tab>
-								<Tab className='h-full' value='Water'>
+								<Tab
+									className='h-full min-h-full min-w-full'
+									value='Water'
+								>
 									<Chart
 										data={chartData.water}
 										margin={{
@@ -262,7 +267,10 @@ const Component: React.FC = () => {
 										fill={[{ match: '*', id: 'gradient' }]}
 									/>
 								</Tab>
-								<Tab className='h-full' value='Plastic'>
+								<Tab
+									className='h-full min-h-full min-w-full'
+									value='Plastic'
+								>
 									<Chart
 										data={chartData.plastic}
 										margin={{
@@ -284,7 +292,10 @@ const Component: React.FC = () => {
 										fill={[{ match: '*', id: 'gradient' }]}
 									/>
 								</Tab>
-								<Tab className='h-full' value='Bottles'>
+								<Tab
+									className='h-full min-h-full min-w-full'
+									value='Bottles'
+								>
 									<Chart
 										data={chartData.bottles}
 										margin={{

@@ -19,7 +19,10 @@ interface IResponsiveChartProps extends LineSvgProps {
 const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
 	const { className, data, margin, ...rest } = props;
 
-	const classNames = classes('h-full w-full min-h-0 min-w-0', className);
+	const classNames = classes(
+		'h-full w-full min-h-0 min-w-0 overflow-hidden',
+		className
+	);
 
 	return (
 		<div className={classNames}>
