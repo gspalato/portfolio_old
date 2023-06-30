@@ -54,7 +54,7 @@ a
   outline: 1px solid rgb(0, 255, 0, .25)
 
 .text-gradient
-  background: linear-gradient(180deg, #fff, #adadad)
+  background: linear-gradient(180deg, #fafafa, #adadad)
   background-clip: text
   -webkit-background-clip: text
   -webkit-text-fill-color: transparent
@@ -85,3 +85,9 @@ input:focus, input:active, input:hover
 
   .optimize
     @include optimize-performance
+
+  .blur-gradient
+    background: #000000aa
+    backdrop-filter: blur(10px)
+    mask: linear-gradient(transparent, black 85%)
+    transition: all 0.2s ease-in-out
