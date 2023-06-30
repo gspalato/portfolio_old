@@ -1,8 +1,8 @@
 import { HTMLMotionProps, motion } from "framer-motion";
-
-import classes from "@/lib/classes";
 import { Link } from "react-router-dom";
 import React from "react";
+
+import classes from "@/lib/classes";
 
 const ButtonVariants = {
     background: {
@@ -36,7 +36,7 @@ const Component: React.FC<IButtonProps> = (props) => {
         transition-all
         rounded-md
         z-[100]
-        cursor-none
+        !cursor-none
         text-sm
         font-display
         font-thin
@@ -56,7 +56,8 @@ const Component: React.FC<IButtonProps> = (props) => {
         >
             <motion.button
                 className={classNames}
-                whileHover={{ scale: 1.025 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 transformTemplate={({ scale }) => `scale(${scale})`}
                 {...rest}
             >
