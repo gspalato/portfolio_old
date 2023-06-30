@@ -141,7 +141,7 @@ const Component: React.FC = () => {
 			<Page className={Styles.page}>
 				<section className={Styles.boxes}>
 					<div className={Styles.chartGrid}>
-						<AnimatePresence>
+						<AnimatePresence mode='wait'>
 							{durationChartData.length > 0 && (
 								<motion.div
 									className={Styles.box}

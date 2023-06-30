@@ -13,7 +13,7 @@ const Component: React.FC<ITabContentProps> = (props) => {
 	const { currentTab } = useTabs();
 
 	return animate ? (
-		<AnimatePresence mode='popLayout'>{children}</AnimatePresence>
+		<AnimatePresence mode='wait'>{children}</AnimatePresence>
 	) : (
 		<>{children}</>
 	);
