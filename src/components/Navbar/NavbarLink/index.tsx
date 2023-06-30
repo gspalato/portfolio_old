@@ -1,8 +1,6 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 
-import classes from '@/lib/classes';
-
 import Styles from './navbarLink.module.sass';
 
 interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
@@ -22,7 +20,7 @@ const Component: React.FC<INavbarLinkProps> = (props) => {
         ...moreProps
     } = props;
 
-    const classNames = classes(Styles.link, className);
+    const classNames = [Styles.link, className].join(' ');
 
     return (
         <Link onClick={(() => setState(false))} to={link}>
