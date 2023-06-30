@@ -310,14 +310,6 @@ const Component: React.FC = () => {
 						</CardContent>
 					</Tabs>
 				</Card>
-				<Card className='mb-8 min-h-full min-w-full md:col-span-1'>
-					<CardHeader separate className='flex-col md:flex-row'>
-						<h1 className='font-exotic text-2xl font-semibold text-foreground'>
-							Example card
-						</h1>
-					</CardHeader>
-					<CardContent></CardContent>
-				</Card>
 			</div>
 		</Page>
 	);
