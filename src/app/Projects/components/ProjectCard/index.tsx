@@ -1,11 +1,10 @@
+import { HTMLMotionProps, motion } from 'framer-motion';
 import Button from '@/components/Button';
-import { Card } from '@/components/Card';
-
-import classes from '@/lib/classes';
 
 import Styles from './ProjectCard.module.sass';
 
-interface IProjectCardProps {
+
+interface IProjectCardProps extends HTMLMotionProps<'div'> {
 	img: string;
 	title: string;
 	description?: string;
@@ -13,12 +12,13 @@ interface IProjectCardProps {
 }
 
 const Component: React.FC<IProjectCardProps> = (props) => {
-	const { img, title, description, link } = props;
+	const { img, title, description, link, ...rest } = props;
 
 	return (
-		<div
+		<motion.div
 			className='relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-lg border border-accents-1 bg-cover p-0 shadow'
 			style={{ backgroundImage: `url(${img})` }}
+			{...rest}
 		>
 			<div className={Styles.layer} />
 			<div className='z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'>
@@ -32,14 +32,13 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 					style={{ color: 'fff' }}
 					className='flex h-8 items-center justify-center self-end !rounded-md !border-none !bg-overlays-6 px-4 py-2 backdrop-blur-sm'
 					link={link}
-					whileHover={{ scale: 1.05 }}
 				>
 					<h1 className='h-fit w-fit text-center font-title text-xs !font-thin tracking-wider'>
 						View
 					</h1>
 				</Button>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

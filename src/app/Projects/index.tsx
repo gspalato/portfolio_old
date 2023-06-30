@@ -1,10 +1,52 @@
 import { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Page from '@/components/Page';
 
 import ProjectCard from './components/ProjectCard';
 
 import { useLayout } from '@/lib/layout';
+import { AnimatePresence } from 'framer-motion';
+
+
+const Projects = [
+	{
+		title: 'Reality',
+		description: 'A microservice platform and back-end.',
+		img: 'https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg',
+		link: 'https://realityplatform.io',
+	},
+	{
+		title: 'Example',
+		description: 'Lorem ipsum dolorem...',
+		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
+		link: '',
+	},
+	{
+		title: 'Example',
+		description: 'Lorem ipsum dolorem...',
+		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
+		link: '',
+	},
+	{
+		title: 'Example',
+		description: 'Lorem ipsum dolorem...',
+		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
+		link: '',
+	},
+];
+
+const ProjectCardAnimationVariants = {
+	initial: {
+		opacity: 0,
+	},
+	animate: (i: number) => ({
+		opacity: 1,
+		transition: {
+			delay: i * 0.15 + (0.3 / Projects.length),
+		},
+	}),
+};
 
 const Component = () => {
 	const {
@@ -31,7 +73,26 @@ const Component = () => {
 					Projects
 				</h1>
 				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
-					{' '}
+					<AnimatePresence mode='wait'>
+						{
+							Projects.map((project, i) => (
+								<ProjectCard
+									title={project.title}
+									description={project.description}
+									img={project.img}
+									link={project.link}
+
+									variants={ProjectCardAnimationVariants}
+									initial='initial'
+									animate='animate'
+									exit='initial'
+									custom={i}
+									key={uuid()}
+								/>
+							))
+						}
+					</AnimatePresence>
+					{/*
 					<ProjectCard
 						title='Reality'
 						description='A microservice platform and back-end.'
@@ -41,15 +102,16 @@ const Component = () => {
 					<ProjectCard
 						title='Title'
 						description='Lorem ipsum dolorem...'
-						img='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8rwYAAioBJ+mp4R0AAAAASUVORK5CYII='
+						img='https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg'
 						link=''
 					/>
 					<ProjectCard
 						title='Title'
 						description='Lorem ipsum dolorem...'
-						img='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8rwYAAioBJ+mp4R0AAAAASUVORK5CYII='
+						img='https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg'
 						link=''
 					/>
+					*/}
 				</div>
 				{/*
 				<div className='sticky h-[30rem] w-full px-8'>
