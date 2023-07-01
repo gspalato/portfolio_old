@@ -82,8 +82,8 @@ const Component: React.FC<INavbarProps> = (props) => {
 					<img
 						src='/favicon.ico'
 						alt=''
-						height={30}
-						width={30}
+						height={35}
+						width={35}
 						style={{ filter: 'invert(0)' }}
 					/>
 					<MenuButton

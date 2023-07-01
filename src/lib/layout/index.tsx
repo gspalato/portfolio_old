@@ -23,7 +23,8 @@ const useLayout = () => useContext(LayoutContext);
 const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const { children } = props;
 
-	const [defaultNavbarEnabled, setDefaultNavbarEnabled] = useState<boolean>(true);
+	const [defaultNavbarEnabled, setDefaultNavbarEnabled] =
+		useState<boolean>(true);
 	const enableDefaultNavbar = () => setDefaultNavbarEnabled(true);
 	const disableDefaultNavbar = () => setDefaultNavbarEnabled(false);
 
