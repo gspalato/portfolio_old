@@ -1,6 +1,6 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface IPageProps extends HTMLMotionProps<'div'> {
 	className?: string;

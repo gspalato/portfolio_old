@@ -1,14 +1,14 @@
 import {
 	ApolloClient,
-	InMemoryCache,
 	ApolloLink,
 	HttpLink,
+	InMemoryCache,
 	NormalizedCacheObject,
 	from,
 } from '@apollo/client';
 import { useMemo } from 'react';
 
-import { useAuth } from '@/lib/auth';
+import { useAuth } from '@lib/auth';
 
 import { GATEWAY_URL } from '@/constants';
 

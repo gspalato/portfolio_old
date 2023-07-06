@@ -1,4 +1,4 @@
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface ICardHeaderProps extends React.PropsWithChildren {
 	className?: string;

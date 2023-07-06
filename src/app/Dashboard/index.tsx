@@ -2,16 +2,16 @@ import { useQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
 import { useEffect, useState } from 'react';
 
-import Loading from '@/app/Loading';
+import Loading from '@app/Loading';
 
-import { Card, CardContent, CardHeader } from '@/components/Card';
-import { ResponsiveLineChart as Chart } from '@/components/Chart';
-import Page from '@/components/Page';
-import { Tab, Tabs, TabButton, TabContent, TabList } from '@/components/Tabs';
+import { Card, CardContent, CardHeader } from '@components/Card';
+import { ResponsiveLineChart as Chart } from '@components/Chart';
+import Page from '@components/Page';
+import { Tab, TabButton, TabContent, TabList, Tabs } from '@components/Tabs';
 
-import { useAuth } from '@/lib/auth';
-import { GetResumes } from '@/lib/graphql/queries';
-import { useLayout } from '@/lib/layout';
+import { useAuth } from '@lib/auth';
+import { GetResumes } from '@lib/graphql/queries';
+import { useLayout } from '@lib/layout';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({

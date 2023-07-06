@@ -1,9 +1,30 @@
 {
   "tabWidth": 4,
   "useTabs": true,
-  "plugins": ["prettier-plugin-tailwindcss"],
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss", "prettier-plugin-style-order"],
   "jsxSingleQuote": true,
   "singleQuote": true,
   "semi": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "importOrder": [
+    "^@app/(.*)$",
+    "^@/app/(.*)$",
+    "^@assets/(.*)$",
+    "^@/assets/(.*)$",
+    "^@components/(.*)$",
+    "^@/components/(.*)$",
+    "^@lib/(.*)$",
+    "^@/lib/(.*)$",
+    "^@styles/(.*)$",
+    "^@/styles/(.*)$",
+    "^@types/(.*)$",
+    "^@/types/(.*)$",
+    "^./(.*)$",
+    "^../(.*)$",
+    "^[./]"
+  ],
+  "importOrderCaseInsensitive": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "tailwindFunctions": ["classes"]
 }

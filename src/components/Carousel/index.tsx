@@ -1,15 +1,7 @@
 import { HTMLMotionProps, motion, useDragControls } from 'framer-motion';
-import React, {
-	Ref,
-	RefObject,
-	forwardRef,
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import React, { useRef } from 'react';
 
-import classes from '@/lib/classes';
-import { v4 as uuid } from 'uuid';
+import classes from '@lib/classes';
 
 interface ICarouselProps extends HTMLMotionProps<'div'> {
 	children?: React.ReactNode;

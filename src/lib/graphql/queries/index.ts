@@ -1,5 +1,5 @@
 import * as CheckAuth from './checkAuth';
-import * as GetUses from './getUses';
 import * as GetResumes from './getResumes';
+import * as GetUses from './getUses';
 
-export { CheckAuth, GetUses, GetResumes };
+export { CheckAuth, GetResumes, GetUses };

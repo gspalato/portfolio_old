@@ -1,22 +1,22 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import About from '@/app/About';
-import Dashboard from '@/app/Dashboard';
-import Home from '@/app/Home';
-import Login from '@/app/Login';
-import Projects from '@/app/Projects';
-import UPx from '@/app/UPx';
-import NotFound from '@/app/NotFound';
+import About from '@app/About';
+import Dashboard from '@app/Dashboard';
+import Home from '@app/Home';
+import Login from '@app/Login';
+import NotFound from '@app/NotFound';
+import Projects from '@app/Projects';
+import UPx from '@app/UPx';
 
-import Content from '@/components/Content';
-import Cursor from '@/components/Cursor';
-import Navbar from '@/components/Navbar';
-import ProtectedRoute from '@/components/ProtectedRoute';
+import Content from '@components/Content';
+import Cursor from '@components/Cursor';
+import Navbar from '@components/Navbar';
+import ProtectedRoute from '@components/ProtectedRoute';
 
-import AuthProvider from '@/lib/auth';
-import LayoutProvider from '@/lib/layout';
+import AuthProvider from '@lib/auth';
+import LayoutProvider from '@lib/layout';
 
-import '@/styles/globals.sass';
+import '@styles/globals.sass';
 
 const App: React.FC = () => {
 	const location = useLocation();

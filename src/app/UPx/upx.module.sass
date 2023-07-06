@@ -1,6 +1,6 @@
-@use '@/styles/mixins' as *
-@use '@/styles/variables' as *
-    
+@use '@styles/mixins' as *
+@use '@styles/variables' as *
+
 $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
 
 $boxBackground: #ffffff05
@@ -45,12 +45,10 @@ $boxHeight: 17.5rem
     grid-template-rows: none
     gap: 2rem
 
-    
     @include responsive($lg)
         grid-template-columns: repeat(2, 1fr)
         grid-template-rows: repeat(2, 1fr)
         gap: 3rem
-    
 
 .box
     display: flex

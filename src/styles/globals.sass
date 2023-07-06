@@ -7,87 +7,95 @@
 @tailwind utilities
 
 *
-  box-sizing: border-box
-  padding: 0
-  margin: 0
+	box-sizing: border-box
+	margin: 0
+	padding: 0
 
-  cursor: none
+	cursor: none
+	-moz-user-select: none
+	-webkit-user-select: none
+	-ms-user-select: none
+	user-select: none
+	-webkit-user-drag: none
 
-  user-drag: none
-  -webkit-user-drag: none
-  user-select: none
-  -moz-user-select: none
-  -webkit-user-select: none
-  -ms-user-select: none
+	user-drag: none
 
-  font-synthesis: none
-  text-rendering: optimizeLegibility
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  -webkit-text-size-adjust: 100%
+	font-synthesis: none
+	text-rendering: optimizeLegibility
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+	-webkit-text-size-adjust: 100%
 
-html, body
-  height: 100%
-  width: 100%
-  max-width: 100vw
-  overflow: hidden
-  background: $background
-  color: $foreground
-  overscroll-behavior: none
-  -ms-overflow-style: none
+html,
+body
+	width: 100%
+	max-width: 100vw
+	height: 100%
+	overflow: hidden
+	color: $foreground
+	background: $background
+	overscroll-behavior: none
+	-ms-overflow-style: none
 
 #root
-  height: 100%
-  width: 100%
+	width: 100%
+	height: 100%
 
-h1, h2, h3, h4, h5, h6
-  font-family: $display
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+	font-family: $display
 
 p
-  font-family: $title
+	font-family: $title
 
 a
-  color: inherit
-  text-decoration: none
+	color: inherit
+	text-decoration: none
 
 .debug *
-  outline: 1px solid rgb(0, 255, 0, .25)
+	outline: 1px solid rgb(0, 255, 0, 0.25)
 
 .text-gradient
-  background: linear-gradient(180deg, #fafafa, #adadad)
-  background-clip: text
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
+	background: linear-gradient(180deg, #fafafa, #adadad)
+	-webkit-background-clip: text
+	background-clip: text
+	-webkit-text-fill-color: transparent
 
-input:focus, input:active, input:hover
-  outline: none
-  border: none
+input:focus,
+input:active,
+input:hover
+	border: none
+	outline: none
 
 ::-webkit-scrollbar
-  background: transparent
-  border-radius: 3px
-  width: 5px
-  overflow: overlay
+	width: 5px
+	overflow: overlay
+	background: transparent
+	border-radius: 3px
 
 ::-webkit-scrollbar-button
-  display: none
+	display: none
 
 ::-webkit-scrollbar-thumb
-  background: rgba(255, 255, 255, .2)
-  border-radius: 3px
-  width: 3px
+	width: 3px
+	background: rgba(255, 255, 255, 0.2)
+	border-radius: 3px
 
 //
 
 @layer components
-  .glass
-    backdrop-filter: blur(10px) brightness(175%)
+	.glass
+		backdrop-filter: blur(10px) brightness(175%)
 
-  .optimize
-    @include optimize-performance
+	.optimize
+		@include optimize-performance
 
-  .blur-gradient
-    background: #000000aa
-    backdrop-filter: blur(10px)
-    mask: linear-gradient(transparent, black 85%)
-    transition: all 0.2s ease-in-out
+	.blur-gradient
+		background: #000000aa
+		backdrop-filter: blur(10px)
+		transition: all 0.2s ease-in-out
+		mask: linear-gradient(transparent, black 85%)

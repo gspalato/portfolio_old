@@ -1,4 +1,4 @@
-import Page from '@/components/Page';
+import Page from '@components/Page';
 
 import Styles from './notfound.module.sass';
 

@@ -1,8 +1,7 @@
+import Button from '@components/Button';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import Button from '@/components/Button';
 
 import Styles from './ProjectCard.module.sass';
-
 
 interface IProjectCardProps extends HTMLMotionProps<'div'> {
 	img: string;
@@ -32,6 +31,7 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 					style={{ color: 'fff' }}
 					className='flex h-8 items-center justify-center self-end !rounded-md !border-none !bg-overlays-6 px-4 py-2 backdrop-blur-sm'
 					link={link}
+					variant={{ background: 'transparent' }}
 				>
 					<h1 className='h-fit w-fit text-center font-title text-xs !font-thin tracking-wider'>
 						View

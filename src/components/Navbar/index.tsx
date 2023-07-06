@@ -1,12 +1,12 @@
-import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
 import { v4 as uuid } from 'uuid';
 
 import MenuButton from './MenuButton';
 import NavbarLink from './NavbarLink';
 
-import classes from '@/lib/classes';
-import { useLayout } from '@/lib/layout';
+import classes from '@lib/classes';
+import { useLayout } from '@lib/layout';
 
 const WrapperVariants = {
 	initial: {

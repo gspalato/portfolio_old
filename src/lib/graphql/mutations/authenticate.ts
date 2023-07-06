@@ -19,4 +19,7 @@ export const Mutation = gql`
 	}
 `;
 
-export type ReturnType = Has<'authenticate', Has<'authenticationPayload', AuthenticationPayload>>;
+export type ReturnType = Has<
+	'authenticate',
+	Has<'authenticationPayload', AuthenticationPayload>
+>;

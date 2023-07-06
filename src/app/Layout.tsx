@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { useRealityClient } from '@/lib/graphql/client';
+import { useRealityClient } from '@lib/graphql/client';
 
 import App from './App';
 

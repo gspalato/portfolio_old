@@ -1,8 +1,6 @@
-import { motion } from 'framer-motion';
-
 import { useTabs } from './Tabs';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface ITabButtonProps {
 	className?: string;

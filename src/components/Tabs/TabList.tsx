@@ -1,8 +1,4 @@
-import { AnimatePresence } from 'framer-motion';
-
-import { useTabs } from './Tabs';
-
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface ITabListProps extends React.PropsWithChildren {
 	className?: string;

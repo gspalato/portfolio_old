@@ -3,7 +3,7 @@ import { LineSvgProps, ResponsiveLine } from '@nivo/line';
 import { BaseChartTheme } from './Theme';
 import CustomTooltip from './Tooltip';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 type LineData = {
 	id: string;

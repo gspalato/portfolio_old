@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
 
-import Page from '@/components/Page';
+import Page from '@components/Page';
 
 import ProjectCard from './components/ProjectCard';
 
-import { useLayout } from '@/lib/layout';
+import { useLayout } from '@lib/layout';
 import { AnimatePresence } from 'framer-motion';
 
 const Projects = [
@@ -42,7 +41,7 @@ const ProjectCardAnimationVariants = {
 	animate: (i: number) => ({
 		opacity: 1,
 		transition: {
-			delay: i * 0.15 + (0.3 / Projects.length),
+			delay: i * 0.15 + 0.3 / Projects.length,
 		},
 	}),
 };

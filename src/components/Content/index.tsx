@@ -1,9 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
-import classes from '@/lib/classes';
-import { useLayout } from '@/lib/layout';
+import classes from '@lib/classes';
+import { useLayout } from '@lib/layout';
 
 const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const { contentScrollable } = useLayout();

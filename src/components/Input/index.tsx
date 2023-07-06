@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 import Styles from './input.module.sass';
 

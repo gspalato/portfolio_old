@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { AnimatePresence, motion } from 'framer-motion';
 import { linearGradientDef } from '@nivo/core';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
-import { ResponsiveLineChart as Chart } from '@/components/Chart';
-import Page from '@/components/Page';
+import { ResponsiveLineChart as Chart } from '@components/Chart';
+import Page from '@components/Page';
 
-import classes from '@/lib/classes';
-import { GetResumes } from '@/lib/graphql/queries';
+import classes from '@lib/classes';
+import { GetResumes } from '@lib/graphql/queries';
 
 import Styles from './upx.module.sass';
-
-import { Resume } from '@/types/Resume';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -57,12 +55,14 @@ const Component: React.FC = () => {
 				const timestampToDateString = (timestamp: number): string => {
 					let date = new Date(timestamp * 1000);
 					let formatted = date.toLocaleDateString('pt-BR');
-	
+
 					return formatted;
-				}
+				};
 
 				let firstDate = timestampToDateString(resumes[0].timestamp);
-				let lastDate = timestampToDateString(resumes[resumes.length - 1].timestamp);
+				let lastDate = timestampToDateString(
+					resumes[resumes.length - 1].timestamp
+				);
 
 				setTicks([firstDate, lastDate]);
 

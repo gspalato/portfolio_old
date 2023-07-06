@@ -1,3 +1,3 @@
-import * as Authenticate from "./authenticate";
+import * as Authenticate from './authenticate';
 
 export { Authenticate };

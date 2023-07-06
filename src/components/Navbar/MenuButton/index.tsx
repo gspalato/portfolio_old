@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import React from 'react';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface IMenuButtonProps {
 	className?: string;

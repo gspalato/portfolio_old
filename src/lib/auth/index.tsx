@@ -1,4 +1,4 @@
-import * as jose from 'jose'
+import * as jose from 'jose';
 import { createContext, useContext, useState } from 'react';
 
 import { User } from '@/types/User';
@@ -22,8 +22,7 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 
 	const getUser = (): User | null => {
 		let token = getToken();
-		if (!token)
-			return null;
+		if (!token) return null;
 
 		let content = jose.decodeJwt(token);
 		let user = content.user ? JSON.parse(content.user as string) : null;
@@ -42,19 +41,16 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 		window.sessionStorage.removeItem('reality-token');
 	};
 
-
 	const data = {
 		user: getUser(),
 		token: getToken(),
 		isTokenValid,
 		setTokenValidity,
 		setToken,
-		expire
+		expire,
 	};
 
-	return (
-		<AuthContext.Provider value={data}>{children}</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 
 Component.displayName = 'AuthProvider';

@@ -1,9 +1,9 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { v4 as uuid } from 'uuid';
 
-import { useTabs } from './Tabs';
+import classes from '@lib/classes';
 
-import classes from '@/lib/classes';
+import { useTabs } from './Tabs';
 
 interface ITabProps extends HTMLMotionProps<'div'> {
 	className?: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 type SkeletonProps = React.ComponentPropsWithoutRef<'div'>;
 

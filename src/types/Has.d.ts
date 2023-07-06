@@ -1,3 +1,3 @@
 export type Has<P extends string, T> = {
-    [Property in P]: T;
-}
+	[Property in P]: T;
+};

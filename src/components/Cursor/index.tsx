@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 import Styles from './cursor.module.sass';
 

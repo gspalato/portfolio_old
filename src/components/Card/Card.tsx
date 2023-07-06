@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import classes from '@/lib/classes';
+import classes from '@lib/classes';
 
 interface ICardProps extends PropsWithChildren {
 	className?: string;
