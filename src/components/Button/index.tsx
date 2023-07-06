@@ -1,4 +1,3 @@
-import { VariantProps, cva } from 'class-variance-authority';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -6,53 +5,35 @@ import { Link } from 'react-router-dom';
 import classes from '@lib/classes';
 
 import { NotOptional } from '@/types/NotOptional';
+import { VariantType } from '@/types/VariantType';
 
-type ComponentVariants = NotOptional<
-	VariantProps<typeof BaseClasses>,
-	'background'
->;
+const Variants = {
+	background: {
+		transparent: 'bg-transparent',
+		bare: 'bg-transparent border-2 border-ring',
+		primary: 'bg-shadowy',
+	},
+};
 
-const BaseClasses = cva(
-	[
-		'flex',
-		'justify-center',
-		'items-center',
-		'bg-transparent',
-		'p-2',
-		'outline-none',
-		'duration-100',
-		'ease-in-out',
-		'transition-all',
-		'rounded-md',
-		'z-[10]',
-		'!cursor-none',
-		'text-sm',
-		'font-display',
-		'font-thin',
-	],
-	{
-		variants: {
-			background: {
-				transparent: 'bg-transparent',
-				bare: 'bg-transparent border-2 border-ring',
-				primary: 'bg-shadowy',
-			},
-		},
-	}
-);
+type Variants = VariantType<typeof Variants> &
+	NotOptional<VariantType<typeof Variants>, 'background'>;
 
 interface IButtonProps extends HTMLMotionProps<'button'> {
 	className?: string;
 	link?: string;
 	onClick?: () => void;
 	type?: 'button' | 'submit' | 'reset';
-	variant: ComponentVariants;
+	variant: Variants;
 }
 
 const Component: React.FC<IButtonProps> = (props) => {
 	const { children, className, variant, ...rest } = props;
 
-	const classNames = classes(BaseClasses(variant), className);
+	const classNames = classes(
+		'z-[10] flex !cursor-none items-center justify-center rounded-md bg-transparent p-2 font-display text-sm font-thin outline-none transition-all duration-100 ease-in-out',
+		variant.background ?? Variants.background.transparent,
+		className
+	);
 
 	const Wrapper = props.link ? Link : React.Fragment;
 
