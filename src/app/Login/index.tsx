@@ -123,6 +123,7 @@ const Component = () => {
 						onClick={authenticate}
 						disabled={submitting}
 						variant={{ background: 'primary' }}
+						whileHover={{ scale: 1.01 }}
 					>
 						<h1 className='w-full text-center text-sm font-semibold'>
 							Sign In
