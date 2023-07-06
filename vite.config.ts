@@ -4,6 +4,11 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+	build: {
+		rollupOptions: {
+			external: ['class-variance-authority'],
+		},
+	},
 	resolve: {
 		alias: {
 			'@': path.join(__dirname, 'src/'),
