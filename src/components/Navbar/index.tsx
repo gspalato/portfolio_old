@@ -2,11 +2,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
-import MenuButton from './MenuButton';
-import NavbarLink from './NavbarLink';
-
 import classes from '@lib/classes';
 import { useLayout } from '@lib/layout';
+
+import MenuButton from './MenuButton';
+import NavbarLink from './NavbarLink';
 
 const WrapperVariants = {
 	initial: {
@@ -70,7 +70,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 	const { defaultNavbarEnabled, navbarBlurEnabled } = useLayout();
 
 	const classNames = classes(
-		'flex h-20 w-[calc(100%-5px)] absolute overflow-hidden z-[101] transition-all duration-200',
+		'absolute z-[101] flex h-20 w-[calc(100%-5px)] overflow-hidden transition-all duration-200',
 		navbarBlurEnabled && 'backdrop-blur-md',
 		className
 	);

@@ -9,7 +9,7 @@ const Component: React.FC<ITabListProps> = (props) => {
 	const { className, children, width } = props;
 
 	const classNames = classes(
-		'p-1 bg-overlays-0 flex gap-2 rounded-md shadow-md',
+		'flex gap-2 rounded-md bg-overlays-0 p-1 shadow-md',
 		className
 	);
 

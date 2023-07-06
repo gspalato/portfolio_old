@@ -1,6 +1,6 @@
-import { useTabs } from './Tabs';
-
 import classes from '@lib/classes';
+
+import { useTabs } from './Tabs';
 
 interface ITabButtonProps {
 	className?: string;
@@ -13,7 +13,7 @@ const Component: React.FC<ITabButtonProps> = (props) => {
 	const { currentTab, setCurrentTab } = useTabs();
 
 	const classNames = classes(
-		'rounded-md px-5 py-1 text-[.65rem] font-medium text-white transition-colors cursor-none @2xl:min-w-[90px] shadow-md',
+		'cursor-none rounded-md px-5 py-1 text-[.65rem] font-medium text-white shadow-md transition-colors @2xl:min-w-[90px]',
 		currentTab == value ? 'bg-accents-1' : 'bg-overlays-0',
 		className
 	);

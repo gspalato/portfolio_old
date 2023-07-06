@@ -1,10 +1,10 @@
 import {
 	ApolloClient,
 	ApolloLink,
+	from,
 	HttpLink,
 	InMemoryCache,
 	NormalizedCacheObject,
-	from,
 } from '@apollo/client';
 import { useMemo } from 'react';
 

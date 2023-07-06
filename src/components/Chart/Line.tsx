@@ -1,9 +1,9 @@
 import { LineSvgProps, ResponsiveLine } from '@nivo/line';
 
+import classes from '@lib/classes';
+
 import { BaseChartTheme } from './Theme';
 import CustomTooltip from './Tooltip';
-
-import classes from '@lib/classes';
 
 type LineData = {
 	id: string;
@@ -20,7 +20,7 @@ const ResponsiveChart: React.FC<IResponsiveChartProps> = (props) => {
 	const { className, data, margin, ...rest } = props;
 
 	const classNames = classes(
-		'h-full w-full min-h-0 min-w-0 overflow-hidden',
+		'h-full min-h-0 w-full min-w-0 overflow-hidden',
 		className
 	);
 

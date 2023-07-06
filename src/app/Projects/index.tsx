@@ -1,11 +1,11 @@
+import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 
 import Page from '@components/Page';
 
-import ProjectCard from './components/ProjectCard';
-
 import { useLayout } from '@lib/layout';
-import { AnimatePresence } from 'framer-motion';
+
+import ProjectCard from './components/ProjectCard';
 
 const Projects = [
 	{

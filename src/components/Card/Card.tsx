@@ -12,7 +12,7 @@ const Component: React.FC<ICardProps> = (props) => {
 
 	const classNames = classes(
 		'card',
-		'min-h-[10rem] rounded-lg border border-ring bg-accents-1 ring-1 ring-black flex flex-col pb-5',
+		'flex min-h-[10rem] flex-col rounded-lg border border-ring bg-accents-1 pb-5 ring-1 ring-black',
 		className
 	);
 

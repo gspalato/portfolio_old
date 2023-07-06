@@ -17,24 +17,24 @@ const Component: React.FC<IMenuButtonProps> = (props) => {
 
 	const classNames = classes(
 		`
-        flex
-        items-center
         align-center
-        bg-transparent
-        cursor-none
-        border-none
-        rounded-md
-        text-white
-        font-title
-        font-bold
         text-md
-        justify-center
-        p-2
-        tracking-tight
+        z-1
+        flex
         min-h-[1.5rem]
         min-w-[1.5rem]
+        cursor-none
+        items-center
+        justify-center
+        rounded-md
+        border-none
+        bg-transparent
+        p-2
         text-center
-        z-1
+        font-title
+        font-bold
+        tracking-tight
+        text-white
         `,
 		className
 	);

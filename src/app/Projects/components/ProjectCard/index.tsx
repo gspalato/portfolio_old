@@ -1,5 +1,6 @@
-import Button from '@components/Button';
 import { HTMLMotionProps, motion } from 'framer-motion';
+
+import Button from '@components/Button';
 
 import Styles from './ProjectCard.module.sass';
 

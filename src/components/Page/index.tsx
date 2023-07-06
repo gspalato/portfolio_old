@@ -10,7 +10,7 @@ const Component: React.FC<IPageProps> = (props) => {
 	const { children, className } = props;
 
 	const classNames = classes(
-		'h-full flex justify-center items-center gap-2',
+		'flex h-full items-center justify-center gap-2',
 		className
 	);
 
