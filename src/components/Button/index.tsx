@@ -67,6 +67,7 @@ const Component: React.FC<IButtonProps> = (props) => {
 				className={classNames}
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
+				transition={{ duration: 0.025 }}
 				transformTemplate={({ scale }) => `scale(${scale})`}
 				{...rest}
 			>
