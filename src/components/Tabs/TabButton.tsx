@@ -13,8 +13,8 @@ const Component: React.FC<ITabButtonProps> = (props) => {
 	const { currentTab, setCurrentTab } = useTabs();
 
 	const classNames = classes(
-		'cursor-none rounded-md px-5 py-1 text-[.65rem] font-medium text-white shadow-md transition-colors @2xl:min-w-[90px]',
-		currentTab == value ? 'bg-accents-1' : 'bg-overlays-0',
+		'cursor-none rounded-[0.3rem] px-5 py-[.175rem] text-[.65rem] font-medium text-white transition-colors @2xl:min-w-[90px] md:py-1',
+		currentTab == value ? 'bg-overlays-5' : 'bg-transparent',
 		className
 	);
 
