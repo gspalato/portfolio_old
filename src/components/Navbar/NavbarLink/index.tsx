@@ -1,6 +1,8 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+import classes from '@/lib/classes';
+
 import Styles from './navbarLink.module.sass';
 
 interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
@@ -14,7 +16,26 @@ interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
 const Component: React.FC<INavbarLinkProps> = (props) => {
 	const { className, link, name, setState, ...moreProps } = props;
 
-	const classNames = [Styles.link, className].join(' ');
+	const classNames = classes(
+		`
+		w-auto
+		text-center
+		font-display
+		text-5xl
+		font-bold
+		tracking-tight
+		text-foreground
+		transition-colors
+		duration-100
+		ease-in-out
+		hover:text-[#aaaaaa]
+		focus:bg-transparent
+		active:bg-transparent
+		md:text-right
+		`,
+		className
+	);
+	//[Styles.link, className].join(' ');
 
 	return (
 		<Link onClick={() => setState(false)} to={link}>
