@@ -67,7 +67,8 @@ const Component: React.FC<INavbarProps> = (props) => {
 	const { className } = props;
 
 	const [isExpanded, setIsExpanded] = React.useState(false);
-	const { defaultNavbarEnabled, navbarBlurEnabled } = useLayout();
+	const { defaultNavbarEnabled, navbarBlurEnabled, setNavbarBlurEnabled } =
+		useLayout();
 
 	const classNames = classes(
 		'absolute z-[101] flex h-20 w-[calc(100%-5px)] overflow-hidden transition-all duration-200',
@@ -88,21 +89,24 @@ const Component: React.FC<INavbarProps> = (props) => {
 					/>
 					<MenuButton
 						isNavbarExpanded={isExpanded}
-						onClick={() => setIsExpanded(!isExpanded)}
+						onClick={() => {
+							setNavbarBlurEnabled(isExpanded);
+							setIsExpanded(!isExpanded);
+						}}
 					/>
 				</div>
 			</motion.nav>
 			<AnimatePresence mode='wait'>
 				{isExpanded && (
 					<motion.div
-						className='absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#0001] backdrop-blur-lg ease-in-out md:justify-end'
+						className='absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#000a] backdrop-blur-lg ease-in-out md:justify-end'
 						initial='initial'
 						animate='animate'
 						exit='exit'
 						variants={WrapperVariants}
 						style={{ pointerEvents: isExpanded ? 'all' : 'none' }}
 					>
-						<motion.div className='flex h-fit w-fit flex-col px-20'>
+						<motion.div className='flex h-fit w-fit flex-col gap-4 px-20'>
 							{Routes.map((route, i) => (
 								<NavbarLink
 									link={route.path}
