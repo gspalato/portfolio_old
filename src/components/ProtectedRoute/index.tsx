@@ -10,9 +10,7 @@ import { CheckAuth } from '@lib/graphql/queries';
 import { CheckAuthenticationPayload } from '@/types/CheckAuthenticationPayload';
 
 const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
-	const { token } = useAuth();
-
-	const { isTokenValid, setTokenValidity, expire } = useAuth();
+	const { token, expire } = useAuth();
 
 	const [check, { loading, error }] = useLazyQuery<CheckAuth.ReturnType>(
 		CheckAuth.Query,
@@ -23,12 +21,10 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 			onCompleted: (data) => {
 				let payload: CheckAuthenticationPayload =
 					data.checkAuthentication;
-				setTokenValidity(payload.successful);
 
 				if (!payload.successful) expire();
 			},
 			onError: () => {
-				setTokenValidity(false);
 				expire();
 			},
 		}
@@ -45,6 +41,6 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 		return <Navigate to='/login' />;
 	}
 
-	return isTokenValid ? <>{props.children}</> : <Navigate to='/login' />;
+	return token ? <>{props.children}</> : <Navigate to='/login' />;
 };
 export default ProtectedRoute;

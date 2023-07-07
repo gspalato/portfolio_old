@@ -4,7 +4,7 @@ import { CheckAuthenticationPayload } from '@/types/CheckAuthenticationPayload';
 
 export const Query = gql`
 	query ($token: String!) {
-		checkAuthentication {
+		checkAuthentication(token: $token) {
 			successful
 			user {
 				username

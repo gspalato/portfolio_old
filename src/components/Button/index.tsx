@@ -35,27 +35,32 @@ const Component: React.FC<IButtonProps> = (props) => {
 		className
 	);
 
-	const Wrapper = props.link ? Link : React.Fragment;
-
-	return (
-		<Wrapper
-			to={props.link ?? ''}
-			target={props.link?.startsWith('/') ? '' : '_blank'}
-			rel={props.link?.startsWith('/') ? '' : 'noopener noreferrer'}
-			onClick={() => props.onClick?.()}
+	const Button = (
+		<motion.button
+			className={classNames}
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			transition={{ duration: 0.025 }}
+			transformTemplate={({ scale }) => `scale(${scale})`}
+			{...rest}
 		>
-			<motion.button
-				className={classNames}
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-				transition={{ duration: 0.025 }}
-				transformTemplate={({ scale }) => `scale(${scale})`}
-				{...rest}
-			>
-				{children}
-			</motion.button>
-		</Wrapper>
+			{children}
+		</motion.button>
 	);
+
+	if (props.link)
+		return (
+			<Link
+				to={props.link ?? ''}
+				target={props.link?.startsWith('/') ? '' : '_blank'}
+				rel={props.link?.startsWith('/') ? '' : 'noopener noreferrer'}
+				onClick={() => props.onClick?.()}
+			>
+				{Button}
+			</Link>
+		);
+
+	return <>{Button}</>;
 };
 
 export default Component;

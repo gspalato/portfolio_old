@@ -23,7 +23,7 @@ const Component = () => {
 	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
 	const [userJson, setUserJson] = useState<string | null>(null);
 
-	const { token, setToken, setTokenValidity } = useAuth();
+	const { token, setToken } = useAuth();
 
 	const [authenticate, { loading }] = useMutation<Authenticate.ReturnType>(
 		Authenticate.Mutation,
@@ -61,10 +61,7 @@ const Component = () => {
 
 	useEffect(() => {
 		if (window) {
-			if (fetchedToken && fetchedToken.length > 0) {
-				setToken(fetchedToken);
-				setTokenValidity(true);
-			}
+			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
 		}
 	}, [fetchedToken, userJson]);
 

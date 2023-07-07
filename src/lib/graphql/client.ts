@@ -4,7 +4,7 @@ import { useAuth } from '@lib/auth';
 
 import { GATEWAY_URL } from '@/constants';
 
-const ApiLink = new HttpLink({ uri: GATEWAY_URL, credentials: 'include' });
+const ApiLink = new HttpLink({ uri: GATEWAY_URL });
 
 export const useRealityClient = () => {
 	const client = new ApolloClient({

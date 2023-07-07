@@ -6,9 +6,7 @@ import { User } from '@/types/User';
 interface IAuthContextData {
 	user?: any;
 	token: string | null;
-	isTokenValid: boolean;
 	setToken: (token: string) => void;
-	setTokenValidity: (valid: boolean) => void;
 	expire: () => void;
 }
 
@@ -17,8 +15,6 @@ const useAuth = () => useContext(AuthContext);
 
 const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const { children } = props;
-
-	const [isTokenValid, setTokenValidity] = useState<boolean>(false);
 
 	const getUser = (): User | null => {
 		let token = getToken();
@@ -44,8 +40,6 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const data = {
 		user: getUser(),
 		token: getToken(),
-		isTokenValid,
-		setTokenValidity,
 		setToken,
 		expire,
 	};
