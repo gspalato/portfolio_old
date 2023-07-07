@@ -19,10 +19,7 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 				token: token,
 			},
 			onCompleted: (data) => {
-				let payload: CheckAuthenticationPayload =
-					data.checkAuthentication;
-
-				if (!payload.successful) expire();
+				if (!data.checkAuthentication.successful) expire();
 			},
 			onError: () => {
 				expire();
