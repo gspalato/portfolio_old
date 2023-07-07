@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 
 import { AuthenticationPayload } from '@/types/AuthenticationPayload';
-import { Has } from '@/types/Has';
 
 export const Mutation = gql`
 	mutation ($user: String!, $pwd: String!) {
@@ -19,7 +18,6 @@ export const Mutation = gql`
 	}
 `;
 
-export type ReturnType = Has<
-	'authenticate',
-	Has<'authenticationPayload', AuthenticationPayload>
->;
+export type ReturnType = {
+	authenticate: { authenticationPayload: AuthenticationPayload };
+};

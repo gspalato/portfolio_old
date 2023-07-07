@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-import { Has } from '@/types/Has';
 import { Use } from '@/types/Use';
 
 export const Query = gql`
@@ -16,4 +15,4 @@ export const Query = gql`
 	}
 `;
 
-export type ReturnType = Has<'uses', Use[]>;
+export type ReturnType = { uses: Use[] };

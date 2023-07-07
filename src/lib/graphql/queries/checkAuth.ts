@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 
 import { CheckAuthenticationPayload } from '@/types/CheckAuthenticationPayload';
-import { Has } from '@/types/Has';
 
 export const Query = gql`
 	query ($token: String!) {
@@ -14,4 +13,4 @@ export const Query = gql`
 	}
 `;
 
-export type ReturnType = Has<'checkAuthentication', CheckAuthenticationPayload>;
+export type ReturnType = { checkAuthentication: CheckAuthenticationPayload };
