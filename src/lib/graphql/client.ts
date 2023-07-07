@@ -1,44 +1,16 @@
-import {
-	ApolloClient,
-	ApolloLink,
-	from,
-	HttpLink,
-	InMemoryCache,
-	NormalizedCacheObject,
-} from '@apollo/client';
-import { useMemo } from 'react';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 import { useAuth } from '@lib/auth';
 
 import { GATEWAY_URL } from '@/constants';
 
-const ApiLink = new HttpLink({ uri: GATEWAY_URL });
-
-const AuthMiddleware = (token: string) =>
-	new ApolloLink((operation, forward) => {
-		if (token) {
-			operation.setContext({
-				headers: {
-					authorization: `Bearer ${token}`,
-				},
-			});
-		}
-
-		return forward(operation);
-	});
+const ApiLink = new HttpLink({ uri: GATEWAY_URL, credentials: 'include' });
 
 export const useRealityClient = () => {
-	const { token, isTokenValid } = useAuth();
-
-	const client = useMemo<ApolloClient<NormalizedCacheObject>>(() => {
-		return new ApolloClient({
-			link:
-				token && isTokenValid
-					? from([AuthMiddleware(token), ApiLink])
-					: ApiLink,
-			cache: new InMemoryCache(),
-		});
-	}, [token]);
+	const client = new ApolloClient({
+		link: ApiLink,
+		cache: new InMemoryCache(),
+	});
 
 	return client;
 };

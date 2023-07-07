@@ -7,7 +7,7 @@ import Loading from '@app/Loading';
 import { useAuth } from '@lib/auth';
 import { CheckAuth } from '@lib/graphql/queries';
 
-import { IsAuthenticatedPayload } from '@/types/IsAuthenticatedPayload';
+import { CheckAuthenticationPayload } from '@/types/CheckAuthenticationPayload';
 
 const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 	const { token } = useAuth();
@@ -21,7 +21,8 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 				token: token,
 			},
 			onCompleted: (data) => {
-				let payload: IsAuthenticatedPayload = data.isAuthenticated;
+				let payload: CheckAuthenticationPayload =
+					data.checkAuthentication;
 				setTokenValidity(payload.successful);
 
 				if (!payload.successful) expire();
