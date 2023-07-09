@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 
 import Page from '@components/Page';
 
@@ -64,6 +65,23 @@ const Component = () => {
 				</h1>
 				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
 					<AnimatePresence mode='wait'>
+						{loading && (
+							<motion.div
+								key='loading'
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.3 }}
+								className='flex h-full w-full items-center justify-center'
+							>
+								<RotatingLines
+									strokeColor='grey'
+									animationDuration='1.5'
+									strokeWidth='4'
+									width='25'
+								/>
+							</motion.div>
+						)}
 						{projects.map((project, i) => (
 							<ProjectCard
 								title={project.name}
