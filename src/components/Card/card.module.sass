@@ -1,0 +1,8 @@
+@use '@styles/mixins' as *
+
+.card
+    $background: rgb(6, 6, 7)
+    $border: rgb(28, 28, 30)
+
+    border: 1px solid transparent
+    background: padding-box linear-gradient(to right, $background, $background) no-repeat, border-box linear-gradient(145deg, $border 0%, adjust-color($border, $alpha: -.3), adjust-color($border, $alpha: -.6))
