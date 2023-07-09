@@ -24,7 +24,7 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 			<div className='z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'>
 				<div className='flex max-h-full w-fit flex-col items-start justify-between pr-4 before:rounded-lg'>
 					<h1 className='font-display text-lg'>{title}</h1>
-					<p className='overflow-hidden text-ellipsis break-words text-sm text-overlays-8'>
+					<p className='overflow-hidden text-ellipsis break-words font-title text-sm font-normal text-overlays-8'>
 						{description}
 					</p>
 				</div>

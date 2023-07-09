@@ -1,38 +1,15 @@
+import { useQuery } from '@apollo/client';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Page from '@components/Page';
 
+import * as GetProjects from '@lib/graphql/queries/getProjects';
 import { useLayout } from '@lib/layout';
 
-import ProjectCard from './components/ProjectCard';
+import Placeholder from '@assets/img/project_placeholder_icon.jpg';
 
-const Projects = [
-	{
-		title: 'Reality',
-		description: 'A microservice platform and back-end.',
-		img: 'https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg',
-		link: 'https://realityplatform.io',
-	},
-	{
-		title: 'Example',
-		description: 'Lorem ipsum dolorem...',
-		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
-		link: '',
-	},
-	{
-		title: 'Example',
-		description: 'Lorem ipsum dolorem...',
-		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
-		link: '',
-	},
-	{
-		title: 'Example',
-		description: 'Lorem ipsum dolorem...',
-		img: 'https://i.ibb.co/fCnfF8K/placeholder-swirl.jpg',
-		link: '',
-	},
-];
+import ProjectCard from './components/ProjectCard';
 
 const ProjectCardAnimationVariants = {
 	initial: {
@@ -41,7 +18,7 @@ const ProjectCardAnimationVariants = {
 	animate: (i: number) => ({
 		opacity: 1,
 		transition: {
-			delay: i * 0.15 + 0.3 / Projects.length,
+			delay: i * 0.15 + 0.3,
 		},
 	}),
 };
@@ -64,6 +41,21 @@ const Component = () => {
 		};
 	}, []);
 
+	const [projects, setProjects] = useState<
+		GetProjects.ReturnType['projects']
+	>([]);
+
+	const { loading } = useQuery<GetProjects.ReturnType>(GetProjects.Query, {
+		onCompleted: (data: GetProjects.ReturnType) => {
+			const projects = data.projects;
+
+			setProjects(projects);
+		},
+		onError: (error: any) => {
+			console.log(error);
+		},
+	});
+
 	return (
 		<Page className='block pt-[5rem]'>
 			<section className='align-center flex h-[calc(100vh-5rem)] w-full flex-col items-center bg-transparent'>
@@ -72,12 +64,15 @@ const Component = () => {
 				</h1>
 				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
 					<AnimatePresence mode='wait'>
-						{Projects.map((project, i) => (
+						{projects.map((project, i) => (
 							<ProjectCard
-								title={project.title}
+								title={project.name}
 								description={project.description}
-								img={project.img}
-								link={project.link}
+								img={project.iconUrl ?? Placeholder}
+								link={
+									project.deploymentUrl ??
+									project.repositoryUrl
+								}
 								variants={ProjectCardAnimationVariants}
 								initial='initial'
 								animate='animate'
