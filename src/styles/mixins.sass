@@ -10,11 +10,6 @@
 @mixin adaptive-text($size)
     font-size: calc($size * 1.1111111111111112vw)
 
-@mixin optimize-performance
-    transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)
-    transform-style: preserve-3d
-    opacity: 1
-
 // Style mixins
 @mixin gradient-text
     -webkit-background-clip: text !important
@@ -41,10 +36,3 @@
 
 @mixin mouse-glow
     background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)
-
-@mixin border($width, $color)
-    $box-shadow: inset 0px 0px 0px $width $color
-
-    box-shadow: $box-shadow
-    -moz-box-shadow: $box-shadow
-    -webkit-box-shadow: $box-shadow
