@@ -11,7 +11,7 @@ const Variants = {
 	background: {
 		transparent: 'bg-transparent',
 		bare: 'bg-transparent border-2 border-ring',
-		primary: 'bg-shadowy',
+		primary: 'bg-white',
 	},
 };
 
@@ -30,7 +30,7 @@ const Component: React.FC<IButtonProps> = (props) => {
 	const { children, className, variant, ...rest } = props;
 
 	const classNames = classes(
-		'z-[10] flex !cursor-none items-center justify-center rounded-md bg-transparent p-2 font-display text-sm font-thin outline-none transition-all duration-100 ease-in-out',
+		'z-[10] flex !cursor-none items-center justify-center rounded-md p-2 font-display text-sm font-thin outline-none transition-all duration-100 ease-in-out',
 		variant.background ?? Variants.background.transparent,
 		className
 	);
@@ -62,5 +62,7 @@ const Component: React.FC<IButtonProps> = (props) => {
 
 	return <>{Button}</>;
 };
+
+Component.displayName = 'Button';
 
 export default Component;
