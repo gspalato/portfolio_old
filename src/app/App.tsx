@@ -6,7 +6,6 @@ import Home from '@app/Home';
 import Login from '@app/Login';
 import NotFound from '@app/NotFound';
 import Projects from '@app/Projects';
-import UPx from '@app/UPx';
 
 import Content from '@components/Content';
 import Cursor from '@components/Cursor';
@@ -39,7 +38,6 @@ const App: React.FC = () => {
 							}
 						/>
 						<Route path='/projects' element={<Projects />} />
-						<Route path='/upx' element={<UPx />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='*' element={<NotFound />} />
 					</Routes>
