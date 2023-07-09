@@ -41,17 +41,6 @@ body
 	width: 100%
 	height: 100%
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
-	font-family: $display
-
-p
-	font-family: $title
-
 a
 	color: inherit
 	text-decoration: none
@@ -92,7 +81,14 @@ input:hover
 		backdrop-filter: blur(10px) brightness(175%)
 
 	.optimize
-		@include optimize-performance
+		-webkit-backface-visibility: hidden
+		-webkit-perspective: 1000
+		-webkit-transform: translate3d(0,0,0)
+		-webkit-transform: translateZ(0)
+		backface-visibility: hidden
+		perspective: 1000
+		transform: translate3d(0,0,0)
+		transform: translateZ(0)
 
 	.blur-gradient
 		background: #000000aa
