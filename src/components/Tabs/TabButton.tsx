@@ -13,14 +13,14 @@ const Component: React.FC<ITabButtonProps> = (props) => {
 	const { currentTab, setCurrentTab } = useTabs();
 
 	const classNames = classes(
-		'cursor-none rounded-[0.3rem] px-5 py-[.175rem] text-[.65rem] font-medium text-white transition-colors @2xl:min-w-[90px] md:py-1',
+		'flex cursor-none items-center justify-center rounded-[0.3rem] px-5 py-[.175rem] font-display text-[0.75rem] font-normal leading-[16px] text-white transition-colors md:py-1',
 		currentTab == value ? 'bg-overlays-5' : 'bg-transparent',
 		className
 	);
 
 	return (
 		<button className={classNames} onClick={() => setCurrentTab(value)}>
-			<h2>{text}</h2>
+			<h2 style={{ fontFamily: 'inherit' }}>{text}</h2>
 		</button>
 	);
 };

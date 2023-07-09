@@ -34,7 +34,7 @@ const getDataAxisSettings = (legend: string, offset?: number) => ({
 const chartAreaDefs = [
 	linearGradientDef('gradient', [
 		{ offset: 0, color: 'inherit' },
-		{ offset: 100, color: 'inherit', opacity: 0.1 },
+		{ offset: 100, color: 'inherit', opacity: 0.15 },
 	]),
 ];
 
@@ -153,7 +153,7 @@ const Component: React.FC = () => {
 	if (loading) return <Loading />;
 
 	return (
-		<Page className='mx-[2rem] flex flex-col items-center !justify-start pt-8 !font-title'>
+		<Page className='mx-4 flex flex-col items-center !justify-start pt-8 !font-title md:mx-8'>
 			<h1 className='text-gradient mb-8 w-full text-center font-exotic !text-xl font-bold md:!text-4xl'>
 				Welcome back, {user.Username}.
 			</h1>
@@ -166,27 +166,27 @@ const Component: React.FC = () => {
 							</h1>
 							<TabList className='mt-4 shadow-md @2xl:mt-0'>
 								<TabButton
-									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-3 shadow-md'
 									text='Uses'
 									value='Uses'
 								/>
 								<TabButton
-									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-3 shadow-md'
 									text='Duration'
 									value='Duration'
 								/>
 								<TabButton
-									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-3 shadow-md'
 									text='Water'
 									value='Water'
 								/>
 								<TabButton
-									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-3 shadow-md'
 									text='Plastic'
 									value='Plastic'
 								/>
 								<TabButton
-									className='min-w-[60px] !px-1 shadow-md @2xl:text-sm'
+									className='min-w-[60px] !px-3 shadow-md'
 									text='Bottles'
 									value='Bottles'
 								/>
