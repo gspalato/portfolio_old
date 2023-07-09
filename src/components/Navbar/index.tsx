@@ -99,7 +99,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 			<AnimatePresence mode='wait'>
 				{isExpanded && (
 					<motion.div
-						className='absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#000a] backdrop-blur-lg ease-in-out md:justify-end'
+						className='optimize absolute z-[100] mx-auto flex h-screen min-h-screen w-screen items-center justify-center bg-[#000a] backdrop-blur-lg ease-in-out md:justify-end'
 						initial='initial'
 						animate='animate'
 						exit='exit'
@@ -127,5 +127,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 		</>
 	) : null;
 };
+
+Component.displayName = 'Navbar';
 
 export default Component;
