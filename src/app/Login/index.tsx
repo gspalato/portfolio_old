@@ -10,6 +10,7 @@ import Page from '@components/Page';
 
 import { useAuth } from '@lib/auth';
 import { Authenticate } from '@lib/graphql/mutations';
+import { useLayout } from '@lib/layout';
 
 import { AuthenticationPayload } from '@/types/AuthenticationPayload';
 
@@ -25,6 +26,8 @@ const Component = () => {
 
 	const { token, setToken } = useAuth();
 
+	const { enableNavbarBlur, disableNavbarBlur } = useLayout();
+
 	const [authenticate, { loading }] = useMutation<Authenticate.ReturnType>(
 		Authenticate.Mutation,
 		{
@@ -39,21 +42,13 @@ const Component = () => {
 
 				setSuccess(success);
 
-				if (!success) {
-					// Handle login error.
-					return;
-				}
+				if (!success) return;
 
 				setFetchedToken(payload.token);
 				setUserJson(JSON.stringify(payload.user));
 				setSubmitting(false);
 			},
-			onError(error) {
-				console.log(error);
-				console.log(error.cause);
-				console.log(error.clientErrors);
-				console.log(error.graphQLErrors);
-				console.log(error.stack);
+			onError() {
 				setSubmitting(false);
 			},
 		}
@@ -64,6 +59,12 @@ const Component = () => {
 			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
 		}
 	}, [fetchedToken, userJson]);
+
+	useEffect(() => {
+		disableNavbarBlur();
+
+		return () => enableNavbarBlur();
+	}, []);
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -79,7 +80,7 @@ const Component = () => {
 			<section className='flex h-screen w-screen place-items-center justify-center px-8 pb-8 pt-20 tracking-tighter lg:p-20'>
 				<form
 					onSubmit={onSubmit}
-					className='flex h-[min(50rem,80%)] w-[clamp(30rem,75%,50rem)] flex-col items-center justify-center rounded-lg md:w-[min(30rem,75%)] md:border md:border-ring md:bg-accents-0'
+					className='flex h-[min(50rem,80%)] w-[clamp(30rem,75%,50rem)] flex-col items-center justify-center rounded-lg md:w-[min(30rem,75%)] md:border-ring md:bg-transparent'
 				>
 					<h1 className='text-gradient m-0 mb-8 font-display text-6xl font-extrabold'>
 						Welcome!
@@ -116,7 +117,7 @@ const Component = () => {
 					/>
 					<Button
 						type='submit'
-						className='flex h-10 w-[75%] !max-w-none items-center justify-center !border-none !bg-shadowy !text-center !text-[#000] shadow-sm'
+						className='flex h-10 w-[75%] !max-w-none items-center justify-center !border-none !bg-white !text-center !text-[#000] shadow-sm'
 						onClick={authenticate}
 						disabled={submitting}
 						variant={{ background: 'primary' }}
