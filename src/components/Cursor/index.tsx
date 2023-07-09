@@ -82,4 +82,6 @@ const Component: React.FC = () => {
 	);
 };
 
+Component.displayName = 'Cursor';
+
 export default Component;

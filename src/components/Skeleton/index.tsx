@@ -4,7 +4,7 @@ import classes from '@lib/classes';
 
 type SkeletonProps = React.ComponentPropsWithoutRef<'div'>;
 
-export default function Skeleton({ className, ...rest }: SkeletonProps) {
+const Component: React.FC<SkeletonProps> = ({ className, ...rest }) => {
 	return (
 		<div
 			className={classes('animate-shimmer bg-[#f6f7f8]', className)}
@@ -17,4 +17,8 @@ export default function Skeleton({ className, ...rest }: SkeletonProps) {
 			{...rest}
 		/>
 	);
-}
+};
+
+Component.displayName = 'Skeleton';
+
+export default Component;

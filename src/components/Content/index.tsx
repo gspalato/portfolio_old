@@ -21,4 +21,6 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 	);
 };
 
+Component.displayName = 'Content';
+
 export default Component;

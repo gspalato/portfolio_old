@@ -57,4 +57,6 @@ const Component: React.FC<IMenuButtonProps> = (props) => {
 	);
 };
 
+Component.displayName = 'MenuButton';
+
 export default Component;

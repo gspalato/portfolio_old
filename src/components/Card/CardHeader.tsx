@@ -17,4 +17,6 @@ const Component: React.FC<ICardHeaderProps> = (props) => {
 	return <div className={classNames}>{props.children}</div>;
 };
 
+Component.displayName = 'CardHeader';
+
 export default Component;

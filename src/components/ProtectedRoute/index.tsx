@@ -7,9 +7,7 @@ import Loading from '@app/Loading';
 import { useAuth } from '@lib/auth';
 import { CheckAuth } from '@lib/graphql/queries';
 
-import { CheckAuthenticationPayload } from '@/types/CheckAuthenticationPayload';
-
-const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
+const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const { token, expire } = useAuth();
 
 	const [check, { loading, error }] = useLazyQuery<CheckAuth.ReturnType>(
@@ -40,4 +38,7 @@ const ProtectedRoute: React.FC<React.PropsWithChildren> = (props) => {
 
 	return token ? <>{props.children}</> : <Navigate to='/login' />;
 };
-export default ProtectedRoute;
+
+Component.displayName = 'ProtectedRoute';
+
+export default Component;

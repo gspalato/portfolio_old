@@ -44,4 +44,6 @@ const Component = (props: ICarouselProps) => {
 	);
 };
 
+Component.displayName = 'Carousel';
+
 export default Component;

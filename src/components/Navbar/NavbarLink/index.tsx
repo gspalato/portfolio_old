@@ -35,7 +35,6 @@ const Component: React.FC<INavbarLinkProps> = (props) => {
 		`,
 		className
 	);
-	//[Styles.link, className].join(' ');
 
 	return (
 		<Link onClick={() => setState(false)} to={link}>
@@ -45,5 +44,7 @@ const Component: React.FC<INavbarLinkProps> = (props) => {
 		</Link>
 	);
 };
+
+Component.displayName = 'NavbarLink';
 
 export default Component;

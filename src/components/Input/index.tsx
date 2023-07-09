@@ -24,4 +24,6 @@ const Component: React.FC<IInputProps> = (props) => {
 	);
 };
 
+Component.displayName = 'Input';
+
 export default Component;

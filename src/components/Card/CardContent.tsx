@@ -12,4 +12,6 @@ const Component: React.FC<ICardContentProps> = (props) => {
 	return <div className={classNames}>{props.children}</div>;
 };
 
+Component.displayName = 'CardContent';
+
 export default Component;
