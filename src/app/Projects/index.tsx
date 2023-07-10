@@ -42,6 +42,8 @@ const Component = () => {
 		};
 	}, []);
 
+	const [loadingAssets, setLoadingAssets] = useState<boolean>(true);
+
 	const [projects, setProjects] = useState<
 		GetProjects.ReturnType['projects']
 	>([]);
@@ -50,7 +52,18 @@ const Component = () => {
 		onCompleted: (data: GetProjects.ReturnType) => {
 			const projects = data.projects;
 
-			setProjects(projects);
+			const imageLoaders = data.projects.map((project) => {
+				return new Promise((resolve) => {
+					const image = new Image();
+					image.src = project.iconUrl ?? Placeholder;
+					image.onload = () => resolve(image);
+				});
+			});
+
+			Promise.all(imageLoaders).then(() => {
+				setLoadingAssets(false);
+				setProjects(projects);
+			});
 		},
 		onError: (error: any) => {
 			console.log(error);
@@ -65,13 +78,13 @@ const Component = () => {
 				</h1>
 				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
 					<AnimatePresence mode='wait'>
-						{loading && (
+						{(loading || loadingAssets) && (
 							<motion.div
 								key='loading'
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
-								transition={{ duration: 0.3 }}
+								transition={{ duration: 0.1 }}
 								className='flex h-full w-full items-center justify-center'
 							>
 								<RotatingLines
@@ -101,23 +114,6 @@ const Component = () => {
 						))}
 					</AnimatePresence>
 				</div>
-				{/*
-				<div className='sticky h-[30rem] w-full px-8'>
-					<Carousel
-						scrollWidthSetter={setScrollWidth}
-						animate={{ x: -x }}
-						className='h-[30rem] w-full will-change-transform'
-					>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-						<ProjectCard title='Reality' description='Microservice platform.' img='https://i.ibb.co/VBgdP07/Reality-Logo-Web-Ready.jpg'/>
-					</Carousel>
-				</div>
-				*/}
 			</section>
 		</Page>
 	);
