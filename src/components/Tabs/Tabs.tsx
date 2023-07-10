@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 interface ITabContextData {
 	currentTab: string;
@@ -17,11 +17,9 @@ const Component: React.FC<ITabsProps> = (props) => {
 
 	const [currentTab, setCurrentTab] = useState<string>(defaultTab);
 
-	return (
-		<TabContext.Provider value={{ currentTab, setCurrentTab }}>
-			{children}
-		</TabContext.Provider>
-	);
+	const data = useMemo(() => ({ currentTab, setCurrentTab }), [currentTab]);
+
+	return <TabContext.Provider value={data}>{children}</TabContext.Provider>;
 };
 
 Component.displayName = 'Tabs';

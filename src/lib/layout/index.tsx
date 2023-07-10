@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 interface ILayoutContextData {
 	defaultNavbarEnabled: boolean;
@@ -36,22 +36,25 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 	const enableContentScrolling = () => setContentScrollable(true);
 	const disableContentScrolling = () => setContentScrollable(false);
 
-	const data = {
-		defaultNavbarEnabled,
-		setDefaultNavbarEnabled,
-		enableDefaultNavbar,
-		disableDefaultNavbar,
+	const data = useMemo(
+		() => ({
+			defaultNavbarEnabled,
+			setDefaultNavbarEnabled,
+			enableDefaultNavbar,
+			disableDefaultNavbar,
 
-		navbarBlurEnabled,
-		setNavbarBlurEnabled,
-		enableNavbarBlur,
-		disableNavbarBlur,
+			navbarBlurEnabled,
+			setNavbarBlurEnabled,
+			enableNavbarBlur,
+			disableNavbarBlur,
 
-		contentScrollable,
-		setContentScrollable,
-		enableContentScrolling,
-		disableContentScrolling,
-	};
+			contentScrollable,
+			setContentScrollable,
+			enableContentScrolling,
+			disableContentScrolling,
+		}),
+		[defaultNavbarEnabled, navbarBlurEnabled, contentScrollable]
+	);
 
 	return (
 		<LayoutContext.Provider value={data}>{children}</LayoutContext.Provider>
