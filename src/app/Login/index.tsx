@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { Navigate } from 'react-router-dom';
 
-import Loading from '@app/Loading';
-
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Page from '@components/Page';
@@ -74,7 +72,6 @@ const Component = () => {
 	};
 
 	if (success || token) return <Navigate to='/dashboard' replace={true} />;
-	//if (loading) return <Loading />;
 
 	return (
 		<Page>
@@ -95,7 +92,7 @@ const Component = () => {
 							borderColor:
 								success === false
 									? 'red'
-									: !(success === null)
+									: success !== null
 									? '#333'
 									: null,
 						}}
@@ -110,7 +107,7 @@ const Component = () => {
 							borderColor:
 								success === false
 									? 'red'
-									: !(success === null)
+									: success !== null
 									? '#333'
 									: null,
 						}}

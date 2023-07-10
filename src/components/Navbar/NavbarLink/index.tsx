@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import classes from '@/lib/classes';
 
-import Styles from './navbarLink.module.sass';
-
 interface INavbarLinkProps extends HTMLMotionProps<'h1'> {
 	className?: string;
 	link: string;
@@ -18,13 +16,13 @@ const Component: React.FC<INavbarLinkProps> = (props) => {
 
 	const classNames = classes(
 		`
+		text-foreground
 		w-auto
 		text-center
 		font-display
 		text-5xl
 		font-bold
 		tracking-tight
-		text-foreground
 		transition-colors
 		duration-100
 		ease-in-out

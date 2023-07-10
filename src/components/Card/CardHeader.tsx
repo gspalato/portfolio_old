@@ -8,7 +8,7 @@ interface ICardHeaderProps extends React.PropsWithChildren {
 }
 
 const Component: React.FC<ICardHeaderProps> = (props) => {
-	const { children, className, separate = true, ...rest } = props;
+	const { children, className, separate = true } = props;
 
 	const classNames = classes(
 		Styles.gradientBorder,
@@ -19,7 +19,7 @@ const Component: React.FC<ICardHeaderProps> = (props) => {
 		className
 	);
 
-	return <div className={classNames}>{props.children}</div>;
+	return <div className={classNames}>{children}</div>;
 };
 
 Component.displayName = 'CardHeader';

@@ -10,7 +10,7 @@ interface ICarouselProps extends HTMLMotionProps<'div'> {
 }
 
 const Component = (props: ICarouselProps) => {
-	const { children, ...rest } = props;
+	const { children } = props;
 
 	const carousel = useRef<HTMLDivElement | null>(null);
 

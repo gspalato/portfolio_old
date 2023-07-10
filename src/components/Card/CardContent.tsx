@@ -5,7 +5,7 @@ interface ICardContentProps extends React.PropsWithChildren {
 }
 
 const Component: React.FC<ICardContentProps> = (props) => {
-	const { children, className, ...rest } = props;
+	const { children, className } = props;
 
 	const classNames = classes('mt-5 min-h-[10rem] flex-1 px-6', className);
 

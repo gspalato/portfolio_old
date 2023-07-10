@@ -1,7 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-import { useAuth } from '@lib/auth';
-
 import { GATEWAY_URL } from '@/constants';
 
 const ApiLink = new HttpLink({ uri: GATEWAY_URL });
