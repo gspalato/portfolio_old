@@ -13,7 +13,11 @@ interface IInputProps {
 const Component: React.FC<IInputProps> = (props) => {
 	const { className, placeholder, ...moreProps } = props;
 
-	const classNames = classes(Styles.input, className);
+	const classNames = classes(
+		Styles.input,
+		'!border-borders-0 !bg-accents-0',
+		className
+	);
 
 	return (
 		<input
