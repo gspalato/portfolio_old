@@ -139,6 +139,7 @@ To get a local copy up and running with:
 -   [x] Finish the Projects page.
 -   [ ] Finish the About page.
 -   [ ] Add more information to the Dashboard.
+-   [ ] Migrate to Next.js with App Router when page transitions with Framer Motion start working.
 
 See the [open issues](https://github.com/gspalato/portfolio/issues) for a full list of proposed features (and known issues).
 

@@ -4,28 +4,36 @@ import Button from '@components/Button';
 
 import classes from '@/lib/classes';
 
+import Placeholder from '@assets/img/project_placeholder_icon.jpg';
+
 import Styles from './ProjectCard.module.sass';
 
 interface IProjectCardProps extends HTMLMotionProps<'div'> {
-	img: string;
+	icon: string;
+	fallbackIcon?: string;
 	title: string;
 	description?: string;
 	link?: string;
 }
 
 const Component: React.FC<IProjectCardProps> = (props) => {
-	const { img, title, description, link, ...rest } = props;
+	const { icon, fallbackIcon, title, description, link, ...rest } = props;
 
 	const classNames = classes(
 		'relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-lg border border-accents-1 bg-cover p-0 shadow'
 	);
 
 	return (
-		<motion.div
-			className={classNames}
-			style={{ backgroundImage: `url(${img})` }}
-			{...rest}
-		>
+		<motion.div className={classNames} {...rest}>
+			<picture>
+				<source type='image/webp' srcSet={icon} />
+				<source type='image/jpg' srcSet={fallbackIcon ?? Placeholder} />
+				<img
+					className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
+					src={icon}
+					alt={title}
+				/>
+			</picture>
 			<div className={Styles.layer} />
 			<div className='z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'>
 				<div className='flex max-h-full w-fit flex-col items-start justify-between pr-4 before:rounded-lg'>
