@@ -1,5 +1,5 @@
 const font = "'Inter', monospace";
-const detailColor = '#373737';
+const detailColor = '#ffffff44';
 
 const BaseChartTheme = {
 	grid: {
@@ -13,6 +13,8 @@ const BaseChartTheme = {
 				fill: detailColor,
 				fontSize: 12,
 				fontFamily: font,
+				fontWeight: 300,
+				letterSpacing: '0.025rem',
 			},
 		},
 		ticks: {
@@ -28,7 +30,7 @@ const BaseChartTheme = {
 		},
 		domain: {
 			line: {
-				stroke: detailColor,
+				stroke: 'transparent',
 				strokeWidth: 1,
 			},
 		},

@@ -18,15 +18,16 @@ const getDateAxisSettings = (ticks: string[]) => ({
 	tickValues: ticks,
 	legend: 'Date',
 	legendPosition: 'middle',
-	legendOffset: +20,
+	legendOffset: -15,
+	//tickPadding: -25,
 });
 
-const getDataAxisSettings = (legend: string, offset?: number) => ({
+const getDataAxisSettings = (legend: string) => ({
 	tickValues: 4,
 	legend: legend,
 	legendPosition: 'middle',
-	legendOffset: offset ?? -30,
-	tickPadding: 10,
+	legendOffset: 15,
+	//tickPadding: -15,
 	tickRotation: -90,
 	tickSize: 0,
 });
@@ -158,10 +159,10 @@ const Component: React.FC = () => {
 				Welcome back, {user.Username}.
 			</h1>
 			<div className='md:auto-rows-minmax grid w-full flex-1 grid-flow-row auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-1 md:grid-flow-col md:grid-cols-2'>
-				<Card className='mb-4 !min-h-[30rem] min-w-full max-w-lg !font-display @container md:col-span-3 md:mb-8'>
+				<Card className='mb-4 !min-h-[30rem] min-w-full max-w-lg !pb-0 !font-display @container md:col-span-3 md:mb-8'>
 					<Tabs defaultTab='Water'>
 						<CardHeader separate className='flex-col @2xl:flex-row'>
-							<h1 className='font-exotic text-2xl font-semibold text-foreground'>
+							<h1 className='text-foreground font-exotic text-2xl font-semibold'>
 								UPx Refill Station
 							</h1>
 							<TabList className='mt-4 shadow-md @2xl:mt-0'>
@@ -192,7 +193,7 @@ const Component: React.FC = () => {
 								/>
 							</TabList>
 						</CardHeader>
-						<CardContent className='mt-0 pt-0'>
+						<CardContent className='mt-0 !px-0 pt-8'>
 							<TabContent animate={false}>
 								<Tab
 									className='h-full min-h-full min-w-full'
@@ -200,17 +201,27 @@ const Component: React.FC = () => {
 								>
 									<Chart
 										data={chartData.uses}
-										axisLeft={
-											getDataAxisSettings('Uses') as any
-										}
+										axisLeft={{
+											...(getDataAxisSettings(
+												'Uses'
+											) as any),
+											tickValues: [
+												0,
+												Math.max(
+													...chartData.uses[0].data.map(
+														(xy: any) => xy.y
+													)
+												),
+											],
+										}}
 										axisBottom={
 											getDateAxisSettings(ticks) as any
 										}
 										margin={{
-											top: 30,
-											right: 35,
-											bottom: 25,
-											left: 35,
+											top: 10,
+											right: 0,
+											bottom: 0,
+											left: 0,
 										}}
 										enableArea
 										defs={chartAreaDefs}
@@ -232,10 +243,10 @@ const Component: React.FC = () => {
 											getDateAxisSettings(ticks) as any
 										}
 										margin={{
-											top: 30,
-											right: 35,
-											bottom: 25,
-											left: 35,
+											top: 10,
+											right: 0,
+											bottom: 0,
+											left: 0,
 										}}
 										enableArea
 										defs={chartAreaDefs}
@@ -249,10 +260,10 @@ const Component: React.FC = () => {
 									<Chart
 										data={chartData.water}
 										margin={{
-											top: 30,
-											right: 35,
-											bottom: 25,
-											left: 35,
+											top: 10,
+											right: 0,
+											bottom: 0,
+											left: 0,
 										}}
 										axisLeft={
 											getDataAxisSettings(
@@ -274,10 +285,10 @@ const Component: React.FC = () => {
 									<Chart
 										data={chartData.plastic}
 										margin={{
-											top: 30,
-											right: 35,
-											bottom: 25,
-											left: 35,
+											top: 10,
+											right: 0,
+											bottom: 0,
+											left: 0,
 										}}
 										axisLeft={
 											getDataAxisSettings(
@@ -299,10 +310,10 @@ const Component: React.FC = () => {
 									<Chart
 										data={chartData.bottles}
 										margin={{
-											top: 30,
-											right: 35,
-											bottom: 25,
-											left: 35,
+											top: 10,
+											right: 0,
+											bottom: 0,
+											left: 0,
 										}}
 										axisLeft={
 											getDataAxisSettings(
