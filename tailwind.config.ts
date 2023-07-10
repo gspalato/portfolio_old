@@ -43,7 +43,7 @@ module.exports = {
 				ring: 'rgb(28, 28, 30)',
 			},
 			backgroundImage: {
-				shadowy: 'linear-gradient(180deg, #fafafa, #adadad)',
+				shadowy: 'linear-gradient(180deg, #fafafa, #aaaaaa)',
 			},
 			boxShadow: {},
 			borderRadius: {},
