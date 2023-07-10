@@ -1,6 +1,11 @@
 FROM alpine
 WORKDIR /app
 
+RUN addgroup -S app \
+    && adduser -S app -G app
+
+USER app
+
 # Install Node.js and NPM
 RUN apk add --update nodejs npm
 
