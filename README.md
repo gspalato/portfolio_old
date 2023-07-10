@@ -106,13 +106,7 @@ To get a local copy up and running with:
     docker compose build
     ```
 
-3. Configure environment variables in a `.env` file:
-
-    ```env
-    VITE_GatewayUrl=reality_api_url
-    ```
-
-4. Start it
+3. Start it
     ```sh
     docker compose up -d
     ```
@@ -131,13 +125,7 @@ To get a local copy up and running with:
     yarn
     ```
 
-3. Configure environment variables in a `.env` file:
-
-    ```env
-    VITE_GatewayUrl=reality_api_url
-    ```
-
-4. Start it
+3. Start it
     ```sh
     yarn dev
     ```
@@ -148,7 +136,7 @@ To get a local copy up and running with:
 
 ## Roadmap
 
--   [ ] Finish the Projects page.
+-   [x] Finish the Projects page.
 -   [ ] Finish the About page.
 -   [ ] Add more information to the Dashboard.
 
