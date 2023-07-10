@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import { Navigate } from 'react-router-dom';
 
 import Loading from '@app/Loading';
@@ -73,7 +74,7 @@ const Component = () => {
 	};
 
 	if (success || token) return <Navigate to='/dashboard' replace={true} />;
-	if (loading) return <Loading />;
+	//if (loading) return <Loading />;
 
 	return (
 		<Page>
@@ -86,7 +87,7 @@ const Component = () => {
 						Welcome!
 					</h1>
 					<Input
-						className='mb-6 w-[75%] border border-border font-title shadow-sm placeholder:text-[#ffffff22]'
+						className='border-border mb-6 w-[75%] border font-title shadow-sm placeholder:text-[#ffffff22]'
 						type='text'
 						placeholder='Username'
 						value={username}
@@ -101,7 +102,7 @@ const Component = () => {
 						onChange={(e: any) => setUsername(e.target.value)}
 					/>
 					<Input
-						className='mb-6 w-[75%] border border-border font-title shadow-sm placeholder:text-[#ffffff22]'
+						className='border-border mb-6 w-[75%] border font-title shadow-sm placeholder:text-[#ffffff22]'
 						type='password'
 						placeholder='Password'
 						value={password}
@@ -123,9 +124,18 @@ const Component = () => {
 						variant={{ background: 'primary' }}
 						whileHover={{ scale: 1.01 }}
 					>
-						<h1 className='w-full text-center text-sm font-semibold'>
-							Sign In
-						</h1>
+						{loading ? (
+							<RotatingLines
+								strokeColor='grey'
+								animationDuration='1.5'
+								strokeWidth='5'
+								width='20'
+							/>
+						) : (
+							<h1 className='w-full text-center text-sm font-semibold'>
+								Sign In
+							</h1>
+						)}
 					</Button>
 				</form>
 			</section>
