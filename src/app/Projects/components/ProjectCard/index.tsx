@@ -2,6 +2,8 @@ import { HTMLMotionProps, motion } from 'framer-motion';
 
 import Button from '@components/Button';
 
+import classes from '@/lib/classes';
+
 import Styles from './ProjectCard.module.sass';
 
 interface IProjectCardProps extends HTMLMotionProps<'div'> {
@@ -14,9 +16,13 @@ interface IProjectCardProps extends HTMLMotionProps<'div'> {
 const Component: React.FC<IProjectCardProps> = (props) => {
 	const { img, title, description, link, ...rest } = props;
 
+	const classNames = classes(
+		'relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-lg border border-accents-1 bg-cover p-0 shadow'
+	);
+
 	return (
 		<motion.div
-			className='relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-lg border border-accents-1 bg-cover p-0 shadow'
+			className={classNames}
 			style={{ backgroundImage: `url(${img})` }}
 			{...rest}
 		>
