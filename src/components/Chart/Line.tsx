@@ -41,7 +41,6 @@ const Component: React.FC<IResponsiveChartProps> = (props) => {
 					'points',
 					'slices',
 					'mesh',
-					'legends',
 				]}
 				enablePoints
 				pointSize={5}
