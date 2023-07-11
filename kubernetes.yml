@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: portfolio_app
+  spec:
+    selector:
+      io.reality.application: portfolio
+    ports:
+      - name: http
+        protocol: TCP
+        port: 80
+        targetPort: 80
+      - name: https
+        protocol: TCP
+        port: 443
+        targetPort: 443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio_deployment
+  labels:
+    io.reality.application: portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.reality.application: portfolio
+  # Pod Template
+  template: 
+    metadata:
+      labels:
+        io.reality.application: portfolio
+    spec:
+      containers:
+      - name: portfolio
+        image: PORTFOLIO_IMAGE_NAME
+        ports:
+        - containerPort: 80
+        envFrom:
+          - secretRef:
+            name: reality-secrets
