@@ -193,7 +193,7 @@ const Component: React.FC = () => {
 								/>
 							</TabList>
 						</CardHeader>
-						<CardContent className='mt-0 !px-0 pt-8'>
+						<CardContent className='mt-0 !px-0'>
 							<TabContent animate={false}>
 								<Tab
 									className='h-full min-h-full min-w-full'
@@ -218,7 +218,7 @@ const Component: React.FC = () => {
 											getDateAxisSettings(ticks) as any
 										}
 										margin={{
-											top: 10,
+											top: 15,
 											right: 0,
 											bottom: 0,
 											left: 0,
@@ -243,7 +243,7 @@ const Component: React.FC = () => {
 											getDateAxisSettings(ticks) as any
 										}
 										margin={{
-											top: 10,
+											top: 15,
 											right: 0,
 											bottom: 0,
 											left: 0,
@@ -260,7 +260,7 @@ const Component: React.FC = () => {
 									<Chart
 										data={chartData.water}
 										margin={{
-											top: 10,
+											top: 15,
 											right: 0,
 											bottom: 0,
 											left: 0,
@@ -285,7 +285,7 @@ const Component: React.FC = () => {
 									<Chart
 										data={chartData.plastic}
 										margin={{
-											top: 10,
+											top: 15,
 											right: 0,
 											bottom: 0,
 											left: 0,
