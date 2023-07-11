@@ -43,10 +43,13 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 						type='image/jpg'
 						srcSet={fallbackIconUrl ?? Placeholder}
 					/>
-					<img
+					<motion.img
 						className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
 						src={iconUrl}
 						alt={name}
+						initial={{ opacity: 0, filter: 'blur(10px)' }}
+						animate={{ opacity: 1, filter: 'none' }}
+						transition={{ delay: 1, duration: 0.5 }}
 					/>
 				</picture>
 			)}
