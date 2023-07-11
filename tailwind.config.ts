@@ -40,7 +40,7 @@ module.exports = {
 
 				white: '#ccc',
 
-				ring: 'rgb(28, 28, 30)',
+				ring: 'rgb(28, 28, 29)',
 			},
 			backgroundImage: {
 				shadowy: 'linear-gradient(180deg, #fafafa, #aaaaaa)',
