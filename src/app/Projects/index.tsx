@@ -97,20 +97,13 @@ const Component = () => {
 						)}
 						{projects.map((project, i) => (
 							<ProjectCard
-								title={project.name}
-								description={project.description}
-								icon={project.iconUrl}
-								fallbackIcon={project.fallbackIconUrl}
-								link={
-									project.deploymentUrl ??
-									project.repositoryUrl
-								}
+								project={project}
 								variants={ProjectCardAnimationVariants}
 								initial='initial'
 								animate='animate'
 								exit='initial'
 								custom={i}
-								key={i}
+								key={project.name}
 							/>
 						))}
 					</AnimatePresence>

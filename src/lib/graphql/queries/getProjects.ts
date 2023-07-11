@@ -7,8 +7,10 @@ export const Query = gql`
 		projects {
 			name
 			description
+			animatedIconUrl
 			iconUrl
 			fallbackIconUrl
+			animatedBannerUrl
 			bannerUrl
 			fallbackBannerUrl
 			repositoryUrl
