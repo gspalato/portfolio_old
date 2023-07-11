@@ -31,7 +31,13 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 	);
 
 	return (
-		<motion.div className={classNames} {...rest}>
+		<motion.div
+			className={classNames}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ delay: 0, duration: 0.25 }}
+			{...rest}
+		>
 			{animatedIconUrl ? (
 				<motion.video
 					className='absolite bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
