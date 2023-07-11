@@ -33,7 +33,12 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 	return (
 		<motion.div className={classNames} {...rest}>
 			{animatedIconUrl ? (
-				<motion.video className='absolite bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'>
+				<motion.video
+					className='absolite bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
+					initial={{ opacity: 0, filter: 'blur(10px)' }}
+					animate={{ opacity: 1, filter: 'none' }}
+					transition={{ delay: 1, duration: 0.5 }}
+				>
 					<source src={animatedIconUrl} type='video/mp4' />
 				</motion.video>
 			) : (
