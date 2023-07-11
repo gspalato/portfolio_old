@@ -37,6 +37,6 @@
 @mixin mouse-glow
     background: radial-gradient(800px circle at calc(var(--x) * 1) calc(var(--y) * 1), hsla(0,0%,100%,.2), transparent 40%)
 
-@mixin gradient-border($background: #060607, $border: #1c1c1c)
+@mixin gradient-border($background: #060607, $border: #1c1c1d)
     border: 1px solid transparent
     background: padding-box linear-gradient(to right, $background, $background) no-repeat, border-box linear-gradient(145deg, $border 0%, adjust-color($border, $alpha: -.3), adjust-color($border, $alpha: -.6))
