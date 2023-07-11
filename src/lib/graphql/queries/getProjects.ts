@@ -8,6 +8,9 @@ export const Query = gql`
 			name
 			description
 			iconUrl
+			fallbackIconUrl
+			bannerUrl
+			fallbackBannerUrl
 			repositoryUrl
 			deploymentUrl
 		}
