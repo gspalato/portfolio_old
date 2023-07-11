@@ -99,7 +99,8 @@ const Component = () => {
 							<ProjectCard
 								title={project.name}
 								description={project.description}
-								img={project.iconUrl ?? Placeholder}
+								icon={project.iconUrl}
+								fallbackIcon={project.fallbackIconUrl}
 								link={
 									project.deploymentUrl ??
 									project.repositoryUrl

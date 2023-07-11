@@ -9,7 +9,7 @@ import Placeholder from '@assets/img/project_placeholder_icon.jpg';
 import Styles from './ProjectCard.module.sass';
 
 interface IProjectCardProps extends HTMLMotionProps<'div'> {
-	icon: string;
+	icon?: string;
 	fallbackIcon?: string;
 	title: string;
 	description?: string;
