@@ -40,3 +40,5 @@ spec:
         envFrom:
           - secretRef:
               name: reality-secrets
+      imagePullSecrets:
+      - name: reality-registry
