@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: portfolio-app-pod
-        image: 127.0.0.1:5000/portfolio:latest
+        image: localhost:5000/portfolio:latest
         ports:
         - containerPort: 80
         envFrom:
