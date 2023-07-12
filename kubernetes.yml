@@ -32,9 +32,11 @@ spec:
       labels:
         io.reality.application: portfolio
     spec:
+      # Using local registry.
       containers:
       - name: portfolio-app-pod
-        image: localhost:5000/portfolio:latest
+        image: unreaalism/portfolio:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         envFrom:
