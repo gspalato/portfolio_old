@@ -79,7 +79,7 @@ const Component: React.FC<INavbarProps> = (props) => {
 	return defaultNavbarEnabled ? (
 		<>
 			<motion.nav id='navbar' className={classNames}>
-				<div className='mx-auto flex w-full items-center justify-between px-[2.23rem]'>
+				<div className='mx-auto flex w-full items-center justify-between px-[1.5rem]'>
 					<img
 						src='/favicon.ico'
 						alt=''

@@ -10,11 +10,54 @@ import Placeholder from '@assets/img/project_placeholder_icon.jpg';
 
 import Styles from './ProjectCard.module.sass';
 
+const ProjectCardLogoAnimationVariants = {
+	initial: {
+		opacity: 0,
+		filter: 'blur(5px)',
+	},
+	animate: (i: number) => ({
+		opacity: 1,
+		filter: 'blur(0px)',
+		transition: {
+			delay: i * 0.3 + 0.5,
+			duration: 0.5,
+		},
+	}),
+};
+
+const ProjectCardContentAnimationVariants = {
+	initial: {
+		opacity: 0,
+	},
+	animate: (i: number) => ({
+		opacity: 1,
+		transition: {
+			delay: i * 0.3 + 1,
+			duration: 0.5,
+		},
+	}),
+};
+
 interface IProjectCardProps extends HTMLMotionProps<'div'> {
 	project: Project;
 }
 
 const Component: React.FC<IProjectCardProps> = (props) => {
+	const {
+		project,
+
+		initial,
+		animate,
+		exit,
+		whileDrag,
+		whileFocus,
+		whileHover,
+		whileTap,
+		whileInView,
+		variants,
+		custom,
+	} = props;
+
 	const {
 		animatedIconUrl,
 		iconUrl,
@@ -24,26 +67,34 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 		repositoryUrl,
 		deploymentUrl,
 		...rest
-	} = props.project;
+	} = project;
 
 	const classNames = classes(
-		'relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-lg border border-accents-1 bg-cover p-0 shadow'
+		'optimize relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-2xl border border-[#fff1] bg-cover p-0 shadow md:h-[22.5rem] md:w-[22.5rem]'
 	);
 
 	return (
 		<motion.div
 			className={classNames}
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ delay: 0, duration: 0.25 }}
+			initial={initial}
+			animate={animate}
+			exit={exit}
+			whileDrag={whileDrag}
+			whileFocus={whileFocus}
+			whileHover={whileHover}
+			whileTap={whileTap}
+			whileInView={whileInView}
+			variants={variants}
+			custom={custom}
 			{...rest}
 		>
 			{animatedIconUrl ? (
 				<motion.video
-					className='absolite bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
-					initial={{ opacity: 0, filter: 'blur(10px)' }}
-					animate={{ opacity: 1, filter: 'none' }}
-					transition={{ delay: 1, duration: 0.5 }}
+					className='absolite bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl'
+					initial='initial'
+					animate='animate'
+					variants={ProjectCardLogoAnimationVariants}
+					custom={custom}
 				>
 					<source src={animatedIconUrl} type='video/mp4' />
 				</motion.video>
@@ -55,30 +106,33 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 						srcSet={fallbackIconUrl ?? Placeholder}
 					/>
 					<motion.img
-						className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg'
+						className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl'
 						src={iconUrl}
 						alt={name}
-						initial={{ opacity: 0, filter: 'blur(10px)' }}
-						animate={{ opacity: 1, filter: 'none' }}
-						transition={{ delay: 1, duration: 0.5 }}
+						initial='initial'
+						animate='animate'
+						variants={ProjectCardLogoAnimationVariants}
+						custom={custom}
 					/>
 				</picture>
 			)}
 			<motion.div
 				className={Styles.layer}
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ delay: 0.5, duration: 0.2 }}
+				initial='initial'
+				animate='animate'
+				variants={ProjectCardContentAnimationVariants}
+				custom={custom}
 			/>
 			<motion.div
-				className='z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ delay: 0.5, duration: 0.2 }}
+				className='optimize z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'
+				initial='initial'
+				animate='animate'
+				variants={ProjectCardContentAnimationVariants}
+				custom={custom}
 			>
 				<div className='flex max-h-full w-fit flex-col items-start justify-between pr-4 before:rounded-lg'>
 					<h1 className='font-display text-lg'>{name}</h1>
-					<p className='overflow-hidden text-ellipsis break-words font-title text-sm font-normal text-overlays-8'>
+					<p className='overflow-hidden text-ellipsis break-words font-title text-sm font-normal text-overlays-8 md:tracking-wide'>
 						{description}
 					</p>
 				</div>

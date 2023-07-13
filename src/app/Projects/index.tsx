@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -12,14 +12,14 @@ import Placeholder from '@assets/img/project_placeholder_icon.jpg';
 
 import ProjectCard from './components/ProjectCard';
 
-const ProjectCardAnimationVariants = {
+const ProjectCardAnimationVariants: Variants = {
 	initial: {
 		opacity: 0,
 	},
 	animate: (i: number) => ({
 		opacity: 1,
 		transition: {
-			delay: i * 0.15 + 0.3,
+			delay: i * 0.3,
 		},
 	}),
 };
@@ -73,10 +73,10 @@ const Component = () => {
 	return (
 		<Page className='block pt-[5rem]'>
 			<section className='align-center flex h-[calc(100vh-5rem)] w-full flex-col items-center bg-transparent'>
-				<h1 className='text-gradient w-full py-8 pb-16 text-center font-exotic text-5xl font-bold md:my-[1.5] md:text-7xl'>
+				<h1 className='text-gradient w-full py-4 pb-12 text-center font-exotic text-5xl font-bold md:pb-16 md:pt-10 md:text-7xl'>
 					Projects
 				</h1>
-				<div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 md:flex md:flex-row md:flex-wrap md:place-content-center'>
+				<motion.div className='top-0 grid flex-1 grid-cols-1 gap-8 px-8 pb-12 transition-all duration-200 md:flex md:flex-row md:flex-wrap md:place-content-center'>
 					<AnimatePresence mode='wait'>
 						{(loading || loadingAssets) && (
 							<motion.div
@@ -85,7 +85,7 @@ const Component = () => {
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.1 }}
-								className='flex h-full w-full items-center justify-center'
+								className='flex h-[22.5rem] w-full items-center justify-center'
 							>
 								<RotatingLines
 									strokeColor='grey'
@@ -101,13 +101,12 @@ const Component = () => {
 								variants={ProjectCardAnimationVariants}
 								initial='initial'
 								animate='animate'
-								exit='initial'
 								custom={i}
 								key={project.name}
 							/>
 						))}
 					</AnimatePresence>
-				</div>
+				</motion.div>
 			</section>
 		</Page>
 	);
