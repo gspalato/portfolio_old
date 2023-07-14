@@ -27,19 +27,19 @@ spec:
     matchLabels:
       io.reality.application: portfolio
   # Pod Template
-  template: 
+  template:
     metadata:
       labels:
         io.reality.application: portfolio
     spec:
       # Using local registry.
       containers:
-      - name: portfolio-app-pod
-        image: unreaalism/portfolio:latest
-        ports:
-        - containerPort: 80
-        envFrom:
-          - secretRef:
-              name: reality-secrets
+        - name: portfolio-app-pod
+          image: unreaalism/portfolio:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: reality-secrets
       imagePullSecrets:
-      - name: reality-registry
+        - name: reality-registry
