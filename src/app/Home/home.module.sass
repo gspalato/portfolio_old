@@ -13,11 +13,11 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     & h1:not(:first-child)
         margin-top: -2 * 1.1111111vw
 
-    @include responsive($lg)
-        & h1:nth-child(odd)
-            text-align: left
-        & h1:nth-child(even)
-            text-align: right
+    //@include responsive($lg)
+    //    & h1:nth-child(odd)
+    //        text-align: left
+    //    & h1:nth-child(even)
+    //        text-align: right
 
 .heroText
     grid-column: span 4
@@ -37,8 +37,8 @@ $gradient: linear-gradient(to right, #8a2387, #e94057, #f27121)
     line-height: 18*1.1111111vw
 
     @include responsive($md)
-        @include adaptive-text(15)
-        line-height: 16*1.1111111vw
+        @include adaptive-text(10)
+        line-height: 11*1.1111111vw
 
 .bubble
     filter: blur(25px) brightness(60%)
