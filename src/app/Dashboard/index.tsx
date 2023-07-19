@@ -40,7 +40,7 @@ const chartAreaDefs = [
 ];
 
 const Component: React.FC = () => {
-	const [chartData, setChartData] = useState<any>([]);
+	const [chartData, setChartData] = useState<any>({});
 
 	const [ticks, setTicks] = useState<any>([]);
 
@@ -59,6 +59,14 @@ const Component: React.FC = () => {
 
 			console.log('Fetched data from Reality:');
 			console.log(resumes);
+			if (resumes.length === 0)
+				setChartData({
+					uses: [],
+					duration: [],
+					plastic: [],
+					water: [],
+					bottles: [],
+				});
 
 			const timestampToDateString = (timestamp: number): string => {
 				let date = new Date(timestamp * 1000);

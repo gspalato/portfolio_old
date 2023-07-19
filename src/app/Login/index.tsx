@@ -21,7 +21,6 @@ const Component = () => {
 
 	const [success, setSuccess] = useState<boolean | null>(null);
 	const [fetchedToken, setFetchedToken] = useState<string | null>(null);
-	const [userJson, setUserJson] = useState<string | null>(null);
 
 	const { token, setToken } = useAuth();
 
@@ -31,12 +30,11 @@ const Component = () => {
 		Authenticate.Mutation,
 		{
 			variables: {
-				user: username,
-				pwd: password,
+				username: username,
+				password: password,
 			},
 			onCompleted(data) {
-				let payload: AuthenticationPayload =
-					data.authenticate.authenticationPayload;
+				let payload: AuthenticationPayload = data.authenticate;
 				let success = payload.successful;
 
 				setSuccess(success);
@@ -44,11 +42,11 @@ const Component = () => {
 				if (!success) return;
 
 				setFetchedToken(payload.token);
-				setUserJson(JSON.stringify(payload.user));
 				setSubmitting(false);
 			},
-			onError() {
+			onError(e) {
 				setSubmitting(false);
+				console.error(e);
 			},
 		}
 	);
@@ -57,7 +55,7 @@ const Component = () => {
 		if (window) {
 			if (fetchedToken && fetchedToken.length > 0) setToken(fetchedToken);
 		}
-	}, [fetchedToken, userJson]);
+	}, [fetchedToken]);
 
 	useEffect(() => {
 		disableNavbarBlur();
