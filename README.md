@@ -20,14 +20,14 @@
   <p align="center">
     My personal portfolio and dashboard for my personal platform.
     <br />
-    <a href="https://github.com/gspalato/reality"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/gspalato/foundation"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://portfolio-gspalato.vercel.app">View Portfolio</a>
     ·
-    <a href="https://github.com/gspalato/reality/issues">Report Bug</a>
+    <a href="https://github.com/gspalato/foundation/issues">Report Bug</a>
     ·
-    <a href="https://github.com/gspalato/reality/issues">Request Feature</a>
+    <a href="https://github.com/gspalato/foundation/issues">Request Feature</a>
   </p>
 </div>
 
@@ -65,7 +65,7 @@
 
 ## About The Project
 
-Reality is a microservice GraphQL back-end and platform for my projects, allowing easy deployments with an authentication server and database.
+Foundation is a microservice GraphQL back-end and platform for my projects, allowing easy deployments with an authentication server and database.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

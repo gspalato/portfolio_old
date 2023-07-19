@@ -4,7 +4,7 @@ import { GATEWAY_URL } from '@/constants';
 
 const ApiLink = new HttpLink({ uri: GATEWAY_URL });
 
-export const useRealityClient = () => {
+export const useFoundationClient = () => {
 	const client = new ApolloClient({
 		link: ApiLink,
 		cache: new InMemoryCache(),

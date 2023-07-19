@@ -2,12 +2,12 @@ import { ApolloProvider } from '@apollo/client';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { useRealityClient } from '@lib/graphql/client';
+import { useFoundationClient } from '@lib/graphql/client';
 
 import App from './App';
 
 const Component = () => {
-	const client = useRealityClient();
+	const client = useFoundationClient();
 
 	return (
 		<React.StrictMode>

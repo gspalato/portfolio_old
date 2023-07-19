@@ -26,15 +26,15 @@ const Component: React.FC<React.PropsWithChildren> = (props) => {
 	};
 
 	const getToken = (): string | null => {
-		return window.sessionStorage.getItem('reality-token');
+		return window.sessionStorage.getItem('foundation-token');
 	};
 
 	const setToken = (token: string) => {
-		window.sessionStorage.setItem('reality-token', token);
+		window.sessionStorage.setItem('foundation-token', token);
 	};
 
 	const expire = () => {
-		window.sessionStorage.removeItem('reality-token');
+		window.sessionStorage.removeItem('foundation-token');
 	};
 
 	const data = {

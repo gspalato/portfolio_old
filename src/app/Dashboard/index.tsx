@@ -57,7 +57,7 @@ const Component: React.FC = () => {
 		onCompleted: (data) => {
 			const resumes = data.resumes;
 
-			console.log('Fetched data from Reality:');
+			console.log('Fetched data from Foundation:');
 			console.log(resumes);
 			if (resumes.length === 0)
 				setChartData({
