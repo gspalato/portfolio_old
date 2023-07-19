@@ -9,7 +9,7 @@ const Component: React.FC = () => {
 				<div className={Styles.textContainer}>
 					<h1 className={Styles.heroText}>full-stack</h1>
 					<h1 className={Styles.heroText}>developer</h1>
-					<h1 className={Styles.heroText}>& designer</h1>
+					<h1 className={Styles.heroText}>& student</h1>
 				</div>
 			</section>
 		</Page>
