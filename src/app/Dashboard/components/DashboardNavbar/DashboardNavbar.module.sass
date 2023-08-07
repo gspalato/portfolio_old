@@ -1,0 +1,12 @@
+@use '@styles/mixins' as *
+
+.hideScrollbar
+    &::-webkit-scrollbar
+        display: none
+
+    -ms-overflow-style: none
+    scrollbar-width: none
+    -webkit-overflow-scrolling: touch
+
+.gradientBorder
+    @include gradient-border

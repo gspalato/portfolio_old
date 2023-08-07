@@ -6,11 +6,12 @@ import { Tab, Tabs } from '@components/Tabs';
 import { useLayout } from '@lib/layout';
 import { usePortrait } from '@lib/portrait';
 
-import { Sidebar } from './components/Sidebar';
+import { DashboardNavbar } from './components/DashboardNavbar';
 import CronJobsPage from './pages/CronJobs';
 import DeploysPage from './pages/Deploys';
 import OverviewPage from './pages/Overview';
 import RefillStationPage from './pages/RefillStation';
+import classes from '@/lib/classes';
 
 const Component: React.FC = () => {
 	const isPortrait = usePortrait();
@@ -32,11 +33,21 @@ const Component: React.FC = () => {
 		};
 	});
 
+	const classNames = classes(
+		'flex items-center !justify-start !gap-0 pt-8 !font-title md:pt-0',
+		isPortrait ? 'flex-col-reverse' : 'flex-row'
+	);
+
+	const contentClassNames = classes(
+		'flex h-full flex-1 flex-col @container/subpage',
+		isPortrait && 'w-full'
+	);
+
 	return (
-		<Page className='flex flex-row items-center !justify-start !gap-0 pt-8 !font-title md:pt-0'>
+		<Page className={classNames}>
 			<Tabs defaultTab='UPx Refill Station'>
-				{!isPortrait && <Sidebar />}
-				<div className='flex h-full flex-1 flex-col'>
+				<DashboardNavbar position={isPortrait ? 'bottom' : 'side'} />
+				<div className={contentClassNames}>
 					<Tab value='Overview'>
 						<OverviewPage />
 					</Tab>

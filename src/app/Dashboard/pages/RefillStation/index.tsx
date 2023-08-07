@@ -194,7 +194,7 @@ const Component: React.FC = () => {
 
 	return (
 		<Page className='h-full flex-col'>
-			<h1 className='text-gradient mt-0 md:mt-8 w-full text-center font-exotic !text-3xl font-bold md:!text-4xl'>
+			<h1 className='text-gradient mt-0 md:mt-8 w-full text-center font-exotic !text-3xl font-bold @md/subpage:!text-4xl'>
 				UPx Refill Station
 			</h1>
 			<Tabs defaultTab='Water'>

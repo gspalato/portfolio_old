@@ -7,7 +7,7 @@ const Component: React.FC = () => {
 
 	return (
 		<Page>
-			<h1 className='text-gradient my-8 w-full text-center font-exotic !text-xl font-bold md:!text-4xl'>
+			<h1 className='text-gradient my-8 w-full text-center font-exotic !text-3xl font-bold @md/subpage:!text-4xl'>
 				Welcome back, {user.Username}.
 			</h1>
 		</Page>
