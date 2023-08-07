@@ -50,7 +50,9 @@ const Component = () => {
 
 	const { loading } = useQuery<GetProjects.ReturnType>(GetProjects.Query, {
 		onCompleted: (data: GetProjects.ReturnType) => {
-			const projects = data.projects;
+			const projects = data.projects.toSorted((a, b) =>
+				a.name.localeCompare(b.name)
+			);
 
 			const imageLoaders = data.projects.map((project) => {
 				return new Promise((resolve) => {
