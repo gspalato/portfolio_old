@@ -9,9 +9,11 @@ import {
 	faRocket,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import classes from '@/lib/classes';
+import { useScreenSize } from '@/lib/layout';
 
 import PolygonIcon from '@/assets/img/Polygon.svg';
 
@@ -27,16 +29,35 @@ interface DashboardNavbarProps extends React.PropsWithChildren {
 const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 	const { children, className, position } = props;
 
+	const navbar = useRef<any>();
+	const { width } = useScreenSize();
+	const [isNavbarLargerThanScreen, setNavbarLargerThanScreen] =
+		useState<boolean>(false);
+
 	const buttonMode = position == 'side' ? 'list' : 'block';
 	const logoSize = position == 'side' ? 25 : 35;
-	const isInStandaloneMode = (): boolean => ('standalone' in window.navigator) && (!!window.navigator.standalone);
+
+	useLayoutEffect(() => {
+		if (position == 'bottom') {
+			const navbarWidth = navbar.current.getBoundingClientRect().width;
+			setNavbarLargerThanScreen(navbarWidth > width);
+		}
+	}, []);
+
+	useLayoutEffect(() => {
+		if (position == 'bottom') {
+			const navbarWidth = navbar.current.getBoundingClientRect().width;
+			setNavbarLargerThanScreen(navbarWidth > width);
+		}
+	}, [width]);
 
 	const classNames = classes(
-		'flex w-[12rem] border-r border-overlays-0 bg-accents-0',
-		position == 'side' && 'h-full w-[12rem] flex-col side',
+		'flex border-r border-overlays-0 bg-accents-0',
+		position == 'side' && 'side h-full w-[13rem] flex-col',
 		position == 'bottom' &&
-			'h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll bottom sm:justify-center',
+			'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll sm:justify-center',
 		position == 'bottom' && Styles.hideScrollbar,
+		//!isNavbarLargerThanScreen && 'justify-center',
 		className
 	);
 
@@ -44,7 +65,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 		'flex flex-row items-center justify-between border-overlays-0 pl-4 pr-2',
 		position == 'side' && 'h-[3rem] border-b',
 		position == 'bottom' &&
-			'!aspect-square h-full w-auto !justify-center border-r !pl-2'
+			'!aspect-square h-full w-auto !justify-center border-r !p-0'
 	);
 
 	const groupClassNames = classes(
@@ -54,14 +75,19 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 	);
 
 	return (
-		<div className={classNames}>
+		<div className={classNames} ref={navbar}>
 			<div className={infoClassNames}>
-				<img
-					src={PolygonIcon}
-					height={logoSize}
-					width={logoSize}
-					className='rounded-full'
-				></img>
+				<Link
+					to='/'
+					className='z-10 flex h-full aspect-square cursor-none items-center justify-center text-[#ffffff22] transition-colors duration-100 hover:text-[#ffffff55]'
+				>
+					<img
+						src={PolygonIcon}
+						height={logoSize}
+						width={logoSize}
+						className='rounded-full'
+					></img>
+				</Link>
 				{position == 'side' && (
 					<Link
 						to='/'
@@ -117,7 +143,12 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 					mode={buttonMode}
 				/>
 			</div>
-			<div className={classes(groupClassNames, 'border-l border-overlays-0')}>
+			<div
+				className={classes(
+					groupClassNames,
+					'border-l border-overlays-0'
+				)}
+			>
 				{position == 'side' && (
 					<h3 className='font-regular ml-4 w-full py-2 font-display text-sm text-accents-4'>
 						Projects

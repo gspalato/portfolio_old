@@ -13,7 +13,7 @@ import Navbar from '@components/Navbar';
 import ProtectedRoute from '@components/ProtectedRoute';
 
 import AuthProvider from '@lib/auth';
-import LayoutProvider from '@lib/layout';
+import { LayoutProvider } from '@lib/layout';
 
 import '@styles/globals.sass';
 

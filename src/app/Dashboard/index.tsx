@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import Page from '@components/Page';
 import { Tab, Tabs } from '@components/Tabs';
 
-import { useLayout } from '@lib/layout';
-import { usePortrait } from '@lib/portrait';
+import { useLayout, usePortrait } from '@lib/layout';
 
 import { DashboardNavbar } from './components/DashboardNavbar';
 import CronJobsPage from './pages/CronJobs';
