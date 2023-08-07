@@ -6,7 +6,7 @@ const Component: React.FC<SliceTooltipProps> = (props) => {
 
 	return (
 		<motion.div
-			className='glass optimize rounded-[5px] border border-[#ffffff11] !bg-[#0008] shadow-md shadow-black/25'
+			className='glass optimize rounded-[5px] border border-[#ffffff11] !bg-[#0008] shadow-md shadow-black/25 z-[100]'
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.1, delay: 0.01 }}
