@@ -67,11 +67,11 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 
 	const BaseSubpages = useMemo(() => Subpages.base.filter((subpage) =>
 		subpage.roles.intersects(user.Roles)
-	), [Subpages]);
+	), [Subpages, user]);
 
 	const ProjectSubpages = useMemo(() => Subpages.project.filter((subpage) =>
 		subpage.roles.intersects(user.Roles)
-	), [Subpages]);
+	), [Subpages, user]);
 
 	const classNames = classes(
 		'flex border-r border-overlays-0 bg-accents-0',

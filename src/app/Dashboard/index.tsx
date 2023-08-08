@@ -21,22 +21,12 @@ const Component: React.FC = () => {
 
 	const { user } = useAuth();
 
-	const [allSubpages, setAllSubpages] = useState<SubpageDefinition[]>([]);
-
 	const {
 		enableDefaultNavbar,
 		disableDefaultNavbar,
 		enableContentScrolling,
 		disableContentScrolling,
 	} = useLayout();
-
-	useLayoutEffect(() => {
-		setAllSubpages(
-			Object.values(Subpages)
-				.flatMap((s) => s)
-				.filter((s) => s.roles.intersects(user.Roles))
-		);
-	}, []);
 
 	useEffect(() => {
 		enableContentScrolling();
@@ -62,7 +52,7 @@ const Component: React.FC = () => {
 		return Object.values(Subpages)
 			.flatMap((s) => s)
 			.filter((s) => s.roles.intersects(user.Roles));
-	}, [Subpages]);
+	}, [Subpages, user]);
 
 	return (
 		<Page className={classNames}>
@@ -89,7 +79,7 @@ const Component: React.FC = () => {
 						<RefillStationPage />
 					</Tab>
 					*/}
-					{allSubpages.map((subpage) => {
+					{AllSubpages.map((subpage) => {
 						return (
 							<Tab
 								value={subpage.id}
