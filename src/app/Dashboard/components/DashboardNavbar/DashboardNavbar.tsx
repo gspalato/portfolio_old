@@ -31,7 +31,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 
 	const navbar = useRef<any>();
 	const { width } = useScreenSize();
-	const [isNavbarLargerThanScreen, setNavbarLargerThanScreen] =
+	const [isNavbarOverflowing, setNavbarOverflowing] =
 		useState<boolean>(false);
 
 	const buttonMode = position == 'side' ? 'list' : 'block';
@@ -39,15 +39,15 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 
 	useLayoutEffect(() => {
 		if (position == 'bottom') {
-			const navbarWidth = navbar.current.getBoundingClientRect().width;
-			setNavbarLargerThanScreen(navbarWidth > width);
+			const navbarWidth = navbar.current.scrollWidth;
+			setNavbarOverflowing(navbarWidth > width);
 		}
 	}, []);
 
 	useLayoutEffect(() => {
 		if (position == 'bottom') {
-			const navbarWidth = navbar.current.getBoundingClientRect().width;
-			setNavbarLargerThanScreen(navbarWidth > width);
+			const navbarWidth = navbar.current.scrollWidth;
+			setNavbarOverflowing(navbarWidth > width);
 		}
 	}, [width]);
 
@@ -57,7 +57,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 		position == 'bottom' &&
 			'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll sm:justify-center',
 		position == 'bottom' && Styles.hideScrollbar,
-		//!isNavbarLargerThanScreen && 'justify-center',
+		position == 'bottom' && !isNavbarOverflowing && 'justify-center',
 		className
 	);
 
