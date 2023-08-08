@@ -22,7 +22,7 @@ const Component: React.FC<IDashboardNavbarButtonProps> = (props) => {
 	const classNames = classes(
 		'flex cursor-none items-center justify-center font-display text-[0.75rem] font-normal leading-[16px] text-white transition-colors',
 		currentTab == value ? 'bg-overlays-5' : 'bg-transparent',
-		mode == 'list' && 'w-full rounded-[0.3rem] px-4 py-[.175rem] md:py-1 mx-2 !justify-start !text-start text-sm font-medium',
+		mode == 'list' && 'rounded-[0.3rem] px-4 py-[.175rem] md:py-1 mx-2 !justify-start !text-start text-sm font-medium',
 		mode == 'block' && '!mx-0 !rounded-none !aspect-square !w-[3.75rem]',
 		className
 	);

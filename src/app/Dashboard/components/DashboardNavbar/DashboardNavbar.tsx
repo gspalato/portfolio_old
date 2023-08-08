@@ -12,12 +12,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import '@lib/utils/array.extensions';
+
+import { useAuth } from '@/lib/auth';
 import classes from '@/lib/classes';
-import { useScreenSize } from '@/lib/layout';
+import { useWindowSize } from '@/lib/layout';
 
 import PolygonIcon from '@/assets/img/Polygon.svg';
 
 import Styles from './DashboardNavbar.module.sass';
+
+import { Subpages } from '../../subpages';
 
 import { DashboardNavbarButton } from '.';
 
@@ -29,9 +34,11 @@ interface DashboardNavbarProps extends React.PropsWithChildren {
 const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 	const { children, className, position } = props;
 
+	const { user } = useAuth();
+
 	const navbar = useRef<any>();
-	const { width } = useScreenSize();
-	const [isNavbarLargerThanScreen, setNavbarLargerThanScreen] =
+	const { width } = useWindowSize();
+	const [isNavbarOverflowing, setNavbarOverflowing] =
 		useState<boolean>(false);
 
 	const buttonMode = position == 'side' ? 'list' : 'block';
@@ -39,38 +46,50 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 
 	useLayoutEffect(() => {
 		if (position == 'bottom') {
-			const navbarWidth = navbar.current.getBoundingClientRect().width;
-			setNavbarLargerThanScreen(navbarWidth > width);
+			const navbarWidth = navbar.current.scrollWidth;
+			setNavbarOverflowing(navbarWidth >= (width ?? 0));
+		} else {
+			setNavbarOverflowing(false);
 		}
 	}, []);
 
 	useLayoutEffect(() => {
 		if (position == 'bottom') {
-			const navbarWidth = navbar.current.getBoundingClientRect().width;
-			setNavbarLargerThanScreen(navbarWidth > width);
+			const navbarWidth = navbar.current.scrollWidth;
+			setNavbarOverflowing(navbarWidth >= (width ?? 0));
+		} else {
+			setNavbarOverflowing(false);
 		}
 	}, [width]);
+
+	const BaseSubpages = Subpages.base.filter((subpage) =>
+		subpage.roles.intersects(user.Roles)
+	);
+
+	const ProjectSubpages = Subpages.project.filter((subpage) =>
+		subpage.roles.intersects(user.Roles)
+	);
 
 	const classNames = classes(
 		'flex border-r border-overlays-0 bg-accents-0',
 		position == 'side' && 'side h-full w-[13rem] flex-col',
 		position == 'bottom' &&
-			'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll sm:justify-center',
+			'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll',
 		position == 'bottom' && Styles.hideScrollbar,
-		//!isNavbarLargerThanScreen && 'justify-center',
+		position == 'bottom' && !isNavbarOverflowing && 'justify-center',
 		className
 	);
 
 	const infoClassNames = classes(
-		'flex flex-row items-center justify-between border-overlays-0 pl-4 pr-2',
+		'flex flex-row items-center justify-between border-overlays-0 px-2',
 		position == 'side' && 'h-[3rem] border-b',
 		position == 'bottom' &&
 			'!aspect-square h-full w-auto !justify-center border-r !p-0'
 	);
 
 	const groupClassNames = classes(
-		'flex w-fit',
-		position == 'side' && 'flex-col',
+		'flex',
+		position == 'side' && 'w-full flex-col',
 		position == 'bottom' && 'flex-row'
 	);
 
@@ -79,14 +98,14 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 			<div className={infoClassNames}>
 				<Link
 					to='/'
-					className='z-10 flex h-full aspect-square cursor-none items-center justify-center text-[#ffffff22] transition-colors duration-100 hover:text-[#ffffff55]'
+					className='z-10 flex aspect-square h-full cursor-none items-center justify-center text-[#ffffff22] transition-colors duration-100 hover:text-[#ffffff55]'
 				>
 					<img
 						src={PolygonIcon}
 						height={logoSize}
 						width={logoSize}
 						className='rounded-full'
-					></img>
+					/>
 				</Link>
 				{position == 'side' && (
 					<Link
@@ -101,47 +120,22 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 				)}
 			</div>
 			<div className={groupClassNames}>
-				{position == 'side' && (
-					<h3 className='font-regular ml-4 w-full py-2 pt-6 font-display text-sm text-accents-4'>
+				{position == 'side' && BaseSubpages.length > 0 && (
+					<h3 className='font-regular w-full py-2 pl-6 pt-6 font-display text-sm text-accents-4'>
 						Foundation
 					</h3>
 				)}
-				<DashboardNavbarButton
-					text='Overview'
-					value='Overview'
-					icon={faHouse}
-					mode={buttonMode}
-				/>
-				<DashboardNavbarButton
-					text='Service Catalog'
-					value='Service Catalog'
-					icon={faCompass}
-					mode={buttonMode}
-				/>
-				<DashboardNavbarButton
-					text='Flow'
-					value='Flow'
-					icon={faBolt}
-					mode={buttonMode}
-				/>
-				<DashboardNavbarButton
-					text='Deploys'
-					value='Deploys'
-					icon={faRocket}
-					mode={buttonMode}
-				/>
-				<DashboardNavbarButton
-					text='Cron Jobs'
-					value='Cron Jobs'
-					icon={faClock}
-					mode={buttonMode}
-				/>
-				<DashboardNavbarButton
-					text='Environments'
-					value='Environments'
-					icon={faLayerGroup}
-					mode={buttonMode}
-				/>
+				{BaseSubpages.map((subpage) => {
+					return (
+						<DashboardNavbarButton
+							text={subpage.name}
+							value={subpage.id}
+							icon={subpage.icon}
+							mode={buttonMode}
+							key={subpage.id}
+						/>
+					);
+				})}
 			</div>
 			<div
 				className={classes(
@@ -149,17 +143,23 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 					'border-l border-overlays-0'
 				)}
 			>
-				{position == 'side' && (
-					<h3 className='font-regular ml-4 w-full py-2 font-display text-sm text-accents-4'>
+				{position == 'side' && ProjectSubpages.length > 0 && (
+					<h3 className='font-regular w-full py-2 pl-6 font-display text-sm text-accents-4'>
 						Projects
 					</h3>
 				)}
-				<DashboardNavbarButton
-					text='UPx Refill Station'
-					value='UPx Refill Station'
-					icon={faDroplet}
-					mode={buttonMode}
-				/>
+				{ProjectSubpages.map((subpage) => {
+					console.log(`Added ${subpage.name} to navbar.`);
+					return (
+						<DashboardNavbarButton
+							text={subpage.name}
+							value={subpage.id}
+							icon={subpage.icon}
+							mode={buttonMode}
+							key={subpage.id}
+						/>
+					);
+				})}
 			</div>
 			{children}
 		</div>

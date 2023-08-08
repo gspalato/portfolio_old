@@ -1,5 +1,5 @@
 import LayoutProvider, { LayoutContext, useLayout } from './LayoutProvider';
 import { usePortrait } from './usePortrait';
-import { useScreenSize } from './useScreenSize';
+import { useWindowSize } from './useScreenSize';
 
-export { LayoutContext, LayoutProvider, useLayout, useScreenSize, usePortrait };
+export { LayoutContext, LayoutProvider, useLayout, usePortrait, useWindowSize };

@@ -1,26 +1,29 @@
 import { useLayoutEffect, useState } from "react";
 
-type ScreenSize = { height: number, width: number };
+type ScreenSize = { height: number | null, width: number | null };
 
-const useScreenSize  = (): ScreenSize => {
-    const [height, setHeight] = useState<number>(window.innerHeight);
-    const [width, setWidth] = useState<number>(window.innerWidth);
-
-    const calculate = () => {
-        setHeight(window.innerHeight);
-        setWidth(window.innerWidth);
-    };
-
+const useWindowSize = (): ScreenSize => {
+    const [size, setSize] = useState<ScreenSize>({
+      width: null,
+      height: null,
+    });
+  
     useLayoutEffect(() => {
-        window.addEventListener("resize", calculate);
-
-        return () => {
-            window.removeEventListener("resize", calculate);
-        };
+      const handleResize = () => {
+        setSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+  
+      handleResize();
+      window.addEventListener("resize", handleResize);
+  
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }, []);
-
-
-    return { height, width };
-}
-
-export { useScreenSize };
+  
+    return size;
+  }
+export { useWindowSize };

@@ -4,16 +4,18 @@ import Page from '@components/Page';
 import { Tab, Tabs } from '@components/Tabs';
 
 import { useLayout, usePortrait } from '@lib/layout';
+import '@lib/utils/array.extensions';
+
+import { useAuth } from '@/lib/auth';
+import classes from '@/lib/classes';
 
 import { DashboardNavbar } from './components/DashboardNavbar';
-import CronJobsPage from './pages/CronJobs';
-import DeploysPage from './pages/Deploys';
-import OverviewPage from './pages/Overview';
-import RefillStationPage from './pages/RefillStation';
-import classes from '@/lib/classes';
+import { Subpages } from './subpages';
 
 const Component: React.FC = () => {
 	const isPortrait = usePortrait();
+
+	const { user } = useAuth();
 
 	const {
 		enableDefaultNavbar,
@@ -42,38 +44,32 @@ const Component: React.FC = () => {
 		isPortrait && 'w-full'
 	);
 
+	const AllSubpages = [ ...Subpages.base, ...Subpages.project ];
+
 	return (
 		<Page className={classNames}>
 			<Tabs defaultTab='UPx Refill Station'>
 				<DashboardNavbar position={isPortrait ? 'bottom' : 'side'} />
 				<div className={contentClassNames}>
-					<Tab value='Overview'>
-						<OverviewPage />
-					</Tab>
-
-					<Tab value='Service Catalog'></Tab>
-
-					<Tab value='Flow'></Tab>
-
-					<Tab value='Deploys'>
-						<DeploysPage />
-					</Tab>
-
-					<Tab value='Cron Jobs'>
-						<CronJobsPage />
-					</Tab>
-
-					{/* Projects */}
-					<Tab
-						className='h-full min-h-full min-w-full'
-						value='UPx Refill Station'
-					>
-						<RefillStationPage />
-					</Tab>
+					{AllSubpages
+						.filter((s) => s.roles.intersects(user.Roles))
+						.map((subpage) => {
+							return (
+								<Tab
+									value={subpage.id}
+									className={subpage.className}
+									key={subpage.id}
+								>
+									{subpage.component}
+								</Tab>
+							);
+						})}
 				</div>
 			</Tabs>
 		</Page>
 	);
 };
+
+Component.displayName = 'Dashboard';
 
 export default Component;
