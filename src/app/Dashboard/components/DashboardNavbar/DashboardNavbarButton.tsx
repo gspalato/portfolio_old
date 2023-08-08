@@ -19,6 +19,8 @@ const Component: React.FC<IDashboardNavbarButtonProps> = (props) => {
 	const { className, icon, iconStyle, mode, text, value } = props;
 	const { currentTab, setCurrentTab } = useTabs();
 
+	const isSelected = currentTab == value;
+
 	const classNames = classes(
 		'flex cursor-none items-center justify-center font-display text-[0.75rem] font-normal leading-[16px] text-white transition-colors',
 		currentTab == value ? 'bg-overlays-5' : 'bg-transparent',
@@ -32,10 +34,11 @@ const Component: React.FC<IDashboardNavbarButtonProps> = (props) => {
 			<FontAwesomeIcon
 				icon={icon}
 				size={mode == 'list' ? 'sm' : '2xl'}
-				color={mode == 'list' ? '#eeeeee' : '#ffffff44'}
+				color={mode == 'list' ? '#eeeeee' : (isSelected ? '#eeeeee' : '#ffffff44')}
 				style={{
 					paddingRight: mode == 'list' ? '10px' : '0px',
 					width: mode == 'list' ? '1rem' : '1.5rem',
+					transition: '0.2s ease-in-out',
 					...iconStyle
 				}}
 			/>

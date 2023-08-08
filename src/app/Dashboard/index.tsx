@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
 import Page from '@components/Page';
 import { Tab, Tabs } from '@components/Tabs';
@@ -10,12 +10,18 @@ import { useAuth } from '@/lib/auth';
 import classes from '@/lib/classes';
 
 import { DashboardNavbar } from './components/DashboardNavbar';
-import { Subpages } from './subpages';
+import CronJobsPage from './pages/CronJobs';
+import DeploysPage from './pages/Deploys';
+import OverviewPage from './pages/Overview';
+import RefillStationPage from './pages/RefillStation';
+import { SubpageDefinition, Subpages } from './subpages';
 
 const Component: React.FC = () => {
 	const isPortrait = usePortrait();
 
 	const { user } = useAuth();
+
+	const [allSubpages, setAllSubpages] = useState<SubpageDefinition[]>([]);
 
 	const {
 		enableDefaultNavbar,
@@ -23,6 +29,14 @@ const Component: React.FC = () => {
 		enableContentScrolling,
 		disableContentScrolling,
 	} = useLayout();
+
+	useLayoutEffect(() => {
+		setAllSubpages(
+			Object.values(Subpages)
+				.flatMap((s) => s)
+				.filter((s) => s.roles.intersects(user.Roles))
+		);
+	}, []);
 
 	useEffect(() => {
 		enableContentScrolling();
@@ -44,26 +58,48 @@ const Component: React.FC = () => {
 		isPortrait && 'w-full'
 	);
 
-	const AllSubpages = [ ...Subpages.base, ...Subpages.project ];
+	const AllSubpages = useMemo(() => {
+		return Object.values(Subpages)
+			.flatMap((s) => s)
+			.filter((s) => s.roles.intersects(user.Roles));
+	}, [Subpages]);
 
 	return (
 		<Page className={classNames}>
-			<Tabs defaultTab='UPx Refill Station'>
+			<Tabs defaultTab='UPxRefillStation'>
 				<DashboardNavbar position={isPortrait ? 'bottom' : 'side'} />
 				<div className={contentClassNames}>
-					{AllSubpages
-						.filter((s) => s.roles.intersects(user.Roles))
-						.map((subpage) => {
-							return (
-								<Tab
-									value={subpage.id}
-									className={subpage.className}
-									key={subpage.id}
-								>
-									{subpage.component}
-								</Tab>
-							);
-						})}
+					{/*
+					<Tab value='Overview'>
+						<OverviewPage />
+					</Tab>
+
+					<Tab value='Deploys'>
+						<DeploysPage />
+					</Tab>
+
+					<Tab value='CronJobs'>
+						<CronJobsPage />
+					</Tab>
+
+					<Tab
+						value='UPxRefillStation'
+						className='h-full min-h-full min-w-full'
+					>
+						<RefillStationPage />
+					</Tab>
+					*/}
+					{allSubpages.map((subpage) => {
+						return (
+							<Tab
+								value={subpage.id}
+								className={subpage.className}
+								key={`${subpage.id}|Tab`}
+							>
+								{subpage.component}
+							</Tab>
+						);
+					})}
 				</div>
 			</Tabs>
 		</Page>

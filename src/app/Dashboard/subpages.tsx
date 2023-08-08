@@ -41,7 +41,7 @@ const Subpages: SubpageCollection = {
 		},
 		{
 			name: 'Service Catalog',
-			id: 'Service Catalog',
+			id: 'ServiceCatalog',
 			icon: faLayerGroup,
 			component: <></>,
 			roles: [0, 1],
@@ -65,7 +65,7 @@ const Subpages: SubpageCollection = {
 		},
 		{
 			name: 'Cron Jobs',
-			id: 'Cron Jobs',
+			id: 'CronJobs',
 			icon: faClock,
 			component: <CronJobsPage />,
 			roles: [0, 1],
@@ -75,7 +75,7 @@ const Subpages: SubpageCollection = {
 	project: [
 		{
 			name: 'UPx Refill Station',
-			id: 'UPx Refill Station',
+			id: 'UPxRefillStation',
 			icon: faDroplet,
 			component: <RefillStationPage />,
 			roles: [0, 1, 2],

@@ -9,7 +9,7 @@ import {
 	faRocket,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '@lib/utils/array.extensions';
@@ -22,7 +22,7 @@ import PolygonIcon from '@/assets/img/Polygon.svg';
 
 import Styles from './DashboardNavbar.module.sass';
 
-import { Subpages } from '../../subpages';
+import { SubpageDefinition, Subpages } from '../../subpages';
 
 import { DashboardNavbarButton } from '.';
 
@@ -38,6 +38,9 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 
 	const navbar = useRef<any>();
 	const { width } = useWindowSize();
+
+	const [baseSubpages, setBaseSubpages] = useState<SubpageDefinition[]>([]);
+	const [projectSubpages, setProjectSubpages] = useState<SubpageDefinition[]>([]);
 	const [isNavbarOverflowing, setNavbarOverflowing] =
 		useState<boolean>(false);
 
@@ -62,13 +65,13 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 		}
 	}, [width]);
 
-	const BaseSubpages = Subpages.base.filter((subpage) =>
+	const BaseSubpages = useMemo(() => Subpages.base.filter((subpage) =>
 		subpage.roles.intersects(user.Roles)
-	);
+	), [Subpages]);
 
-	const ProjectSubpages = Subpages.project.filter((subpage) =>
+	const ProjectSubpages = useMemo(() => Subpages.project.filter((subpage) =>
 		subpage.roles.intersects(user.Roles)
-	);
+	), [Subpages]);
 
 	const classNames = classes(
 		'flex border-r border-overlays-0 bg-accents-0',
@@ -125,17 +128,51 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 						Foundation
 					</h3>
 				)}
-				{BaseSubpages.map((subpage) => {
-					return (
-						<DashboardNavbarButton
-							text={subpage.name}
-							value={subpage.id}
-							icon={subpage.icon}
-							mode={buttonMode}
-							key={subpage.id}
-						/>
-					);
-				})}
+				{/*
+				<DashboardNavbarButton
+					text='Overview'
+					value='Overview'
+					icon={faHouse}
+					mode={buttonMode}
+				/>
+				<DashboardNavbarButton
+					text='Service Catalog'
+					value='ServiceCatalog'
+					icon={faLayerGroup}
+					mode={buttonMode}
+				/>
+				<DashboardNavbarButton
+					text='Flow'
+					value='Flow'
+					icon={faBolt}
+					mode={buttonMode}
+				/>
+				<DashboardNavbarButton
+					text='Deploys'
+					value='Deploys'
+					icon={faRocket}
+					mode={buttonMode}
+				/>
+				<DashboardNavbarButton
+					text='Cron Jobs'
+					value='CronJobs'
+					icon={faClock}
+					mode={buttonMode}
+				/>
+				*/}
+				{
+					BaseSubpages.map((subpage) => {
+						return (
+							<DashboardNavbarButton
+								text={subpage.name}
+								value={subpage.id}
+								icon={subpage.icon}
+								mode={buttonMode}
+								key={`${subpage.id}|NavbarButton`}
+							/>
+						);
+					})
+				}
 			</div>
 			<div
 				className={classes(
@@ -148,7 +185,16 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 						Projects
 					</h3>
 				)}
-				{ProjectSubpages.map((subpage) => {
+				{/*
+				<DashboardNavbarButton
+					text='UPx Refill Station'
+					value='UPxRefillStation'
+					icon={faDroplet}
+					mode={buttonMode}
+				/>
+				*/}
+				{
+				ProjectSubpages.map((subpage) => {
 					console.log(`Added ${subpage.name} to navbar.`);
 					return (
 						<DashboardNavbarButton
@@ -156,10 +202,11 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 							value={subpage.id}
 							icon={subpage.icon}
 							mode={buttonMode}
-							key={subpage.id}
+							key={`${subpage.id} | Navbar Button`}
 						/>
 					);
-				})}
+				})
+				}
 			</div>
 			{children}
 		</div>

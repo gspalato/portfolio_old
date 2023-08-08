@@ -1,15 +1,14 @@
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { linearGradientDef } from '@nivo/core';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import Loading from '@/app/Loading';
 
 import { ResponsiveLineChart as Chart } from '@components/Chart';
 import Page from '@components/Page';
+import { Tab, TabButton, TabContent, TabList, Tabs } from '@components/Tabs';
 
-import { Tab, TabButton, TabContent, TabList, Tabs } from '@/components/Tabs';
-
-import { GetResumes } from '@/lib/graphql/queries';
+import { GetResumes } from '@lib/graphql/queries';
 
 /* Constants */
 const getDateAxisSettings = (ticks: string[]) => ({
@@ -17,7 +16,6 @@ const getDateAxisSettings = (ticks: string[]) => ({
 	legend: 'Date',
 	legendPosition: 'middle',
 	legendOffset: -15,
-	//tickPadding: -25,
 });
 
 const getDataAxisSettings = (legend: string) => ({
@@ -25,7 +23,6 @@ const getDataAxisSettings = (legend: string) => ({
 	legend: legend,
 	legendPosition: 'middle',
 	legendOffset: 15,
-	//tickPadding: -15,
 	tickRotation: -90,
 	tickSize: 0,
 });
@@ -55,20 +52,20 @@ type TickData = {
 
 const Component: React.FC = () => {
 	const [chartData, setChartData] = useState<ChartData>({
-        uses: [],
-        duration: [],
-        water: [],
-        plastic: [],
-        bottles: [],
-    });
+		uses: [],
+		duration: [],
+		water: [],
+		plastic: [],
+		bottles: [],
+	});
 
-    const [maxTicks, setMaxTicks] = useState<any>({
-        uses: 0,
-        duration: 0,
-        water: 0,
-        plastic: 0,
-        bottles: 0,
-    });
+	const [maxTicks, setMaxTicks] = useState<any>({
+		uses: 0,
+		duration: 0,
+		water: 0,
+		plastic: 0,
+		bottles: 0,
+	});
 
 	const [dateTicks, setDateTicks] = useState<any>([]);
 
@@ -76,19 +73,19 @@ const Component: React.FC = () => {
 		GetResumes.Query
 	);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		fetch();
 	}, []);
 
-	useEffect(() => {
-        if (!data) return;
+	useLayoutEffect(() => {
+		if (!data) return;
 
 		const resumes = data.resumes;
 
 		console.log('Fetched data from Foundation:');
 		console.log(resumes);
 
-        let chartData: ChartData = {
+		let chartData: ChartData = {
 			uses: [],
 			duration: [],
 			plastic: [],
@@ -96,7 +93,7 @@ const Component: React.FC = () => {
 			bottles: [],
 		};
 
-        let maxTicks: TickData  = {
+		let maxTicks: TickData = {
 			uses: 0,
 			duration: 0,
 			plastic: 0,
@@ -104,8 +101,7 @@ const Component: React.FC = () => {
 			bottles: 0,
 		};
 
-		if (resumes.length === 0)
-			setChartData(chartData);
+		if (resumes.length === 0) setChartData(chartData);
 
 		const timestampToDateString = (timestamp: number): string => {
 			let date = new Date(timestamp * 1000);
@@ -131,8 +127,10 @@ const Component: React.FC = () => {
 				})),
 			},
 		];
-        chartData.uses = useChartData;
-        maxTicks.uses = Math.max(...useChartData[0].data.map((xy: any) => xy.y));
+		chartData.uses = useChartData;
+		maxTicks.uses = Math.max(
+			...useChartData[0].data.map((xy: any) => xy.y)
+		);
 
 		const durationChartData = [
 			{
@@ -144,8 +142,10 @@ const Component: React.FC = () => {
 				})),
 			},
 		];
-        chartData.duration = durationChartData;
-        maxTicks.duration = Math.max(...durationChartData[0].data.map((xy: any) => xy.y));
+		chartData.duration = durationChartData;
+		maxTicks.duration = Math.max(
+			...durationChartData[0].data.map((xy: any) => xy.y)
+		);
 
 		const plasticChartData = [
 			{
@@ -157,8 +157,10 @@ const Component: React.FC = () => {
 				})),
 			},
 		];
-        chartData.plastic = plasticChartData;
-        maxTicks.plastic = Math.max(...plasticChartData[0].data.map((xy: any) => xy.y));
+		chartData.plastic = plasticChartData;
+		maxTicks.plastic = Math.max(
+			...plasticChartData[0].data.map((xy: any) => xy.y)
+		);
 
 		const waterChartData = [
 			{
@@ -170,8 +172,10 @@ const Component: React.FC = () => {
 				})),
 			},
 		];
-        chartData.water = waterChartData;
-        maxTicks.water = Math.max(...waterChartData[0].data.map((xy: any) => xy.y));
+		chartData.water = waterChartData;
+		maxTicks.water = Math.max(
+			...waterChartData[0].data.map((xy: any) => xy.y)
+		);
 
 		const bottleChartData = [
 			{
@@ -183,18 +187,20 @@ const Component: React.FC = () => {
 				})),
 			},
 		];
-        chartData.bottles = bottleChartData;
-        maxTicks.bottles = Math.max(...bottleChartData[0].data.map((xy: any) => xy.y));
+		chartData.bottles = bottleChartData;
+		maxTicks.bottles = Math.max(
+			...bottleChartData[0].data.map((xy: any) => xy.y)
+		);
 
 		setChartData(chartData);
-        setMaxTicks(maxTicks);
+		setMaxTicks(maxTicks);
 	}, [data]);
 
 	if (!data) return <Loading />;
 
 	return (
 		<Page className='h-full flex-col'>
-			<h1 className='text-gradient mt-0 md:mt-8 w-full text-center font-exotic !text-3xl font-bold @md/subpage:!text-4xl'>
+			<h1 className='text-gradient mt-0 w-full text-center font-exotic !text-3xl font-bold @md/subpage:!text-4xl md:mt-8'>
 				UPx Refill Station
 			</h1>
 			<Tabs defaultTab='Water'>
@@ -236,12 +242,11 @@ const Component: React.FC = () => {
 								data={chartData.uses}
 								axisLeft={{
 									...(getDataAxisSettings('Uses') as any),
-									tickValues: [
-										0,
-										maxTicks.uses,
-									],
+									tickValues: [0, maxTicks.uses],
 								}}
-								axisBottom={getDateAxisSettings(dateTicks) as any}
+								axisBottom={
+									getDateAxisSettings(dateTicks) as any
+								}
 								margin={{
 									top: 15,
 									right: 0,
@@ -269,7 +274,9 @@ const Component: React.FC = () => {
 										'Total Duration (min)'
 									) as any
 								}
-								axisBottom={getDateAxisSettings(dateTicks) as any}
+								axisBottom={
+									getDateAxisSettings(dateTicks) as any
+								}
 								margin={{
 									top: 15,
 									right: 0,
@@ -303,7 +310,9 @@ const Component: React.FC = () => {
 										'Distributed Water (L)'
 									) as any
 								}
-								axisBottom={getDateAxisSettings(dateTicks) as any}
+								axisBottom={
+									getDateAxisSettings(dateTicks) as any
+								}
 								enableArea
 								defs={chartAreaDefs}
 								fill={[
@@ -331,7 +340,9 @@ const Component: React.FC = () => {
 										'Economized Plastic (kg)'
 									) as any
 								}
-								axisBottom={getDateAxisSettings(dateTicks) as any}
+								axisBottom={
+									getDateAxisSettings(dateTicks) as any
+								}
 								enableArea
 								defs={chartAreaDefs}
 								fill={[
@@ -355,7 +366,9 @@ const Component: React.FC = () => {
 									left: 0,
 								}}
 								axisLeft={getDataAxisSettings('Bottles') as any}
-								axisBottom={getDateAxisSettings(dateTicks) as any}
+								axisBottom={
+									getDateAxisSettings(dateTicks) as any
+								}
 								enableArea
 								defs={chartAreaDefs}
 								fill={[
