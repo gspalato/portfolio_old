@@ -8,12 +8,12 @@ RUN addgroup -S app \
 RUN apk add --update nodejs npm
 
 # Install dependencies
-COPY ./Portfolio/package.json .
+COPY package.json .
 RUN npm i
 RUN npm i serve -g
 
 # Copy source code.
-COPY ./Portfolio .
+COPY . .
 
 RUN npm run build
 
