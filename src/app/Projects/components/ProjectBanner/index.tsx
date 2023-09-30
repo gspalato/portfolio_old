@@ -8,29 +8,28 @@ import { Project } from '@/types/Project';
 
 import Placeholder from '@assets/img/project_placeholder_icon.jpg';
 
-import Styles from './ProjectCard.module.sass';
+import Styles from './ProjectBanner.module.sass';
 
-const ProjectCardLogoAnimationVariants = {
+const ProjectBannerLogoAnimationVariants = {
 	initial: {
 		opacity: 0,
 	},
 	animate: (i: number) => ({
 		opacity: 1,
 		transition: {
-			delay: i * 0.3 + 0.5,
 			duration: 0.5,
 		},
 	}),
 };
 
-const ProjectCardContentAnimationVariants = {
+const ProjectBannerContentAnimationVariants = {
 	initial: {
 		opacity: 0,
 	},
 	animate: (i: number) => ({
 		opacity: 1,
 		transition: {
-			delay: i * 0.3 + 1,
+			delay: 0.5 + 0.3,
 			duration: 0.5,
 		},
 	}),
@@ -59,9 +58,9 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 	} = props;
 
 	const {
-		animatedIconUrl,
-		iconUrl,
-		fallbackIconUrl,
+		animatedBannerUrl,
+		bannerUrl,
+		fallbackBannerUrl,
 		name,
 		description,
 		repositoryUrl,
@@ -70,7 +69,7 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 	} = project;
 
 	const classNames = classes(
-		'optimize relative flex h-[20rem] w-[20rem] flex-col items-center justify-end rounded-2xl border border-[#fff1] bg-cover p-0 shadow md:h-[22.5rem] md:w-[22.5rem]',
+		'optimize relative flex h-full w-full flex-col items-center justify-end rounded-2xl border border-[#fff1] bg-cover p-0 shadow',
 		className
 	);
 
@@ -89,30 +88,30 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 			custom={custom}
 			{...rest}
 		>
-			{animatedIconUrl ? (
+			{animatedBannerUrl ? (
 				<motion.video
-					className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl'
+					className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl object-cover'
 					initial='initial'
 					animate='animate'
-					variants={ProjectCardLogoAnimationVariants}
+					variants={ProjectBannerLogoAnimationVariants}
 					custom={custom}
 				>
-					<source src={animatedIconUrl} type='video/mp4' />
+					<source src={animatedBannerUrl} type='video/mp4' />
 				</motion.video>
 			) : (
 				<picture>
-					<source type='image/webp' srcSet={iconUrl} />
+					<source type='image/webp' srcSet={bannerUrl} />
 					<source
 						type='image/jpg'
-						srcSet={fallbackIconUrl ?? Placeholder}
+						srcSet={fallbackBannerUrl ?? Placeholder}
 					/>
 					<motion.img
-						className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl'
-						src={iconUrl}
+						className='absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl object-cover'
+						src={bannerUrl}
 						alt={name}
 						initial='initial'
 						animate='animate'
-						variants={ProjectCardLogoAnimationVariants}
+						variants={ProjectBannerLogoAnimationVariants}
 						custom={custom}
 					/>
 				</picture>
@@ -121,14 +120,14 @@ const Component: React.FC<IProjectCardProps> = (props) => {
 				className={Styles.layer}
 				initial='initial'
 				animate='animate'
-				variants={ProjectCardContentAnimationVariants}
+				variants={ProjectBannerContentAnimationVariants}
 				custom={custom}
 			/>
 			<motion.div
-				className='optimize z-[10] flex max-h-[26%] w-full flex-row items-center justify-between overflow-visible px-4 pb-4'
+				className='optimize z-[10] flex w-full flex-row items-center justify-between overflow-visible px-4 pb-4'
 				initial='initial'
 				animate='animate'
-				variants={ProjectCardContentAnimationVariants}
+				variants={ProjectBannerContentAnimationVariants}
 				custom={custom}
 			>
 				<div className='flex max-h-full w-fit flex-col items-start justify-between pr-4 before:rounded-lg'>

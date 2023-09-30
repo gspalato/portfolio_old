@@ -19,9 +19,8 @@ const Component: React.FC<INavbarLinkProps> = (props) => {
 		text-foreground
 		w-auto
 		text-center
-		font-display
+		font-mono
 		text-5xl
-		font-bold
 		tracking-tight
 		transition-colors
 		duration-100

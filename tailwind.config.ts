@@ -36,6 +36,7 @@ module.exports = {
 					6: '#ffffff22',
 					7: '#ffffff33',
 					8: '#ffffff44',
+					9: '#ffffff55',
 				},
 
 				white: '#ccc',
@@ -50,8 +51,9 @@ module.exports = {
 			fontSize: {},
 			fontFamily: {
 				display: 'Space Grotesk',
+				mono: 'Space Mono',
 				title: 'Inter',
-				body: 'Karla',
+				body: 'Space Mono',
 				exotic: 'Syne',
 			},
 		},

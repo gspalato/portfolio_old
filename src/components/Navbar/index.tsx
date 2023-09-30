@@ -46,15 +46,15 @@ const LinkVariants = {
 
 const Routes = [
 	{
-		name: 'Home',
+		name: 'HOME',
 		path: '/',
 	},
 	{
-		name: 'About',
+		name: 'ABOUT',
 		path: '/about',
 	},
 	{
-		name: 'Projects',
+		name: 'PROJECTS',
 		path: '/projects',
 	},
 ];
