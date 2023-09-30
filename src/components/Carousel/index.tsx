@@ -68,6 +68,6 @@ const Styles = {
 	indicator: (selected?: boolean) =>
 		classes(
 			'transition-200 aspect-square h-3 w-3 rounded-full border transition-all',
-			selected ? 'w-6 bg-white' : 'bg-transparent'
+			selected ? 'w-8 bg-white' : 'bg-transparent'
 		),
 };

@@ -12,6 +12,7 @@ const skills = [
 	{ name: 'CSS3', icon: 'devicon-css3-plain' },
 	{ name: 'Docker', icon: 'devicon-docker-plain' },
 	{ name: 'Electron', icon: 'devicon-electron-original' },
+	{ name: 'Figma', icon: 'devicon-figma-plain' },
 	{ name: 'Git', icon: 'devicon-git-plain' },
 	{ name: 'GraphQL', icon: 'devicon-graphql-plain' },
 	{ name: 'HTML5', icon: 'devicon-html5-plain' },
