@@ -1,0 +1,24 @@
+@use '@styles/mixins' as *
+@use '@styles/variables' as *
+
+.grid
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    grid-gap: 1rem
+    padding: 1rem
+
+.grid > div
+    padding: .5vw
+    @include responsive($md)
+        padding: 1vw
+
+    display: grid
+
+    &::before
+        content: ""
+        padding-bottom: 100%
+        display: block
+
+.grid > div::before,
+.grid > div > img
+    grid-area: 1 / 1 / 2 / 2

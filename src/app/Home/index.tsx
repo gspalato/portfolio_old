@@ -9,7 +9,7 @@ import Stylesheet from './home.module.sass';
 const Component: React.FC = () => {
 	return (
 		<Page>
-			<section className='flex h-screen w-screen flex-col-reverse items-center justify-center gap-[8rem] p-8 pt-20 tracking-tighter md:flex-row lg:p-20'>
+			<section className='flex h-screen w-screen flex-col-reverse items-center justify-center gap-[4rem] p-8 pt-20 tracking-tighter md:flex-row md:gap-[8rem] lg:p-20'>
 				<div className='flex flex-col gap-4'>
 					<h1 className='text-left font-mono text-xl tracking-wide text-overlays-9'>
 						greetings.
@@ -55,5 +55,4 @@ const Styles = {
 		'blur-sm',
 		Stylesheet.projectIcon
 	),
-	radialBlur: classes(Stylesheet.radialBlur),
 };

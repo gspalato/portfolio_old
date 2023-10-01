@@ -14,7 +14,7 @@ const ProjectBannerLogoAnimationVariants = {
 	initial: {
 		opacity: 0,
 	},
-	animate: (i: number) => ({
+	animate: () => ({
 		opacity: 1,
 		transition: {
 			duration: 0.5,
@@ -26,7 +26,7 @@ const ProjectBannerContentAnimationVariants = {
 	initial: {
 		opacity: 0,
 	},
-	animate: (i: number) => ({
+	animate: () => ({
 		opacity: 1,
 		transition: {
 			delay: 0.5 + 0.3,

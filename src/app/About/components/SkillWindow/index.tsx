@@ -2,29 +2,37 @@ import React from 'react';
 
 import classes from '@/lib/classes';
 
+import Stylesheet from './SkillWindow.module.sass';
+
 import SkillIcon from '../SkillIcon';
 
-const skills = [
-	{ name: 'Arduino', icon: 'devicon-arduino-plain' },
-	{ name: 'C', icon: 'devicon-c-plain' },
-	{ name: 'CPP', icon: 'devicon-cplusplus-plain' },
-	{ name: 'CSharp', icon: 'devicon-csharp-plain' },
-	{ name: 'CSS3', icon: 'devicon-css3-plain' },
-	{ name: 'Docker', icon: 'devicon-docker-plain' },
-	{ name: 'Electron', icon: 'devicon-electron-original' },
-	{ name: 'Figma', icon: 'devicon-figma-plain' },
-	{ name: 'Git', icon: 'devicon-git-plain' },
-	{ name: 'GraphQL', icon: 'devicon-graphql-plain' },
-	{ name: 'HTML5', icon: 'devicon-html5-plain' },
-	{ name: 'Javascript', icon: 'devicon-javascript-plain' },
-	{ name: 'Lua', icon: 'devicon-lua-plain' },
-	{ name: 'MongoDB', icon: 'devicon-mongodb-plain' },
-	{ name: 'NodeJS', icon: 'devicon-nodejs-plain' },
-	{ name: 'Python', icon: 'devicon-python-plain' },
-	{ name: 'React', icon: 'devicon-react-original' },
-	{ name: 'SASS', icon: 'devicon-sass-original' },
-	{ name: 'Tailwind', icon: 'devicon-tailwindcss-plain' },
-	{ name: 'Typescript', icon: 'devicon-typescript-plain' },
+type SkillIconDefinition = {
+	name: string;
+	icon: string;
+	version?: 'plain' | 'original';
+};
+
+const SkillIcons: SkillIconDefinition[] = [
+	{ name: 'Arduino', icon: 'arduino', version: 'original' },
+	{ name: 'C', icon: 'c' },
+	{ name: 'CPP', icon: 'cplusplus' },
+	{ name: 'CSharp', icon: 'csharp' },
+	{ name: 'CSS3', icon: 'css3' },
+	{ name: 'Docker', icon: 'docker' },
+	{ name: 'Electron', icon: 'electron', version: 'original' },
+	{ name: 'Figma', icon: 'figma', version: 'original' },
+	{ name: 'Git', icon: 'git' },
+	{ name: 'GraphQL', icon: 'graphql', version: 'plain' },
+	{ name: 'HTML5', icon: 'html5' },
+	{ name: 'Javascript', icon: 'javascript' },
+	{ name: 'Lua', icon: 'lua', version: 'plain' },
+	{ name: 'MongoDB', icon: 'mongodb', version: 'plain' },
+	{ name: 'NodeJS', icon: 'nodejs' },
+	{ name: 'Python', icon: 'python', version: 'original' },
+	{ name: 'React', icon: 'react', version: 'original' },
+	{ name: 'SASS', icon: 'sass', version: 'original' },
+	{ name: 'Tailwind', icon: 'tailwindcss', version: 'plain' },
+	{ name: 'Typescript', icon: 'typescript' },
 ];
 
 type SkillWindowProps = {
@@ -41,12 +49,13 @@ const Component: React.FC<SkillWindowProps> = (props) => {
 				<div className={Styles.titlebarButton}></div>
 				<div className={Styles.titlebarButton}></div>
 			</div>
-			<div className='grid w-full flex-1 auto-rows-max grid-cols-5 items-center p-6 text-5xl'>
-				{skills.sort().map(({ name, icon }) => (
+			<div className={Styles.grid}>
+				{SkillIcons.sort().map(({ name, icon, version }) => (
 					<SkillIcon
 						key={name}
 						icon={icon}
-						className='aspect-square p-4'
+						name={name}
+						version={version}
 					/>
 				))}
 			</div>
@@ -65,4 +74,5 @@ const Styles = {
 	titlebar:
 		'flex h-8 w-full items-center gap-1 border-b border-overlays-6 px-2',
 	titlebarButton: 'aspect-square h-1/3 rounded-full border border-overlays-6',
+	grid: Stylesheet.grid,
 };

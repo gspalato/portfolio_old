@@ -1,5 +1,5 @@
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import classes from '@lib/classes';
 

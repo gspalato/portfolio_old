@@ -31,7 +31,7 @@ const ProjectBannerAnimationVariants: Variants = {
 	initial: {
 		opacity: 0,
 	},
-	animate: (i: number) => ({
+	animate: () => ({
 		opacity: 1,
 		transition: {
 			delay: 0.3,

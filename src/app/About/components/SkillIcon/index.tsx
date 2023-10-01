@@ -1,19 +1,24 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 type SkillIconProps = {
 	className?: string;
+	name: string;
 	icon: string;
+	version?: 'plain' | 'original';
 	style?: React.CSSProperties;
 };
 
 const Component: React.FC<SkillIconProps> = (props) => {
-	const { className, icon, style } = props;
+	const { className, icon, version = 'plain', style } = props;
 
 	return (
-		<i
-			className={`${icon} colored w-fit place-self-center text-center ${className}`}
-			style={style}
-		/>
+		<motion.div className={className} style={style}>
+			<img
+				className='saturate-150'
+				src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}/${icon}-${version}.svg`}
+			/>
+		</motion.div>
 	);
 };
 
