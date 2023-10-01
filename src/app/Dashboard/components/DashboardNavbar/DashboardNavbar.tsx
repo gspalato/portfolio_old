@@ -17,14 +17,16 @@ import { useScreenSize } from '@/lib/layout';
 
 import PolygonIcon from '@/assets/img/Polygon.svg';
 
-import Styles from './DashboardNavbar.module.sass';
+import Stylesheet from './DashboardNavbar.module.sass';
 
 import { DashboardNavbarButton } from '.';
 
-interface DashboardNavbarProps extends React.PropsWithChildren {
+type DashboardNavbarPosition = 'side' | 'bottom';
+
+type DashboardNavbarProps = {
 	className?: string;
-	position?: 'side' | 'bottom';
-}
+	position?: DashboardNavbarPosition;
+} & React.PropsWithChildren;
 
 const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 	const { children, className, position } = props;
@@ -42,44 +44,21 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 			const navbarWidth = navbar.current.scrollWidth;
 			setNavbarOverflowing(navbarWidth > width);
 		}
-	}, []);
-
-	useLayoutEffect(() => {
-		if (position == 'bottom') {
-			const navbarWidth = navbar.current.scrollWidth;
-			setNavbarOverflowing(navbarWidth > width);
-		}
 	}, [width]);
 
-	const classNames = classes(
-		'flex border-r border-overlays-0 bg-accents-0',
-		position == 'side' && 'side h-full w-[13rem] flex-col',
-		position == 'bottom' &&
-			'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll sm:justify-center',
-		position == 'bottom' && Styles.hideScrollbar,
-		position == 'bottom' && !isNavbarOverflowing && 'justify-center',
-		className
-	);
-
-	const infoClassNames = classes(
-		'flex flex-row items-center justify-between border-overlays-0 pl-4 pr-2',
-		position == 'side' && 'h-[3rem] border-b',
-		position == 'bottom' &&
-			'!aspect-square h-full w-auto !justify-center border-r !p-0'
-	);
-
-	const groupClassNames = classes(
-		'flex w-fit',
-		position == 'side' && 'flex-col',
-		position == 'bottom' && 'flex-row'
-	);
-
 	return (
-		<div className={classNames} ref={navbar}>
-			<div className={infoClassNames}>
+		<div
+			className={Styles.container(
+				isNavbarOverflowing,
+				position,
+				className
+			)}
+			ref={navbar}
+		>
+			<div className={Styles.infoGroupContainer(position)}>
 				<Link
 					to='/'
-					className='z-10 flex h-full aspect-square cursor-none items-center justify-center text-[#ffffff22] transition-colors duration-100 hover:text-[#ffffff55]'
+					className='z-10 flex aspect-square h-full cursor-none items-center justify-center text-[#ffffff22] transition-colors duration-100 hover:text-[#ffffff55]'
 				>
 					<img
 						src={PolygonIcon}
@@ -100,7 +79,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 					</Link>
 				)}
 			</div>
-			<div className={groupClassNames}>
+			<div className={Styles.tabGroupContainer(position)}>
 				{position == 'side' && (
 					<h3 className='font-regular ml-4 w-full py-2 pt-6 font-display text-sm text-accents-4'>
 						Foundation
@@ -145,7 +124,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 			</div>
 			<div
 				className={classes(
-					groupClassNames,
+					Styles.tabGroupContainer(position),
 					'border-l border-overlays-0'
 				)}
 			>
@@ -167,3 +146,33 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
 };
 
 export default DashboardNavbar;
+
+const Styles = {
+	container: (
+		isNavbarOverflowing: boolean,
+		position?: DashboardNavbarPosition,
+		className?: string
+	) =>
+		classes(
+			'flex border-r border-overlays-0 bg-accents-0',
+			position == 'side' && 'side h-full w-[13rem] flex-col',
+			position == 'bottom' &&
+				'bottom h-[4rem] w-[100vw] max-w-[100vw] flex-row overflow-x-scroll sm:justify-center',
+			position == 'bottom' && Stylesheet.hideScrollbar,
+			position == 'bottom' && !isNavbarOverflowing && 'justify-center',
+			className
+		),
+	infoGroupContainer: (position?: DashboardNavbarPosition) =>
+		classes(
+			'flex flex-row items-center justify-between border-overlays-0 pl-4 pr-2',
+			position == 'side' && 'h-[3rem] border-b',
+			position == 'bottom' &&
+				'!aspect-square h-full w-auto !justify-center border-r !p-0'
+		),
+	tabGroupContainer: (position?: DashboardNavbarPosition) =>
+		classes(
+			'flex w-fit',
+			position == 'side' && 'flex-col',
+			position == 'bottom' && 'flex-row'
+		),
+};
