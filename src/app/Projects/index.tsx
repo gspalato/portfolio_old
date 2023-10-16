@@ -93,8 +93,27 @@ const Component = () => {
 		<Page className='block pt-[5rem]'>
 			<section className='align-center flex h-[calc(100vh-5rem)] w-full flex-col items-center bg-transparent'>
 				<h1 className='w-full py-4 pb-12 text-center font-mono text-3xl text-overlays-9 md:py-5'>
-					projects.
+					{'<projects>'}
 				</h1>
+				<AnimatePresence mode='wait'>
+					{(loading || loadingAssets) && (
+						<motion.div
+							key='loading'
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.1 }}
+							className='flex h-[22.5rem] w-full items-center justify-center'
+						>
+							<RotatingLines
+								strokeColor='grey'
+								animationDuration='1.5'
+								strokeWidth='4'
+								width='25'
+							/>
+						</motion.div>
+					)}
+				</AnimatePresence>
 				{!isPortrait && (
 					<div className='flex w-full flex-1 items-center justify-center px-2'>
 						<Carousel

@@ -19,20 +19,6 @@ $gradient2: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4)
     & h1:not(:first-child)
         margin-top: -2 * 1.1111111vw
 
-.greetingText
-    font-family: 'Space Grotesk'
-    font-weight: 400
-    letter-spacing: normal
-
-    padding-bottom: 2rem
-    text-align: center
-
-    background: $gradient
-    @include gradient-text
-    filter: saturate(200%)
-
-    @include adaptive-text(1.3)
-
 .heroText
     grid-column: span 4
     grid-row: span 2
@@ -53,6 +39,16 @@ $gradient2: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4)
     @include responsive($md)
         @include adaptive-text(10)
         line-height: 11*1.1111111vw
+
+.greetingText
+    font-family: 'Space Mono'
+    font-weight: 400
+    text-align: left
+
+    @include adaptive-text(2.75)
+
+    @include responsive($md)
+        @include adaptive-text(1)
 
 .descriptionText
     font-family: 'Space Mono'

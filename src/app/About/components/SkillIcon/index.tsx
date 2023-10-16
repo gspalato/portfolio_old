@@ -15,7 +15,7 @@ const Component: React.FC<SkillIconProps> = (props) => {
 	return (
 		<motion.div className={className} style={style}>
 			<img
-				className='saturate-150'
+				className='place-self-center saturate-150'
 				src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}/${icon}-${version}.svg`}
 			/>
 		</motion.div>

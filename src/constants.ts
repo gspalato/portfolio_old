@@ -1,1 +1,1 @@
-export const GATEWAY_URL = 'http://3.223.11.90/api';
+export const GATEWAY_URL = 'http://foundation.unreal.sh/gql';

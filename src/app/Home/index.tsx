@@ -11,9 +11,7 @@ const Component: React.FC = () => {
 		<Page>
 			<section className='flex h-screen w-screen flex-col-reverse items-center justify-center gap-[4rem] p-8 pt-20 tracking-tighter md:flex-row md:gap-[8rem] lg:p-20'>
 				<div className='flex flex-col gap-4'>
-					<h1 className='text-left font-mono text-xl tracking-wide text-overlays-9'>
-						greetings.
-					</h1>
+					<h1 className={Styles.greeting}>greetings.</h1>
 					<h1 className={Styles.description}>
 						My name is{' '}
 						<span className={Styles.gradient}>Gabriel Spalato</span>
@@ -48,6 +46,10 @@ const Styles = {
 	description: classes(
 		'text-left font-mono leading-snug',
 		Stylesheet.descriptionText
+	),
+	greeting: classes(
+		'text-left font-mono text-lg tracking-wide text-overlays-9',
+		Stylesheet.greetingText
 	),
 	gradient: classes(Stylesheet.gradientText),
 	projectIcon: classes(

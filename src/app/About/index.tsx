@@ -19,7 +19,7 @@ const Component = () => {
 		<Page className='block pt-[5rem]'>
 			<section className='align-center flex h-[calc(100vh-5rem)] w-full flex-col items-center bg-transparent'>
 				<h1 className='w-full py-4 pb-12 text-center font-mono text-3xl text-overlays-9 md:py-5'>
-					about.
+					{'<about>'}
 				</h1>
 				<div className='flex w-full flex-1 flex-col gap-16 px-8 pb-8 md:flex-row md:gap-0'>
 					<div className='flex h-full flex-1 flex-col items-center justify-center gap-8 md:w-1/2'>
@@ -50,7 +50,7 @@ const Component = () => {
 							</p>
 						</div>
 					</div>
-					<div className='flex h-full w-full flex-col items-center justify-center p-4 md:w-1/2'>
+					<div className='flex h-full w-full flex-col items-center justify-center p-4 md:w-1/2 md:px-8'>
 						<SkillWindow className='md:max-w-[40rem]' />
 					</div>
 				</div>
