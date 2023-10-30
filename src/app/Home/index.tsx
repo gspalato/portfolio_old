@@ -2,7 +2,7 @@ import Page from '@components/Page';
 
 import classes from '@/lib/classes';
 
-import ProfilePicture from '@assets/img/resonance.png';
+import ProfilePicture from '@assets/img/resonance.jpg';
 
 import Stylesheet from './home.module.sass';
 
