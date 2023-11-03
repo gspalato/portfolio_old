@@ -27,12 +27,12 @@ const Component = () => {
 							<h1 className='text-left font-mono text-2xl text-overlays-9'>
 								whoami?
 							</h1>
-							<p className='max-w-xl indent-4 font-mono text-lg'>
+							<p className='max-w-xl select-text indent-4 font-mono text-lg'>
 								Hello! I'm Gabriel Spalato, a Computer
 								Engineering student seeking to broaden and
 								deepen my knowledge and skillset!
 							</p>
-							<p className='max-w-xl indent-4 font-mono text-lg'>
+							<p className='max-w-xl select-text indent-4 font-mono text-lg'>
 								As an aspiring software engineer, my programming
 								journey began when I was 7 years old,
 								experimenting with Batch. This early passion led
@@ -42,7 +42,7 @@ const Component = () => {
 								proficient in JavaScript, TypeScript, Python,
 								and C#.
 							</p>
-							<p className='max-w-xl indent-4 font-mono text-lg'>
+							<p className='max-w-xl select-text indent-4 font-mono text-lg'>
 								I've also gained experience with various
 								technologies such as React, React Native,
 								Electron, and GraphQL. My journey has equipped
